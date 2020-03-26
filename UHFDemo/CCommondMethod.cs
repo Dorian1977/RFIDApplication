@@ -42,28 +42,28 @@ namespace UHFDemo
         /// <returns></returns>
         public static byte[] StringArrayToByteArray(string[] strAryHex, int nLen)
         {
-            if (strAryHex.Length < nLen)
-            {
-                nLen = strAryHex.Length;
-            }
-
-            byte[] btAryHex = new byte[nLen];
-
             try
             {
+                if (strAryHex.Length < nLen)
+                {
+                    nLen = strAryHex.Length;
+                }
+
+                byte[] btAryHex = new byte[nLen];
                 int nIndex = 0;
                 foreach (string strTemp in strAryHex)
                 {
                     btAryHex[nIndex] = Convert.ToByte(strTemp, 16);
                     nIndex++;
                 }
+                return btAryHex;
             }
             catch (System.Exception ex)
             {
 
             }
 
-            return btAryHex;
+            return null;
         }
 
         /// <summary>

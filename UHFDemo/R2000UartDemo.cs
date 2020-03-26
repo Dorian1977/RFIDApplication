@@ -69,22 +69,22 @@ namespace UHFDemo
 
 
             lvRealList.SmallImageList = sortImageList;
-            lvFastList.SmallImageList = sortImageList;
+            //lvFastList.SmallImageList = sortImageList;
             lvBufferList.SmallImageList = sortImageList;
 
             this.columnHeader37.ImageIndex = 0;
             this.columnHeader38.ImageIndex = 0;
 
-            this.columnHeader31.ImageIndex = 0;
-            this.columnHeader32.ImageIndex = 0;
+            //this.columnHeader31.ImageIndex = 0;
+            //this.columnHeader32.ImageIndex = 0;
 
             this.columnHeader49.ImageIndex = 0;
             this.columnHeader52.ImageIndex = 0;
 
-            this.m_new_fast_inventory_session.SelectedIndex = 0;
-            this.m_new_fast_inventory_flag.SelectedIndex = 0;
+            //this.m_new_fast_inventory_session.SelectedIndex = 0;
+            //this.m_new_fast_inventory_flag.SelectedIndex = 0;
 
-            this.refreshFastListView();
+            //this.refreshFastListView();
             this.refreshLvListView();
 
 
@@ -210,40 +210,16 @@ namespace UHFDemo
             lvBufferHelper.addSortColumn(3);
             this.lvBufferList.ColumnClick += new ColumnClickEventHandler(lvBufferHelper.ListView_ColumnClick);
 
-            this.lvFastList.ListViewItemSorter = new ListViewColumnSorter();
+            /*this.lvFastList.ListViewItemSorter = new ListViewColumnSorter();
             ListViewHelper lvFastHelper = new ListViewHelper();
             lvFastHelper.addSortColumn(0);
             lvFastHelper.addSortColumn(1);
             this.lvFastList.ColumnClick += new ColumnClickEventHandler(lvFastHelper.ListView_ColumnClick);
-
+            */
             this.m_real_phase_value.SelectedIndex = 0;
 
             if(bfoundSettingFile)
                 btnConnectRs232_Click(sender, e);// auto start
-        }
-
-        private void refreshFastListView()
-        {
-            if (this.m_phase_value.Checked)
-            {
-                this.columnHeader31.Width = 53;
-                    this.columnHeader32.Width = 400;
-                    this.columnHeader33.Width = 61;
-                    this.columnHeader34.Width = 211;
-                    this.columnHeader35.Width = 89;
-                    this.columnHeader356.Width = 65;
-                    this.columnHeader36.Width = 117;
-            }
-            else
-            {
-                this.columnHeader31.Width = 56;
-                this.columnHeader32.Width = 428;
-                this.columnHeader33.Width = 65;
-                this.columnHeader34.Width = 226;
-                this.columnHeader35.Width = 96;
-                this.columnHeader356.Width = 0;
-                this.columnHeader36.Width = 125;
-            }
         }
 
         private void refreshLvListView()
@@ -420,6 +396,7 @@ namespace UHFDemo
                 case 0x98:
                     ProcessTagMask(msgTran);
                     break;
+#if false
                 case 0xb0:
                     //ProcessInventoryISO18000(msgTran);
                     break;
@@ -435,6 +412,7 @@ namespace UHFDemo
                 case 0xb4:
                     //ProcessQueryISO18000(msgTran);
                     break;
+#endif
                 case 0xE1:
                     ProcessUntraceable(msgTran);
                     break;
@@ -760,16 +738,7 @@ namespace UHFDemo
                                 item.SubItems.Add(row[2].ToString());
                                 item.SubItems.Add(row[0].ToString());
                                 //item.SubItems.Add(row[5].ToString());
-                                if (antType8.Checked)
-                                {
-                                    item.SubItems.Add(row[7].ToString() + "  /  " + row[8].ToString() + "  /  " + row[9].ToString() + "  /  " + row[10] + "  /  "
-                                    + row[11].ToString() + "  /  " + row[12].ToString() + "  /  " + row[13].ToString() + "  /  " + row[14]);
-                                }
-                                else if (antType4.Checked)
-                                {
-                                    item.SubItems.Add(row[7].ToString() + "  /  " + row[8].ToString() + "  /  " + row[9].ToString() + "  /  " + row[10]);
-                                }
-                                else if (antType1.Checked)
+                                //if (antType1.Checked)
                                 {
                                     item.SubItems.Add(row[7].ToString());
                                 }
@@ -807,16 +776,7 @@ namespace UHFDemo
                                     ListViewItem item;
                                     item = lvRealList.Items[nIndex];
                                     //item.SubItems[3].Text = row[5].ToString();
-                                    if (antType8.Checked)
-                                    {
-                                        item.SubItems[3].Text = (row[7].ToString() + "  /  " + row[8].ToString() + "  /  " + row[9].ToString() + "  /  " + row[10] + "  /  "
-                                       + row[11].ToString() + "  /  " + row[12].ToString() + "  /  " + row[13].ToString() + "  /  " + row[14]);
-                                    }
-                                    else if (antType4.Checked)
-                                    {
-                                        item.SubItems[3].Text = (row[7].ToString() + "  /  " + row[8].ToString() + "  /  " + row[9].ToString() + "  /  " + row[10]);
-                                    }
-                                    else if (antType1.Checked) {
+                                    if (antType1.Checked) {
                                         item.SubItems[3].Text = (row[7].ToString());
                                     }
                                     item.SubItems[4].Text = (Convert.ToInt32(row[4]) - 129).ToString() + "dBm";
@@ -925,8 +885,8 @@ namespace UHFDemo
             }
         }
 
-     
 
+/*
         private delegate void RefreshFastSwitchUnsafe(byte btCmd);
         private void RefreshFastSwitch(byte btCmd)
         {
@@ -1043,7 +1003,7 @@ namespace UHFDemo
                 }                
             }
         }
-
+*/
         private delegate void RefreshReadSettingUnsafe(byte btCmd);
         private void RefreshReadSetting(byte btCmd)
         {
@@ -1095,31 +1055,6 @@ namespace UHFDemo
                         break;
                     case 0x77:
                         {
-                            if (antType4.Checked) 
-                            {
-                                if (m_curSetting.btOutputPower != 0 && m_curSetting.btOutputPowers == null)
-                            {
-                                textBox1.Text = m_curSetting.btOutputPower.ToString();
-                                textBox2.Text = m_curSetting.btOutputPower.ToString();
-                                textBox3.Text = m_curSetting.btOutputPower.ToString();
-                                textBox4.Text = m_curSetting.btOutputPower.ToString();
-
-                                m_curSetting.btOutputPower = 0;
-                                m_curSetting.btOutputPowers = null;
-                            }
-                            else if (m_curSetting.btOutputPowers != null)
-                            {
-                                textBox1.Text = m_curSetting.btOutputPowers[0].ToString();
-                                textBox2.Text = m_curSetting.btOutputPowers[1].ToString();
-                                textBox3.Text = m_curSetting.btOutputPowers[2].ToString();
-                                textBox4.Text = m_curSetting.btOutputPowers[3].ToString();
-
-                                m_curSetting.btOutputPower = 0;
-                                m_curSetting.btOutputPowers = null;
-                            }
-
-                            }
-
                             if (antType1.Checked)
                             {
                                 if (m_curSetting.btOutputPower != 0 && m_curSetting.btOutputPowers == null)
@@ -1140,40 +1075,7 @@ namespace UHFDemo
                         break;
                     case 0x97:
                         {
-                            if (antType8.Checked)
-                            {
-
-                                if (m_curSetting.btOutputPower != 0 && m_curSetting.btOutputPowers == null)
-                                {
-                                    textBox1.Text = m_curSetting.btOutputPower.ToString();
-                                    textBox2.Text = m_curSetting.btOutputPower.ToString();
-                                    textBox3.Text = m_curSetting.btOutputPower.ToString();
-                                    textBox4.Text = m_curSetting.btOutputPower.ToString();
-
-
-                                    textBox7.Text = m_curSetting.btOutputPower.ToString();
-                                    textBox8.Text = m_curSetting.btOutputPower.ToString();
-                                    textBox9.Text = m_curSetting.btOutputPower.ToString();
-                                    textBox10.Text = m_curSetting.btOutputPower.ToString();
-
-                                    m_curSetting.btOutputPower = 0;
-                                    m_curSetting.btOutputPowers = null;
-                                }
-                                else if (m_curSetting.btOutputPowers != null)
-                                {
-                                    textBox1.Text = m_curSetting.btOutputPowers[0].ToString();
-                                    textBox2.Text = m_curSetting.btOutputPowers[1].ToString();
-                                    textBox3.Text = m_curSetting.btOutputPowers[2].ToString();
-                                    textBox4.Text = m_curSetting.btOutputPowers[3].ToString();
-                                    textBox7.Text = m_curSetting.btOutputPowers[4].ToString();
-                                    textBox8.Text = m_curSetting.btOutputPowers[5].ToString();
-                                    textBox9.Text = m_curSetting.btOutputPowers[6].ToString();
-                                    textBox10.Text = m_curSetting.btOutputPowers[7].ToString();
-
-                                    m_curSetting.btOutputPower = 0;
-                                    m_curSetting.btOutputPowers = null;
-                                }
-                            }
+                            
                         }
                         break;
                     case 0x79:
@@ -1381,19 +1283,6 @@ namespace UHFDemo
             {
                 RunLoopFastSwitchUnsafe InvokeRunLoopFastSwitch = new RunLoopFastSwitchUnsafe(RunLoopFastSwitch);
                 this.Invoke(InvokeRunLoopFastSwitch, new object[] { });
-            }
-            else
-            {
-                if (m_curInventoryBuffer.bLoopInventory)
-                {
-                    if (antType8.Checked)
-                    {
-                        reader.FastSwitchInventory(m_curSetting.btReadId, m_btAryData);
-                    }
-                    if (antType4.Checked) {
-                        reader.FastSwitchInventory(m_curSetting.btReadId, m_btAryData_4);
-                    }
-                }
             }
         }
                 
@@ -1758,12 +1647,7 @@ namespace UHFDemo
         private void btnGetOutputPower_Click(object sender, EventArgs e)
         {
             WriteLog(lrtxtLog, "btnGetOutputPower", 0);
-            if (antType8.Checked)
-            {
-                reader.GetOutputPower(m_curSetting.btReadId);
-            }
-
-            if (antType4.Checked || antType1.Checked)
+            if (antType1.Checked)
             {               
                 reader.GetOutputPowerFour(m_curSetting.btReadId);
             }
@@ -1814,41 +1698,6 @@ namespace UHFDemo
         {
             try
             {
-                if (antType8.Checked) {
-                    if (textBox1.Text.Length != 0 || textBox2.Text.Length != 0 || textBox3.Text.Length != 0 || textBox4.Text.Length != 0
-                       || textBox7.Text.Length != 0 || textBox8.Text.Length != 0 || textBox9.Text.Length != 0 || textBox10.Text.Length != 0)
-                    {
-                        byte[] OutputPower = new byte[8];
-                        OutputPower[0] = Convert.ToByte(textBox1.Text);
-                        OutputPower[1] = Convert.ToByte(textBox2.Text);
-                        OutputPower[2] = Convert.ToByte(textBox3.Text);
-                        OutputPower[3] = Convert.ToByte(textBox4.Text);
-                        OutputPower[4] = Convert.ToByte(textBox7.Text);
-                        OutputPower[5] = Convert.ToByte(textBox8.Text);
-                        OutputPower[6] = Convert.ToByte(textBox9.Text);
-                        OutputPower[7] = Convert.ToByte(textBox10.Text);
-           
-                        //m_curSetting.btOutputPower = Convert.ToByte(txtOutputPower.Text);
-                        reader.SetOutputPower(m_curSetting.btReadId, OutputPower);
-                        // m_curSetting.btOutputPower = Convert.ToByte(txtOutputPower.Text);
-                    }
-                }
-
-                if (antType4.Checked)
-                {
-                    if (textBox1.Text.Length != 0 || textBox2.Text.Length != 0 || textBox3.Text.Length != 0 || textBox4.Text.Length != 0)
-                    {
-                        byte[] OutputPower = new byte[4];
-                        OutputPower[0] = Convert.ToByte(textBox1.Text);
-                        OutputPower[1] = Convert.ToByte(textBox2.Text);
-                        OutputPower[2] = Convert.ToByte(textBox3.Text);
-                        OutputPower[3] = Convert.ToByte(textBox4.Text);
-                        //m_curSetting.btOutputPower = Convert.ToByte(txtOutputPower.Text);
-                        reader.SetOutputPower(m_curSetting.btReadId, OutputPower);
-                        // m_curSetting.btOutputPower = Convert.ToByte(txtOutputPower.Text);
-                    }
-                }
-
                 if (antType1.Checked)
                 {
                     if (textBox1.Text.Length != 0)
@@ -2762,8 +2611,8 @@ namespace UHFDemo
                 string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
                 WriteLog(lrtxtLog, strLog, 1);
-                RefreshFastSwitch(0x8A);
-                RunLoopFastSwitch();
+                //RefreshFastSwitch(0x8A);
+                //RunLoopFastSwitch();
             }
             else if (msgTran.AryData.Length == 2)
             {
@@ -2782,8 +2631,8 @@ namespace UHFDemo
                 m_curInventoryBuffer.nDataCount = m_nSwitchTotal;
                 m_curInventoryBuffer.nCommandDuration = m_nSwitchTime;
                 WriteLog(lrtxtLog, strCmd, 0);
-                RefreshFastSwitch(0x00);
-                RunLoopFastSwitch();
+                //RefreshFastSwitch(0x00);
+                //RunLoopFastSwitch();
             }
 
             /*else if (msgTran.AryData.Length == 8)
@@ -2993,7 +2842,7 @@ namespace UHFDemo
                     m_curInventoryBuffer.dtTagTable.AcceptChanges();
                 }
                 m_curInventoryBuffer.dtEndInventory = DateTime.Now;
-                RefreshFastSwitch(0x00);
+                //RefreshFastSwitch(0x00);
             }
 
         }
@@ -3011,7 +2860,7 @@ namespace UHFDemo
                 strCmd = "User define Session and Inventoried Flag inventory";
             }
             string strErrorCode = string.Empty;
-
+#if false
             if(!bLEDOn)
             {
                 setVerifiedLEDStatus(true, false);
@@ -3022,7 +2871,7 @@ namespace UHFDemo
                 setVerifiedLEDStatus(false, false);
                 bLEDOn = false;
             }            
-
+#endif
             if (msgTran.AryData.Length == 1)
             {
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
@@ -3616,7 +3465,7 @@ namespace UHFDemo
                 m_curOperateTagBuffer.dtTagTable.Clear();
                 ltvOperate.Items.Clear();
                 reader.ReadTag(m_curSetting.btReadId, btMemBank, btWordAdd, btWordCnt, btAryPwd);
-                //WriteLog(lrtxtLog, "Read Tag", 1);
+                //WriteLog(lrtxtLog, "Read Tag", 0);
             }
             catch (System.Exception ex)
             {
@@ -3734,13 +3583,17 @@ namespace UHFDemo
                     m_curOperateTagBuffer.dtTagTable.Rows.Add(row);
                     m_curOperateTagBuffer.dtTagTable.AcceptChanges();
                     RefreshOpTag(0x81);
+                    WriteLog(lrtxtLog, strCmd, 0);
 
                     if (btMemBank == 0x03 && btWordAdd == 0 && btWordCnt >= 22)
                     {//read data section
                         bVerified = verifyTag(strData);
-                        writeTag(true);
-                    }
-                    WriteLog(lrtxtLog, strCmd, 0);
+
+                        if(radioBtnRead2Erase.Checked)
+                        {
+                            ProcessWriteTag(msgTran);
+                        }                        
+                    }                    
                 }
 
                 if (bVerified)
@@ -3867,7 +3720,7 @@ namespace UHFDemo
             
         }
 
-        private void writeTag(bool bEraseTag)
+        private void writeTag()
         {
             byte btMemBank = findMemBank();
             byte btWordAdd = Convert.ToByte(txtWordAdd.Text);
@@ -3876,13 +3729,14 @@ namespace UHFDemo
             string[] result = CCommondMethod.StringToStringArray(htxtReadAndWritePwd.Text.ToUpper(), 2);
             byte[] btAryPwd = CCommondMethod.StringArrayToByteArray(result, 4);
             
-            if(bEraseTag)
+            /*if(!bNotEraseTag)
             {
-                byte[] btAryWriteData = Enumerable.Repeat((byte)0x00, btWordCnt).ToArray();
+                //byte[] btAryWriteData = Enumerable.Repeat((byte)0x00, btWordCnt).ToArray();
                 reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAdd, btWordCnt, btAryWriteData, btCmd);//1, pwd, 3, 0, 22, data, 148      
                 WriteLog(lrtxtLog, "Erase tag", 0);
-            }
-            else if (htxtWriteData.Text != "")
+                Thread.Sleep(50);
+            }*/
+            //else if ( != "")
             {
                 result = CCommondMethod.StringToStringArray(htxtWriteData.Text.ToUpper(), 2);
                 byte[] btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
@@ -3891,6 +3745,7 @@ namespace UHFDemo
                 WriteLog(lrtxtLog, "Write tag", 0);
             }
         }
+
         private int WriteTagCount = 0;
         private const int rwTagRetryMAX = 10;
         static int writeTagRetry = 0;
@@ -3907,9 +3762,15 @@ namespace UHFDemo
                 WriteLog(lrtxtLog, strLog, 1);
                 if(writeTagRetry < rwTagRetryMAX)
                 {
-                    writeTag(false);
+                    if(radioBtnRead2Erase.Checked)
+                    {
+                        char [] zero = new char[22];
+                        Array.Clear(zero, 0, zero.Length);
+                        htxtWriteData.Text = zero.ToString();
+                    }
+                    writeTag();
                     WriteLog(lrtxtLog, "Write Tag retry " + writeTagRetry++, 0);                    
-                }          
+                }
             }
             else
             {
@@ -4378,7 +4239,7 @@ namespace UHFDemo
                 }
                 m_curInventoryBuffer.btRepeat = Convert.ToByte(textRealRound.Text);
 
-#if true 
+#if true
                 m_curInventoryBuffer.bLoopCustomizedSession = false;
 #else
                 if (this.sessionInventoryrb.Checked == true)
@@ -4543,12 +4404,7 @@ namespace UHFDemo
             tbRealMinRssi.Text = "0";
             textRealRound.Text = "1";
             cbRealWorkant1.Checked = true;
-            cbRealWorkant2.Checked = false;
-            cbRealWorkant3.Checked = false;
-            cbRealWorkant4.Checked = false;
             lbRealTagCount.Text = "Tag List：";
-       
-           
         }
 
         private void btBufferInventory_Click(object sender, EventArgs e)
@@ -4687,7 +4543,7 @@ namespace UHFDemo
             cbBufferWorkant4.Checked = false;
             labelBufferTagCount.Text = "Tag List：";
         }
-
+/*
         private void btFastInventory_Click(object sender, EventArgs e)
         {
             short antASelection = 1;
@@ -5155,7 +5011,8 @@ namespace UHFDemo
                 MessageBox.Show(ex.Message);
             }            
         }
-
+*/
+/*
         private void buttonFastFresh_Click(object sender, EventArgs e)
         {
             m_curInventoryBuffer.ClearInventoryRealResult();
@@ -5194,7 +5051,7 @@ namespace UHFDemo
         {
             buttonFastFresh_Click(sender, e);
         }
-
+*/
         private void button7_Click(object sender, EventArgs e)
         {
             txtFirmwareVersion.Text = "";
@@ -5203,10 +5060,6 @@ namespace UHFDemo
             txtReaderTemperature.Text = "";
             //txtOutputPower.Text = "";
             textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-
             htbGetIdentifier.Text = "";
         }
 
@@ -5300,9 +5153,6 @@ namespace UHFDemo
         {
             //txtOutputPower.Text = "";
             textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
 
             cmbFrequencyStart.SelectedIndex = -1;
             cmbFrequencyEnd.SelectedIndex = -1;
@@ -5827,7 +5677,7 @@ namespace UHFDemo
             // assigned to Button2.
             Encoder encoder = Encoding.UTF8.GetEncoder();
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
+/*
             if (txt_format_fast_rb.Checked)
             {
                 saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
@@ -5878,6 +5728,7 @@ namespace UHFDemo
                     MessageBox.Show("Export data success！");
                 }
             }
+*/
 #if USE_EXCEL
             else if (excel_format_fast_rb.Checked)
             {
@@ -5927,263 +5778,21 @@ namespace UHFDemo
                     MessageBox.Show(ex.Message);
                     textBox1.Text = "";
                 }
-            }
-
-           
-            if (antType4.Checked)
-            {
-                textBox2.Text = textBox1.Text;
-                textBox3.Text = textBox1.Text;
-                textBox4.Text = textBox1.Text;
-            }
-
-            if (antType8.Checked)
-            {
-                textBox2.Text = textBox1.Text;
-                textBox3.Text = textBox1.Text;
-                textBox4.Text = textBox1.Text;
-
-                textBox7.Text = textBox1.Text;
-                textBox8.Text = textBox1.Text;
-                textBox9.Text = textBox1.Text;
-                textBox10.Text = textBox1.Text;
-
-            }
-            
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox2.Text.Length == 0)
-            {
-
-            }
-            else
-            {
-                try
-                {
-
-                    int tmp = Convert.ToInt16(textBox2.Text);
-                    if (tmp > 33 || tmp < 0)
-                    {
-                        MessageBox.Show("Parameter exception!");
-                        textBox2.Text = "";
-                        return;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    textBox2.Text = "";
-                }
-            }
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox3.Text.Length == 0)
-            {
-
-            }
-            else
-            {
-                try
-                {
-
-                    int tmp = Convert.ToInt16(textBox3.Text);
-                    if (tmp > 33 || tmp < 0)
-                    {
-                        MessageBox.Show("Parameter exception!");
-                        textBox3.Text = "";
-                        return;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    textBox3.Text = "";
-                }
-            }
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox4.Text.Length == 0)
-            {
-
-            }
-            else
-            {
-                try
-                {
-
-                    int tmp = Convert.ToInt16(textBox4.Text);
-                    if (tmp > 33 || tmp < 0)
-                    {
-                        MessageBox.Show("Parameter exception!");
-                        textBox4.Text = "";
-                        return;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    textBox4.Text = "";
-                }
-            }
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox7.Text.Length == 0)
-            {
-
-            }
-            else
-            {
-                try
-                {
-
-                    int tmp = Convert.ToInt16(textBox7.Text);
-                    if (tmp > 33 || tmp < 0)
-                    {
-                        MessageBox.Show("Parameter exception!");
-                        textBox7.Text = "";
-                        return;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    textBox7.Text = "";
-                }
-            }
-        }
-
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox8.Text.Length == 0)
-            {
-
-            }
-            else
-            {
-                try
-                {
-
-                    int tmp = Convert.ToInt16(textBox8.Text);
-                    if (tmp > 33 || tmp < 0)
-                    {
-                        MessageBox.Show("Parameter exception!");
-                        textBox8.Text = "";
-                        return;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    textBox8.Text = "";
-                }
-            }
-        }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox9.Text.Length == 0)
-            {
-
-            }
-            else
-            {
-                try
-                {
-
-                    int tmp = Convert.ToInt16(textBox9.Text);
-                    if (tmp > 33 || tmp < 0)
-                    {
-                        MessageBox.Show("Parameter exception!");
-                        textBox9.Text = "";
-                        return;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    textBox9.Text = "";
-                }
-            }
-        }
-
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox10.Text.Length == 0)
-            {
-
-            }
-            else
-            {
-                try
-                {
-
-                    int tmp = Convert.ToInt16(textBox10.Text);
-                    if (tmp > 33 || tmp < 0)
-                    {
-                        MessageBox.Show("Parameter exception!");
-                        textBox10.Text = "";
-                        return;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    textBox10.Text = "";
-                }
-            }
-        }
+            }            
+        }  
 
         private void antType1_CheckedChanged(object sender, EventArgs e)
         {
             if (antType1.Checked)
             {
-                //disable fast ant switch inventory.
-                btFastInventory.Enabled = false;
-                //disable fast ant switch inventory.
-                // output power 
-                textBox2.Enabled = false;
-                textBox3.Enabled = false;
-                textBox4.Enabled = false;
-                textBox7.Enabled = false;
-                textBox8.Enabled = false;
-                textBox9.Enabled = false;
-                textBox10.Enabled = false;
-
                 columnHeader40.Text = "Identification Count";
 
                 //set work ant
                 this.cmbWorkAnt.Items.Clear();
-                this.cmbWorkAnt.Items.AddRange(new object[] {
-                "ANT 1"});
+                this.cmbWorkAnt.Items.AddRange(new object[] {"ANT 1"});
                 this.cmbWorkAnt.SelectedIndex = 0;
 
-
-
                 cbRealWorkant1.Enabled = false;
-                cbRealWorkant2.Enabled = false;
-                cbRealWorkant3.Enabled = false;
-                cbRealWorkant4.Enabled = false;
-                cbRealWorkant5.Enabled = false;
-                cbRealWorkant6.Enabled = false;
-                cbRealWorkant7.Enabled = false;
-                cbRealWorkant8.Enabled = false;
-
-                //select ant
-                cbRealWorkant2.Checked = false;
-                cbRealWorkant3.Checked = false;
-                cbRealWorkant4.Checked = false;
-                cbRealWorkant5.Checked = false;
-                cbRealWorkant6.Checked = false;
-                cbRealWorkant7.Checked = false;
-                cbRealWorkant8.Checked = false;
 
                 cbBufferWorkant2.Checked = false;
                 cbBufferWorkant3.Checked = false;
@@ -6193,10 +5802,6 @@ namespace UHFDemo
                 checkBox2.Checked = false;
                 checkBox3.Checked = false;
                 checkBox4.Checked = false;
-
-
-                //init selelct ant
-
 
                 cbBufferWorkant1.Enabled = false;
                 cbBufferWorkant2.Enabled = false;
@@ -6207,298 +5812,7 @@ namespace UHFDemo
                 checkBox2.Enabled = false;
                 checkBox3.Enabled = false;
                 checkBox4.Enabled = false;
-
-                cmbAntSelect1.Enabled = false;
-                cmbAntSelect2.Enabled = false;
-                cmbAntSelect3.Enabled = false;
-                cmbAntSelect4.Enabled = false;
-                txtAStay.Enabled = false;
-                txtBStay.Enabled = false;
-                txtCStay.Enabled = false;
-                txtDStay.Enabled = false;
-
-                comboBox1.Enabled = false;
-                comboBox2.Enabled = false;
-                comboBox3.Enabled = false;
-                comboBox4.Enabled = false;
-
-                textBox13.Enabled = false;
-                textBox14.Enabled = false;
-                textBox15.Enabled = false;
-                textBox16.Enabled = false;
             }
-        }
-
-        private void antType4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (antType4.Checked)
-            {
-                //Enable fast ant switch inventory.
-                btFastInventory.Enabled = true;
-                //Enable fast ant switch inventory.
-
-                //set fast 4 ant
-                columnHeader34.Text = "Identification Count(ANT1/2/3/4)";
-                //init selelct ant
-                columnHeader40.Text = "Identification Count(ANT1/2/3/4)";
-
-                //set work ant
-                this.cmbWorkAnt.Items.Clear();
-                this.cmbWorkAnt.Items.AddRange(new object[] {
-                "ANT 1",
-                "ANT 2",
-                "ANT 3",
-                "ANT 4"});
-                this.cmbWorkAnt.SelectedIndex = 0;
-
-                // output power 
-                textBox2.Enabled = true;
-                textBox3.Enabled = true;
-                textBox4.Enabled = true;
-                textBox7.Enabled = false;
-                textBox8.Enabled = false;
-                textBox9.Enabled = false;
-                textBox10.Enabled = false;
-
-
-           
-                cbRealWorkant1.Enabled = true;
-                cbRealWorkant2.Enabled = true;
-                cbRealWorkant3.Enabled = true;
-                cbRealWorkant4.Enabled = true;
-
-                cbRealWorkant5.Enabled = false;
-                cbRealWorkant6.Enabled = false;
-                cbRealWorkant7.Enabled = false;
-                cbRealWorkant8.Enabled = false;
-
-                cbBufferWorkant1.Enabled = true;
-                cbBufferWorkant2.Enabled = true;
-                cbBufferWorkant3.Enabled = true;
-                cbBufferWorkant4.Enabled = true;
-
-                checkBox1.Enabled = false;
-                checkBox2.Enabled = false;
-                checkBox3.Enabled = false;
-                checkBox4.Enabled = false;
-
-                cmbAntSelect1.Enabled = true;
-                cmbAntSelect2.Enabled = true;
-                cmbAntSelect3.Enabled = true;
-                cmbAntSelect4.Enabled = true;
-                txtAStay.Enabled = true;
-                txtBStay.Enabled = true;
-                txtCStay.Enabled = true;
-                txtDStay.Enabled = true;
-
-                comboBox1.Enabled = false;
-                comboBox2.Enabled = false;
-                comboBox3.Enabled = false;
-                comboBox4.Enabled = false;
-
-                textBox13.Enabled = false;
-                textBox14.Enabled = false;
-                textBox15.Enabled = false;
-                textBox16.Enabled = false;
-
-
-                //select ant
-                cbRealWorkant2.Checked = false;
-                cbRealWorkant3.Checked = false;
-                cbRealWorkant4.Checked = false;
-                cbRealWorkant5.Checked = false;
-                cbRealWorkant6.Checked = false;
-                cbRealWorkant7.Checked = false;
-                cbRealWorkant8.Checked = false;
-
-                cbBufferWorkant2.Checked = false;
-                cbBufferWorkant3.Checked = false;
-                cbBufferWorkant4.Checked = false;
-
-                checkBox1.Checked = false;
-                checkBox2.Checked = false;
-                checkBox3.Checked = false;
-                checkBox4.Checked = false;
-
-                /*
-                cmbAntSelect2.SelectedIndex = 8;
-                cmbAntSelect3.SelectedIndex = 8;
-                cmbAntSelect4.SelectedIndex = 8;
-
-                comboBox1.SelectedIndex = 8;
-                comboBox2.SelectedIndex = 8;
-                comboBox3.SelectedIndex = 8;
-                comboBox4.SelectedIndex = 8;
-                 */
-
-                //change  selelct ant
-                cmbAntSelect1.Items.Clear();
-                cmbAntSelect1.Items.AddRange(new object[] {
-                "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "Unselect"});
-                cmbAntSelect1.SelectedIndex = 0;
-                cmbAntSelect2.Items.Clear();
-                cmbAntSelect2.Items.AddRange(new object[] {
-                "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "Unselect"});
-                cmbAntSelect2.SelectedIndex = 1;
-                cmbAntSelect3.Items.Clear();
-                cmbAntSelect3.Items.AddRange(new object[] {
-                "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "Unselect"});
-                cmbAntSelect3.SelectedIndex = 2;
-                cmbAntSelect4.Items.Clear();
-                cmbAntSelect4.Items.AddRange(new object[] {
-                "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "Unselect"});
-                cmbAntSelect4.SelectedIndex = 3;
-
-                //change  selelct ant
-
-            }
-        }
-
-        private void antType8_CheckedChanged(object sender, EventArgs e)
-        {
-            if (antType8.Checked)
-            {
-                //Enable fast ant switch inventory.
-                btFastInventory.Enabled = true;
-                //Enable fast ant switch inventory.
-
-                //set fast 8 ant
-                columnHeader34.Text = "Identification Count(ANT1/2/3/4/5/6/7/8)";
-                columnHeader40.Text = "Identification Count(ANT1/2/3/4/5/6/7/8)";
-                //set work ant
-                this.cmbWorkAnt.Items.Clear();
-                this.cmbWorkAnt.Items.AddRange(new object[] {
-                "ANT 1",
-                "ANT 2",
-                "ANT 3",
-                "ANT 4",
-                "ANT 5",
-                "ANT 6",
-                "ANT 7",
-                "ANT 8"});
-                this.cmbWorkAnt.SelectedIndex = 0;
-
-                // output power 
-                textBox2.Enabled = true;
-                textBox3.Enabled = true;
-                textBox4.Enabled = true;
-                textBox7.Enabled = true;
-                textBox8.Enabled = true;
-                textBox9.Enabled = true;
-                textBox10.Enabled = true;
-
-                cbRealWorkant1.Enabled = true;
-                cbRealWorkant2.Enabled = true;
-                cbRealWorkant3.Enabled = true;
-                cbRealWorkant4.Enabled = true;
-
-                cbRealWorkant5.Enabled = true;
-                cbRealWorkant6.Enabled = true;
-                cbRealWorkant7.Enabled = true;
-                cbRealWorkant8.Enabled = true;
-
-                cbBufferWorkant1.Enabled = true;
-                cbBufferWorkant2.Enabled = true;
-                cbBufferWorkant3.Enabled = true;
-                cbBufferWorkant4.Enabled = true;
-
-                checkBox1.Enabled = true;
-                checkBox2.Enabled = true;
-                checkBox3.Enabled = true;
-                checkBox4.Enabled = true;
-
-                cmbAntSelect1.Enabled = true;
-                cmbAntSelect2.Enabled = true;
-                cmbAntSelect3.Enabled = true;
-                cmbAntSelect4.Enabled = true;
-                txtAStay.Enabled = true;
-                txtBStay.Enabled = true;
-                txtCStay.Enabled = true;
-                txtDStay.Enabled = true;
-
-                comboBox1.Enabled = true;
-                comboBox2.Enabled = true;
-                comboBox3.Enabled = true;
-                comboBox4.Enabled = true;
-
-                textBox13.Enabled = true;
-                textBox14.Enabled = true;
-                textBox15.Enabled = true;
-                textBox16.Enabled = true;
-
-
-                //change  selelct ant
-                cmbAntSelect1.Items.Clear();
-                cmbAntSelect1.Items.AddRange(new object[] {
-                "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "ANT5",
-                "ANT6",
-                "ANT7",
-                "ANT8",
-                "Unselect"});
-                cmbAntSelect1.SelectedIndex = 0;
-                cmbAntSelect2.Items.Clear();
-                cmbAntSelect2.Items.AddRange(new object[] {
-                 "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "ANT5",
-                "ANT6",
-                "ANT7",
-                "ANT8",
-                "UnSelect"});
-                cmbAntSelect2.SelectedIndex = 1;
-                cmbAntSelect3.Items.Clear();
-                cmbAntSelect3.Items.AddRange(new object[] {
-                "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "ANT5",
-                "ANT6",
-                "ANT7",
-                "ANT8",
-                "Unselect"});
-                cmbAntSelect3.SelectedIndex = 2;
-                cmbAntSelect4.Items.Clear();
-                cmbAntSelect4.Items.AddRange(new object[] {
-                 "ANT1",
-                "ANT2",
-                "ANT3",
-                "ANT4",
-                "ANT5",
-                "ANT6",
-                "ANT7",
-                "ANT8",
-                "Unselect"});
-                cmbAntSelect4.SelectedIndex = 3;
-                //change  selelct ant
-            }
-        }
-
-        private void label125_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void m_session_q_cb_CheckedChanged(object sender, EventArgs e)
@@ -6585,36 +5899,6 @@ namespace UHFDemo
                 label98.Enabled = true;
                 cmbSession.Enabled = true;
                 cmbTarget.Enabled = true;
-            }
-        }
-
-        private void m_new_fast_inventory_CheckedChanged(object sender, EventArgs e)
-        {
-            if (m_new_fast_inventory.Checked)
-            {
-                this.m_new_fast_inventory_flag.Enabled = true;
-                this.m_new_fast_inventory_session.Enabled = true;
-                this.m_phase_value.Enabled = true;
-            }
-            else
-            {
-                this.m_new_fast_inventory_flag.Enabled = false;
-                this.m_new_fast_inventory_session.Enabled = false;
-                this.m_phase_value.Enabled = false;
-                this.m_phase_value.Checked = false;
-            }
-        }
-
-        private void m_phase_value_CheckedChanged(object sender, EventArgs e)
-        {
-            this.refreshFastListView();
-            if (m_phase_value.Checked)
-            {
-                m_nPhaseOpened = true;
-            }
-            else
-            {
-                m_nPhaseOpened = false;
             }
         }
 
@@ -6747,6 +6031,11 @@ namespace UHFDemo
             txtAccessEpcMatch.Text = cmbSetAccessEpcMatch.Text;
             ckAccessEpcMatch.Checked = true;
             reader.SetAccessEpcMatch(m_curSetting.btReadId, 0x00, Convert.ToByte(btAryEpc.Length), btAryEpc);
+        }
+
+        private void btnRead2Erase_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
