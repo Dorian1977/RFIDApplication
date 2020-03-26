@@ -1,4 +1,12 @@
-﻿using System;
+﻿//#define USE_EXCEL
+
+#if USE_EXCEL
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+#endif
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,14 +16,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Threading;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System.IO;
 using System.IO.Ports;
 
 namespace UHFDemo
 {
+
     public partial class R2000UartDemo : Form
     {
         private Reader.ReaderMethod reader;
@@ -24,7 +30,7 @@ namespace UHFDemo
         private InventoryBuffer m_curInventoryBuffer = new InventoryBuffer();
         private OperateTagBuffer m_curOperateTagBuffer = new OperateTagBuffer();
         Symmetric_Encrypted symmetric = new Symmetric_Encrypted();
-        private OperateTagISO18000Buffer m_curOperateTagISO18000Buffer = new OperateTagISO18000Buffer();
+        //private OperateTagISO18000Buffer m_curOperateTagISO18000Buffer = new OperateTagISO18000Buffer();
 
         //Before inventory, you need to set working antenna to identify whether the inventory operation is executing.
         private bool m_bInventory = false;
@@ -3648,6 +3654,27 @@ namespace UHFDemo
             m_curSetting.btGpio3Value = btGpio3Value;
             Thread.Sleep(20);
         }
+
+        private bool verifyTag(string label)
+        {
+            bool bVerified = false;
+            symmetric.loadKey(File.ReadAllBytes(keyFilePathTextBox.Text));
+            WriteLog(lrtxtLog, "Load Key " + symmetric.readKey(), 0);
+
+            string decryptMsg = symmetric.DecryptFromHEX(label);
+            WriteLog(lrtxtLog, "Decrypt data " + decryptMsg + ", Size " + decryptMsg.Length, 0);
+
+            bVerified = symmetric.verifyLabel(decryptMsg);
+            WriteLog(lrtxtLog, "Verified data " + bVerified.ToString() + " read " + decryptMsg, 0);
+
+            if(bVerified)
+            {
+                symmetric.addVolume(decryptMsg);
+                WriteLog(lrtxtLog, "Get Volume " + symmetric.readVolume(), 0);                
+            }
+            return bVerified;
+        }
+
         static int readTagRetry = 0;
         private void ProcessReadTag(Reader.MessageTran msgTran)
         {
@@ -3709,18 +3736,9 @@ namespace UHFDemo
                     RefreshOpTag(0x81);
 
                     if (btMemBank == 0x03 && btWordAdd == 0 && btWordCnt >= 22)
-                    {//read data section                    
-                        symmetric.loadKey(File.ReadAllBytes(keyFilePathTextBox.Text));
-                        WriteLog(lrtxtLog, "Load Key " + symmetric.readKey(), 0);
-
-                        string decryptMsg = symmetric.DecryptFromHEX(strData);
-                        WriteLog(lrtxtLog, "Decrypt data " + decryptMsg + ", Size " + decryptMsg.Length, 0);
-
-                        bVerified = symmetric.verifyLabel(decryptMsg);
-                        WriteLog(lrtxtLog, "Verified data " + bVerified.ToString() + " read " + decryptMsg, 0);
-
-                        symmetric.addVolume(decryptMsg);
-                        WriteLog(lrtxtLog, "Get Volume " + symmetric.readVolume(), 0);
+                    {//read data section
+                        bVerified = verifyTag(strData);
+                        writeTag(true);
                     }
                     WriteLog(lrtxtLog, strCmd, 0);
                 }
@@ -3849,6 +3867,30 @@ namespace UHFDemo
             
         }
 
+        private void writeTag(bool bEraseTag)
+        {
+            byte btMemBank = findMemBank();
+            byte btWordAdd = Convert.ToByte(txtWordAdd.Text);
+            byte btWordCnt = Convert.ToByte(txtWordCnt.Text);
+            byte btCmd = findCmd();
+            string[] result = CCommondMethod.StringToStringArray(htxtReadAndWritePwd.Text.ToUpper(), 2);
+            byte[] btAryPwd = CCommondMethod.StringArrayToByteArray(result, 4);
+            
+            if(bEraseTag)
+            {
+                byte[] btAryWriteData = Enumerable.Repeat((byte)0x00, btWordCnt).ToArray();
+                reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAdd, btWordCnt, btAryWriteData, btCmd);//1, pwd, 3, 0, 22, data, 148      
+                WriteLog(lrtxtLog, "Erase tag", 0);
+            }
+            else if (htxtWriteData.Text != "")
+            {
+                result = CCommondMethod.StringToStringArray(htxtWriteData.Text.ToUpper(), 2);
+                byte[] btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
+                btWordCnt = Convert.ToByte(result.Length / 2 + result.Length % 2);
+                reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAdd, btWordCnt, btAryWriteData, btCmd);
+                WriteLog(lrtxtLog, "Write tag", 0);
+            }
+        }
         private int WriteTagCount = 0;
         private const int rwTagRetryMAX = 10;
         static int writeTagRetry = 0;
@@ -3865,19 +3907,9 @@ namespace UHFDemo
                 WriteLog(lrtxtLog, strLog, 1);
                 if(writeTagRetry < rwTagRetryMAX)
                 {
-                    byte btMemBank = findMemBank();
-                    byte btWordAdd = Convert.ToByte(txtWordAdd.Text);
-                    byte btWordCnt = Convert.ToByte(txtWordCnt.Text);
-                    byte btCmd = findCmd();
-                    string[] result = CCommondMethod.StringToStringArray(htxtReadAndWritePwd.Text.ToUpper(), 2);
-                    byte[] btAryPwd = CCommondMethod.StringArrayToByteArray(result, 4);
-                    result = CCommondMethod.StringToStringArray(htxtWriteData.Text.ToUpper(), 2);
-                    byte[] btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
-
-                    btWordCnt = Convert.ToByte(result.Length / 2 + result.Length % 2);
-                    reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAdd, btWordCnt, btAryWriteData, btCmd);
+                    writeTag(false);
                     WriteLog(lrtxtLog, "Write Tag retry " + writeTagRetry++, 0);                    
-                }                
+                }          
             }
             else
             {
@@ -5482,11 +5514,12 @@ namespace UHFDemo
             // assigned to Button2.
             Encoder encoder = Encoding.UTF8.GetEncoder();
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
+            const string wordSeparater = ",";// "\t";
+            const string endOfLine = "\n"; // "\r\n";
             if (txt_format_rb.Checked)
             {
-                saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
-                saveFileDialog1.Title = "Save an text File";
+                saveFileDialog1.Filter = "csv files (*.csv)|*.csv";//"txt files (*.txt)|*.txt";
+                saveFileDialog1.Title = "Save an CSV File";//"Save an text File";
                 saveFileDialog1.ShowDialog();
 
                 // If the file name is not an empty string open it for saving.
@@ -5504,9 +5537,9 @@ namespace UHFDemo
                     String title = String.Empty;
                     foreach (ColumnHeader header in lvRealList.Columns)
                     {
-                        title += header.Text + "\t";
+                        title += header.Text + wordSeparater; //"\t";
                     }
-                    title += "\r\n";
+                    title += endOfLine; //"\r\n";
                     byte[] byteTitile = System.Text.Encoding.UTF8.GetBytes(title);
                     fs.Write(byteTitile, 0, byteTitile.Length);
                     for (int i = 0; i < table.Rows.Count; i++)
@@ -5517,11 +5550,11 @@ namespace UHFDemo
                         {
                             if (j != table.Columns.Count - 1)
                             {
-                                strData += row[j].ToString() + "\t";
+                                strData += row[j].ToString() + wordSeparater; //"\t";
                             }
                             else
                             {
-                                strData += row[j].ToString() + "\t\r\n";
+                                strData += row[j].ToString() + wordSeparater + endOfLine; // "\t\r\n";
                             }
                         }
                         Char[] charData = strData.ToString().ToArray();
@@ -5533,6 +5566,8 @@ namespace UHFDemo
                     MessageBox.Show("Export data success！");
                 }
             }
+
+#if USE_EXCEL
             else if (excel_format_rb.Checked)
             {
                 saveFileDialog1.Filter = "97-2003Document（*.xls）|*.xls|2007Document(*.xlsx)|*.xlsx";
@@ -5554,6 +5589,7 @@ namespace UHFDemo
                     }
                 }
             }
+#endif
         }
 
 
@@ -5582,6 +5618,7 @@ namespace UHFDemo
             return table;
         }
 
+#if (USE_EXCEL)
         /// <summary>
         /// Import data to excel2003
         /// </summary>
@@ -5633,8 +5670,7 @@ namespace UHFDemo
                 }
             }
         }
-
-
+#endif
         //////////////////////////////////////////////////////////////////////////
         public void SaveToFile(MemoryStream ms, string fileName)
         {
@@ -5649,6 +5685,7 @@ namespace UHFDemo
             }
         }
 
+#if USE_EXCEL
         /// <summary>
         /// Import data to excel2007
         /// </summary>
@@ -5698,7 +5735,7 @@ namespace UHFDemo
                 return false;
             }
         }
-
+#endif
         //save tag as execel
 
 
@@ -5759,6 +5796,7 @@ namespace UHFDemo
                     MessageBox.Show("Export data success！");
                 }
             }
+#if USE_EXCEL
             else if (excel_format_buffer_rb.Checked)
             {
                 saveFileDialog1.Filter = "97-2003Document（*.xls）|*.xls|2007Document(*.xlsx)|*.xlsx";
@@ -5780,6 +5818,7 @@ namespace UHFDemo
                     }
                 }
             }
+#endif
         }
 
         private void button7_Click_1(object sender, EventArgs e)
@@ -5839,6 +5878,7 @@ namespace UHFDemo
                     MessageBox.Show("Export data success！");
                 }
             }
+#if USE_EXCEL
             else if (excel_format_fast_rb.Checked)
             {
                 saveFileDialog1.Filter = "97-2003Document（*.xls）|*.xls|2007Document(*.xlsx)|*.xlsx";
@@ -5860,6 +5900,7 @@ namespace UHFDemo
                     }
                 }
             }
+#endif
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -6639,7 +6680,7 @@ namespace UHFDemo
                 htxtWriteData.Text = symmetric.StringInt2Hex(plainEPCTextBox.Text);
                 //use ASCII, support 6 words
                 //htxtWriteData.Text = symmetric.ASCIIToHex(plainEPCTextBox.Text);
-#endif                
+#endif
                 labelHEXSize.Text = "HEX Count: " + htxtWriteData.Text.Length/3;
             }
         }

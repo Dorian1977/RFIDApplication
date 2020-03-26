@@ -5021,6 +5021,9 @@ is the same as the number of tags that are identified.)</value>
   <data name="excel_format_rb.Text" xml:space="preserve">
     <value>EXCEL</value>
   </data>
+  <data name="excel_format_rb.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;excel_format_rb.Name" xml:space="preserve">
     <value>excel_format_rb</value>
   </data>
@@ -5049,7 +5052,7 @@ is the same as the number of tags that are identified.)</value>
     <value>62</value>
   </data>
   <data name="txt_format_rb.Text" xml:space="preserve">
-    <value>TXT</value>
+    <value>CSV</value>
   </data>
   <data name="&gt;&gt;txt_format_rb.Name" xml:space="preserve">
     <value>txt_format_rb</value>
@@ -6279,10 +6282,10 @@ is the same as the number of tags that are identified.)</value>
     <value>Fill</value>
   </data>
   <data name="panel9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>571, 4</value>
+    <value>569, 4</value>
   </data>
   <data name="panel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 81</value>
+    <value>427, 81</value>
   </data>
   <data name="panel9.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -6399,7 +6402,7 @@ is the same as the number of tags that are identified.)</value>
     <value>4, 4</value>
   </data>
   <data name="panel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 81</value>
+    <value>277, 81</value>
   </data>
   <data name="panel10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -6684,10 +6687,10 @@ is the same as the number of tags that are identified.)</value>
     <value>Fill</value>
   </data>
   <data name="panel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 4</value>
+    <value>288, 4</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 81</value>
+    <value>274, 81</value>
   </data>
   <data name="panel8.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -6732,7 +6735,7 @@ is the same as the number of tags that are identified.)</value>
     <value>3</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel9" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel10" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel8" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50.22422,Percent,49.77578,Absolute,430" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel9" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel10" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel8" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50.22422,Percent,49.77578,Absolute,432" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="ledBuffer4.Location" type="System.Drawing.Point, System.Drawing">
     <value>702, 54</value>
@@ -8967,10 +8970,10 @@ is the same as the number of tags that are identified.)</value>
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>182, 5</value>
+    <value>181, 5</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 91</value>
+    <value>460, 91</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -9024,7 +9027,7 @@ is the same as the number of tags that are identified.)</value>
     <value>5, 5</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 91</value>
+    <value>168, 91</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -9306,10 +9309,10 @@ is the same as the number of tags that are identified.)</value>
     <value>Fill</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 5</value>
+    <value>649, 5</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 91</value>
+    <value>340, 91</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -9354,7 +9357,7 @@ is the same as the number of tags that are identified.)</value>
     <value>7</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,27.20588,Percent,72.79412,Absolute,342" /&gt;&lt;Rows Styles="Percent,50,Absolute,99" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,27.20588,Percent,72.79412,Absolute,345" /&gt;&lt;Rows Styles="Percent,50,Absolute,99" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -12601,7 +12604,7 @@ is the same as the number of tags that are identified.)</value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADu
-        BwAAAk1TRnQBSQFMAwEBAAEMAQEBDAEBARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
+        BwAAAk1TRnQBSQFMAwEBAAEUAQEBFAEBARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
         AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
         AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
         AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm

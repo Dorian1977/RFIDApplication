@@ -18,3 +18,10 @@ C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo soft
 C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
 C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\CustomControl\obj\Debug\CustomControl.dll
 C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\CustomControl\obj\Debug\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\bin\Debug\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\bin\Debug\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.cache
+C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\Debug\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\Debug\CustomControl.pdb
