@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UHFDemo
+namespace RFIDApplication
 {
     class DBListView : System.Windows.Forms.ListView
     {

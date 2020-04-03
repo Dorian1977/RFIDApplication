@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace UHFDemo
+namespace RFIDApplication
 {
     public class ListViewHelper
     {

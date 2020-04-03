@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace UHFDemo
+namespace RFIDApplication
 {
     class InventoryBuffer
     {
         public byte btRepeat;
-        public byte btSession;
-        public byte btTarget;
-        public byte btSL;
-        public byte btStartQ;
-        public byte btMinQ;
-        public byte btMaxQ;
+        //public byte btSession;
+        //public byte btTarget;
+        //public byte btSL;
+        //public byte btStartQ;
+        //public byte btMinQ;
+        //public byte btMaxQ;
 
         public List<byte> CustomizeSessionParameters;
 

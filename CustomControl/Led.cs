@@ -85,7 +85,7 @@ namespace LxControl
             Matrix offsetMatrix = null;
             if (!m_bIsCacheBuild)
             {
-#if DEBUG
+#if Debug
                 System.Diagnostics.Debug.WriteLine("Rebuilding cache...");
 #endif
                 DestoryCache();

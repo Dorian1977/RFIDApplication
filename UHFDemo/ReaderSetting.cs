@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UHFDemo
+namespace RFIDApplication
 {
     class ReaderSetting
     {
@@ -28,7 +28,7 @@ namespace UHFDemo
         public byte btMonzaStatus;
         public string btReaderIdentifier;
         public byte btAntImpedance;
-        public byte btImpedanceFrequency;
+        //public byte btImpedanceFrequency;
 
         public int nUserDefineStartFrequency;
         public byte btUserDefineFrequencyInterval;

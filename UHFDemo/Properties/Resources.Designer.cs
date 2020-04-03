@@ -59,5 +59,35 @@ namespace RFIDApplication.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] AccessCode {
+            get {
+                object obj = ResourceManager.GetObject("AccessCode", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] LabelFormat {
+            get {
+                object obj = ResourceManager.GetObject("LabelFormat", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] SymmetricKey {
+            get {
+                object obj = ResourceManager.GetObject("SymmetricKey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

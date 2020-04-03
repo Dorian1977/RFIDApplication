@@ -80,10 +80,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CE5869AF3FB6D7DD125E33675EA7E52853A044E9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>52BD23754F900C0554EBFD7B7E13D5AB7987B09E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>UHFDemo_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>RFIDApplication_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -95,13 +95,6 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NPOI, Version=1.2.4.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>..\..\..\..\NPOI.OOXML.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -120,15 +113,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCommondMethod.cs" />
+    <Compile Include="RFIDTagInfo.cs" />
     <Compile Include="Symmetric_Encrypted.cs" />
     <Compile Include="DBListView.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="InventoryBuffer.cs" />
     <Compile Include="ListViewHelper.cs" />
@@ -141,9 +129,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="R2000UartDemo.resx">
       <DependentUpon>R2000UartDemo.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -169,7 +154,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ReaderSetting.cs" />
-    <None Include="UHFDemo_TemporaryKey.pfx" />
+    <None Include="RFIDApplication_2_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomControl\CustomControl.csproj">
@@ -200,6 +185,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="reference\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

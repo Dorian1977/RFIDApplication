@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace UHFDemo
+namespace RFIDApplication
 {
     partial class R2000UartDemo
     {
@@ -104,30 +104,7 @@ namespace UHFDemo
             this.label108 = new System.Windows.Forms.Label();
             this.textReturnLoss = new System.Windows.Forms.TextBox();
             this.btReturnLoss = new System.Windows.Forms.Button();
-            this.gbProfile = new System.Windows.Forms.GroupBox();
-            this.btGetProfile = new System.Windows.Forms.Button();
-            this.btSetProfile = new System.Windows.Forms.Button();
-            this.rdbProfile3 = new System.Windows.Forms.RadioButton();
-            this.rdbProfile2 = new System.Windows.Forms.RadioButton();
-            this.rdbProfile1 = new System.Windows.Forms.RadioButton();
-            this.rdbProfile0 = new System.Windows.Forms.RadioButton();
             this.btRfSetup = new System.Windows.Forms.Button();
-            this.gbMonza = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.rdbMonzaOff = new System.Windows.Forms.RadioButton();
-            this.btSetMonzaStatus = new System.Windows.Forms.Button();
-            this.btGetMonzaStatus = new System.Windows.Forms.Button();
-            this.rdbMonzaOn = new System.Windows.Forms.RadioButton();
-            this.gbCmdAntDetector = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbAntDectector = new System.Windows.Forms.TextBox();
-            this.btnGetAntDetector = new System.Windows.Forms.Button();
-            this.btnSetAntDetector = new System.Windows.Forms.Button();
             this.gbCmdAntenna = new System.Windows.Forms.GroupBox();
             this.label107 = new System.Windows.Forms.Label();
             this.cmbWorkAnt = new System.Windows.Forms.ComboBox();
@@ -184,9 +161,8 @@ namespace UHFDemo
             this.label98 = new System.Windows.Forms.Label();
             this.cmbSession = new System.Windows.Forms.ComboBox();
             this.label97 = new System.Windows.Forms.Label();
-            this.excel_format_rb = new System.Windows.Forms.RadioButton();
             this.txt_format_rb = new System.Windows.Forms.RadioButton();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btnSaveFile = new System.Windows.Forms.Button();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.cbRealWorkant1 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -248,7 +224,6 @@ namespace UHFDemo
             this.rdbFree = new System.Windows.Forms.RadioButton();
             this.btnLockTag = new System.Windows.Forms.Button();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.radioBtnRead2Erase = new System.Windows.Forms.RadioButton();
             this.labelHEXSize = new System.Windows.Forms.Label();
             this.plainTextBox = new System.Windows.Forms.TextBox();
             this.btEPC2Hex = new System.Windows.Forms.Button();
@@ -270,7 +245,7 @@ namespace UHFDemo
             this.label27 = new System.Windows.Forms.Label();
             this.btnWriteTag = new System.Windows.Forms.Button();
             this.btnReadTag = new System.Windows.Forms.Button();
-            this.txtWordAdd = new System.Windows.Forms.TextBox();
+            this.txtWordAddr = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.htxtReadAndWritePwd = new CustomControl.HexTextBox();
             this.label25 = new System.Windows.Forms.Label();
@@ -286,60 +261,6 @@ namespace UHFDemo
             this.cmbSetAccessEpcMatch = new System.Windows.Forms.ComboBox();
             this.txtAccessEpcMatch = new System.Windows.Forms.TextBox();
             this.ckAccessEpcMatch = new System.Windows.Forms.CheckBox();
-            this.pageBufferedMode = new System.Windows.Forms.TabPage();
-            this.excel_format_buffer_rb = new System.Windows.Forms.RadioButton();
-            this.txt_format_buffer_rb = new System.Windows.Forms.RadioButton();
-            this.button6 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.btClearBuffer = new System.Windows.Forms.Button();
-            this.btQueryBuffer = new System.Windows.Forms.Button();
-            this.btGetClearBuffer = new System.Windows.Forms.Button();
-            this.btGetBuffer = new System.Windows.Forms.Button();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.btBufferInventory = new System.Windows.Forms.Button();
-            this.label85 = new System.Windows.Forms.Label();
-            this.textReadRoundBuffer = new System.Windows.Forms.TextBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.cbBufferWorkant1 = new System.Windows.Forms.CheckBox();
-            this.cbBufferWorkant4 = new System.Windows.Forms.CheckBox();
-            this.cbBufferWorkant2 = new System.Windows.Forms.CheckBox();
-            this.cbBufferWorkant3 = new System.Windows.Forms.CheckBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.ledBuffer4 = new LxControl.LxLedControl();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
-            this.ledBuffer5 = new LxControl.LxLedControl();
-            this.ledBuffer2 = new LxControl.LxLedControl();
-            this.ledBuffer3 = new LxControl.LxLedControl();
-            this.label92 = new System.Windows.Forms.Label();
-            this.label93 = new System.Windows.Forms.Label();
-            this.label94 = new System.Windows.Forms.Label();
-            this.label95 = new System.Windows.Forms.Label();
-            this.label96 = new System.Windows.Forms.Label();
-            this.ledBuffer1 = new LxControl.LxLedControl();
-            this.btBufferFresh = new System.Windows.Forms.Button();
-            this.labelBufferTagCount = new System.Windows.Forms.Label();
-            this.lvBufferList = new System.Windows.Forms.ListView();
-            this.columnHeader49 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader50 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader51 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader52 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader53 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader54 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PagTranDataLog = new System.Windows.Forms.TabPage();
-            this.gbCmdManual = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.htxtSendData = new CustomControl.HexTextBox();
-            this.btnClearData = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.btnSendData = new System.Windows.Forms.Button();
-            this.htxtCheckData = new CustomControl.HexTextBox();
-            this.lrtxtDataTran = new CustomControl.LogRichTextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.ckDisplayLog = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -383,9 +304,7 @@ namespace UHFDemo
             this.label91 = new System.Windows.Forms.Label();
             this.ckClearOperationRec = new System.Windows.Forms.CheckBox();
             this.timerInventory = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.totalTime = new System.Windows.Forms.Timer(this.components);
-            this.totalTimeBuffer = new System.Windows.Forms.Timer(this.components);
             this.sortImageList = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.lrtxtLog = new CustomControl.LogRichTextBox();
@@ -416,9 +335,6 @@ namespace UHFDemo
             this.gbConnectType.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gbReturnLoss.SuspendLayout();
-            this.gbProfile.SuspendLayout();
-            this.gbMonza.SuspendLayout();
-            this.gbCmdAntDetector.SuspendLayout();
             this.gbCmdAntenna.SuspendLayout();
             this.gbCmdRegion.SuspendLayout();
             this.groupBox23.SuspendLayout();
@@ -445,19 +361,6 @@ namespace UHFDemo
             this.groupBox14.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.groupBox13.SuspendLayout();
-            this.pageBufferedMode.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer1)).BeginInit();
-            this.PagTranDataLog.SuspendLayout();
-            this.gbCmdManual.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -478,11 +381,9 @@ namespace UHFDemo
             // 
             this.tabCtrMain.Controls.Add(this.PagReaderSetting);
             this.tabCtrMain.Controls.Add(this.pageEpcTest);
-            this.tabCtrMain.Controls.Add(this.PagTranDataLog);
             resources.ApplyResources(this.tabCtrMain, "tabCtrMain");
             this.tabCtrMain.Name = "tabCtrMain";
             this.tabCtrMain.SelectedIndex = 0;
-            this.tabCtrMain.SelectedIndexChanged += new System.EventHandler(this.tabCtrMain_SelectedIndexChanged);
             this.tabCtrMain.Click += new System.EventHandler(this.tabCtrMain_Click);
             // 
             // PagReaderSetting
@@ -1005,10 +906,7 @@ namespace UHFDemo
             // 
             this.tabPage2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tabPage2.Controls.Add(this.gbReturnLoss);
-            this.tabPage2.Controls.Add(this.gbProfile);
             this.tabPage2.Controls.Add(this.btRfSetup);
-            this.tabPage2.Controls.Add(this.gbMonza);
-            this.tabPage2.Controls.Add(this.gbCmdAntDetector);
             this.tabPage2.Controls.Add(this.gbCmdAntenna);
             this.tabPage2.Controls.Add(this.gbCmdRegion);
             this.tabPage2.Controls.Add(this.gbCmdOutputPower);
@@ -1125,183 +1023,12 @@ namespace UHFDemo
             this.btReturnLoss.UseVisualStyleBackColor = true;
             this.btReturnLoss.Click += new System.EventHandler(this.btReturnLoss_Click);
             // 
-            // gbProfile
-            // 
-            this.gbProfile.Controls.Add(this.btGetProfile);
-            this.gbProfile.Controls.Add(this.btSetProfile);
-            this.gbProfile.Controls.Add(this.rdbProfile3);
-            this.gbProfile.Controls.Add(this.rdbProfile2);
-            this.gbProfile.Controls.Add(this.rdbProfile1);
-            this.gbProfile.Controls.Add(this.rdbProfile0);
-            this.gbProfile.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.gbProfile, "gbProfile");
-            this.gbProfile.Name = "gbProfile";
-            this.gbProfile.TabStop = false;
-            // 
-            // btGetProfile
-            // 
-            resources.ApplyResources(this.btGetProfile, "btGetProfile");
-            this.btGetProfile.Name = "btGetProfile";
-            this.btGetProfile.UseVisualStyleBackColor = true;
-            this.btGetProfile.Click += new System.EventHandler(this.btGetProfile_Click);
-            // 
-            // btSetProfile
-            // 
-            resources.ApplyResources(this.btSetProfile, "btSetProfile");
-            this.btSetProfile.Name = "btSetProfile";
-            this.btSetProfile.UseVisualStyleBackColor = true;
-            this.btSetProfile.Click += new System.EventHandler(this.btSetProfile_Click);
-            // 
-            // rdbProfile3
-            // 
-            resources.ApplyResources(this.rdbProfile3, "rdbProfile3");
-            this.rdbProfile3.Name = "rdbProfile3";
-            this.rdbProfile3.TabStop = true;
-            this.rdbProfile3.UseVisualStyleBackColor = true;
-            // 
-            // rdbProfile2
-            // 
-            resources.ApplyResources(this.rdbProfile2, "rdbProfile2");
-            this.rdbProfile2.Name = "rdbProfile2";
-            this.rdbProfile2.TabStop = true;
-            this.rdbProfile2.UseVisualStyleBackColor = true;
-            // 
-            // rdbProfile1
-            // 
-            resources.ApplyResources(this.rdbProfile1, "rdbProfile1");
-            this.rdbProfile1.ForeColor = System.Drawing.Color.Black;
-            this.rdbProfile1.Name = "rdbProfile1";
-            this.rdbProfile1.TabStop = true;
-            this.rdbProfile1.UseVisualStyleBackColor = true;
-            // 
-            // rdbProfile0
-            // 
-            resources.ApplyResources(this.rdbProfile0, "rdbProfile0");
-            this.rdbProfile0.Name = "rdbProfile0";
-            this.rdbProfile0.TabStop = true;
-            this.rdbProfile0.UseVisualStyleBackColor = true;
-            // 
             // btRfSetup
             // 
             resources.ApplyResources(this.btRfSetup, "btRfSetup");
             this.btRfSetup.Name = "btRfSetup";
             this.btRfSetup.UseVisualStyleBackColor = true;
             this.btRfSetup.Click += new System.EventHandler(this.btRfSetup_Click);
-            // 
-            // gbMonza
-            // 
-            this.gbMonza.Controls.Add(this.label14);
-            this.gbMonza.Controls.Add(this.label11);
-            this.gbMonza.Controls.Add(this.rdbMonzaOff);
-            this.gbMonza.Controls.Add(this.btSetMonzaStatus);
-            this.gbMonza.Controls.Add(this.btGetMonzaStatus);
-            this.gbMonza.Controls.Add(this.rdbMonzaOn);
-            this.gbMonza.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.gbMonza, "gbMonza");
-            this.gbMonza.Name = "gbMonza";
-            this.gbMonza.TabStop = false;
-            // 
-            // label14
-            // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label14.Name = "label14";
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label11.Name = "label11";
-            // 
-            // rdbMonzaOff
-            // 
-            resources.ApplyResources(this.rdbMonzaOff, "rdbMonzaOff");
-            this.rdbMonzaOff.Name = "rdbMonzaOff";
-            this.rdbMonzaOff.TabStop = true;
-            this.rdbMonzaOff.UseVisualStyleBackColor = true;
-            // 
-            // btSetMonzaStatus
-            // 
-            resources.ApplyResources(this.btSetMonzaStatus, "btSetMonzaStatus");
-            this.btSetMonzaStatus.Name = "btSetMonzaStatus";
-            this.btSetMonzaStatus.UseVisualStyleBackColor = true;
-            this.btSetMonzaStatus.Click += new System.EventHandler(this.btSetMonzaStatus_Click);
-            // 
-            // btGetMonzaStatus
-            // 
-            resources.ApplyResources(this.btGetMonzaStatus, "btGetMonzaStatus");
-            this.btGetMonzaStatus.Name = "btGetMonzaStatus";
-            this.btGetMonzaStatus.UseVisualStyleBackColor = true;
-            this.btGetMonzaStatus.Click += new System.EventHandler(this.btGetMonzaStatus_Click);
-            // 
-            // rdbMonzaOn
-            // 
-            resources.ApplyResources(this.rdbMonzaOn, "rdbMonzaOn");
-            this.rdbMonzaOn.Name = "rdbMonzaOn";
-            this.rdbMonzaOn.TabStop = true;
-            this.rdbMonzaOn.UseVisualStyleBackColor = true;
-            // 
-            // gbCmdAntDetector
-            // 
-            this.gbCmdAntDetector.Controls.Add(this.label7);
-            this.gbCmdAntDetector.Controls.Add(this.label6);
-            this.gbCmdAntDetector.Controls.Add(this.label5);
-            this.gbCmdAntDetector.Controls.Add(this.label10);
-            this.gbCmdAntDetector.Controls.Add(this.label8);
-            this.gbCmdAntDetector.Controls.Add(this.tbAntDectector);
-            this.gbCmdAntDetector.Controls.Add(this.btnGetAntDetector);
-            this.gbCmdAntDetector.Controls.Add(this.btnSetAntDetector);
-            this.gbCmdAntDetector.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.gbCmdAntDetector, "gbCmdAntDetector");
-            this.gbCmdAntDetector.Name = "gbCmdAntDetector";
-            this.gbCmdAntDetector.TabStop = false;
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label7.Name = "label7";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label6.Name = "label6";
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label5.Name = "label5";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // tbAntDectector
-            // 
-            resources.ApplyResources(this.tbAntDectector, "tbAntDectector");
-            this.tbAntDectector.Name = "tbAntDectector";
-            // 
-            // btnGetAntDetector
-            // 
-            resources.ApplyResources(this.btnGetAntDetector, "btnGetAntDetector");
-            this.btnGetAntDetector.Name = "btnGetAntDetector";
-            this.btnGetAntDetector.UseVisualStyleBackColor = true;
-            this.btnGetAntDetector.Click += new System.EventHandler(this.btnGetAntDetector_Click);
-            // 
-            // btnSetAntDetector
-            // 
-            resources.ApplyResources(this.btnSetAntDetector, "btnSetAntDetector");
-            this.btnSetAntDetector.Name = "btnSetAntDetector";
-            this.btnSetAntDetector.UseVisualStyleBackColor = true;
-            this.btnSetAntDetector.Click += new System.EventHandler(this.btnSetAntDetector_Click);
             // 
             // gbCmdAntenna
             // 
@@ -1574,20 +1301,17 @@ namespace UHFDemo
             // 
             this.tabEpcTest.Controls.Add(this.pageRealMode);
             this.tabEpcTest.Controls.Add(this.pageAcessTag);
-            this.tabEpcTest.Controls.Add(this.pageBufferedMode);
             resources.ApplyResources(this.tabEpcTest, "tabEpcTest");
             this.tabEpcTest.Name = "tabEpcTest";
             this.tabEpcTest.SelectedIndex = 0;
             this.tabEpcTest.TabStop = false;
-            this.tabEpcTest.SelectedIndexChanged += new System.EventHandler(this.tabEpcTest_SelectedIndexChanged);
             // 
             // pageRealMode
             // 
             this.pageRealMode.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pageRealMode.Controls.Add(this.tableLayoutPanel1);
-            this.pageRealMode.Controls.Add(this.excel_format_rb);
             this.pageRealMode.Controls.Add(this.txt_format_rb);
-            this.pageRealMode.Controls.Add(this.button8);
+            this.pageRealMode.Controls.Add(this.btnSaveFile);
             this.pageRealMode.Controls.Add(this.groupBox20);
             this.pageRealMode.Controls.Add(this.tbRealMinRssi);
             this.pageRealMode.Controls.Add(this.tbRealMaxRssi);
@@ -1740,12 +1464,6 @@ namespace UHFDemo
             resources.ApplyResources(this.label97, "label97");
             this.label97.Name = "label97";
             // 
-            // excel_format_rb
-            // 
-            resources.ApplyResources(this.excel_format_rb, "excel_format_rb");
-            this.excel_format_rb.Name = "excel_format_rb";
-            this.excel_format_rb.UseVisualStyleBackColor = true;
-            // 
             // txt_format_rb
             // 
             resources.ApplyResources(this.txt_format_rb, "txt_format_rb");
@@ -1754,13 +1472,13 @@ namespace UHFDemo
             this.txt_format_rb.TabStop = true;
             this.txt_format_rb.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // btnSaveFile
             // 
-            resources.ApplyResources(this.button8, "button8");
-            this.button8.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.button8.Name = "button8";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            resources.ApplyResources(this.btnSaveFile, "btnSaveFile");
+            this.btnSaveFile.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btnSaveFile.Name = "btnSaveFile";
+            this.btnSaveFile.UseVisualStyleBackColor = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.button8_Click);
             // 
             // groupBox20
             // 
@@ -2241,7 +1959,6 @@ namespace UHFDemo
             // 
             // groupBox14
             // 
-            this.groupBox14.Controls.Add(this.radioBtnRead2Erase);
             this.groupBox14.Controls.Add(this.labelHEXSize);
             this.groupBox14.Controls.Add(this.plainTextBox);
             this.groupBox14.Controls.Add(this.btEPC2Hex);
@@ -2263,7 +1980,7 @@ namespace UHFDemo
             this.groupBox14.Controls.Add(this.label27);
             this.groupBox14.Controls.Add(this.btnWriteTag);
             this.groupBox14.Controls.Add(this.btnReadTag);
-            this.groupBox14.Controls.Add(this.txtWordAdd);
+            this.groupBox14.Controls.Add(this.txtWordAddr);
             this.groupBox14.Controls.Add(this.label26);
             this.groupBox14.Controls.Add(this.htxtReadAndWritePwd);
             this.groupBox14.Controls.Add(this.label25);
@@ -2272,12 +1989,6 @@ namespace UHFDemo
             resources.ApplyResources(this.groupBox14, "groupBox14");
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.TabStop = false;
-            // 
-            // radioBtnRead2Erase
-            // 
-            resources.ApplyResources(this.radioBtnRead2Erase, "radioBtnRead2Erase");
-            this.radioBtnRead2Erase.Name = "radioBtnRead2Erase";
-            this.radioBtnRead2Erase.UseVisualStyleBackColor = true;
             // 
             // labelHEXSize
             // 
@@ -2362,15 +2073,15 @@ namespace UHFDemo
             // radioButtonBWrite
             // 
             resources.ApplyResources(this.radioButtonBWrite, "radioButtonBWrite");
-            this.radioButtonBWrite.Checked = true;
             this.radioButtonBWrite.Name = "radioButtonBWrite";
-            this.radioButtonBWrite.TabStop = true;
             this.radioButtonBWrite.UseVisualStyleBackColor = true;
             // 
             // radioButtonWrite
             // 
             resources.ApplyResources(this.radioButtonWrite, "radioButtonWrite");
+            this.radioButtonWrite.Checked = true;
             this.radioButtonWrite.Name = "radioButtonWrite";
+            this.radioButtonWrite.TabStop = true;
             this.radioButtonWrite.UseVisualStyleBackColor = true;
             // 
             // htxtWriteData
@@ -2402,10 +2113,10 @@ namespace UHFDemo
             this.btnReadTag.UseVisualStyleBackColor = true;
             this.btnReadTag.Click += new System.EventHandler(this.btnReadTag_Click);
             // 
-            // txtWordAdd
+            // txtWordAddr
             // 
-            resources.ApplyResources(this.txtWordAdd, "txtWordAdd");
-            this.txtWordAdd.Name = "txtWordAdd";
+            resources.ApplyResources(this.txtWordAddr, "txtWordAddr");
+            this.txtWordAddr.Name = "txtWordAddr";
             // 
             // label26
             // 
@@ -2512,460 +2223,6 @@ namespace UHFDemo
             this.ckAccessEpcMatch.Name = "ckAccessEpcMatch";
             this.ckAccessEpcMatch.UseVisualStyleBackColor = true;
             this.ckAccessEpcMatch.CheckedChanged += new System.EventHandler(this.cbAccessEpcMatch_CheckedChanged);
-            // 
-            // pageBufferedMode
-            // 
-            this.pageBufferedMode.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pageBufferedMode.Controls.Add(this.excel_format_buffer_rb);
-            this.pageBufferedMode.Controls.Add(this.txt_format_buffer_rb);
-            this.pageBufferedMode.Controls.Add(this.button6);
-            this.pageBufferedMode.Controls.Add(this.tableLayoutPanel4);
-            this.pageBufferedMode.Controls.Add(this.groupBox3);
-            this.pageBufferedMode.Controls.Add(this.btBufferFresh);
-            this.pageBufferedMode.Controls.Add(this.labelBufferTagCount);
-            this.pageBufferedMode.Controls.Add(this.lvBufferList);
-            this.pageBufferedMode.ForeColor = System.Drawing.SystemColors.Desktop;
-            resources.ApplyResources(this.pageBufferedMode, "pageBufferedMode");
-            this.pageBufferedMode.Name = "pageBufferedMode";
-            // 
-            // excel_format_buffer_rb
-            // 
-            resources.ApplyResources(this.excel_format_buffer_rb, "excel_format_buffer_rb");
-            this.excel_format_buffer_rb.Name = "excel_format_buffer_rb";
-            this.excel_format_buffer_rb.UseVisualStyleBackColor = true;
-            // 
-            // txt_format_buffer_rb
-            // 
-            resources.ApplyResources(this.txt_format_buffer_rb, "txt_format_buffer_rb");
-            this.txt_format_buffer_rb.Checked = true;
-            this.txt_format_buffer_rb.Name = "txt_format_buffer_rb";
-            this.txt_format_buffer_rb.TabStop = true;
-            this.txt_format_buffer_rb.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            resources.ApplyResources(this.button6, "button6");
-            this.button6.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.button6.Name = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click_1);
-            // 
-            // tableLayoutPanel4
-            // 
-            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.panel9, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.panel10, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.panel8, 1, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.btClearBuffer);
-            this.panel9.Controls.Add(this.btQueryBuffer);
-            this.panel9.Controls.Add(this.btGetClearBuffer);
-            this.panel9.Controls.Add(this.btGetBuffer);
-            resources.ApplyResources(this.panel9, "panel9");
-            this.panel9.Name = "panel9";
-            // 
-            // btClearBuffer
-            // 
-            resources.ApplyResources(this.btClearBuffer, "btClearBuffer");
-            this.btClearBuffer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btClearBuffer.Name = "btClearBuffer";
-            this.btClearBuffer.UseVisualStyleBackColor = true;
-            this.btClearBuffer.Click += new System.EventHandler(this.btClearBuffer_Click);
-            // 
-            // btQueryBuffer
-            // 
-            resources.ApplyResources(this.btQueryBuffer, "btQueryBuffer");
-            this.btQueryBuffer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btQueryBuffer.Name = "btQueryBuffer";
-            this.btQueryBuffer.UseVisualStyleBackColor = true;
-            this.btQueryBuffer.Click += new System.EventHandler(this.btQueryBuffer_Click);
-            // 
-            // btGetClearBuffer
-            // 
-            resources.ApplyResources(this.btGetClearBuffer, "btGetClearBuffer");
-            this.btGetClearBuffer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btGetClearBuffer.Name = "btGetClearBuffer";
-            this.btGetClearBuffer.UseVisualStyleBackColor = true;
-            this.btGetClearBuffer.Click += new System.EventHandler(this.btGetClearBuffer_Click);
-            // 
-            // btGetBuffer
-            // 
-            resources.ApplyResources(this.btGetBuffer, "btGetBuffer");
-            this.btGetBuffer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btGetBuffer.Name = "btGetBuffer";
-            this.btGetBuffer.UseVisualStyleBackColor = true;
-            this.btGetBuffer.Click += new System.EventHandler(this.btGetBuffer_Click);
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.btBufferInventory);
-            this.panel10.Controls.Add(this.label85);
-            this.panel10.Controls.Add(this.textReadRoundBuffer);
-            resources.ApplyResources(this.panel10, "panel10");
-            this.panel10.Name = "panel10";
-            // 
-            // btBufferInventory
-            // 
-            resources.ApplyResources(this.btBufferInventory, "btBufferInventory");
-            this.btBufferInventory.ForeColor = System.Drawing.Color.DarkBlue;
-            this.btBufferInventory.Name = "btBufferInventory";
-            this.btBufferInventory.UseVisualStyleBackColor = true;
-            this.btBufferInventory.Click += new System.EventHandler(this.btBufferInventory_Click);
-            // 
-            // label85
-            // 
-            resources.ApplyResources(this.label85, "label85");
-            this.label85.Name = "label85";
-            // 
-            // textReadRoundBuffer
-            // 
-            resources.ApplyResources(this.textReadRoundBuffer, "textReadRoundBuffer");
-            this.textReadRoundBuffer.Name = "textReadRoundBuffer";
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.checkBox4);
-            this.panel8.Controls.Add(this.checkBox3);
-            this.panel8.Controls.Add(this.checkBox2);
-            this.panel8.Controls.Add(this.checkBox1);
-            this.panel8.Controls.Add(this.cbBufferWorkant1);
-            this.panel8.Controls.Add(this.cbBufferWorkant4);
-            this.panel8.Controls.Add(this.cbBufferWorkant2);
-            this.panel8.Controls.Add(this.cbBufferWorkant3);
-            resources.ApplyResources(this.panel8, "panel8");
-            this.panel8.Name = "panel8";
-            // 
-            // checkBox4
-            // 
-            resources.ApplyResources(this.checkBox4, "checkBox4");
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            resources.ApplyResources(this.checkBox2, "checkBox2");
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // cbBufferWorkant1
-            // 
-            resources.ApplyResources(this.cbBufferWorkant1, "cbBufferWorkant1");
-            this.cbBufferWorkant1.Checked = true;
-            this.cbBufferWorkant1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbBufferWorkant1.Name = "cbBufferWorkant1";
-            this.cbBufferWorkant1.UseVisualStyleBackColor = true;
-            // 
-            // cbBufferWorkant4
-            // 
-            resources.ApplyResources(this.cbBufferWorkant4, "cbBufferWorkant4");
-            this.cbBufferWorkant4.Name = "cbBufferWorkant4";
-            this.cbBufferWorkant4.UseVisualStyleBackColor = true;
-            // 
-            // cbBufferWorkant2
-            // 
-            resources.ApplyResources(this.cbBufferWorkant2, "cbBufferWorkant2");
-            this.cbBufferWorkant2.Name = "cbBufferWorkant2";
-            this.cbBufferWorkant2.UseVisualStyleBackColor = true;
-            // 
-            // cbBufferWorkant3
-            // 
-            resources.ApplyResources(this.cbBufferWorkant3, "cbBufferWorkant3");
-            this.cbBufferWorkant3.Name = "cbBufferWorkant3";
-            this.cbBufferWorkant3.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.ledBuffer4);
-            this.groupBox3.Controls.Add(this.comboBox11);
-            this.groupBox3.Controls.Add(this.ledBuffer5);
-            this.groupBox3.Controls.Add(this.ledBuffer2);
-            this.groupBox3.Controls.Add(this.ledBuffer3);
-            this.groupBox3.Controls.Add(this.label92);
-            this.groupBox3.Controls.Add(this.label93);
-            this.groupBox3.Controls.Add(this.label94);
-            this.groupBox3.Controls.Add(this.label95);
-            this.groupBox3.Controls.Add(this.label96);
-            this.groupBox3.Controls.Add(this.ledBuffer1);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            // 
-            // ledBuffer4
-            // 
-            this.ledBuffer4.BackColor = System.Drawing.Color.Transparent;
-            this.ledBuffer4.BackColor_1 = System.Drawing.Color.Transparent;
-            this.ledBuffer4.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.ledBuffer4.BevelRate = 0.1F;
-            this.ledBuffer4.BorderColor = System.Drawing.Color.Lavender;
-            this.ledBuffer4.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.ledBuffer4.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.ledBuffer4.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.ledBuffer4.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.ledBuffer4, "ledBuffer4");
-            this.ledBuffer4.Name = "ledBuffer4";
-            this.ledBuffer4.RoundCorner = true;
-            this.ledBuffer4.SegmentIntervalRatio = 50;
-            this.ledBuffer4.ShowHighlight = true;
-            this.ledBuffer4.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            this.ledBuffer4.TotalCharCount = 10;
-            // 
-            // comboBox11
-            // 
-            this.comboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox11.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Items.AddRange(new object[] {
-            resources.GetString("comboBox11.Items"),
-            resources.GetString("comboBox11.Items1"),
-            resources.GetString("comboBox11.Items2"),
-            resources.GetString("comboBox11.Items3"),
-            resources.GetString("comboBox11.Items4")});
-            resources.ApplyResources(this.comboBox11, "comboBox11");
-            this.comboBox11.Name = "comboBox11";
-            // 
-            // ledBuffer5
-            // 
-            this.ledBuffer5.BackColor = System.Drawing.Color.Transparent;
-            this.ledBuffer5.BackColor_1 = System.Drawing.Color.Transparent;
-            this.ledBuffer5.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.ledBuffer5.BevelRate = 0.1F;
-            this.ledBuffer5.BorderColor = System.Drawing.Color.Lavender;
-            this.ledBuffer5.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.ledBuffer5.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.ledBuffer5.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.ledBuffer5.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.ledBuffer5, "ledBuffer5");
-            this.ledBuffer5.Name = "ledBuffer5";
-            this.ledBuffer5.RoundCorner = true;
-            this.ledBuffer5.SegmentIntervalRatio = 50;
-            this.ledBuffer5.ShowHighlight = true;
-            this.ledBuffer5.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            this.ledBuffer5.TotalCharCount = 10;
-            // 
-            // ledBuffer2
-            // 
-            this.ledBuffer2.BackColor = System.Drawing.Color.Transparent;
-            this.ledBuffer2.BackColor_1 = System.Drawing.Color.Transparent;
-            this.ledBuffer2.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.ledBuffer2.BevelRate = 0.1F;
-            this.ledBuffer2.BorderColor = System.Drawing.Color.Lavender;
-            this.ledBuffer2.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.ledBuffer2.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.ledBuffer2.ForeColor = System.Drawing.Color.Purple;
-            this.ledBuffer2.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.ledBuffer2, "ledBuffer2");
-            this.ledBuffer2.Name = "ledBuffer2";
-            this.ledBuffer2.RoundCorner = true;
-            this.ledBuffer2.SegmentIntervalRatio = 50;
-            this.ledBuffer2.ShowHighlight = true;
-            this.ledBuffer2.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            this.ledBuffer2.TotalCharCount = 6;
-            // 
-            // ledBuffer3
-            // 
-            this.ledBuffer3.BackColor = System.Drawing.Color.Transparent;
-            this.ledBuffer3.BackColor_1 = System.Drawing.Color.Transparent;
-            this.ledBuffer3.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.ledBuffer3.BevelRate = 0.1F;
-            this.ledBuffer3.BorderColor = System.Drawing.Color.Lavender;
-            this.ledBuffer3.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.ledBuffer3.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.ledBuffer3.ForeColor = System.Drawing.Color.Purple;
-            this.ledBuffer3.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.ledBuffer3, "ledBuffer3");
-            this.ledBuffer3.Name = "ledBuffer3";
-            this.ledBuffer3.RoundCorner = true;
-            this.ledBuffer3.SegmentIntervalRatio = 50;
-            this.ledBuffer3.ShowHighlight = true;
-            this.ledBuffer3.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            this.ledBuffer3.TotalCharCount = 6;
-            // 
-            // label92
-            // 
-            resources.ApplyResources(this.label92, "label92");
-            this.label92.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label92.Name = "label92";
-            // 
-            // label93
-            // 
-            resources.ApplyResources(this.label93, "label93");
-            this.label93.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label93.Name = "label93";
-            // 
-            // label94
-            // 
-            resources.ApplyResources(this.label94, "label94");
-            this.label94.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label94.Name = "label94";
-            // 
-            // label95
-            // 
-            resources.ApplyResources(this.label95, "label95");
-            this.label95.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label95.Name = "label95";
-            // 
-            // label96
-            // 
-            resources.ApplyResources(this.label96, "label96");
-            this.label96.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label96.Name = "label96";
-            // 
-            // ledBuffer1
-            // 
-            this.ledBuffer1.BackColor = System.Drawing.Color.Transparent;
-            this.ledBuffer1.BackColor_1 = System.Drawing.Color.Transparent;
-            this.ledBuffer1.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.ledBuffer1.BevelRate = 0.1F;
-            this.ledBuffer1.BorderColor = System.Drawing.Color.Lavender;
-            this.ledBuffer1.BorderWidth = 3;
-            this.ledBuffer1.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.ledBuffer1.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.ledBuffer1.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.ledBuffer1.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.ledBuffer1, "ledBuffer1");
-            this.ledBuffer1.Name = "ledBuffer1";
-            this.ledBuffer1.RoundCorner = true;
-            this.ledBuffer1.SegmentIntervalRatio = 50;
-            this.ledBuffer1.ShowHighlight = true;
-            this.ledBuffer1.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            // 
-            // btBufferFresh
-            // 
-            resources.ApplyResources(this.btBufferFresh, "btBufferFresh");
-            this.btBufferFresh.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.btBufferFresh.Name = "btBufferFresh";
-            this.btBufferFresh.UseVisualStyleBackColor = true;
-            this.btBufferFresh.Click += new System.EventHandler(this.btBufferFresh_Click);
-            // 
-            // labelBufferTagCount
-            // 
-            resources.ApplyResources(this.labelBufferTagCount, "labelBufferTagCount");
-            this.labelBufferTagCount.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.labelBufferTagCount.Name = "labelBufferTagCount";
-            // 
-            // lvBufferList
-            // 
-            this.lvBufferList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader49,
-            this.columnHeader50,
-            this.columnHeader51,
-            this.columnHeader52,
-            this.columnHeader53,
-            this.columnHeader54,
-            this.columnHeader16});
-            resources.ApplyResources(this.lvBufferList, "lvBufferList");
-            this.lvBufferList.GridLines = true;
-            this.lvBufferList.HideSelection = false;
-            this.lvBufferList.Name = "lvBufferList";
-            this.lvBufferList.UseCompatibleStateImageBehavior = false;
-            this.lvBufferList.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader49
-            // 
-            resources.ApplyResources(this.columnHeader49, "columnHeader49");
-            // 
-            // columnHeader50
-            // 
-            resources.ApplyResources(this.columnHeader50, "columnHeader50");
-            // 
-            // columnHeader51
-            // 
-            resources.ApplyResources(this.columnHeader51, "columnHeader51");
-            // 
-            // columnHeader52
-            // 
-            resources.ApplyResources(this.columnHeader52, "columnHeader52");
-            // 
-            // columnHeader53
-            // 
-            resources.ApplyResources(this.columnHeader53, "columnHeader53");
-            // 
-            // columnHeader54
-            // 
-            resources.ApplyResources(this.columnHeader54, "columnHeader54");
-            // 
-            // columnHeader16
-            // 
-            resources.ApplyResources(this.columnHeader16, "columnHeader16");
-            // 
-            // PagTranDataLog
-            // 
-            this.PagTranDataLog.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.PagTranDataLog.Controls.Add(this.gbCmdManual);
-            this.PagTranDataLog.Controls.Add(this.lrtxtDataTran);
-            resources.ApplyResources(this.PagTranDataLog, "PagTranDataLog");
-            this.PagTranDataLog.Name = "PagTranDataLog";
-            this.PagTranDataLog.UseVisualStyleBackColor = true;
-            // 
-            // gbCmdManual
-            // 
-            this.gbCmdManual.Controls.Add(this.label16);
-            this.gbCmdManual.Controls.Add(this.htxtSendData);
-            this.gbCmdManual.Controls.Add(this.btnClearData);
-            this.gbCmdManual.Controls.Add(this.label17);
-            this.gbCmdManual.Controls.Add(this.btnSendData);
-            this.gbCmdManual.Controls.Add(this.htxtCheckData);
-            resources.ApplyResources(this.gbCmdManual, "gbCmdManual");
-            this.gbCmdManual.Name = "gbCmdManual";
-            this.gbCmdManual.TabStop = false;
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // htxtSendData
-            // 
-            resources.ApplyResources(this.htxtSendData, "htxtSendData");
-            this.htxtSendData.Name = "htxtSendData";
-            this.htxtSendData.Leave += new System.EventHandler(this.htxtSendData_Leave);
-            // 
-            // btnClearData
-            // 
-            resources.ApplyResources(this.btnClearData, "btnClearData");
-            this.btnClearData.Name = "btnClearData";
-            this.btnClearData.UseVisualStyleBackColor = true;
-            this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
-            // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
-            // btnSendData
-            // 
-            resources.ApplyResources(this.btnSendData, "btnSendData");
-            this.btnSendData.Name = "btnSendData";
-            this.btnSendData.UseVisualStyleBackColor = true;
-            this.btnSendData.Click += new System.EventHandler(this.btnSendData_Click);
-            // 
-            // htxtCheckData
-            // 
-            resources.ApplyResources(this.htxtCheckData, "htxtCheckData");
-            this.htxtCheckData.Name = "htxtCheckData";
-            this.htxtCheckData.ReadOnly = true;
-            // 
-            // lrtxtDataTran
-            // 
-            resources.ApplyResources(this.lrtxtDataTran, "lrtxtDataTran");
-            this.lrtxtDataTran.Name = "lrtxtDataTran";
-            this.lrtxtDataTran.DoubleClick += new System.EventHandler(this.lrtxtDataTran_DoubleClick);
             // 
             // label35
             // 
@@ -3342,7 +2599,6 @@ namespace UHFDemo
             // 
             resources.ApplyResources(this.lrtxtLog, "lrtxtLog");
             this.lrtxtLog.Name = "lrtxtLog";
-            this.lrtxtLog.TextChanged += new System.EventHandler(this.lrtxtLog_TextChanged);
             this.lrtxtLog.DoubleClick += new System.EventHandler(this.lrtxtLog_DoubleClick);
             // 
             // lxLedControl14
@@ -3450,6 +2706,7 @@ namespace UHFDemo
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "R2000UartDemo";
+            this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.R2000UartDemo_Load);
             this.tabCtrMain.ResumeLayout(false);
             this.PagReaderSetting.ResumeLayout(false);
@@ -3487,12 +2744,6 @@ namespace UHFDemo
             this.tabPage2.ResumeLayout(false);
             this.gbReturnLoss.ResumeLayout(false);
             this.gbReturnLoss.PerformLayout();
-            this.gbProfile.ResumeLayout(false);
-            this.gbProfile.PerformLayout();
-            this.gbMonza.ResumeLayout(false);
-            this.gbMonza.PerformLayout();
-            this.gbCmdAntDetector.ResumeLayout(false);
-            this.gbCmdAntDetector.PerformLayout();
             this.gbCmdAntenna.ResumeLayout(false);
             this.gbCmdAntenna.PerformLayout();
             this.gbCmdRegion.ResumeLayout(false);
@@ -3535,24 +2786,6 @@ namespace UHFDemo
             this.groupBox17.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
-            this.pageBufferedMode.ResumeLayout(false);
-            this.pageBufferedMode.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ledBuffer1)).EndInit();
-            this.PagTranDataLog.ResumeLayout(false);
-            this.gbCmdManual.ResumeLayout(false);
-            this.gbCmdManual.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -3579,16 +2812,7 @@ namespace UHFDemo
         private System.Windows.Forms.TabControl tabCtrMain;
         private System.Windows.Forms.TabPage PagReaderSetting;
         private CustomControl.LogRichTextBox lrtxtLog;
-        private System.Windows.Forms.TabPage PagTranDataLog;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Button btnSendData;
-        private System.Windows.Forms.Label label17;
-        private CustomControl.HexTextBox htxtSendData;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.GroupBox gbCmdManual;
-        private CustomControl.LogRichTextBox lrtxtDataTran;
-        private CustomControl.HexTextBox htxtCheckData;
-        private System.Windows.Forms.Button btnClearData;
         private System.Windows.Forms.CheckBox ckDisplayLog;
         private System.Windows.Forms.TabPage pageEpcTest;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -3698,17 +2922,9 @@ namespace UHFDemo
         private System.Windows.Forms.RadioButton rdbTcpIp;
         private System.Windows.Forms.RadioButton rdbRS232;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox gbMonza;
-        private System.Windows.Forms.RadioButton rdbMonzaOff;
-        private System.Windows.Forms.Button btSetMonzaStatus;
-        private System.Windows.Forms.Button btGetMonzaStatus;
-        private System.Windows.Forms.RadioButton rdbMonzaOn;
         private System.Windows.Forms.GroupBox gbCmdAntenna;
         private System.Windows.Forms.Button btnGetWorkAntenna;
         private System.Windows.Forms.Button btnSetWorkAntenna;
-        private System.Windows.Forms.GroupBox gbCmdAntDetector;
-        private System.Windows.Forms.Button btnGetAntDetector;
-        private System.Windows.Forms.Button btnSetAntDetector;
         private System.Windows.Forms.GroupBox gbCmdRegion;
         private System.Windows.Forms.Button btnGetFrequencyRegion;
         private System.Windows.Forms.Button btnSetFrequencyRegion;
@@ -3720,21 +2936,6 @@ namespace UHFDemo
         private System.Windows.Forms.Button btRfSetup;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.TextBox tbAntDectector;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.GroupBox gbProfile;
-        private System.Windows.Forms.Button btGetProfile;
-        private System.Windows.Forms.Button btSetProfile;
-        private System.Windows.Forms.RadioButton rdbProfile3;
-        private System.Windows.Forms.RadioButton rdbProfile2;
-        private System.Windows.Forms.RadioButton rdbProfile1;
-        private System.Windows.Forms.RadioButton rdbProfile0;
         private System.Windows.Forms.GroupBox groupBox23;
         private System.Windows.Forms.TextBox textFreqQuantity;
         private System.Windows.Forms.TextBox TextFreqInterval;
@@ -3774,8 +2975,6 @@ namespace UHFDemo
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox24;
         private System.Windows.Forms.RadioButton antType1;
-        private Timer timer1;
-        private Timer totalTimeBuffer;
         private ImageList sortImageList;
         private TabControl tabEpcTest;
         private TabPage pageRealMode;
@@ -3796,9 +2995,8 @@ namespace UHFDemo
         private Label label98;
         private ComboBox cmbSession;
         private Label label97;
-        private RadioButton excel_format_rb;
         private RadioButton txt_format_rb;
-        private Button button8;
+        private Button btnSaveFile;
         private GroupBox groupBox20;
         private CheckBox cbRealWorkant1;
         private Label label19;
@@ -3828,51 +3026,6 @@ namespace UHFDemo
         private ColumnHeader columnHeader41;
         private ColumnHeader columnHeader412;
         private ColumnHeader columnHeader42;
-        private TabPage pageBufferedMode;
-        private RadioButton excel_format_buffer_rb;
-        private RadioButton txt_format_buffer_rb;
-        private Button button6;
-        private TableLayoutPanel tableLayoutPanel4;
-        private Panel panel9;
-        private Button btClearBuffer;
-        private Button btQueryBuffer;
-        private Button btGetClearBuffer;
-        private Button btGetBuffer;
-        private Panel panel10;
-        private Button btBufferInventory;
-        private Label label85;
-        private TextBox textReadRoundBuffer;
-        private Panel panel8;
-        private CheckBox checkBox4;
-        private CheckBox checkBox3;
-        private CheckBox checkBox2;
-        private CheckBox checkBox1;
-        private CheckBox cbBufferWorkant1;
-        private CheckBox cbBufferWorkant4;
-        private CheckBox cbBufferWorkant2;
-        private CheckBox cbBufferWorkant3;
-        private GroupBox groupBox3;
-        private LxControl.LxLedControl ledBuffer4;
-        private ComboBox comboBox11;
-        private LxControl.LxLedControl ledBuffer5;
-        private LxControl.LxLedControl ledBuffer2;
-        private LxControl.LxLedControl ledBuffer3;
-        private Label label92;
-        private Label label93;
-        private Label label94;
-        private Label label95;
-        private Label label96;
-        private LxControl.LxLedControl ledBuffer1;
-        private Button btBufferFresh;
-        private Label labelBufferTagCount;
-        private ListView lvBufferList;
-        private ColumnHeader columnHeader49;
-        private ColumnHeader columnHeader50;
-        private ColumnHeader columnHeader51;
-        private ColumnHeader columnHeader52;
-        private ColumnHeader columnHeader53;
-        private ColumnHeader columnHeader54;
-        private ColumnHeader columnHeader16;
         private TabPage pageAcessTag;
         private ListView ltvOperate;
         private ColumnHeader columnHeader5;
@@ -3911,7 +3064,7 @@ namespace UHFDemo
         private Label label27;
         private Button btnWriteTag;
         private Button btnReadTag;
-        private TextBox txtWordAdd;
+        private TextBox txtWordAddr;
         private Label label26;
         private CustomControl.HexTextBox htxtReadAndWritePwd;
         private Label label25;
@@ -3943,7 +3096,6 @@ namespace UHFDemo
         private TextBox plainTextBox;
         private Label labelHEXSize;
         private Button btnSetAccessEpcMatch;
-        private RadioButton radioBtnRead2Erase;
     }
 }
 

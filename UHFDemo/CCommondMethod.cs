@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UHFDemo
+namespace RFIDApplication
 {
     class CCommondMethod
     {
@@ -44,6 +44,10 @@ namespace UHFDemo
         {
             try
             {
+                if(strAryHex.Length == 0)
+                {
+                    return null;
+                }
                 if (strAryHex.Length < nLen)
                 {
                     nLen = strAryHex.Length;
