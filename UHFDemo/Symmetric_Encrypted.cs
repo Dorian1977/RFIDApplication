@@ -75,7 +75,7 @@ namespace RFIDApplication
             }
             catch (Exception e)
             {
-                //Debug.WriteLine(e.Message);
+                //WriteLog(lrtxtLog,e.Message);
                 return null;
             }
             // Return encrypted data    

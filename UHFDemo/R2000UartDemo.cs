@@ -88,25 +88,14 @@ namespace RFIDApplication
             SetFormEnable(false);
             rdbRS232.Checked = true;
             antType1.Checked = true;
-
+            
             cmbComPort.Items.AddRange(SerialPort.GetPortNames());
             cmbComPort.SelectedIndex = 1;
-
-            //load Access Code
-            byte[] accessCode = Properties.Resources.AccessCode;
-            string strCode = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(accessCode)).ToUpper();
-            htxtReadAndWritePwd.Text = strCode;
-            symmetric.loadAccessCode(strCode);
-
-            //load key
-            byte[] encryptKey = Properties.Resources.SymmetricKey;
-            symmetric.loadKey(encryptKey);
-            //keyFilePathTextBox.Text = Encoding.ASCII.GetString(encryptKey);
 
             //load LabelFormat":
             byte[] labelFormat = Properties.Resources.LabelFormat;
             RFIDTagInfo.loadLabelFormat(labelFormat);
-            Debug.WriteLine("read label format " + RFIDTagInfo.readLabelFormat());
+            WriteLog(lrtxtLog,"read label format " + RFIDTagInfo.readLabelFormat(),0);
 
             string path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             using (StreamReader sr = new StreamReader(path + "\\Setting.dat"))
@@ -132,7 +121,7 @@ namespace RFIDApplication
                                 }
                             }
                             break;
-
+                            /*
                         case "TonerVolumeCount":
                             {
                                 if (param[1] != "")
@@ -140,7 +129,7 @@ namespace RFIDApplication
                                     RFIDTagInfo.loadVolumeFile(param[1]);
                                 }
                                 break;
-                            }
+                            }*/
                     }
                 }
             }
@@ -183,6 +172,8 @@ namespace RFIDApplication
             if(bfoundSettingFile)
             {
 #if true
+                btnConnectRs232.Enabled = true;
+                btnDisconnectRs232.Enabled = false;
                 btnConnectRs232_Click(sender, e);// auto start                                                 
                 btnGetFirmwareVersion_Click(sender, e);//Get “Firmware Version” – read RFID current firmware version
                 //Read “Read GPIO” – get GPIO status
@@ -194,19 +185,23 @@ namespace RFIDApplication
                 //Get “RF Spectrum Setup: -read RF frequencies
                 btnGetFrequencyRegion_Click(sender, e);
                 //btRealTimeInventory_Click(sender, e);// auto start
+
+                reader.WriteGpioValue(m_curSetting.btReadId, 0x03, 0);
+                reader.WriteGpioValue(m_curSetting.btReadId, 0x04, 0);
+                Thread.Sleep(20);
 #else
                 string strException = string.Empty;
                 int nRet = reader.OpenCom(cmbComPort.Text, Convert.ToInt32(cmbBaudrate.Text), out strException);
                 if (nRet != 0)
                 {
                     string strLog = "Connection failed, failure cause: " + strException; 
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog, 1);
                     return;
                 }
                 else
                 {
                     string strLog = "Connect " + cmbComPort.Text + "@" + cmbBaudrate.Text;
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog, 0);
                 }            
                 SetFormEnable(true);
 #endif
@@ -447,7 +442,7 @@ namespace RFIDApplication
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
                 string strLog = strCmd + "F" + strErrorCode;
 
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 0);
             }
             else
             {
@@ -459,7 +454,7 @@ namespace RFIDApplication
                     strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[nLen - 3]);
                     string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog, 1);
                     return;
                 }
 
@@ -487,7 +482,7 @@ namespace RFIDApplication
                 m_curOperateTagBuffer.dtTagTable.AcceptChanges();
 
                 RefreshUntraceable(0xE1);
-                //Debug.WriteLine(strCmd);
+                //WriteLog(lrtxtLog,strCmd);
             }
         }
 
@@ -656,7 +651,7 @@ namespace RFIDApplication
                             lbRealTagCount.Text = "标签EPC号列表（不重复）： " + nTagCount.ToString() + "个";
 
                             nEpcCount = lvRealList.Items.Count;
-                            setVerifiedLEDStatus(0, 0);//init LED to off
+                            resetLEDstatus();
 
                             if (nEpcCount < nEpcLength)
                             {
@@ -719,8 +714,8 @@ namespace RFIDApplication
 
                                         if (!bIsLabel)
                                         {
-                                            Debug.WriteLine("Read tag wrong format skip " + labelRead);
-                                            break;
+                                            WriteLog(lrtxtLog,"Read tag wrong format skip " + labelRead);                                           
+                                            continue;
                                         }
                                         if (RFIDTagInfo.bIsScan())
                                         {//scan a tag, read it now
@@ -774,12 +769,14 @@ namespace RFIDApplication
                                         }
                                         else
                                         {
-                                            Debug.WriteLine("Reading tag skip scan " + labelRead);
+                                            WriteLog(lrtxtLog,"Reading tag skip scan " + labelRead);
                                         }
                                     }
                                     catch (System.Exception ex)
                                     {
-                                        MessageBox.Show(ex.Message);
+                                        //MessageBox.Show(ex.Message);
+                                        WriteLog(lrtxtLog,"Reading tag format not support Exception " + ex.Message);
+                                        setVerifiedLEDStatus(0, 1);
                                     }
 #endif
                                 }
@@ -975,25 +972,6 @@ namespace RFIDApplication
                             {
                                 rdbGpio2High.Checked = true;
                             }
-
-                            if (m_curSetting.btGpio3Value == 0x00)
-                            {
-                                rdbGpio3Low.Checked = true;
-                            }
-                            else
-                            {
-                                rdbGpio3High.Checked = true;
-                            }
-
-                            if (m_curSetting.btGpio4Value == 0x00)
-                            {
-                                rdbGpio4Low.Checked = true;
-                            }
-                            else
-                            {
-                                rdbGpio4High.Checked = true;
-                            }
-
                         }
                         break;
                     case 0x63:
@@ -1171,13 +1149,13 @@ namespace RFIDApplication
             if (nRet != 0)
             {
                 string strLog = "Connection failed, failure cause: " + strException; 
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 1);
                 return;
             }
             else
             {
                 string strLog = "Connect " + strComPort + "@" + nBaudrate.ToString();
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 0);
             }
             
             SetFormEnable(true);
@@ -1217,14 +1195,14 @@ namespace RFIDApplication
                 if (nRet != 0)
                 {
                     string strLog = "Connection failed, failure cause: " + strException;
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog, 1);
 
                     return;
                 }
                 else
                 {
                     string strLog = "Connect " + ipIpServer.IpAddressStr + "@" + nPort.ToString();
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog, 0);
                 }
 
                 SetFormEnable(true);
@@ -1263,13 +1241,13 @@ namespace RFIDApplication
             if (nRet != 0)
             {
                 string strLog = "Reset reader fails";
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 1);
             }
             else
             {
                 string strLog = "Reset reader";
                 m_curSetting.btReadId = (byte)0xFF;
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 0);
             }
         }
 
@@ -1301,7 +1279,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd, 0);
 
                     return;
                 }
@@ -1316,7 +1294,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnGetFirmwareVersion_Click(object sender, EventArgs e)
@@ -1336,7 +1314,7 @@ namespace RFIDApplication
                 m_curSetting.btReadId = msgTran.ReadId;
 
                 RefreshReadSetting(msgTran.Cmd);
-                //Debug.WriteLine(strCmd);
+                //WriteLog(lrtxtLog,strCmd);
                 return;
             }
             else if (msgTran.AryData.Length == 1)
@@ -1349,7 +1327,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnSetUartBaudrate_Click(object sender, EventArgs e)
@@ -1371,7 +1349,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd, 0);
 
                     return;
                 }
@@ -1386,7 +1364,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnGetReaderTemperature_Click(object sender, EventArgs e)
@@ -1406,7 +1384,7 @@ namespace RFIDApplication
                 m_curSetting.btTemperature = msgTran.AryData[1];
 
                 RefreshReadSetting(msgTran.Cmd);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else if (msgTran.AryData.Length == 1)
@@ -1419,12 +1397,12 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnGetOutputPower_Click(object sender, EventArgs e)
         {
-            //Debug.WriteLine("btnGetOutputPower");
+            //WriteLog(lrtxtLog,"btnGetOutputPower");
             if (antType1.Checked)
             {               
                 reader.GetOutputPowerFour(m_curSetting.btReadId);
@@ -1442,7 +1420,7 @@ namespace RFIDApplication
                 m_curSetting.btOutputPower = msgTran.AryData[0];
 
                 RefreshReadSetting(0x77);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else if (msgTran.AryData.Length == 8)
@@ -1451,7 +1429,7 @@ namespace RFIDApplication
                 m_curSetting.btOutputPowers = msgTran.AryData;
 
                 RefreshReadSetting(0x97);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
              else if (msgTran.AryData.Length == 4) 
@@ -1460,7 +1438,7 @@ namespace RFIDApplication
                 m_curSetting.btOutputPowers = msgTran.AryData;
 
                 RefreshReadSetting(0x77);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else
@@ -1469,7 +1447,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnSetOutputPower_Click(object sender, EventArgs e)
@@ -1505,7 +1483,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
 
                     return;
                 }
@@ -1520,7 +1498,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnGetWorkAntenna_Click(object sender, EventArgs e)
@@ -1542,7 +1520,7 @@ namespace RFIDApplication
                     m_curSetting.btWorkAntenna = msgTran.AryData[0];
 
                     RefreshReadSetting(0x75);
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd, 0);
                     return;
                 }
                 else
@@ -1556,7 +1534,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnSetWorkAntenna_Click(object sender, EventArgs e)
@@ -1584,7 +1562,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    //Debug.WriteLine(strCmd);
+                    //WriteLog(lrtxtLog,strCmd);
 
                     if (m_bInventory)
                     {
@@ -1603,7 +1581,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
 
             if (m_bInventory)
             {
@@ -1631,7 +1609,7 @@ namespace RFIDApplication
                     m_curSetting.btDrmMode = msgTran.AryData[0];
 
                     RefreshReadSetting(0x7D);
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -1645,7 +1623,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnSetDrmMode_Click(object sender, EventArgs e)
@@ -1680,7 +1658,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
 
                     return;
                 }
@@ -1695,7 +1673,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void rdbRegionFcc_CheckedChanged(object sender, EventArgs e)
@@ -1800,7 +1778,7 @@ namespace RFIDApplication
                 m_curSetting.btFrequencyEnd = msgTran.AryData[2];
 
                 RefreshReadSetting(0x79);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else if (msgTran.AryData.Length == 6)
@@ -1811,7 +1789,7 @@ namespace RFIDApplication
                 m_curSetting.btUserDefineChannelQuantity = msgTran.AryData[2];
                 m_curSetting.nUserDefineStartFrequency = msgTran.AryData[3] * 256 * 256 + msgTran.AryData[4] * 256 + msgTran.AryData[5];
                 RefreshReadSetting(0x79);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
                 
 
@@ -1826,7 +1804,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnSetFrequencyRegion_Click(object sender, EventArgs e)
@@ -1855,7 +1833,7 @@ namespace RFIDApplication
                     int nEndIndex = cmbFrequencyEnd.SelectedIndex;
                     if (nEndIndex < nStartIndex)
                     {
-                        Debug.WriteLine("Spectral range that does not meet specifications, please refer to the Serial Protocol");
+                        WriteLog(lrtxtLog,"Spectral range that does not meet specifications, please refer to the Serial Protocol", 1);
                         return;
                     }
 
@@ -1904,7 +1882,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
 
                     return;
                 }
@@ -1919,7 +1897,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnSetBeeperMode_Click(object sender, EventArgs e)
@@ -1957,7 +1935,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -1971,7 +1949,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnReadGpioValue_Click(object sender, EventArgs e)
@@ -1991,7 +1969,7 @@ namespace RFIDApplication
                 m_curSetting.btGpio2Value = msgTran.AryData[1];
 
                 RefreshReadSetting(0x60);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else if (msgTran.AryData.Length == 1)
@@ -2004,7 +1982,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnWriteGpio3Value_Click(object sender, EventArgs e)
@@ -2022,11 +2000,6 @@ namespace RFIDApplication
             {
                 return;
             }
-
-            if (btGPIO3 == btGpioValue)
-                return;
-
-            btGPIO3 = btGpioValue;
             reader.WriteGpioValue(m_curSetting.btReadId, 0x03, btGpioValue);
             m_curSetting.btGpio3Value = btGpioValue;
         }
@@ -2047,10 +2020,6 @@ namespace RFIDApplication
             {
                 return;
             }
-            if (btGPIO4 == btGpioValue)
-                return;
-
-            btGPIO4 = btGpioValue;
             reader.WriteGpioValue(m_curSetting.btReadId, 0x04, btGpioValue);
             m_curSetting.btGpio4Value = btGpioValue;
         }
@@ -2065,7 +2034,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -2079,7 +2048,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void btnGetAntDetector_Click(object sender, EventArgs e)
@@ -2098,7 +2067,7 @@ namespace RFIDApplication
                 m_curSetting.btAntDetector = msgTran.AryData[0];
                 
                 RefreshReadSetting(0x63);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else
@@ -2107,7 +2076,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void ProcessGetMonzaStatus(Reader.MessageTran msgTran)
@@ -2123,7 +2092,7 @@ namespace RFIDApplication
                     m_curSetting.btMonzaStatus = msgTran.AryData[0];
 
                     RefreshReadSetting(0x8E);
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -2137,7 +2106,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void ProcessSetMonzaStatus(Reader.MessageTran msgTran)
@@ -2151,7 +2120,7 @@ namespace RFIDApplication
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
                     m_curSetting.btAntDetector = msgTran.AryData[0];
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -2165,7 +2134,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void ProcessSetProfile(Reader.MessageTran msgTran)
@@ -2179,7 +2148,7 @@ namespace RFIDApplication
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
                     m_curSetting.btLinkProfile = msgTran.AryData[0];
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -2193,7 +2162,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void ProcessGetProfile(Reader.MessageTran msgTran)
@@ -2209,7 +2178,7 @@ namespace RFIDApplication
                     m_curSetting.btLinkProfile = msgTran.AryData[0];
 
                     RefreshReadSetting(0x6A);
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -2223,7 +2192,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
 
@@ -2246,7 +2215,7 @@ namespace RFIDApplication
                 }
                 m_curSetting.btReaderIdentifier = readerIdentifier;
                 RefreshReadSetting(0x68);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else
@@ -2255,7 +2224,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void ProcessGetImpedanceMatch(Reader.MessageTran msgTran)
@@ -2270,7 +2239,7 @@ namespace RFIDApplication
 
                 m_curSetting.btAntImpedance = msgTran.AryData[0];
                 RefreshReadSetting(0x7E);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 return;
             }
             else
@@ -2279,7 +2248,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         
@@ -2294,7 +2263,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
             }
@@ -2304,7 +2273,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void ProcessSetAntDetector(Reader.MessageTran msgTran)
@@ -2317,7 +2286,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
 
                     return;
                 }
@@ -2332,7 +2301,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
 
         private void ProcessFastSwitch(Reader.MessageTran msgTran)
@@ -2345,17 +2314,17 @@ namespace RFIDApplication
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
                 string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 1);
                 //RefreshFastSwitch(0x8A);
                 //RunLoopFastSwitch();
             }
             else if (msgTran.AryData.Length == 2)
             {
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[1]);
-                Debug.WriteLine("Return ant NO : " + (msgTran.AryData[0] + 1));
+                WriteLog(lrtxtLog,"Return ant NO : " + (msgTran.AryData[0] + 1), 0);
                 string strLog = strCmd + "Failure, failure cause: " + strErrorCode + "--" + "Antenna" + (msgTran.AryData[0] + 1);
 
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 1);
             }
 
             else if (msgTran.AryData.Length == 7)
@@ -2365,7 +2334,7 @@ namespace RFIDApplication
 
                 m_curInventoryBuffer.nDataCount = m_nSwitchTotal;
                 m_curInventoryBuffer.nCommandDuration = m_nSwitchTime;
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
                 //RefreshFastSwitch(0x00);
                 //RunLoopFastSwitch();
             }
@@ -2378,7 +2347,7 @@ namespace RFIDApplication
 
                 m_curInventoryBuffer.nDataCount = m_nSwitchTotal;
                 m_curInventoryBuffer.nCommandDuration = m_nSwitchTime;
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd);
                 RefreshFastSwitch(0x02);
                 RunLoopFastSwitch();
             }*/
@@ -2596,13 +2565,11 @@ namespace RFIDApplication
             }
             string strErrorCode = string.Empty;
 
-            setVerifiedLEDStatus(0, 0);
-
             if (msgTran.AryData.Length == 1)
             {
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
                 string strLog = strCmd + " Failure, failure cause: " + strErrorCode;
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog,1);
 
                 m_curInventoryBuffer.dtEndInventory = DateTime.Now;
 
@@ -2618,16 +2585,15 @@ namespace RFIDApplication
                 m_curInventoryBuffer.nDataCount = Convert.ToInt32(msgTran.AryData[3]) * 256 * 256 * 256 + Convert.ToInt32(msgTran.AryData[4]) * 256 * 256 + Convert.ToInt32(msgTran.AryData[5]) * 256 + Convert.ToInt32(msgTran.AryData[6]);
 
                 m_curInventoryBuffer.dtEndInventory = DateTime.Now;
-                
-                
+                                
                 RefreshInventoryReal(0x89);
            
                 if (m_bInventory)
                 {
                     RunLoopInventroy();
                 }
-                Thread.Sleep(20);
-                Debug.WriteLine(strCmd);
+                Thread.Sleep(10);
+                //WriteLog(lrtxtLog,strCmd);
             }
             else
             {
@@ -2875,7 +2841,7 @@ namespace RFIDApplication
             {
                 if (msgTran.AryData[0] == 0x01)
                 {
-                    Debug.WriteLine("Unselected Tag");
+                    WriteLog(lrtxtLog,"Unselected Tag", 1);
                     return;
                 }
                 else
@@ -2890,7 +2856,7 @@ namespace RFIDApplication
                     m_curOperateTagBuffer.strAccessEpcMatch = CCommondMethod.ByteArrayToString(msgTran.AryData, 2, Convert.ToInt32(msgTran.AryData[1]));
                     
                     RefreshOpTag(0x86);
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd, 0);
                     return;
                 }
                 else
@@ -2901,7 +2867,7 @@ namespace RFIDApplication
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog, 1);
         }
 
         private void btnSetAccessEpcMatch_Click(object sender, EventArgs e)
@@ -2910,7 +2876,7 @@ namespace RFIDApplication
 
             if (reslut == null)
             {
-                Debug.WriteLine("Please select EPC number");
+                WriteLog(lrtxtLog,"Please select EPC number", 1);
                 return;
             }
 
@@ -2931,7 +2897,7 @@ namespace RFIDApplication
             {
                 if (msgTran.AryData[0] == 0x10)
                 {
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd, 0);
                     return;
                 }
                 else
@@ -2945,7 +2911,7 @@ namespace RFIDApplication
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog, 1);
         }
 
         
@@ -2964,7 +2930,7 @@ namespace RFIDApplication
                 }
                 else
                 {
-                    Debug.WriteLine("Please select the start Add of tag");
+                    WriteLog(lrtxtLog,"Please select the start Add of tag", 1);
                     return;
                 }
 
@@ -2974,14 +2940,14 @@ namespace RFIDApplication
                 }
                 else
                 {
-                    Debug.WriteLine("Please select the Length");
+                    WriteLog(lrtxtLog,"Please select the Length", 1);
                     return;
                 }
 
-                string[] reslut = CCommondMethod.StringToStringArray(symmetric.readAccessCode(), 2);//htxtReadAndWritePwd.Text.ToUpper(), 2);
+                string[] reslut = CCommondMethod.StringToStringArray(htxtReadAndWritePwd.Text.ToUpper(), 2);
                 if (reslut != null && reslut.GetLength(0) != 4)
                 {
-                    Debug.WriteLine("Password must be null or 4 bytes");
+                    WriteLog(lrtxtLog,"Password must be null or 4 bytes", 1);
                     return;
                 }
                 byte[] btAryPwd = null;
@@ -2993,7 +2959,7 @@ namespace RFIDApplication
                 m_curOperateTagBuffer.dtTagTable.Clear();
                 ltvOperate.Items.Clear();
                 reader.ReadTag(m_curSetting.btReadId, btMemBank, btWordAddr, btWordCnt, btAryPwd);
-                //Debug.WriteLine("Read Tag", 0);
+                WriteLog(lrtxtLog,"Read Tag", 0);
             }
             catch (System.Exception ex)
             {
@@ -3002,60 +2968,101 @@ namespace RFIDApplication
 
         }
 
-        private static byte btGPIO3 = 0; //Red
-        private static byte btGPIO4 = 0; //Green
+        //private static byte btGPIO3 = 0; //Red
+        //private static byte btGPIO4 = 0; //Green
+        private static short displayGreenCnt = 5;
+        private static short displayRedCnt = 5;
+        private static short displayIdleGreenCnt = 0;
+        private static short displayIdleRedCnt = 0;
+        private const short displayMAXCnt = 20;
+        private const short displayIdelMAXCnt = 200;
+        private void resetLEDstatus()
+        {
+            if (m_curSetting.btGpio3Value != 0)
+            {
+                if(displayIdleGreenCnt++ > displayIdelMAXCnt)
+                {//reset light when it is zero
+                    reader.WriteGpioValue(m_curSetting.btReadId, 0x04, 0);
+                    m_curSetting.btGpio3Value = 0;
+                    displayIdleGreenCnt = 0;
+                    Thread.Sleep(20);
+                }
+            }   
+            else if(displayIdleGreenCnt-- > -3)
+            {
+                displayIdleGreenCnt--;
+                reader.WriteGpioValue(m_curSetting.btReadId, 0x04, 0);
+                m_curSetting.btGpio3Value = 0;
+                Thread.Sleep(20);
+            }
+            else if (displayIdleGreenCnt <= -50)
+            {
+                displayIdleGreenCnt = 0;
+            }
+
+            if (m_curSetting.btGpio4Value != 0)
+            {
+                if(displayIdleRedCnt++ > displayIdelMAXCnt)
+                {//reset light when it is zero
+                    reader.WriteGpioValue(m_curSetting.btReadId, 0x03, 0); //bGpio3RedOn                
+                    m_curSetting.btGpio4Value = 0;
+                    displayIdleRedCnt = 0;
+                    Thread.Sleep(20);
+                }
+            }
+            else if (displayIdleRedCnt-- > -3)
+            {
+                displayIdleRedCnt--;
+                reader.WriteGpioValue(m_curSetting.btReadId, 0x03, 0);
+                m_curSetting.btGpio4Value = 0;
+                Thread.Sleep(20);
+            }
+            else if (displayIdleRedCnt <= -50)
+            {
+                displayIdleRedCnt = 0;
+            }
+        }
+
         private void setVerifiedLEDStatus(byte bGpio4GreenOn, byte bGpio3RedOn)
         {//GPIO 4 green, GPIO 3 red
-
-            if (bGpio4GreenOn == 1 && bGpio3RedOn != 1)
-            {//green
-                btGPIO4 = 0x01;
-            }
-            else
-            {
-                btGPIO4 = 0x00;
-            }
-
-            if (bGpio4GreenOn == 1 || bGpio3RedOn == 1 || btGPIO4 != bGpio4GreenOn)
-            {
-                btGPIO4 = bGpio4GreenOn;
-                reader.WriteGpioValue(m_curSetting.btReadId, 0x04, btGPIO4);
-                m_curSetting.btGpio4Value = btGPIO4;
-                Debug.WriteLine("LED Green on ");
-                Thread.Sleep(10);
-            }
-
+#if false
             if (bGpio3RedOn == 1)
-            {//red
-                btGPIO3 = 0x01;
-            }
-            else
-            {
-                btGPIO3 = 0x00;
+            {//red on, green must be off
+                bGpio4GreenOn = 0;
             }
 
-            if (bGpio3RedOn == 1 || bGpio4GreenOn == 1 || btGPIO3 != bGpio3RedOn)
-            {
-                btGPIO3 = bGpio3RedOn;
-                reader.WriteGpioValue(m_curSetting.btReadId, 0x03, btGPIO3);
-                m_curSetting.btGpio3Value = btGPIO3;
-                Debug.WriteLine("LED Red on ");
-                Thread.Sleep(10);
+            reader.WriteGpioValue(m_curSetting.btReadId, 0x04, bGpio4GreenOn);
+            m_curSetting.btGpio4Value = bGpio4GreenOn;
+            WriteLog(lrtxtLog,"LED Green set " + bGpio4GreenOn, 0);
+            Thread.Sleep(20);
+            
+            /*if (bGpio3RedOn == 1)
+            {//red on
+                displayRedCnt = 0;
             }
+            else if (bGpio3RedOn == 0 && m_curSetting.btGpio3Value == 1 &&
+                        displayRedCnt++ < displayMAXCnt)
+            {//red to off
+                return;
+            }*/
+            reader.WriteGpioValue(m_curSetting.btReadId, 0x03, bGpio3RedOn);
+            m_curSetting.btGpio3Value = bGpio3RedOn;
+            WriteLog(lrtxtLog,"LED Red set " + bGpio3RedOn,0);
+            Thread.Sleep(20);  
+#endif            
         }
 
         private bool verifyTag(string label)
         {
             //bool bVerified = false;
-            Debug.WriteLine("Load Key " + symmetric.readKey());
+            WriteLog(lrtxtLog,"Load Key " + symmetric.readKey(),0);
 
             string decryptMsg = symmetric.DecryptFromHEX(label);
-            Debug.WriteLine("Decrypt data " + decryptMsg + ", Size " + decryptMsg.Length);
+            WriteLog(lrtxtLog,"Decrypt data " + decryptMsg + ", Size " + decryptMsg.Length,0);
             RFIDTagInfo.tagInfo = decryptMsg;
 
             //bVerified = symmetric.verifyLabel(decryptMsg, bRead2Erase);
-            Debug.WriteLine("Verified data read " + decryptMsg);
-            WriteLog(lrtxtLog, "Verify data read " + decryptMsg, 0);
+            WriteLog(lrtxtLog, "Verify label read " + label, 0);
             return RFIDTagInfo.verifyData(decryptMsg, true, bRead2Erase);
         }
 
@@ -3071,9 +3078,9 @@ namespace RFIDApplication
             {
                 byte btMemBank = findMemBank();
                 byte btWordAddr = Convert.ToByte(txtWordAddr.Text);
-                byte btWordCnt = 22; // = Convert.ToByte(txtWordCnt.Text);
+                byte btWordCnt = Convert.ToByte(txtWordCnt.Text);
 
-                //Debug.WriteLine("Read Tag, AryData.Length " + msgTran.AryData.Length, 0);
+                //WriteLog(lrtxtLog,"Read Tag, AryData.Length " + msgTran.AryData.Length, 0);
                 if (msgTran.AryData.Length == 1)
                 {
                     strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
@@ -3081,18 +3088,18 @@ namespace RFIDApplication
                                         
                     if (readTagRetry++ < rwTagRetryMAX)
                     {
-                        string[] reslut = CCommondMethod.StringToStringArray(symmetric.readAccessCode(), 2); // htxtReadAndWritePwd.Text.ToUpper(), 2);
+                        string[] reslut = CCommondMethod.StringToStringArray(htxtReadAndWritePwd.Text.ToUpper(), 2);
                         byte[] btAryPwd = CCommondMethod.StringArrayToByteArray(reslut, reslut.Length);
                         reader.ReadTag(m_curSetting.btReadId, btMemBank, btWordAddr, 22, btAryPwd);
-                        Thread.Sleep(50);
+                        Thread.Sleep(30);
                         //setVerifiedLEDStatus(false, true); //red on
-                        Debug.WriteLine("Read Tag retry " + readTagRetry);
+                        WriteLog(lrtxtLog,"Read Tag retry " + readTagRetry, 1);
                     }
                     else
                     {// read tag failed
                         setVerifiedLEDStatus(0, 1); //red on                        
 #if READ2SCAN
-                        Debug.WriteLine(strLog + " retry " + readTagRetry);
+                        WriteLog(lrtxtLog,strLog + " retry " + readTagRetry);
                         initScanTag();
 #endif
                         readTagRetry = 0;
@@ -3126,7 +3133,7 @@ namespace RFIDApplication
                     m_curOperateTagBuffer.dtTagTable.Rows.Add(row);
                     m_curOperateTagBuffer.dtTagTable.AcceptChanges();
                     RefreshOpTag(0x81);
-                    Debug.WriteLine(strCmd);
+                    WriteLog(lrtxtLog,strCmd,0);
                     ulong uWordCnt = 0;                    
                     RFIDTagInfo.label = RFIDTagInfo.readEPCLabel(strEPC, out uWordCnt);
                     if (uWordCnt <= 99999999999999)
@@ -3160,8 +3167,7 @@ namespace RFIDApplication
 #endif
 #else
                                     btMemBank = 3; //1 for EPC, 3 for user
-                                    string zeroTmp = "79 51 7a 4b 68 64 30 42 51 4a 34 76 6b 33 39 4a 58 74 30 51 33 67 77 4b 43 75 43 79 79 43 7a 6f 51 75 38 65 67 48 78 6a 66 34 77 3d ";
-                                                     //"79 51 7a 4b 68 64 30 42 51 4a 34 76 6b 33 39 4a 58 74 30 51 33 67 77 4b 43 75 43 79 79 43 7a 6f 51 75 38 65 67 48 78 6a 66 34 77 3d "
+                                    string zeroTmp = "62 4a 49 72 57 49 62 6e 32 31 74 4d 39 44 51 37 74 47 73 2b 79 4c 64 6e 4d 54 4f 4c 71 2f 61 6f 43 56 51 48 67 69 70 64 44 2b 30 3d ";
 #endif
                                     if (zeroTmp.StartsWith(" "))
                                         zeroTmp = zeroTmp.Substring(1);
@@ -3179,16 +3185,17 @@ namespace RFIDApplication
                                         btWordAddr = 2;
                                     else
                                         btWordAddr = 0;*/
-
+#if READ2ERASE
                                     reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAddr, btWordCnt, btAryWriteData, btCmd);
+
+#endif
                                     bRead2Erase = true;
-                                    Thread.Sleep(50);
                                 }
                             }
                             else
                             {//red on                                                           
                                 setVerifiedLEDStatus(0, 1); //red on      
-                                Debug.WriteLine("verified failed, data " + strData);
+                                WriteLog(lrtxtLog,"verified failed, data " + strData, 1);
 #if READ2SCAN
                                 //need to move to scan next tag here
                                 initScanTag();
@@ -3198,7 +3205,7 @@ namespace RFIDApplication
                         catch (Exception exp)
                         {
                             setVerifiedLEDStatus(0, 1); //red on      
-                            Debug.WriteLine(strCmd + " got error " + exp.Message);
+                            WriteLog(lrtxtLog,strCmd + " got error " + exp.Message, 1);
 #if READ2SCAN
                             //Got exception need to move to scan next tag here
                             initScanTag();
@@ -3212,7 +3219,7 @@ namespace RFIDApplication
             catch(Exception exp)
             {
                 setVerifiedLEDStatus(0, 1); //red on      
-                Debug.WriteLine(strCmd + " got error " + exp.Message);               
+                WriteLog(lrtxtLog,strCmd + " got error " + exp.Message, 1);               
                 //need to move to scan next tag here
             }          
         }
@@ -3253,7 +3260,7 @@ namespace RFIDApplication
             }
             else
             {
-                Debug.WriteLine("Please select the area of tag");
+                WriteLog(lrtxtLog,"Please select the area of tag", 1);
                 return byteMemBank;
             }
             return byteMemBank;
@@ -3263,6 +3270,11 @@ namespace RFIDApplication
         {
             try
             {
+                if(rdbReserved.Checked && htxtWriteData.Text.Length > 12)
+                {
+                    MessageBox.Show("Write Wrong section");
+                    return;
+                }
                 byte btMemBank = findMemBank();
                 byte btWordAddr = 0x00;
                 byte btWordCnt = 0x00;
@@ -3275,7 +3287,7 @@ namespace RFIDApplication
                 }
                 else
                 {
-                    Debug.WriteLine("Pleader select the start Add of tag");
+                    WriteLog(lrtxtLog,"Pleader select the start Add of tag", 1);
                     return;
                 }
 
@@ -3285,19 +3297,19 @@ namespace RFIDApplication
                 }
                 else
                 {
-                    Debug.WriteLine("Invalid input characters word cnt failed");
+                    WriteLog(lrtxtLog,"Invalid input characters word cnt failed", 1);
                     return;
                 }
 
-                string[] result = CCommondMethod.StringToStringArray(symmetric.readAccessCode(), 2);// htxtReadAndWritePwd.Text.ToUpper(), 2);
+                string[] result = CCommondMethod.StringToStringArray(htxtReadAndWritePwd.Text.ToUpper(), 2);
                 if (result == null)
                 {
-                    Debug.WriteLine("Invalid input characters, input access pwd");
+                    WriteLog(lrtxtLog,"Invalid input characters, input access pwd", 1);
                     return;
                 }
                 else if (result.GetLength(0) < 4)
                 {
-                    Debug.WriteLine("Enter at least 4 bytes");
+                    WriteLog(lrtxtLog,"Enter at least 4 bytes", 1);
                     return;
                 }
                 
@@ -3305,21 +3317,19 @@ namespace RFIDApplication
                 result = CCommondMethod.StringToStringArray(htxtWriteData.Text.ToUpper(), 2);
                 if (result == null)
                 {
-                    Debug.WriteLine("Invalid input characters error on hex write data");
+                    WriteLog(lrtxtLog,"Invalid input characters error on hex write data", 1);
                     return;
                 }
 
                 byte[] btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
                 btWordCnt = Convert.ToByte(result.Length / 2 + result.Length % 2);
+                txtWordCnt.Text = btWordCnt.ToString();
 
                 m_curOperateTagBuffer.dtTagTable.Clear();
                 ltvOperate.Items.Clear();
-                /*if (btMemBank == 1)
-                    btWordAddr = 2;
-                else
-                    btWordAddr = 0;*/
+
                 reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAddr, btWordCnt, btAryWriteData,btCmd);//1, access, 3, 0, 22, data, 148
-                Debug.WriteLine("Write Tag");
+                WriteLog(lrtxtLog,"Write Tag", 0);
             }
             catch (System.Exception ex)
             {
@@ -3350,11 +3360,11 @@ namespace RFIDApplication
             else
                 btWordAddr = 0;*/
             reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAddr, btWordCnt, btAryWriteData, btCmd);
-            //Debug.WriteLine("Write tag");            
+            //WriteLog(lrtxtLog,"Write tag");            
         }
 
         private int WriteTagCount = 0;
-        private const int rwTagRetryMAX = 10;
+        private const int rwTagRetryMAX = 5;
         static int writeTagRetry = 0;
         private string ellapsed;
 
@@ -3368,20 +3378,20 @@ namespace RFIDApplication
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
                 string strLog = strCmd + " Failure, failure cause1: " + strErrorCode;
 
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog, 1);
                 if(writeTagRetry++ < rwTagRetryMAX)
                 {                   
                     writeTag();
                     //Thread.Sleep(10);
-                    Debug.WriteLine("Write Tag retry " + writeTagRetry);                    
+                    WriteLog(lrtxtLog,"Write Tag retry " + writeTagRetry, 1);                    
                 }
                 else if(!bRead2Erase)
                 {
                     setVerifiedLEDStatus(0, 1); //red on      
-                    Debug.WriteLine("Erase tag failed");
+                    WriteLog(lrtxtLog,"Erase tag failed", 1);
 #if READ2SCAN
                     initScanTag();
-#endif                    
+#endif
                 }
                 else
                 {//write tag failed
@@ -3402,7 +3412,7 @@ namespace RFIDApplication
                     strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[nLen - 3]);
                     string strLog = strCmd + " Failure, failure cause2: " + strErrorCode;
 
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog,1);
 #if READ2SCAN
                     initScanTag();
 #endif
@@ -3433,15 +3443,15 @@ namespace RFIDApplication
                 m_curOperateTagBuffer.dtTagTable.AcceptChanges();
 
                 RefreshOpTag(0x82);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd, 0);
 
                 if (bRead2Erase && bVerify)
                 {
                     bVerify = false;
                     bRead2Erase = false;
-                    RFIDTagInfo.addVolumeToFile(RFIDTagInfo.tagInfo);
-                    Debug.WriteLine("Get Volume " + RFIDTagInfo.readVolume());
-                    RFIDTagInfo.addLog(RFIDTagInfo.label, RFIDTagInfo.tagInfo);
+                    //RFIDTagInfo.addVolumeToFile(RFIDTagInfo.tagInfo);
+                    //WriteLog(lrtxtLog,"Get Volume " + RFIDTagInfo.readVolume());
+                    //RFIDTagInfo.addLog(RFIDTagInfo.label, RFIDTagInfo.tagInfo);
 
                     setVerifiedLEDStatus(1, 0); //green on
 #if READ2SCAN
@@ -3484,7 +3494,7 @@ namespace RFIDApplication
             }
             else
             {
-                Debug.WriteLine("Please select the protected area");
+                WriteLog(lrtxtLog,"Please select the protected area",1);
                 return;
             }
 
@@ -3510,7 +3520,7 @@ namespace RFIDApplication
             }
             else
             {
-                Debug.WriteLine("Please select the type of protection");
+                WriteLog(lrtxtLog,"Please select the type of protection",1);
                 return;
             }
 
@@ -3518,12 +3528,12 @@ namespace RFIDApplication
 
             if (reslut == null)
             {
-                Debug.WriteLine("Invalid input characters");
+                WriteLog(lrtxtLog,"Invalid input characters",1);
                 return;
             }
             else if (reslut.GetLength(0) < 4)
             {
-                Debug.WriteLine("Enter at least 4 bytes");
+                WriteLog(lrtxtLog,"Enter at least 4 bytes",1);
                 return;
             }
 
@@ -3544,7 +3554,7 @@ namespace RFIDApplication
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
                 string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog,1);
             }
             else
             {
@@ -3556,7 +3566,7 @@ namespace RFIDApplication
                     strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[nLen - 3]);
                     string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog,1);
                     return;
                 }
 
@@ -3584,7 +3594,7 @@ namespace RFIDApplication
                 m_curOperateTagBuffer.dtTagTable.AcceptChanges();
 
                 RefreshOpTag(0x83);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
             }
         }
 
@@ -3594,12 +3604,12 @@ namespace RFIDApplication
 
             if (reslut == null)
             {
-                Debug.WriteLine("Invalid input characters");
+                WriteLog(lrtxtLog,"Invalid input characters",1);
                 return;
             }
             else if (reslut.GetLength(0) < 4)
             {
-                Debug.WriteLine("Enter at least 4 bytes");
+                WriteLog(lrtxtLog,"Enter at least 4 bytes",1);
                 return;
             }
 
@@ -3620,7 +3630,7 @@ namespace RFIDApplication
                 strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
                 string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
-                Debug.WriteLine(strLog);
+                WriteLog(lrtxtLog,strLog,1);
             }
             else
             {
@@ -3632,7 +3642,7 @@ namespace RFIDApplication
                     strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[nLen - 3]);
                     string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
 
-                    Debug.WriteLine(strLog);
+                    WriteLog(lrtxtLog,strLog,1);
                     return;
                 }
 
@@ -3660,7 +3670,7 @@ namespace RFIDApplication
                 m_curOperateTagBuffer.dtTagTable.AcceptChanges();
 
                 RefreshOpTag(0x84);
-                Debug.WriteLine(strCmd);
+                WriteLog(lrtxtLog,strCmd,0);
             }
         }
   
@@ -3816,7 +3826,7 @@ namespace RFIDApplication
 
                 if (textRealRound.Text.Length == 0) //1
                 {
-                    Debug.WriteLine("Please enter the number of cycles");
+                    WriteLog(lrtxtLog,"Please enter the number of cycles",1);
                     return;
                 }
                 m_curInventoryBuffer.btRepeat = Convert.ToByte(textRealRound.Text); //1
@@ -3916,12 +3926,12 @@ namespace RFIDApplication
 
                 if (result == null)
                 {
-                    Debug.WriteLine("Invalid input characters");
+                    WriteLog(lrtxtLog,"Invalid input characters",1);
                     return;
                 }
                 else if (result.GetLength(0) != 12)
                 {
-                    Debug.WriteLine("Please enter 12 bytes");
+                    WriteLog(lrtxtLog,"Please enter 12 bytes",1);
                     return;
                 }
                 byte[] readerIdentifier = CCommondMethod.StringArrayToByteArray(result, 12);
@@ -4055,7 +4065,7 @@ namespace RFIDApplication
             {
                 if (msgTran.AryData[0] == (byte)0x10)
                 {
-                    //Debug.WriteLine("Command execute success！", 0);
+                    //WriteLog(lrtxtLog,"Command execute success！", 0);
                     return;
                 }
                 else if (msgTran.AryData[1] == (byte)0x41)
@@ -4073,13 +4083,13 @@ namespace RFIDApplication
                 {
                     m_curSetting.btsGetTagMask = msgTran.AryData;
                     RefreshReadSetting(msgTran.Cmd);
-                    //Debug.WriteLine("Get tag mask sucess");
+                    //WriteLog(lrtxtLog,"Get tag mask sucess");
                     return;
                 }
             }
 
             string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            Debug.WriteLine(strLog);
+            WriteLog(lrtxtLog,strLog,1);
         }
          
         private void button8_Click(object sender, EventArgs e)
@@ -4137,7 +4147,7 @@ namespace RFIDApplication
                         fs.Write(byData, 0, byData.Length);
                     }
                     fs.Close();
-                    Debug.WriteLine("Export data success！");
+                    WriteLog(lrtxtLog,"Export data success！",0);
                 }
             }
         }
@@ -4197,7 +4207,7 @@ namespace RFIDApplication
                     int tmp = Convert.ToInt16(textBox1.Text);
                     if (tmp > 33 || tmp < 0)
                     {
-                        Debug.WriteLine("Parameter exception!");
+                        WriteLog(lrtxtLog,"Parameter exception!",1);
                         textBox1.Text = "";
                         return;
                     }
@@ -4314,10 +4324,15 @@ namespace RFIDApplication
 
         private void rdbReserved_CheckedChanged(object sender, EventArgs e)
         {
+            if(htxtReadAndWritePwd.Text == "")
+            {
+                byte[] accessCode = Properties.Resources.AccessCode;
+                htxtReadAndWritePwd.Text = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(accessCode)).ToUpper();                
+            }
             if (rdbReserved.Checked)
             {
                 txtWordAddr.Text = "0";
-                txtWordCnt.Text = "4";
+                txtWordCnt.Text = "2";
             }
         }
 
@@ -4336,27 +4351,6 @@ namespace RFIDApplication
             {
                 txtWordAddr.Text = "0";
                 txtWordCnt.Text = "22";
-            }
-        }
-
-        private void accessCodeFileBrower_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                accessCodeTextBox.Text = openFileDialog1.FileName;
-                var data = RFIDTagInfo.GetBytesFromBinaryString(File.ReadAllText(openFileDialog1.FileName));
-                htxtReadAndWritePwd.Text = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(data)).ToUpper();
-                symmetric.loadAccessCode(htxtReadAndWritePwd.Text);
-            }
-        }
-
-        private void keyFileBrower_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                keyFilePathTextBox.Text = openFileDialog1.FileName;
             }
         }
 
@@ -4398,20 +4392,33 @@ namespace RFIDApplication
 
         private void EncryptedToHEX_Click(object sender, EventArgs e)
         {
-            if(symmetric.readKey() == null)
+            //load Access Code           
+            byte[] accessCode = Properties.Resources.AccessCode;
+            string strCode = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(accessCode)).ToUpper();
+            symmetric.loadAccessCode(strCode);
+
+            if (htxtReadAndWritePwd.Text == "")
+                htxtReadAndWritePwd.Text = strCode;
+
+            //load key
+            byte[] encryptKey = Properties.Resources.SymmetricKey;
+            symmetric.loadKey(encryptKey);
+            //keyFilePathTextBox.Text = Encoding.ASCII.GetString(encryptKey);
+
+            if (symmetric.readKey() == null)
             {
-                Debug.WriteLine("Please select key file first, Warning");
+                WriteLog(lrtxtLog,"Please select key file first, Warning",1);
                 return;
             }
 
             if(plainTextBox.Text == "")
             {
-                Debug.WriteLine("Please input data first, Warning");
+                WriteLog(lrtxtLog,"Please input data first, Warning",1);
                 return;
             }
 
             //read key            
-            Debug.WriteLine( "Read Key " + symmetric.readKey() + ", size " + symmetric.readKey().Length);
+            WriteLog(lrtxtLog, "Read Key " + symmetric.readKey() + ", size " + symmetric.readKey().Length,0);
             //read EPS SN number
             string strEPC = RFIDTagInfo.HEXToASCII(txtAccessEpcMatch.Text.Substring(0,6));
             string strnum = txtAccessEpcMatch.Text.Substring(6).Replace(" ", String.Empty);
@@ -4425,38 +4432,40 @@ namespace RFIDApplication
             else
             {
                 encrypString = strEPC + "0" + RFIDTagInfo.serialSep + plainTextBox.Text;
-                Debug.WriteLine("Error, exceed RFID tag ulong");
+                WriteLog(lrtxtLog,"Error, exceed RFID tag ulong",1);
             }
 #else
             encrypString = plainTextBox.Text;
 #endif
             // Encrypt string = EPC serial + data  
             symmetric.encryptedtext = symmetric.Encrypt(encrypString);//, symmetric.aes.Key);
-            Debug.WriteLine("Encrypt data " + Convert.ToBase64String(symmetric.encryptedtext) + 
-                               ", size " + symmetric.encryptedtext.Length);
+            string strEncrypted = Convert.ToBase64String(symmetric.encryptedtext);
+            WriteLog(lrtxtLog,"Encrypt data " + strEncrypted + 
+                               ", size " + symmetric.encryptedtext.Length,0);
 
-            htxtWriteData.Text = RFIDTagInfo.ASCIIToHex(Convert.ToBase64String(symmetric.encryptedtext));
+            hexTbReserve.Text = RFIDTagInfo.ASCIIToHex(strEncrypted.Substring(0,4));
+            htxtWriteData.Text = RFIDTagInfo.ASCIIToHex(strEncrypted.Substring(4));
             labelHEXSize.Text = "HEX Count: " + htxtWriteData.Text.Length/3;
 
             if((htxtWriteData.Text.Length / 3 ) > 64)
             {
-                Debug.WriteLine("Error, exceed RFID tag user section");
+                WriteLog(lrtxtLog,"Error, exceed RFID tag user section", 1);
                 labelHEXSize.ForeColor = Color.Red;
                 htxtWriteData.ForeColor = Color.Red;
             }
 
             rdbUser.Checked = true;
             txtWordAddr.Text = "0";
-            txtWordCnt.Text = "22";
+            txtWordCnt.Text = "20";
         }
         
         private void btDecrypt_Click(object sender, EventArgs e)
         {
-            //Debug.WriteLine("Read Key " + symmetric.readKey() + ", size " + symmetric.readKey().Length, 0);
+            //WriteLog(lrtxtLog,"Read Key " + symmetric.readKey() + ", size " + symmetric.readKey().Length, 0);
             if (symmetric.readKey() != "")
             {
-                string decryptMsg = symmetric.DecryptFromHEX(htxtWriteData.Text);
-                Debug.WriteLine("Decrypt data " + decryptMsg + ", Size " + decryptMsg.Length);
+                string decryptMsg = symmetric.DecryptFromHEX(hexTbReserve.Text + htxtWriteData.Text);
+                WriteLog(lrtxtLog, "Decrypt data " + decryptMsg + ", Size " + decryptMsg.Length, 0);
             }
         }
 
@@ -4466,7 +4475,7 @@ namespace RFIDApplication
 
             if (reslut == null)
             {
-                Debug.WriteLine("Please select EPC number");
+                WriteLog(lrtxtLog,"Please select EPC number",1);
                 return;
             }
 
@@ -4476,7 +4485,79 @@ namespace RFIDApplication
             txtAccessEpcMatch.Text = cmbSetAccessEpcMatch.Text;
             ckAccessEpcMatch.Checked = true;
             reader.SetAccessEpcMatch(m_curSetting.btReadId, 0x00, Convert.ToByte(btAryEpc.Length), btAryEpc);
+
+            if(plainTextBox.Text != "")
+            {
+                EncryptedToHEX_Click(sender, e);
+            }
         }
 
+        private void btWriteReserver_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                byte btMemBank = findMemBank();
+                byte btWordAddr = 0x00;
+                byte btWordCnt = 0x00;
+                byte btCmd = findCmd();
+                writeTagRetry = 0;
+
+                if (!rdbReserved.Checked)
+                {
+                    MessageBox.Show("Write wrong memory bank, error return!");
+                    return;
+                }
+
+                if (txtWordAddr.Text.Length != 0)
+                {
+                    btWordAddr = Convert.ToByte(txtWordAddr.Text);
+                }
+                else
+                {
+                    WriteLog(lrtxtLog, "Pleader select the start Add of tag", 1);
+                    return;
+                }
+
+                if (txtWordCnt.Text.Length != 0)
+                {
+                    btWordCnt = Convert.ToByte(txtWordCnt.Text);
+                }
+                else
+                {
+                    WriteLog(lrtxtLog, "Invalid input characters word cnt failed", 1);
+                    return;
+                }
+
+                string[] result = CCommondMethod.StringToStringArray(htxtReadAndWritePwd.Text.ToUpper(), 2);
+                if (result == null)
+                {
+                    WriteLog(lrtxtLog, "Invalid input characters, input access pwd", 1);
+                    return;
+                }
+                else if (result.GetLength(0) < 4)
+                {
+                    WriteLog(lrtxtLog, "Enter at least 4 bytes", 1);
+                    return;
+                }
+
+                byte[] btAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
+                result = CCommondMethod.StringToStringArray(hexTbReserve.Text.ToUpper(), 2);
+                if (result == null)
+                {
+                    WriteLog(lrtxtLog, "Invalid input characters error on hex write data", 1);
+                    return;
+                }
+
+                byte[] btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
+                btWordCnt = Convert.ToByte(result.Length / 2 + result.Length % 2);
+
+                reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAddr, btWordCnt, btAryWriteData, btCmd);//1, access, 3, 0, 22, data, 148
+                WriteLog(lrtxtLog, "Write Tag", 0);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

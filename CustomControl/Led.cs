@@ -86,7 +86,7 @@ namespace LxControl
             if (!m_bIsCacheBuild)
             {
 #if Debug
-                System.Diagnostics.Debug.WriteLine("Rebuilding cache...");
+                System.Diagnostics.WriteLog(lrtxtLog,"Rebuilding cache...");
 #endif
                 DestoryCache();
                 CreateCache(rectBound, bevelRate, segmentWidth, segmentInterval);

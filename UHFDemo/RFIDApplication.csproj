@@ -80,10 +80,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>52BD23754F900C0554EBFD7B7E13D5AB7987B09E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>E0D305C4B5B79B64B640213A444FEADB620A8B1E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>RFIDApplication_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>RFIDApplication_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -154,7 +154,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ReaderSetting.cs" />
-    <None Include="RFIDApplication_2_TemporaryKey.pfx" />
+    <None Include="RFIDApplication_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomControl\CustomControl.csproj">

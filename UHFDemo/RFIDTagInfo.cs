@@ -110,7 +110,7 @@ namespace RFIDApplication
             using (StreamWriter sw = File.AppendText(path + "\\log.dat"))
             {
                 DateTime localDate = DateTime.Now; 
-                sw.Write("{0},", localDate.ToString(new CultureInfo("en-US")));
+                sw.Write("{0},", localDate.ToString("MM/dd/yy HH:mm:ss"));
                 sw.Write(label + "," + strHeadType + "," + strIntType + ",");
                 sw.WriteLine(strVolume + "," + strDate + "," + strSupplier);
             }

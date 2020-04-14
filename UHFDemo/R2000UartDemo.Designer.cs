@@ -224,19 +224,16 @@ namespace RFIDApplication
             this.rdbFree = new System.Windows.Forms.RadioButton();
             this.btnLockTag = new System.Windows.Forms.Button();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btWriteReserver = new System.Windows.Forms.Button();
+            this.hexTbReserve = new CustomControl.HexTextBox();
             this.labelHEXSize = new System.Windows.Forms.Label();
             this.plainTextBox = new System.Windows.Forms.TextBox();
             this.btEPC2Hex = new System.Windows.Forms.Button();
             this.btDecrypt = new System.Windows.Forms.Button();
-            this.accessCodeTextBox = new CustomControl.HexTextBox();
-            this.accessCodeFileBrower = new System.Windows.Forms.Button();
-            this.label129 = new System.Windows.Forms.Label();
             this.plainEPCTextBox = new System.Windows.Forms.TextBox();
             this.label128 = new System.Windows.Forms.Label();
             this.EncryptedToHEX = new System.Windows.Forms.Button();
-            this.keyFilePathTextBox = new CustomControl.HexTextBox();
-            this.keyFileBrower = new System.Windows.Forms.Button();
-            this.label127 = new System.Windows.Forms.Label();
             this.label126 = new System.Windows.Forms.Label();
             this.radioButtonBWrite = new System.Windows.Forms.RadioButton();
             this.radioButtonWrite = new System.Windows.Forms.RadioButton();
@@ -1959,19 +1956,16 @@ namespace RFIDApplication
             // 
             // groupBox14
             // 
+            this.groupBox14.Controls.Add(this.label5);
+            this.groupBox14.Controls.Add(this.btWriteReserver);
+            this.groupBox14.Controls.Add(this.hexTbReserve);
             this.groupBox14.Controls.Add(this.labelHEXSize);
             this.groupBox14.Controls.Add(this.plainTextBox);
             this.groupBox14.Controls.Add(this.btEPC2Hex);
             this.groupBox14.Controls.Add(this.btDecrypt);
-            this.groupBox14.Controls.Add(this.accessCodeTextBox);
-            this.groupBox14.Controls.Add(this.accessCodeFileBrower);
-            this.groupBox14.Controls.Add(this.label129);
             this.groupBox14.Controls.Add(this.plainEPCTextBox);
             this.groupBox14.Controls.Add(this.label128);
             this.groupBox14.Controls.Add(this.EncryptedToHEX);
-            this.groupBox14.Controls.Add(this.keyFilePathTextBox);
-            this.groupBox14.Controls.Add(this.keyFileBrower);
-            this.groupBox14.Controls.Add(this.label127);
             this.groupBox14.Controls.Add(this.label126);
             this.groupBox14.Controls.Add(this.radioButtonBWrite);
             this.groupBox14.Controls.Add(this.radioButtonWrite);
@@ -1989,6 +1983,23 @@ namespace RFIDApplication
             resources.ApplyResources(this.groupBox14, "groupBox14");
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.TabStop = false;
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // btWriteReserver
+            // 
+            resources.ApplyResources(this.btWriteReserver, "btWriteReserver");
+            this.btWriteReserver.Name = "btWriteReserver";
+            this.btWriteReserver.UseVisualStyleBackColor = true;
+            this.btWriteReserver.Click += new System.EventHandler(this.btWriteReserver_Click);
+            // 
+            // hexTbReserve
+            // 
+            resources.ApplyResources(this.hexTbReserve, "hexTbReserve");
+            this.hexTbReserve.Name = "hexTbReserve";
             // 
             // labelHEXSize
             // 
@@ -2014,23 +2025,6 @@ namespace RFIDApplication
             this.btDecrypt.UseVisualStyleBackColor = true;
             this.btDecrypt.Click += new System.EventHandler(this.btDecrypt_Click);
             // 
-            // accessCodeTextBox
-            // 
-            resources.ApplyResources(this.accessCodeTextBox, "accessCodeTextBox");
-            this.accessCodeTextBox.Name = "accessCodeTextBox";
-            // 
-            // accessCodeFileBrower
-            // 
-            resources.ApplyResources(this.accessCodeFileBrower, "accessCodeFileBrower");
-            this.accessCodeFileBrower.Name = "accessCodeFileBrower";
-            this.accessCodeFileBrower.UseVisualStyleBackColor = true;
-            this.accessCodeFileBrower.Click += new System.EventHandler(this.accessCodeFileBrower_Click);
-            // 
-            // label129
-            // 
-            resources.ApplyResources(this.label129, "label129");
-            this.label129.Name = "label129";
-            // 
             // plainEPCTextBox
             // 
             resources.ApplyResources(this.plainEPCTextBox, "plainEPCTextBox");
@@ -2048,23 +2042,6 @@ namespace RFIDApplication
             this.EncryptedToHEX.UseVisualStyleBackColor = true;
             this.EncryptedToHEX.Click += new System.EventHandler(this.EncryptedToHEX_Click);
             // 
-            // keyFilePathTextBox
-            // 
-            resources.ApplyResources(this.keyFilePathTextBox, "keyFilePathTextBox");
-            this.keyFilePathTextBox.Name = "keyFilePathTextBox";
-            // 
-            // keyFileBrower
-            // 
-            resources.ApplyResources(this.keyFileBrower, "keyFileBrower");
-            this.keyFileBrower.Name = "keyFileBrower";
-            this.keyFileBrower.UseVisualStyleBackColor = true;
-            this.keyFileBrower.Click += new System.EventHandler(this.keyFileBrower_Click);
-            // 
-            // label127
-            // 
-            resources.ApplyResources(this.label127, "label127");
-            this.label127.Name = "label127";
-            // 
             // label126
             // 
             resources.ApplyResources(this.label126, "label126");
@@ -2073,15 +2050,15 @@ namespace RFIDApplication
             // radioButtonBWrite
             // 
             resources.ApplyResources(this.radioButtonBWrite, "radioButtonBWrite");
+            this.radioButtonBWrite.Checked = true;
             this.radioButtonBWrite.Name = "radioButtonBWrite";
+            this.radioButtonBWrite.TabStop = true;
             this.radioButtonBWrite.UseVisualStyleBackColor = true;
             // 
             // radioButtonWrite
             // 
             resources.ApplyResources(this.radioButtonWrite, "radioButtonWrite");
-            this.radioButtonWrite.Checked = true;
             this.radioButtonWrite.Name = "radioButtonWrite";
-            this.radioButtonWrite.TabStop = true;
             this.radioButtonWrite.UseVisualStyleBackColor = true;
             // 
             // htxtWriteData
@@ -2574,7 +2551,7 @@ namespace RFIDApplication
             // 
             // timerInventory
             // 
-            this.timerInventory.Interval = 500;
+            this.timerInventory.Interval = 250;
             this.timerInventory.Tick += new System.EventHandler(this.timerInventory_Tick);
             // 
             // totalTime
@@ -2706,7 +2683,6 @@ namespace RFIDApplication
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "R2000UartDemo";
-            this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.R2000UartDemo_Load);
             this.tabCtrMain.ResumeLayout(false);
             this.PagReaderSetting.ResumeLayout(false);
@@ -3080,22 +3056,19 @@ namespace RFIDApplication
         private TextBox txtAccessEpcMatch;
         private CheckBox ckAccessEpcMatch;
         private RadioButton rdbLockEverR6;
-        private Button keyFileBrower;
-        private Label label127;
         private Label label126;
         private OpenFileDialog openFileDialog1;
         private Button EncryptedToHEX;
         private Label label128;
-        private CustomControl.HexTextBox keyFilePathTextBox;
         private TextBox plainEPCTextBox;
-        private CustomControl.HexTextBox accessCodeTextBox;
-        private Button accessCodeFileBrower;
-        private Label label129;
         private Button btDecrypt;
         private Button btEPC2Hex;
         private TextBox plainTextBox;
         private Label labelHEXSize;
         private Button btnSetAccessEpcMatch;
+        private Label label5;
+        private Button btWriteReserver;
+        private CustomControl.HexTextBox hexTbReserve;
     }
 }
 
