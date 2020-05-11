@@ -18,6 +18,7 @@ namespace RFIDApplication
         private const decimal tonerMAXVolume = 2000000000000; //max is 2L
         public const char serialSep = '=';
         public static string label;
+        public static string reserverData;
         public static string tagInfo;
         public static List<string> labelList = new List<string>();
 
@@ -116,7 +117,7 @@ namespace RFIDApplication
             }
         }
 
-        public static bool verifyData(string inputData, bool bVerifyData, bool bRead2Erase)
+        public static bool verifyData(string inputData, bool bVerifyData)
         {//1. input label = correct, bRead2Erase = false,
          //2. input label = 0, bRead2Erase = true;
             if (inputData == "")
@@ -148,18 +149,6 @@ namespace RFIDApplication
                     }
                 }
             }
-
-            if (bRead2Erase)
-            {
-                for (int i = 0; i < dataFormat.Length; i++)
-                {
-                    if (inputData[i] != '0')
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }          
             return true;
         }
 

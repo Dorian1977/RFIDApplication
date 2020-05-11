@@ -192,6 +192,20 @@ namespace RFIDApplication
             this.columnHeader41 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader412 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader42 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pageReadTag = new System.Windows.Forms.TabPage();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.tbUserData = new System.Windows.Forms.TextBox();
+            this.btUserDataUpdate = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBoxAccessCode = new System.Windows.Forms.TextBox();
+            this.btAccessCode = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxAccessCode = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labelTagID = new System.Windows.Forms.Label();
+            this.textBoxEPCTagID = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btEPCTag = new System.Windows.Forms.Button();
             this.pageAcessTag = new System.Windows.Forms.TabPage();
             this.ltvOperate = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -349,6 +363,10 @@ namespace RFIDApplication
             ((System.ComponentModel.ISupportInitialize)(this.ledReal2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ledReal4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ledReal1)).BeginInit();
+            this.pageReadTag.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.pageAcessTag.SuspendLayout();
             this.gbCmdOperateTag.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -1297,11 +1315,13 @@ namespace RFIDApplication
             // tabEpcTest
             // 
             this.tabEpcTest.Controls.Add(this.pageRealMode);
+            this.tabEpcTest.Controls.Add(this.pageReadTag);
             this.tabEpcTest.Controls.Add(this.pageAcessTag);
             resources.ApplyResources(this.tabEpcTest, "tabEpcTest");
             this.tabEpcTest.Name = "tabEpcTest";
             this.tabEpcTest.SelectedIndex = 0;
             this.tabEpcTest.TabStop = false;
+            this.tabEpcTest.Click += new System.EventHandler(this.tabEpcTest_Click);
             // 
             // pageRealMode
             // 
@@ -1705,11 +1725,14 @@ namespace RFIDApplication
             this.columnHeader412,
             this.columnHeader42});
             resources.ApplyResources(this.lvRealList, "lvRealList");
+            this.lvRealList.FullRowSelect = true;
             this.lvRealList.GridLines = true;
             this.lvRealList.HideSelection = false;
+            this.lvRealList.MultiSelect = false;
             this.lvRealList.Name = "lvRealList";
             this.lvRealList.UseCompatibleStateImageBehavior = false;
             this.lvRealList.View = System.Windows.Forms.View.Details;
+            this.lvRealList.SelectedIndexChanged += new System.EventHandler(this.lvRealList_SelectedIndexChanged);
             // 
             // columnHeader37
             // 
@@ -1738,6 +1761,103 @@ namespace RFIDApplication
             // columnHeader42
             // 
             resources.ApplyResources(this.columnHeader42, "columnHeader42");
+            // 
+            // pageReadTag
+            // 
+            this.pageReadTag.Controls.Add(this.groupBox12);
+            this.pageReadTag.Controls.Add(this.groupBox3);
+            this.pageReadTag.Controls.Add(this.groupBox2);
+            resources.ApplyResources(this.pageReadTag, "pageReadTag");
+            this.pageReadTag.Name = "pageReadTag";
+            this.pageReadTag.UseVisualStyleBackColor = true;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.tbUserData);
+            this.groupBox12.Controls.Add(this.btUserDataUpdate);
+            resources.ApplyResources(this.groupBox12, "groupBox12");
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.TabStop = false;
+            // 
+            // tbUserData
+            // 
+            resources.ApplyResources(this.tbUserData, "tbUserData");
+            this.tbUserData.ForeColor = System.Drawing.Color.Black;
+            this.tbUserData.Name = "tbUserData";
+            // 
+            // btUserDataUpdate
+            // 
+            resources.ApplyResources(this.btUserDataUpdate, "btUserDataUpdate");
+            this.btUserDataUpdate.Name = "btUserDataUpdate";
+            this.btUserDataUpdate.UseVisualStyleBackColor = true;
+            this.btUserDataUpdate.Click += new System.EventHandler(this.btUserDataUpdate_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBoxAccessCode);
+            this.groupBox3.Controls.Add(this.btAccessCode);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // textBoxAccessCode
+            // 
+            resources.ApplyResources(this.textBoxAccessCode, "textBoxAccessCode");
+            this.textBoxAccessCode.ForeColor = System.Drawing.Color.Black;
+            this.textBoxAccessCode.Name = "textBoxAccessCode";
+            // 
+            // btAccessCode
+            // 
+            resources.ApplyResources(this.btAccessCode, "btAccessCode");
+            this.btAccessCode.Name = "btAccessCode";
+            this.btAccessCode.UseVisualStyleBackColor = true;
+            this.btAccessCode.Click += new System.EventHandler(this.btAccessCode_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBoxAccessCode);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.labelTagID);
+            this.groupBox2.Controls.Add(this.textBoxEPCTagID);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.btEPCTag);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
+            // checkBoxAccessCode
+            // 
+            resources.ApplyResources(this.checkBoxAccessCode, "checkBoxAccessCode");
+            this.checkBoxAccessCode.Name = "checkBoxAccessCode";
+            this.checkBoxAccessCode.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // labelTagID
+            // 
+            resources.ApplyResources(this.labelTagID, "labelTagID");
+            this.labelTagID.Name = "labelTagID";
+            // 
+            // textBoxEPCTagID
+            // 
+            resources.ApplyResources(this.textBoxEPCTagID, "textBoxEPCTagID");
+            this.textBoxEPCTagID.ForeColor = System.Drawing.Color.Black;
+            this.textBoxEPCTagID.Name = "textBoxEPCTagID";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // btEPCTag
+            // 
+            resources.ApplyResources(this.btEPCTag, "btEPCTag");
+            this.btEPCTag.Name = "btEPCTag";
+            this.btEPCTag.UseVisualStyleBackColor = true;
+            this.btEPCTag.Click += new System.EventHandler(this.btEPCTag_Click);
             // 
             // pageAcessTag
             // 
@@ -2746,6 +2866,13 @@ namespace RFIDApplication
             ((System.ComponentModel.ISupportInitialize)(this.ledReal2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ledReal4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ledReal1)).EndInit();
+            this.pageReadTag.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.pageAcessTag.ResumeLayout(false);
             this.gbCmdOperateTag.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
@@ -3032,7 +3159,20 @@ namespace RFIDApplication
         private RadioButton rdbLock;
         private RadioButton rdbFree;
         private Button btnLockTag;
+        private RadioButton rdbLockEverR6;
+        private OpenFileDialog openFileDialog1;
         private GroupBox groupBox14;
+        private Label label5;
+        private Button btWriteReserver;
+        private CustomControl.HexTextBox hexTbReserve;
+        private Label labelHEXSize;
+        private TextBox plainTextBox;
+        private Button btEPC2Hex;
+        private Button btDecrypt;
+        private TextBox plainEPCTextBox;
+        private Label label128;
+        private Button EncryptedToHEX;
+        private Label label126;
         private RadioButton radioButtonBWrite;
         private RadioButton radioButtonWrite;
         private CustomControl.HexTextBox htxtWriteData;
@@ -3052,23 +3192,24 @@ namespace RFIDApplication
         private Label label24;
         private GroupBox groupBox13;
         private Label label23;
+        private Button btnSetAccessEpcMatch;
         private ComboBox cmbSetAccessEpcMatch;
         private TextBox txtAccessEpcMatch;
         private CheckBox ckAccessEpcMatch;
-        private RadioButton rdbLockEverR6;
-        private Label label126;
-        private OpenFileDialog openFileDialog1;
-        private Button EncryptedToHEX;
-        private Label label128;
-        private TextBox plainEPCTextBox;
-        private Button btDecrypt;
-        private Button btEPC2Hex;
-        private TextBox plainTextBox;
-        private Label labelHEXSize;
-        private Button btnSetAccessEpcMatch;
-        private Label label5;
-        private Button btWriteReserver;
-        private CustomControl.HexTextBox hexTbReserve;
+        private TabPage pageReadTag;
+        private Button btUserDataUpdate;
+        private Button btAccessCode;
+        private Button btEPCTag;
+        private TextBox textBoxEPCTagID;
+        private Label label6;
+        private Label labelTagID;
+        private GroupBox groupBox2;
+        private Label label7;
+        private GroupBox groupBox12;
+        private GroupBox groupBox3;
+        private TextBox textBoxAccessCode;
+        private CheckBox checkBoxAccessCode;
+        private TextBox tbUserData;
     }
 }
 

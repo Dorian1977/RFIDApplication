@@ -28,9 +28,6 @@ namespace RFIDApplication
         private InventoryBuffer m_curInventoryBuffer = new InventoryBuffer();
         private OperateTagBuffer m_curOperateTagBuffer = new OperateTagBuffer();
         Symmetric_Encrypted symmetric = new Symmetric_Encrypted();
-        //private OperateTagISO18000Buffer m_curOperateTagISO18000Buffer = new OperateTagISO18000Buffer();
-
-        //private const string settingPath = @"c:\TEMP\Setting.dat";
         private const int ACCESSCodeMAXLENGTH = 2; //4 wrods
 
         //Before inventory, you need to set working antenna to identify whether the inventory operation is executing.
@@ -41,13 +38,7 @@ namespace RFIDApplication
         private bool m_bLockTab = false;
         //Whether display the serial monitoring data.
         private bool m_bDisplayLog = false;
-        //Record the number of ISO18000 tag written loop time.
-        //private int m_nLoopTimes = 0;
-        //Record the number of ISO18000 tag's written characters.
-        //private int m_nBytes = 0;
-        //Record the number of ISO18000 tag have been written loop time.
-        //private int m_nLoopedTimes = 0;
-        //Real time inventory times.
+        const short rwTagDelay = 300; //read/write RFID tag delay
         private int m_nTotal = 0;
         //Frequency of list updating.
         private int m_nRealRate = 20;
@@ -96,44 +87,7 @@ namespace RFIDApplication
             byte[] labelFormat = Properties.Resources.LabelFormat;
             RFIDTagInfo.loadLabelFormat(labelFormat);
             WriteLog(lrtxtLog,"read label format " + RFIDTagInfo.readLabelFormat(),0);
-
-            string path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            using (StreamReader sr = new StreamReader(path + "\\Setting.dat"))
-            {
-                string line;
-                // Read and display lines from the file until the end of 
-                // the file is reached.
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] param = line.Split(',');
-                    switch (param[0])
-                    {
-                        case "ComPort":
-                            {
-                                for (int j = 0; j < cmbComPort.Items.Count; j++)
-                                {
-                                    if (param[1] == cmbComPort.Items[j].ToString())
-                                    {
-                                        cmbComPort.SelectedIndex = j;
-                                        bfoundSettingFile = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
-                            /*
-                        case "TonerVolumeCount":
-                            {
-                                if (param[1] != "")
-                                {
-                                    RFIDTagInfo.loadVolumeFile(param[1]);
-                                }
-                                break;
-                            }*/
-                    }
-                }
-            }
-           
+                         
             cmbBaudrate.SelectedIndex = 1;
             ipIpServer.IpAddressStr = "192.168.0.178";
             txtTcpPort.Text = "4001";
@@ -169,44 +123,9 @@ namespace RFIDApplication
             //this.lvBufferList.ColumnClick += new ColumnClickEventHandler(lvBufferHelper.ListView_ColumnClick);
             this.m_real_phase_value.SelectedIndex = 0;
 
-            if(bfoundSettingFile)
-            {
-#if true
-                btnConnectRs232.Enabled = true;
-                btnDisconnectRs232.Enabled = false;
-                btnConnectRs232_Click(sender, e);// auto start                                                 
-                btnGetFirmwareVersion_Click(sender, e);//Get “Firmware Version” – read RFID current firmware version
-                //Read “Read GPIO” – get GPIO status
-                btnReadGpioValue_Click(sender, e);
-                //Get “Current Ant” – get current antenna
-                btnGetWorkAntenna_Click(sender, e);
-                //Get “RF Output Power” – read current RF power setting
-                btnGetOutputPower_Click(sender, e);
-                //Get “RF Spectrum Setup: -read RF frequencies
-                btnGetFrequencyRegion_Click(sender, e);
-                //btRealTimeInventory_Click(sender, e);// auto start
-
-                reader.WriteGpioValue(m_curSetting.btReadId, 0x03, 0);
-                reader.WriteGpioValue(m_curSetting.btReadId, 0x04, 0);
-                Thread.Sleep(20);
-#else
-                string strException = string.Empty;
-                int nRet = reader.OpenCom(cmbComPort.Text, Convert.ToInt32(cmbBaudrate.Text), out strException);
-                if (nRet != 0)
-                {
-                    string strLog = "Connection failed, failure cause: " + strException; 
-                    WriteLog(lrtxtLog,strLog, 1);
-                    return;
-                }
-                else
-                {
-                    string strLog = "Connect " + cmbComPort.Text + "@" + cmbBaudrate.Text;
-                    WriteLog(lrtxtLog,strLog, 0);
-                }            
-                SetFormEnable(true);
-#endif
-                initScanTag();
-            }
+            btnConnectRs232.Enabled = true;
+            btnDisconnectRs232.Enabled = false;
+         
         }
 
         private delegate void SwitchTagUnSafe(TabControl tab, int index);
@@ -1167,6 +1086,23 @@ namespace RFIDApplication
             btnDisconnectRs232.ForeColor = Color.Indigo;
             SetButtonBold(btnConnectRs232);
             SetButtonBold(btnDisconnectRs232);
+                                             
+            btnGetFirmwareVersion_Click(sender, e);//Get “Firmware Version” – read RFID current firmware version
+                                                   //Read “Read GPIO” – get GPIO status
+            btnReadGpioValue_Click(sender, e);
+            //Get “Current Ant” – get current antenna
+            btnGetWorkAntenna_Click(sender, e);
+            //Get “RF Output Power” – read current RF power setting
+            btnGetOutputPower_Click(sender, e);
+            //Get “RF Spectrum Setup: -read RF frequencies
+            btnGetFrequencyRegion_Click(sender, e);
+            //btRealTimeInventory_Click(sender, e);// auto start
+
+            reader.WriteGpioValue(m_curSetting.btReadId, 0x03, 0);
+            reader.WriteGpioValue(m_curSetting.btReadId, 0x04, 0);
+            Thread.Sleep(20);
+
+            initScanTag();
         }
 
         private void btnDisconnectRs232_Click(object sender, EventArgs e)
@@ -2034,7 +1970,7 @@ namespace RFIDApplication
                 if (msgTran.AryData[0] == 0x10)
                 {
                     m_curSetting.btReadId = msgTran.ReadId;
-                    WriteLog(lrtxtLog,strCmd,0);
+                    //WriteLog(lrtxtLog,strCmd,0);
                     return;
                 }
                 else
@@ -3063,11 +2999,10 @@ namespace RFIDApplication
 
             //bVerified = symmetric.verifyLabel(decryptMsg, bRead2Erase);
             WriteLog(lrtxtLog, "Verify label read " + label, 0);
-            return RFIDTagInfo.verifyData(decryptMsg, true, bRead2Erase);
+            return RFIDTagInfo.verifyData(decryptMsg, true);
         }
 
         static int readTagRetry = 0;
-        static bool bRead2Erase = false;
         static bool bVerify = false;
         private void ProcessReadTag(Reader.MessageTran msgTran)
         {
@@ -3134,63 +3069,31 @@ namespace RFIDApplication
                     m_curOperateTagBuffer.dtTagTable.AcceptChanges();
                     RefreshOpTag(0x81);
                     WriteLog(lrtxtLog,strCmd,0);
-                    ulong uWordCnt = 0;                    
+                    ulong uWordCnt = 0;
+
                     RFIDTagInfo.label = RFIDTagInfo.readEPCLabel(strEPC, out uWordCnt);
-                    if (uWordCnt <= 99999999999999)
-                        btWordCnt = 22;
-                    else
-                        btWordCnt = 32;
-                    
-                    if (btMemBank == 0x03 && btWordAddr == 0 && btWordCnt >= 22)
+
+                    if (strData.Length/3 == 8)
+                    {
+                        RFIDTagInfo.reserverData = strData;
+                    }
+                                        
+                    if (btMemBank == 0x03 && strData.Length/3 >= 20)
                     {//read data section
                         try
                         {
-                            bVerify = verifyTag(strData);
+                            string reserveData = "";
+                            if (RFIDTagInfo.reserverData != null && RFIDTagInfo.reserverData != "")
+                                reserveData = RFIDTagInfo.reserverData.Substring(0, 12);
+                            else if (hexTbReserve.Text != "")
+                                reserveData = hexTbReserve.Text;
+                            else
+                                WriteLog(lrtxtLog, "Add reserve data first!! ", 1);
+                            
+                            bVerify = verifyTag(reserveData.ToUpper() + strData);
                             if (bVerify)
                             {
-                                if (!bRead2Erase)
-                                {//update tag to zero                                    
-                                 //string [] zeroData;
-#if READ2ERASE
-#if TRUE
-                                    btMemBank = 3; //1 for EPC, 3 for user                                    
-                                    string zeroTmp = "";
-                                    for(int i=0; i< btWordCnt*2; i++)
-                                    {
-                                        zeroTmp += "00 ";
-                                    }
-#else
-                                    //btMemBank = 3; //1 for EPC, 3 for user                                    
-                                    //string zeroTmp = "00 00 00 00 00 00 00 00 00 00 00 00";
-                                    btMemBank = 3;
-                                    string zeroTmp = "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ";
-#endif
-#else
-                                    btMemBank = 3; //1 for EPC, 3 for user
-                                    string zeroTmp = "62 4a 49 72 57 49 62 6e 32 31 74 4d 39 44 51 37 74 47 73 2b 79 4c 64 6e 4d 54 4f 4c 71 2f 61 6f 43 56 51 48 67 69 70 64 44 2b 30 3d ";
-#endif
-                                    if (zeroTmp.StartsWith(" "))
-                                        zeroTmp = zeroTmp.Substring(1);
-
-                                    byte btCmd = findCmd();
-                                    string[] result = CCommondMethod.StringToStringArray(symmetric.readAccessCode(), 2);// htxtReadAndWritePwd.Text.ToUpper(), 2);
-                                    byte[] btAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
-                                    result =  CCommondMethod.StringToStringArray(zeroTmp.ToUpper(), 2);
-                                    byte[] btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
-                                    btWordCnt = Convert.ToByte(result.Length / 2 + result.Length % 2);
-
-                                    //1, access, 3, 0, 22, data, 148
-                                    strHEXdata = zeroTmp;
-                                    /*if (btMemBank == 1)
-                                        btWordAddr = 2;
-                                    else
-                                        btWordAddr = 0;*/
-#if READ2ERASE
-                                    reader.WriteTag(m_curSetting.btReadId, btAryPwd, btMemBank, btWordAddr, btWordCnt, btAryWriteData, btCmd);
-
-#endif
-                                    bRead2Erase = true;
-                                }
+                                WriteLog(lrtxtLog, "*** Verified Data Successful ***", 0);
                             }
                             else
                             {//red on                                                           
@@ -3241,7 +3144,7 @@ namespace RFIDApplication
 
         private byte findMemBank()
         {
-           byte byteMemBank = 0xFF;
+            byte byteMemBank = 0xFF;
             if (rdbReserved.Checked)
             {
                 byteMemBank = 0x00;
@@ -3385,14 +3288,6 @@ namespace RFIDApplication
                     //Thread.Sleep(10);
                     WriteLog(lrtxtLog,"Write Tag retry " + writeTagRetry, 1);                    
                 }
-                else if(!bRead2Erase)
-                {
-                    setVerifiedLEDStatus(0, 1); //red on      
-                    WriteLog(lrtxtLog,"Erase tag failed", 1);
-#if READ2SCAN
-                    initScanTag();
-#endif
-                }
                 else
                 {//write tag failed
                     setVerifiedLEDStatus(0, 1); //red on 
@@ -3445,10 +3340,9 @@ namespace RFIDApplication
                 RefreshOpTag(0x82);
                 WriteLog(lrtxtLog,strCmd, 0);
 
-                if (bRead2Erase && bVerify)
+                if (bVerify)
                 {
                     bVerify = false;
-                    bRead2Erase = false;
                     //RFIDTagInfo.addVolumeToFile(RFIDTagInfo.tagInfo);
                     //WriteLog(lrtxtLog,"Get Volume " + RFIDTagInfo.readVolume());
                     //RFIDTagInfo.addLog(RFIDTagInfo.label, RFIDTagInfo.tagInfo);
@@ -3840,7 +3734,7 @@ namespace RFIDApplication
                     m_curInventoryBuffer.bLoopInventory = false;
                     btRealTimeInventory.BackColor = Color.WhiteSmoke;
                     btRealTimeInventory.ForeColor = Color.DarkBlue;
-                    btRealTimeInventory.Text = "Inventory";
+                    btRealTimeInventory.Text = "Scan";
                     timerInventory.Enabled = false;
                     totalTime.Enabled = false;
                     return;
@@ -4557,6 +4451,220 @@ namespace RFIDApplication
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void lvRealList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListViewItem item = null;
+            try
+            {
+                item = this.lvRealList.SelectedItems[0];
+                txtAccessEpcMatch.Text = item.SubItems[1].Text;
+                labelTagID.Text = item.SubItems[1].Text;
+            }
+            catch (Exception exp) { return; }
+
+            if (!labelTagID.Text.ToUpper().Contains("50 53"))
+            {
+                textBoxEPCTagID.BackColor = Color.Red;
+            }
+            else
+            {
+                textBoxEPCTagID.BackColor = Color.White;
+            }
+            ckAccessEpcMatch.Checked = true;
+            btRealTimeInventory_Click(sender, e);
+
+            SwitchTag(tabCtrMain, 1);
+            SwitchTag(tabEpcTest, 1);
+        }
+
+        private void btEPCTag_Click(object sender, EventArgs e)
+        {//2 kinds of tag id
+            //1. original tag
+            //2. pack smart tag, start with 50 30
+            writeTagRetry = 0;
+
+            string[] result = null;
+            byte[] btAryPwd = null;
+            byte[] btAryWriteData = null;
+            string tagID = ""; // to be write
+            
+            rdbEpc.Checked = true;
+            txtWordAddr.Text = "2";
+            txtWordCnt.Text = "6";
+
+            //load Access Code
+            string strCode = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(Properties.Resources.AccessCode)).ToUpper();
+            symmetric.loadAccessCode(strCode);
+
+            if (checkBoxAccessCode.Checked)
+            {
+                result = CCommondMethod.StringToStringArray("50 30 43 4B", 2);
+                btAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
+            }
+            else
+            {
+                result = CCommondMethod.StringToStringArray("00 00 00 00", 2);
+                btAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
+            }
+
+            //mix with 2 ASCII and 10 digits
+            string tmpWord = textBoxEPCTagID.Text.Substring(0, 2).ToUpper();
+            string serialNumber = textBoxEPCTagID.Text.Substring(2);
+            string EPClabel = RFIDTagInfo.ASCIIToHex(tmpWord);
+            ulong uNumber;
+            try
+            {
+                if (!ulong.TryParse(serialNumber, out uNumber))
+                {
+                    uNumber = 0;
+                }
+            }
+            catch (Exception exp)
+            {
+                uNumber = 0;
+            }
+            string EPSnumber = uNumber.ToString("D20");
+            strHEXdata = tagID = EPClabel + RFIDTagInfo.AddHexSpace(EPSnumber);
+            result = CCommondMethod.StringToStringArray(tagID, 2);
+            btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);      
+            
+            //1, access, 1, 2, 6, data, 148
+            reader.WriteTag(m_curSetting.btReadId, btAryPwd, 0x01, 0x02, 0x06, btAryWriteData, 0x94);
+            WriteLog(lrtxtLog, "Write Tag: " + tagID, 0);
+        }
+
+        private void btAccessCode_Click(object sender, EventArgs e)
+        {//write access code
+            writeTagRetry = 0;
+
+            string[] result = null;
+            byte[] byteAryPwd = null;
+            byte[] byteAryWriteData = null;
+
+            strHEXdata = textBoxAccessCode.Text;
+            result = CCommondMethod.StringToStringArray("00 00 00 00", 2);
+            byteAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
+            result = CCommondMethod.StringToStringArray(textBoxAccessCode.Text.ToUpper(), 2);
+            byteAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
+
+            //load Access Code
+            string strCode = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(Properties.Resources.AccessCode)).ToUpper();
+            symmetric.loadAccessCode(strCode);
+
+            rdbReserved.Checked = true;
+            txtWordAddr.Text = "2";
+            txtWordCnt.Text = "2";
+            //1, access, 0, 2, 2, data, 148
+            reader.WriteTag(m_curSetting.btReadId, byteAryPwd, 0x00, 0x02, 0x02, byteAryWriteData, 0x94);
+            Thread.Sleep(rwTagDelay);
+
+            //lock tag
+            reader.LockTag(m_curSetting.btReadId, byteAryWriteData, 0x04, 0x01);
+            Thread.Sleep(rwTagDelay);
+
+            //read back to verify
+            rdbReserved.Checked = true;
+
+            reader.ReadTag(m_curSetting.btReadId, 0x00, 0, 4, byteAryWriteData);
+            Thread.Sleep(rwTagDelay);
+
+            if(RFIDTagInfo.reserverData != null && RFIDTagInfo.reserverData != "")
+            {
+                string reserveData = RFIDTagInfo.reserverData;
+                if(reserveData.EndsWith(textBoxAccessCode.Text.ToUpper()))
+                {
+                    WriteLog(lrtxtLog, "*** Access Code Verified Successful ***", 0);
+                    RFIDTagInfo.reserverData = "";
+                }
+            }
+            else
+            {
+                WriteLog(lrtxtLog, "*** Access code verified failed, try again! ***", 1);
+            }
+        }
+
+        private void btUserDataUpdate_Click(object sender, EventArgs e)
+        {
+            byte[] byteAryPwd = { 80, 48, 67, 75 };
+            string reserveData = "";
+            string userData = "";
+
+            if (tbUserData.Text == "")
+            {
+                return;
+            }
+            //covert plain text to encrypt message
+
+            //load Access Code
+            string strCode = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(Properties.Resources.AccessCode)).ToUpper();
+            symmetric.loadAccessCode(strCode);
+
+            //load key
+            symmetric.loadKey(Properties.Resources.SymmetricKey);
+            //keyFilePathTextBox.Text = Encoding.ASCII.GetString(encryptKey);
+
+            //read EPS SN number
+            string strEPC = RFIDTagInfo.HEXToASCII(labelTagID.Text.Substring(0, 6));
+            string strnum = txtAccessEpcMatch.Text.Substring(6).Replace(" ", String.Empty);
+            string encrypString = "";
+            ulong num = 0;
+
+            if (ulong.TryParse(strnum, out num))
+            {
+                encrypString = strEPC + num.ToString() + RFIDTagInfo.serialSep + tbUserData.Text;
+            }
+            else
+            {
+                encrypString = strEPC + "0" + RFIDTagInfo.serialSep + tbUserData.Text;
+                WriteLog(lrtxtLog, "Error, exceed RFID tag ulong", 1);
+            }
+
+            symmetric.encryptedtext = symmetric.Encrypt(encrypString);//, symmetric.aes.Key);
+            string strEncrypted = Convert.ToBase64String(symmetric.encryptedtext);
+            WriteLog(lrtxtLog, "Encrypt data " + strEncrypted +
+                               ", size " + symmetric.encryptedtext.Length, 0);
+
+            hexTbReserve.Text = reserveData = RFIDTagInfo.ASCIIToHex(strEncrypted.Substring(0, 4));
+            htxtWriteData.Text = userData = RFIDTagInfo.ASCIIToHex(strEncrypted.Substring(4));
+
+            string[] result = CCommondMethod.StringToStringArray(reserveData.ToUpper(), 2);
+            byte[] byteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
+            //1, access, 0, 0, 2, data, 148   
+            rdbReserved.Checked = true;
+            txtWordAddr.Text = "0";
+            txtWordCnt.Text = "2";
+            strHEXdata = hexTbReserve.Text;
+            reader.WriteTag(m_curSetting.btReadId, byteAryPwd, 0x00, 0x00, 0x02, byteData, 0x94);
+            Thread.Sleep(rwTagDelay);
+
+            result = CCommondMethod.StringToStringArray(userData.ToUpper(), 2);
+            byteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
+            //1, access, 0, 0, 2, data, 148
+            rdbUser.Checked = true;
+            txtWordAddr.Text = "0";
+            txtWordCnt.Text = "20";
+            strHEXdata = htxtWriteData.Text;
+            reader.WriteTag(m_curSetting.btReadId, byteAryPwd, 0x03, 0x00, 0x020, byteData, 0x94);
+            Thread.Sleep(rwTagDelay);
+
+            //read back to verify reserve data first
+            rdbReserved.Checked = true;
+            reader.ReadTag(m_curSetting.btReadId, 0x00, 0, 4, byteAryPwd);
+            Thread.Sleep(rwTagDelay);
+
+            rdbUser.Checked = true;
+            reader.ReadTag(m_curSetting.btReadId, 0x03, 0, 20, byteAryPwd);
+            Thread.Sleep(rwTagDelay);
+        }
+
+        private void tabEpcTest_Click(object sender, EventArgs e)
+        {
+            if(tabEpcTest.SelectedTab == pageRealMode)
+            {
+                btRealTimeInventory_Click(sender, e);
             }
         }
     }
