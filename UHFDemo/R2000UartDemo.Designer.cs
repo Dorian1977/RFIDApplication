@@ -194,9 +194,15 @@ namespace RFIDApplication
             this.columnHeader42 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pageReadTag = new System.Windows.Forms.TabPage();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.btReadUserData = new System.Windows.Forms.Button();
+            this.tbUserDataRead = new System.Windows.Forms.TextBox();
             this.tbUserData = new System.Windows.Forms.TextBox();
             this.btUserDataUpdate = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.checkBoxAccessCode1 = new System.Windows.Forms.CheckBox();
+            this.btAccessCodeRead = new System.Windows.Forms.Button();
+            this.textBoxReadAccessCode = new System.Windows.Forms.TextBox();
             this.textBoxAccessCode = new System.Windows.Forms.TextBox();
             this.btAccessCode = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -206,7 +212,7 @@ namespace RFIDApplication
             this.textBoxEPCTagID = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btEPCTag = new System.Windows.Forms.Button();
-            this.pageAcessTag = new System.Windows.Forms.TabPage();
+            this.pageAccessTag = new System.Windows.Forms.TabPage();
             this.ltvOperate = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -367,7 +373,7 @@ namespace RFIDApplication
             this.groupBox12.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.pageAcessTag.SuspendLayout();
+            this.pageAccessTag.SuspendLayout();
             this.gbCmdOperateTag.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
@@ -1316,7 +1322,7 @@ namespace RFIDApplication
             // 
             this.tabEpcTest.Controls.Add(this.pageRealMode);
             this.tabEpcTest.Controls.Add(this.pageReadTag);
-            this.tabEpcTest.Controls.Add(this.pageAcessTag);
+            this.tabEpcTest.Controls.Add(this.pageAccessTag);
             resources.ApplyResources(this.tabEpcTest, "tabEpcTest");
             this.tabEpcTest.Name = "tabEpcTest";
             this.tabEpcTest.SelectedIndex = 0;
@@ -1773,11 +1779,27 @@ namespace RFIDApplication
             // 
             // groupBox12
             // 
+            this.groupBox12.Controls.Add(this.btReadUserData);
+            this.groupBox12.Controls.Add(this.tbUserDataRead);
             this.groupBox12.Controls.Add(this.tbUserData);
             this.groupBox12.Controls.Add(this.btUserDataUpdate);
             resources.ApplyResources(this.groupBox12, "groupBox12");
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.TabStop = false;
+            // 
+            // btReadUserData
+            // 
+            resources.ApplyResources(this.btReadUserData, "btReadUserData");
+            this.btReadUserData.Name = "btReadUserData";
+            this.btReadUserData.UseVisualStyleBackColor = true;
+            this.btReadUserData.Click += new System.EventHandler(this.btReadUserData_Click);
+            // 
+            // tbUserDataRead
+            // 
+            resources.ApplyResources(this.tbUserDataRead, "tbUserDataRead");
+            this.tbUserDataRead.ForeColor = System.Drawing.Color.Black;
+            this.tbUserDataRead.Name = "tbUserDataRead";
+            this.tbUserDataRead.ReadOnly = true;
             // 
             // tbUserData
             // 
@@ -1794,11 +1816,40 @@ namespace RFIDApplication
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.checkBoxAccessCode1);
+            this.groupBox3.Controls.Add(this.btAccessCodeRead);
+            this.groupBox3.Controls.Add(this.textBoxReadAccessCode);
             this.groupBox3.Controls.Add(this.textBoxAccessCode);
             this.groupBox3.Controls.Add(this.btAccessCode);
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // checkBoxAccessCode1
+            // 
+            resources.ApplyResources(this.checkBoxAccessCode1, "checkBoxAccessCode1");
+            this.checkBoxAccessCode1.Name = "checkBoxAccessCode1";
+            this.checkBoxAccessCode1.UseVisualStyleBackColor = true;
+            // 
+            // btAccessCodeRead
+            // 
+            resources.ApplyResources(this.btAccessCodeRead, "btAccessCodeRead");
+            this.btAccessCodeRead.Name = "btAccessCodeRead";
+            this.btAccessCodeRead.UseVisualStyleBackColor = true;
+            this.btAccessCodeRead.Click += new System.EventHandler(this.btAccessCodeRead_Click);
+            // 
+            // textBoxReadAccessCode
+            // 
+            resources.ApplyResources(this.textBoxReadAccessCode, "textBoxReadAccessCode");
+            this.textBoxReadAccessCode.ForeColor = System.Drawing.Color.Black;
+            this.textBoxReadAccessCode.Name = "textBoxReadAccessCode";
+            this.textBoxReadAccessCode.ReadOnly = true;
             // 
             // textBoxAccessCode
             // 
@@ -1839,6 +1890,7 @@ namespace RFIDApplication
             // labelTagID
             // 
             resources.ApplyResources(this.labelTagID, "labelTagID");
+            this.labelTagID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelTagID.Name = "labelTagID";
             // 
             // textBoxEPCTagID
@@ -1859,14 +1911,14 @@ namespace RFIDApplication
             this.btEPCTag.UseVisualStyleBackColor = true;
             this.btEPCTag.Click += new System.EventHandler(this.btEPCTag_Click);
             // 
-            // pageAcessTag
+            // pageAccessTag
             // 
-            this.pageAcessTag.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pageAcessTag.Controls.Add(this.ltvOperate);
-            this.pageAcessTag.Controls.Add(this.gbCmdOperateTag);
-            resources.ApplyResources(this.pageAcessTag, "pageAcessTag");
-            this.pageAcessTag.Name = "pageAcessTag";
-            this.pageAcessTag.UseVisualStyleBackColor = true;
+            this.pageAccessTag.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pageAccessTag.Controls.Add(this.ltvOperate);
+            this.pageAccessTag.Controls.Add(this.gbCmdOperateTag);
+            resources.ApplyResources(this.pageAccessTag, "pageAccessTag");
+            this.pageAccessTag.Name = "pageAccessTag";
+            this.pageAccessTag.UseVisualStyleBackColor = true;
             // 
             // ltvOperate
             // 
@@ -2873,7 +2925,7 @@ namespace RFIDApplication
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.pageAcessTag.ResumeLayout(false);
+            this.pageAccessTag.ResumeLayout(false);
             this.gbCmdOperateTag.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
             this.groupBox16.PerformLayout();
@@ -3129,7 +3181,7 @@ namespace RFIDApplication
         private ColumnHeader columnHeader41;
         private ColumnHeader columnHeader412;
         private ColumnHeader columnHeader42;
-        private TabPage pageAcessTag;
+        private TabPage pageAccessTag;
         private ListView ltvOperate;
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader9;
@@ -3210,6 +3262,12 @@ namespace RFIDApplication
         private TextBox textBoxAccessCode;
         private CheckBox checkBoxAccessCode;
         private TextBox tbUserData;
+        private CheckBox checkBoxAccessCode1;
+        private Button btAccessCodeRead;
+        private TextBox textBoxReadAccessCode;
+        private Label label8;
+        private Button btReadUserData;
+        private TextBox tbUserDataRead;
     }
 }
 

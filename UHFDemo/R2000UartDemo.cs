@@ -73,15 +73,15 @@ namespace RFIDApplication
             reader = new Reader.ReaderMethod();
 
             reader.AnalyCallback = AnalyData;
-   
+
             gbRS232.Enabled = true;
             gbTcpIp.Enabled = false;
             SetFormEnable(false);
             rdbRS232.Checked = true;
             antType1.Checked = true;
-            
+
             cmbComPort.Items.AddRange(SerialPort.GetPortNames());
-            cmbComPort.SelectedIndex = 1;
+            cmbComPort.SelectedIndex = cmbComPort.Items.Count-1;
 
             //load LabelFormat":
             byte[] labelFormat = Properties.Resources.LabelFormat;
@@ -3002,6 +3002,20 @@ namespace RFIDApplication
             return RFIDTagInfo.verifyData(decryptMsg, true);
         }
 
+
+        private string lookupTable(ulong labelNum, string data)
+        {
+            string data1 = data;
+            if(labelNum < 99999999999999)
+            {
+                if(data.Length > 120)
+                {
+                    data1 = data.Substring(0, 120);
+                }
+            }
+            return data1;
+        }
+
         static int readTagRetry = 0;
         static bool bVerify = false;
         private void ProcessReadTag(Reader.MessageTran msgTran)
@@ -3073,6 +3087,8 @@ namespace RFIDApplication
 
                     RFIDTagInfo.label = RFIDTagInfo.readEPCLabel(strEPC, out uWordCnt);
 
+                    strData = lookupTable(uWordCnt, strData);
+
                     if (strData.Length/3 == 8)
                     {
                         RFIDTagInfo.reserverData = strData;
@@ -3098,7 +3114,7 @@ namespace RFIDApplication
                             else
                             {//red on                                                           
                                 setVerifiedLEDStatus(0, 1); //red on      
-                                WriteLog(lrtxtLog,"verified failed, data " + strData, 1);
+                                WriteLog(lrtxtLog,"verified failed, data " + reserveData.ToUpper() + strData, 1);
 #if READ2SCAN
                                 //need to move to scan next tag here
                                 initScanTag();
@@ -4254,8 +4270,8 @@ namespace RFIDApplication
             {
 #if true
                 //mix with 2 ASCII and 10 digits
-                string tmpWord = plainEPCTextBox.Text.Substring(0, 2).ToUpper();
-                string serialNumber = plainEPCTextBox.Text.Substring(2);
+                string tmpWord = "PS";// plainEPCTextBox.Text.Substring(0, 2).ToUpper();
+                string serialNumber = plainEPCTextBox.Text;//.Substring(2);
                 string EPClabel = RFIDTagInfo.ASCIIToHex(tmpWord);
                 ulong uNumber;
                 try
@@ -4462,6 +4478,26 @@ namespace RFIDApplication
                 item = this.lvRealList.SelectedItems[0];
                 txtAccessEpcMatch.Text = item.SubItems[1].Text;
                 labelTagID.Text = item.SubItems[1].Text;
+
+                m_curOperateTagBuffer.strAccessEpcMatch = labelTagID.Text;
+                string[] reslut = CCommondMethod.StringToStringArray(labelTagID.Text.ToUpper(), 2);
+                byte[] btAryEpc = CCommondMethod.StringArrayToByteArray(reslut, reslut.Length);
+
+
+                //load Access Code
+                string strCode = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(Properties.Resources.AccessCode)).ToUpper();
+                symmetric.loadAccessCode(strCode);
+
+                //load key
+                symmetric.loadKey(Properties.Resources.SymmetricKey);
+                //keyFilePathTextBox.Text = Encoding.ASCII.GetString(encryptKey);
+
+                ckAccessEpcMatch.Checked = true;
+                reader.SetAccessEpcMatch(m_curSetting.btReadId, 0x00, Convert.ToByte(btAryEpc.Length), btAryEpc);
+                Thread.Sleep(rwTagDelay*2);
+
+                reader.SetAccessEpcMatch(m_curSetting.btReadId, 0x00, Convert.ToByte(btAryEpc.Length), btAryEpc);
+                Thread.Sleep(rwTagDelay * 2);
             }
             catch (Exception exp) { return; }
 
@@ -4473,7 +4509,6 @@ namespace RFIDApplication
             {
                 textBoxEPCTagID.BackColor = Color.White;
             }
-            ckAccessEpcMatch.Checked = true;
             btRealTimeInventory_Click(sender, e);
 
             SwitchTag(tabCtrMain, 1);
@@ -4486,8 +4521,8 @@ namespace RFIDApplication
             //2. pack smart tag, start with 50 30
             writeTagRetry = 0;
 
-            string[] result = null;
-            byte[] btAryPwd = null;
+            string[] result = { "00", "00", "00", "00" };
+            byte[] btAryPwd = { 0, 0, 0, 0 };
             byte[] btAryWriteData = null;
             string tagID = ""; // to be write
             
@@ -4501,19 +4536,14 @@ namespace RFIDApplication
 
             if (checkBoxAccessCode.Checked)
             {
-                result = CCommondMethod.StringToStringArray("50 30 43 4B", 2);
-                btAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
-            }
-            else
-            {
-                result = CCommondMethod.StringToStringArray("00 00 00 00", 2);
+                result = CCommondMethod.StringToStringArray(strCode, 2);
                 btAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
             }
 
             //mix with 2 ASCII and 10 digits
-            string tmpWord = textBoxEPCTagID.Text.Substring(0, 2).ToUpper();
-            string serialNumber = textBoxEPCTagID.Text.Substring(2);
-            string EPClabel = RFIDTagInfo.ASCIIToHex(tmpWord);
+            //string tmpWord = textBoxEPCTagID.Text.Substring(0, 2).ToUpper();
+            string serialNumber = textBoxEPCTagID.Text;//.Substring(2);
+            string EPClabel = RFIDTagInfo.ASCIIToHex("PS");
             ulong uNumber;
             try
             {
@@ -4526,11 +4556,16 @@ namespace RFIDApplication
             {
                 uNumber = 0;
             }
+            if(uNumber == 0)
+            {
+                WriteLog(lrtxtLog, "Input Tag out of range " + serialNumber, 1);
+                return;
+            }
             string EPSnumber = uNumber.ToString("D20");
             strHEXdata = tagID = EPClabel + RFIDTagInfo.AddHexSpace(EPSnumber);
             result = CCommondMethod.StringToStringArray(tagID, 2);
-            btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);      
-            
+            btAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
+           
             //1, access, 1, 2, 6, data, 148
             reader.WriteTag(m_curSetting.btReadId, btAryPwd, 0x01, 0x02, 0x06, btAryWriteData, 0x94);
             WriteLog(lrtxtLog, "Write Tag: " + tagID, 0);
@@ -4540,12 +4575,16 @@ namespace RFIDApplication
         {//write access code
             writeTagRetry = 0;
 
-            string[] result = null;
-            byte[] byteAryPwd = null;
+            string[] result = { "00", "00", "00", "00" };
+            byte[] byteAryPwd = { 0, 0, 0, 0 };
             byte[] byteAryWriteData = null;
 
             strHEXdata = textBoxAccessCode.Text;
-            result = CCommondMethod.StringToStringArray("00 00 00 00", 2);
+
+            if (checkBoxAccessCode1.Checked && textBoxReadAccessCode.Text != null && textBoxReadAccessCode.Text != "")
+            {
+                result = CCommondMethod.StringToStringArray(textBoxReadAccessCode.Text, 2);
+            }
             byteAryPwd = CCommondMethod.StringArrayToByteArray(result, result.Length);
             result = CCommondMethod.StringToStringArray(textBoxAccessCode.Text.ToUpper(), 2);
             byteAryWriteData = CCommondMethod.StringArrayToByteArray(result, result.Length);
@@ -4597,15 +4636,6 @@ namespace RFIDApplication
                 return;
             }
             //covert plain text to encrypt message
-
-            //load Access Code
-            string strCode = RFIDTagInfo.ASCIIToHex(Encoding.ASCII.GetString(Properties.Resources.AccessCode)).ToUpper();
-            symmetric.loadAccessCode(strCode);
-
-            //load key
-            symmetric.loadKey(Properties.Resources.SymmetricKey);
-            //keyFilePathTextBox.Text = Encoding.ASCII.GetString(encryptKey);
-
             //read EPS SN number
             string strEPC = RFIDTagInfo.HEXToASCII(labelTagID.Text.Substring(0, 6));
             string strnum = txtAccessEpcMatch.Text.Substring(6).Replace(" ", String.Empty);
@@ -4620,6 +4650,12 @@ namespace RFIDApplication
             {
                 encrypString = strEPC + "0" + RFIDTagInfo.serialSep + tbUserData.Text;
                 WriteLog(lrtxtLog, "Error, exceed RFID tag ulong", 1);
+                return;
+            }
+            if(num == 0)
+            {
+                WriteLog(lrtxtLog, "Error, exceed RFID tag ulong", 1);
+                return;
             }
 
             symmetric.encryptedtext = symmetric.Encrypt(encrypString);//, symmetric.aes.Key);
@@ -4645,18 +4681,18 @@ namespace RFIDApplication
             //1, access, 0, 0, 2, data, 148
             rdbUser.Checked = true;
             txtWordAddr.Text = "0";
-            txtWordCnt.Text = "20";
+            txtWordCnt.Text = (result.Length/2).ToString();
             strHEXdata = htxtWriteData.Text;
-            reader.WriteTag(m_curSetting.btReadId, byteAryPwd, 0x03, 0x00, 0x020, byteData, 0x94);
-            Thread.Sleep(rwTagDelay);
+            reader.WriteTag(m_curSetting.btReadId, byteAryPwd, 0x03, 0x00, (byte)(result.Length / 2), byteData, 0x94);
+            Thread.Sleep(rwTagDelay*2);
 
             //read back to verify reserve data first
             rdbReserved.Checked = true;
             reader.ReadTag(m_curSetting.btReadId, 0x00, 0, 4, byteAryPwd);
-            Thread.Sleep(rwTagDelay);
+            Thread.Sleep(rwTagDelay*2);
 
             rdbUser.Checked = true;
-            reader.ReadTag(m_curSetting.btReadId, 0x03, 0, 20, byteAryPwd);
+            reader.ReadTag(m_curSetting.btReadId, 0x03, 0, (byte)(result.Length / 2), byteAryPwd);
             Thread.Sleep(rwTagDelay);
         }
 
@@ -4665,6 +4701,51 @@ namespace RFIDApplication
             if(tabEpcTest.SelectedTab == pageRealMode)
             {
                 btRealTimeInventory_Click(sender, e);
+            }
+        }
+
+        private void btAccessCodeRead_Click(object sender, EventArgs e)
+        {
+            byte[] byteAryPwd = { 80, 48, 67, 75 };
+            
+            if (!checkBoxAccessCode1.Checked)            
+            {
+                Array.Clear(byteAryPwd, 0, byteAryPwd.Length);
+            }
+            textBoxReadAccessCode.Text = "";
+
+            //read back to verify
+            rdbReserved.Checked = true;
+            txtWordAddr.Text = "0";
+            txtWordCnt.Text = "4";
+
+            reader.ReadTag(m_curSetting.btReadId, 0x00, 0, 4, byteAryPwd);
+            Thread.Sleep(rwTagDelay);
+
+            if(RFIDTagInfo.reserverData != null)
+                textBoxReadAccessCode.Text = RFIDTagInfo.reserverData.Substring(12);
+        }
+
+        private void btReadUserData_Click(object sender, EventArgs e)
+        {
+            byte[] byteAryPwd = { 80, 48, 67, 75 };
+            htxtReadAndWritePwd.Text = "50 30 43 4B";
+            tbUserDataRead.Text = "";
+
+            //read back to verify reserve data first
+            rdbReserved.Checked = true;
+            reader.ReadTag(m_curSetting.btReadId, 0x00, 0, 4, byteAryPwd);
+            Thread.Sleep(rwTagDelay);
+
+            rdbUser.Checked = true;
+            reader.ReadTag(m_curSetting.btReadId, 0x03, 0, 30, byteAryPwd);
+            Thread.Sleep(rwTagDelay);
+
+            if (RFIDTagInfo.tagInfo != null && RFIDTagInfo.tagInfo != "")
+            {
+                string[] data = RFIDTagInfo.tagInfo.Split('=');
+                if(data.Length > 1)
+                    tbUserDataRead.Text = data[1];
             }
         }
     }

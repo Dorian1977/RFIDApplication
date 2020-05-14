@@ -80,7 +80,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>E0D305C4B5B79B64B640213A444FEADB620A8B1E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A88F355E5F16D22995AC480950EAA94F834BA66A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>RFIDApplication_TemporaryKey.pfx</ManifestKeyFile>

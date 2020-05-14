@@ -62,3 +62,11 @@ C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\Cus
 C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\x86\Release\CustomControl.dll
 C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\x86\Release\CustomControl.pdb
 C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\CustomControl\obj\x86\Release\CustomControl.csprojAssemblyReference.cache
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\bin\x86\Release\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\bin\x86\Release\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\x86\Release\CustomControl.csprojAssemblyReference.cache
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\x86\Release\CustomControl.IpAddressTextBox.resources
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\x86\Release\CustomControl.csproj.GenerateResource.cache
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\x86\Release\CustomControl.csproj.CoreCompileInputs.cache
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\x86\Release\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\x86\Release\CustomControl.pdb

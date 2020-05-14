@@ -96,7 +96,26 @@ namespace RFIDApplication
                 {//can't covert 0x00 to ASCII word
                     return "";
                 }
+
+                try
+                {
+                    for(int j=0; j<inputEncrypt.Length/6; j++)
+                    {
+                        int pos = inputEncrypt.LastIndexOf("00");
+                        if (pos != -1)
+                        {
+                            inputEncrypt = inputEncrypt.Remove(pos - 3);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); }
+
                 string hex2Ascii = RFIDTagInfo.HEXToASCII(inputEncrypt);
+
                 //byte[] cipherText = ASCIIEncoding.ASCII.GetBytes(hex2Ascii);
                 byte[] cipherText = System.Convert.FromBase64String(hex2Ascii);
                 using (AesManaged aesTemp = new AesManaged())
@@ -119,6 +138,7 @@ namespace RFIDApplication
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return "";
             }
             return plaintext;
