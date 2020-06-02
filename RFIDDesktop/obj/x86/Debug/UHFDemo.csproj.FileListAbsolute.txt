@@ -1,0 +1,11 @@
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.csprojAssemblyReference.cache
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.Form1.resources
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.R2000UartDemo.resources
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.Properties.Resources.resources
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.csproj.GenerateResource.cache
+C:\Users\dyeh\Documents\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.csprojAssemblyReference.cache
+C:\Users\dyeh\Documents\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.Form1.resources
+C:\Users\dyeh\Documents\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.R2000UartDemo.resources
+C:\Users\dyeh\Documents\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.Properties.Resources.resources
+C:\Users\dyeh\Documents\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.csproj.GenerateResource.cache
+C:\Users\dyeh\Documents\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\x86\Debug\UHFDemo.csproj.CoreCompileInputs.cache

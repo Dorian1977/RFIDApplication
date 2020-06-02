@@ -1,0 +1,133 @@
+import sys
+path = sys.argv[0]  #1 argument given is a string for the path
+sys.path.append(path)
+import xmlrpclib
+
+admin = 2
+RFIDConnected = False
+RFIDTagReady = False 
+workorder_product_code = '' #SU-0067
+RFIDEPCTagInfo = ''#'PS999999999999999999=SU-00670521' #max 18 digits, ink type, expire date
+uid = 0
+password = ""
+db = ""
+model = 0
+
+class XmlRpc:    
+    def isRFIDConnected(self, RFIDStatus):
+        global RFIDConnected
+        RFIDConnected = RFIDStatus
+        print('RFID status is connected? ', RFIDStatus)
+
+    #1. display ready to read and write
+    def readyToUpdateTag(self):
+        global RFIDTagReady
+        print('ready to update tag: ', RFIDTagReady)
+        return RFIDTagReady    
+
+    #2. get RFID tag, update the RFID data
+    def readRFIDTagID(self, RFIDEPCTagID):
+        if RFIDEPCTagID.find('PS') != -1:
+            #prepare data to write
+            global RFIDEPCTagInfo
+            RFIDEPCTagInfo = RFIDEPCTagID + workorder_product_code
+            print('RFID Data to write: ', RFIDEPCTagInfo)  
+    
+    #3. update RFID tag data, when RFIDEPCTagInfo is updated 
+    def updateTag(self):
+        global RFIDEPCTagInfo
+        print('write tag: ', RFIDEPCTagInfo)
+        return RFIDEPCTagInfo
+    
+    #4. get RFID tag updated successful
+    def writeRFIDTagSuccessful(self, RFIDTagstatus):       
+        if RFIDTagstatus == True:
+            #global RFIDTagReady #disable for continue test
+            #RFIDTagReady = False #disable for continue test
+            global RFIDEPCTagInfo
+            RFIDEPCTagInfo = ''
+            print('write successful, clear the data')
+            
+    #Get RFID tag number + Increase by 1        
+    def getRFIDNumber(self):
+        serial_rec = models.execute_kw(db, uid, password, 'ir.sequence', 'search_read', [[['code','=','rfid']]], {'fields': ['number_next_actual']})
+        print(serial_rec)
+        serial_id = serial_rec[0].get('id')
+        serial_number = serial_rec[0].get('number_next_actual')
+        print(serial_id)
+        print(serial_number)
+        return serial_number
+        
+    #move to next number
+    def getNextRFIDNumber(self, serial_number):
+        next_serial_number = serial_number + 1
+        id = models.execute_kw(db, uid, password, 'ir.sequence', 'write',[[serial_id], {'number_next_actual': next_serial_number}])
+        
+    #login is simulate the overall process, need to simplify
+    def login(self, url, _db, username, _password):         
+        common = xmlrpclib.ServerProxy('{}/xmlrpc/common'.format(url))
+        print('Logging in as ', username, '...')
+
+        _uid = common.authenticate(_db, username, _password, {})
+        print('Log in success.')
+
+        global uid
+        uid = _uid
+
+        global db
+        db = _db
+        
+        global password
+        password = _password
+   
+        global models
+        models = xmlrpclib.ServerProxy('{}/xmlrpc/object'.format(url))
+
+        #(Dorian)Check if RFID reader is connect, raise message if not connected
+        if RFIDConnected == False:
+            print('RFID reader not connected, please connect it first, return')
+            return
+            
+        #Search for Work Order which the user is currently working on
+          # Search for Work Order which the user is currently working on
+        workorder_rec = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read', [[['state','=','progress']]], {'fields': ['name', 'product_id', 'is_user_working', 'working_user_ids'], 'limit': 10})
+        
+        for workorder in workorder_rec:
+            workorder_id = workorder.get('id')
+            workorder_product_id = workorder.get('product_id')
+            workorder_working = workorder.get('is_user_working')
+            workorder_user = workorder.get('working_user_ids')
+
+            if uid in workorder_user or admin in workorder_user:
+                # Search for Part Number of the Work Order Product
+                workorder_rec = models.execute_kw(db, uid, password, 'product.product', 'search_read', [[['id','=',workorder_product_id[0]]]], {'fields': ['engineering_code']})
+                workorder_product_code = workorder_rec[0].get('engineering_code')
+                print('Found Eng Code: ', workorder_product_code)
+                break
+
+        #For Dorian:
+        #Prompt User to put ink bottle on scanner
+        global RFIDTagReady
+        RFIDTagReady = True
+        print('read to write tag: ', RFIDTagReady)
+
+        #Click Update
+        #RFID reader get tag #
+        #readRFIDTagID()
+
+        #This PC app convert info into S/N, skip
+        
+        #PC app update the tag
+        #updateTag()
+
+        #If fail, display retry option. If retry 3 times and still fail, then display instruction to record id. Odoo also need to record scrap inventory
+        
+        #If success, then create new serial number entry in odoo
+        #Todo: Expiry date (for next update) and outside label
+        #print('Creating new serial number...')
+        #id = models.execute_kw(db, uid, password, 'stock.production.lot', 'create',[{'name': 'Test SN 001', 'product_id': product_id[0]}])
+        #print('Create successful.')
+
+        #(Jason)Update the number on screen
+        #(Jason)Move to next one
+        

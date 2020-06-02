@@ -1,0 +1,5 @@
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\Debug\UHFDemo.csprojAssemblyReference.cache
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\Debug\UHFDemo.Form1.resources
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\Debug\UHFDemo.R2000UartDemo.resources
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\Debug\UHFDemo.Properties.Resources.resources
+C:\Users\dyeh\Downloads\mini small uhf rfid reader module czs6147\test demo software\PC-demo-software (c#)\PC-demo-software (c#)\UHFDemo\UHFDemo\obj\Debug\UHFDemo.csproj.GenerateResource.cache

@@ -69,6 +69,12 @@ namespace Reader
             return 0;
         }
 
+        public void resetCom()
+        {
+            iSerialPort.DiscardOutBuffer();
+            iSerialPort.DiscardInBuffer();
+        }
+
         public void CloseCom()
         {
             if (iSerialPort.IsOpen)
