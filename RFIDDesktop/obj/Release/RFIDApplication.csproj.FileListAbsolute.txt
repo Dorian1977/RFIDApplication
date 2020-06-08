@@ -4,3 +4,36 @@ C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\UHF
 C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\UHFDemo\obj\Release\RFIDAApplication.Properties.Resources.resources
 C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\UHFDemo\obj\Release\RFIDApplication.csproj.GenerateResource.cache
 C:\Users\dyeh\source\repos\RFID Application\RFID Applicaiotn\RFIDApplication\UHFDemo\obj\Release\RFIDApplication.csproj.CoreCompileInputs.cache
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe.config
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\reference\xml_rpc.py
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe.manifest
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.application
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.pdb
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\CustomControl.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.Modules.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.SQLite.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.Wpf.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Microsoft.Dynamic.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.Metadata.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Reader.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\CustomControl.pdb
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Reader.pdb
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.Modules.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.SQLite.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\IronPython.Wpf.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Microsoft.Dynamic.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.Metadata.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.csprojResolveAssemblyReference.cache
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.LoginForm.resources
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.RFIDTagIDForm.resources
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.Properties.Resources.resources
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.csproj.GenerateResource.Cache
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe.manifest
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.application
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.pdb

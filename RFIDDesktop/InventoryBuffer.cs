@@ -119,5 +119,19 @@ namespace RFIDApplication
             dtTagTable.Rows.Clear();
             dtTagDetailTable.Clear();
         }
+
+        public void removeInventoryItem(int columeNum, string strID)
+        {
+            for (int i = dtTagTable.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = dtTagTable.Rows[i];
+                string rowValue = dr[columeNum].ToString();
+                if (rowValue.Trim().Contains(strID.Trim()))
+                {
+                    dtTagTable.Rows.Remove(dr);
+                    break;
+                }
+            }
+        }
     }
 }

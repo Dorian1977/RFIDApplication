@@ -31,4 +31,3 @@ C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomContr
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.Cache
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomControl\obj\Debug\CustomControl.dll
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomControl\obj\Debug\CustomControl.pdb
-C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomControl\obj\Debug\CustomControl.csprojResolveAssemblyReference.cache

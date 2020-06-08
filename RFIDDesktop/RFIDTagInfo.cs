@@ -14,6 +14,7 @@ namespace RFIDApplication
         public ulong EPC_PS_Num;
         public string EPC_data;
         public int readCount;
+        public int notUpdateCount;
         public int rssi;
         public TagStatus tagStatus;
 
@@ -53,7 +54,7 @@ namespace RFIDApplication
             if (strData == null || strData == "")
                 return false;
 
-            if (strData.EndsWith(verifyCode.Remove(verifyCode.Length - 1, 1)))
+            if (strData.Trim().Contains(verifyCode.Trim()))
             {
                 return true;
             }
@@ -121,6 +122,16 @@ namespace RFIDApplication
             return true;
         }
 
+        public static bool checkZeroAccessCode(byte[] input)
+        {//return true if read 0 access code
+            if ((input[0] == 0) &&
+               (input[1] == 0) &&
+               (input[2] == 0) &&
+               (input[3] == 0))
+                return true;
+            return false;
+        }
+
         public static string ASCIIToHex(string input)
         {
             //return String.Concat(input.Select(x => ((int)x).ToString("x")));
@@ -143,10 +154,17 @@ namespace RFIDApplication
                 string serialNumber = strEPC.Substring(7).Replace(" ", "");
                 uEPCNumber = ulong.Parse(serialNumber);
                 string EPSnumber = uEPCNumber.ToString("D20");
+                if(EPClabel != RFIDTagInfo.readLabelFormat().Substring(0,2))
+                {
+                    uEPCNumber = 0;
+                    return "";
+                }
                 return EPClabel + EPSnumber;
             }
             catch (Exception exp) { return ""; }
         }
+        //byte array to string 
+        //Encoding.ASCII.GetString
 
         public static string HEXToASCII(string input)
         {

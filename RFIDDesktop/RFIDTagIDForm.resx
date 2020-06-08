@@ -117,137 +117,116 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="checkBoxUpdateData.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="checkBoxUpdateData.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="checkBoxUpdateData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 75</value>
-  </data>
-  <data name="checkBoxUpdateData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 17</value>
-  </data>
-  <data name="checkBoxUpdateData.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="checkBoxUpdateData.Text" xml:space="preserve">
-    <value>Auto Update Data</value>
-  </data>
-  <data name="&gt;&gt;checkBoxUpdateData.Name" xml:space="preserve">
-    <value>checkBoxUpdateData</value>
-  </data>
-  <data name="&gt;&gt;checkBoxUpdateData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxUpdateData.Parent" xml:space="preserve">
-    <value>pageEpcID</value>
-  </data>
-  <data name="&gt;&gt;checkBoxUpdateData.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+  <data name="RFIDTag.Text" xml:space="preserve">
+    <value>RFIDTag</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="RFIDTag.Width" type="System.Int32, mscorlib">
+    <value>230</value>
   </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 130</value>
+  <data name="Counts.Text" xml:space="preserve">
+    <value>Counts</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 13</value>
+  <data name="Counts.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
   </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="listViewEPCTag.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Manual Update:</value>
+  <data name="listViewEPCTag.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
+  <data name="listViewEPCTag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 20</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="listViewEPCTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 196</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>pageEpcID</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbSelectTag.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
-  </data>
-  <data name="tbSelectTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 21</value>
-  </data>
-  <data name="tbSelectTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tbSelectTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="tbSelectTag.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;tbSelectTag.Name" xml:space="preserve">
-    <value>tbSelectTag</value>
-  </data>
-  <data name="&gt;&gt;tbSelectTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbSelectTag.Parent" xml:space="preserve">
-    <value>pageEpcID</value>
-  </data>
-  <data name="&gt;&gt;tbSelectTag.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tbUserData.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
-  </data>
-  <data name="tbUserData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 97</value>
-  </data>
-  <data name="tbUserData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tbUserData.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tbUserData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 24</value>
-  </data>
-  <data name="tbUserData.TabIndex" type="System.Int32, mscorlib">
+  <data name="listViewEPCTag.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;tbUserData.Name" xml:space="preserve">
-    <value>tbUserData</value>
+  <data name="&gt;&gt;listViewEPCTag.Name" xml:space="preserve">
+    <value>listViewEPCTag</value>
   </data>
-  <data name="&gt;&gt;tbUserData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;listViewEPCTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbUserData.Parent" xml:space="preserve">
-    <value>pageEpcID</value>
+  <data name="&gt;&gt;listViewEPCTag.Parent" xml:space="preserve">
+    <value>groupBox4</value>
   </data>
-  <data name="&gt;&gt;tbUserData.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;listViewEPCTag.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="groupBox4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 219</value>
+  </data>
+  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Read EPC Tag ID</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitContainer1.Panel1MinSize" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="splitContainer1.Panel2.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="splitContainer1.Panel2.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>100, 80</value>
   </data>
   <data name="btEPCTag.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btEPCTag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btEPCTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 147</value>
+    <value>6, 21</value>
   </data>
   <data name="btEPCTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -268,19 +247,19 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btEPCTag.Parent" xml:space="preserve">
-    <value>pageEpcID</value>
+    <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;btEPCTag.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="btAccessCode.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btAccessCode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btAccessCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 148</value>
+    <value>97, 21</value>
   </data>
   <data name="btAccessCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -301,34 +280,223 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btAccessCode.Parent" xml:space="preserve">
-    <value>pageEpcID</value>
+    <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;btAccessCode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 127</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 58</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Manual Update</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>pageEpcID</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 91</value>
+  </data>
+  <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 15</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Tag Data</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>pageEpcID</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 65</value>
+  </data>
+  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 15</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Update ID</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>pageEpcID</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="checkBoxUpdateData.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxUpdateData.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="checkBoxUpdateData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBoxUpdateData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="checkBoxUpdateData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 20</value>
+  </data>
+  <data name="checkBoxUpdateData.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="checkBoxUpdateData.Text" xml:space="preserve">
+    <value>Auto update data</value>
+  </data>
+  <data name="&gt;&gt;checkBoxUpdateData.Name" xml:space="preserve">
+    <value>checkBoxUpdateData</value>
+  </data>
+  <data name="&gt;&gt;checkBoxUpdateData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxUpdateData.Parent" xml:space="preserve">
+    <value>pageEpcID</value>
+  </data>
+  <data name="&gt;&gt;checkBoxUpdateData.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbSelectTag.Font" type="System.Drawing.Font, System.Drawing">
+    <value>SimSun, 9.75pt</value>
+  </data>
+  <data name="tbSelectTag.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 36</value>
+  </data>
+  <data name="tbSelectTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tbSelectTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 22</value>
+  </data>
+  <data name="tbSelectTag.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;tbSelectTag.Name" xml:space="preserve">
+    <value>tbSelectTag</value>
+  </data>
+  <data name="&gt;&gt;tbSelectTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbSelectTag.Parent" xml:space="preserve">
+    <value>pageEpcID</value>
+  </data>
+  <data name="&gt;&gt;tbSelectTag.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbUserData.Font" type="System.Drawing.Font, System.Drawing">
+    <value>SimSun, 9.75pt</value>
+  </data>
+  <data name="tbUserData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 87</value>
+  </data>
+  <data name="tbUserData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tbUserData.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbUserData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 24</value>
+  </data>
+  <data name="tbUserData.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;tbUserData.Name" xml:space="preserve">
+    <value>tbUserData</value>
+  </data>
+  <data name="&gt;&gt;tbUserData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbUserData.Parent" xml:space="preserve">
+    <value>pageEpcID</value>
+  </data>
+  <data name="&gt;&gt;tbUserData.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="labelEPCTag.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelEPCTag.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="labelEPCTag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelEPCTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 2</value>
+    <value>3, 38</value>
   </data>
   <data name="labelEPCTag.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="labelEPCTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 13</value>
+    <value>79, 15</value>
   </data>
   <data name="labelEPCTag.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="labelEPCTag.Text" xml:space="preserve">
-    <value>Selected Tag (top), Update to (bottom)</value>
+    <value>Selected Tag</value>
   </data>
   <data name="&gt;&gt;labelEPCTag.Name" xml:space="preserve">
     <value>labelEPCTag</value>
@@ -346,13 +514,13 @@
     <value>SimSun, 9.75pt</value>
   </data>
   <data name="textBoxEPCTagID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 48</value>
+    <value>83, 62</value>
   </data>
   <data name="textBoxEPCTagID.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="textBoxEPCTagID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>250, 22</value>
   </data>
   <data name="textBoxEPCTagID.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -373,10 +541,10 @@
     <value>SimSun, 9pt, style=Bold</value>
   </data>
   <data name="pageEpcID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 27</value>
   </data>
   <data name="pageEpcID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>349, 190</value>
+    <value>337, 188</value>
   </data>
   <data name="pageEpcID.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -396,41 +564,71 @@
   <data name="&gt;&gt;pageEpcID.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelUpdateStatus.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelUpdateStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="labelUpdateStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelUpdateStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 102</value>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-2, 106</value>
   </data>
-  <data name="labelUpdateStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 16</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 18</value>
   </data>
-  <data name="labelUpdateStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="labelUpdateStatus.Text" xml:space="preserve">
-    <value>Scan Tag Now</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Tips:</value>
   </data>
-  <data name="&gt;&gt;labelUpdateStatus.Name" xml:space="preserve">
-    <value>labelUpdateStatus</value>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
   </data>
-  <data name="&gt;&gt;labelUpdateStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUpdateStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>pageData</value>
   </data>
-  <data name="&gt;&gt;labelUpdateStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tbDataUpdateStatus.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="tbDataUpdateStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="tbDataUpdateStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 128</value>
+  </data>
+  <data name="tbDataUpdateStatus.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbDataUpdateStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 60</value>
+  </data>
+  <data name="tbDataUpdateStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tbDataUpdateStatus.Text" xml:space="preserve">
+    <value>Scan Tag Now</value>
+  </data>
+  <data name="&gt;&gt;tbDataUpdateStatus.Name" xml:space="preserve">
+    <value>tbDataUpdateStatus</value>
+  </data>
+  <data name="&gt;&gt;tbDataUpdateStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDataUpdateStatus.Parent" xml:space="preserve">
+    <value>pageData</value>
+  </data>
+  <data name="&gt;&gt;tbDataUpdateStatus.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="textBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
+    <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 9</value>
@@ -439,7 +637,7 @@
     <value>True</value>
   </data>
   <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 63</value>
+    <value>217, 82</value>
   </data>
   <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -457,7 +655,7 @@
     <value>pageData</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -487,12 +685,12 @@
     <value>pageData</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJQAAAB7CAIAAAAdTD7UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAA3ySURBVHhe7Z2vbxy7HsULSsqKAqJLIj0pJKwoJCy4IKQw
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAA3ySURBVHhe7Z2vbxy7HsULSsqKAqJLIj0pJKwoJCy4IKQw
         YNGisJVCwwKXRFdF/QuikMCioKKiSk8KCHhSpSc9BRWsVCnvMxlfX9/jGdsznp2NN3N0VLVZ7+zO9/j7
         09P2zdOEYjGJVzAm8QrGJF7BmMQrGJN4BWMSr2BM4hWMSbyCMYlXMCbxCsYkXsGYxCsYk3gFYxKvYEzi
         FYxJvL/x+/fv+/v729vbq6uri4uLs7Oz+Xw+m834ld/zk+VyeX19/f3799VqZd6zUbx28R4fH9EDbT58
@@ -580,13 +778,13 @@
     <value>pageData</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="pageData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 27</value>
   </data>
   <data name="pageData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>349, 190</value>
+    <value>337, 188</value>
   </data>
   <data name="pageData.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -606,11 +804,17 @@
   <data name="&gt;&gt;pageData.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="tabCtrMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="tabCtrMain.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
   <data name="tabCtrMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 0</value>
+    <value>104, 0</value>
   </data>
   <data name="tabCtrMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>357, 216</value>
+    <value>345, 219</value>
   </data>
   <data name="tabCtrMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -627,50 +831,53 @@
   <data name="&gt;&gt;tabCtrMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tBDataVerify.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+  <metadata name="groupBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="tbDataVerify.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="tBDataVerify.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 112</value>
+  <data name="tbDataVerify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 108</value>
   </data>
-  <data name="tBDataVerify.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tbDataVerify.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="tBDataVerify.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbDataVerify.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 22</value>
   </data>
-  <data name="tBDataVerify.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbDataVerify.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="tBDataVerify.Text" xml:space="preserve">
+  <data name="tbDataVerify.Text" xml:space="preserve">
     <value>Tag Data</value>
   </data>
-  <data name="&gt;&gt;tBDataVerify.Name" xml:space="preserve">
-    <value>tBDataVerify</value>
+  <data name="&gt;&gt;tbDataVerify.Name" xml:space="preserve">
+    <value>tbDataVerify</value>
   </data>
-  <data name="&gt;&gt;tBDataVerify.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbDataVerify.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tBDataVerify.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbDataVerify.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;tBDataVerify.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbDataVerify.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 151</value>
+    <value>6, 152</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 15</value>
+    <value>48, 16</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -694,16 +901,16 @@
     <value>True</value>
   </data>
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 11.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 185</value>
+    <value>6, 188</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 15</value>
+    <value>41, 15</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -727,16 +934,16 @@
     <value>True</value>
   </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 11.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 166</value>
+    <value>6, 170</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 15</value>
+    <value>48, 15</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -756,41 +963,41 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="tBEPCTagVerify.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+  <data name="tbEPCTagVerify.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="tBEPCTagVerify.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 30</value>
+  <data name="tbEPCTagVerify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 30</value>
   </data>
-  <data name="tBEPCTagVerify.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tbEPCTagVerify.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="tBEPCTagVerify.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbEPCTagVerify.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 22</value>
   </data>
-  <data name="tBEPCTagVerify.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbEPCTagVerify.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="tBEPCTagVerify.Text" xml:space="preserve">
+  <data name="tbEPCTagVerify.Text" xml:space="preserve">
     <value>Tag SN</value>
   </data>
-  <data name="&gt;&gt;tBEPCTagVerify.Name" xml:space="preserve">
-    <value>tBEPCTagVerify</value>
+  <data name="&gt;&gt;tbEPCTagVerify.Name" xml:space="preserve">
+    <value>tbEPCTagVerify</value>
   </data>
-  <data name="&gt;&gt;tBEPCTagVerify.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbEPCTagVerify.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tBEPCTagVerify.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbEPCTagVerify.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;tBEPCTagVerify.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbEPCTagVerify.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="tBAccessCodeVerify.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="tBAccessCodeVerify.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 72</value>
+    <value>5, 67</value>
   </data>
   <data name="tBAccessCodeVerify.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -820,13 +1027,19 @@
     <value>Left</value>
   </data>
   <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9.75pt</value>
+    <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="groupBox1.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>120, 230</value>
+  </data>
+  <data name="groupBox1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>100, 100</value>
+  </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 216</value>
+    <value>100, 219</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -846,86 +1059,56 @@
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="RFIDTag.Text" xml:space="preserve">
-    <value>RFIDTag</value>
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
   </data>
-  <data name="RFIDTag.Width" type="System.Int32, mscorlib">
-    <value>230</value>
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Counts.Text" xml:space="preserve">
-    <value>Counts</value>
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
   </data>
-  <data name="Counts.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="listViewEPCTag.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="splitContainer1.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
-  <data name="listViewEPCTag.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 9pt</value>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 219</value>
   </data>
-  <data name="listViewEPCTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 22</value>
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>303</value>
   </data>
-  <data name="listViewEPCTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 191</value>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
-  <data name="listViewEPCTag.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
+    <value>splitContainer1</value>
   </data>
-  <data name="&gt;&gt;listViewEPCTag.Name" xml:space="preserve">
-    <value>listViewEPCTag</value>
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;listViewEPCTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
+    <value>splitContainer2.Panel1</value>
   </data>
-  <data name="&gt;&gt;listViewEPCTag.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;listViewEPCTag.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="groupBox4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>SimSun, 12pt</value>
-  </data>
-  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 216</value>
-  </data>
-  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Read EPC Tag ID</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label35.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label35.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="label35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 7</value>
+    <value>130, 3</value>
   </data>
   <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
+    <value>104, 15</value>
   </data>
   <data name="label35.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1839,14 +2022,17 @@
   <data name="ckClearOperationRec.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="ckClearOperationRec.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="ckClearOperationRec.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="ckClearOperationRec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 7</value>
+    <value>240, 3</value>
   </data>
   <data name="ckClearOperationRec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 17</value>
+    <value>82, 19</value>
   </data>
   <data name="ckClearOperationRec.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1869,63 +2055,6 @@
   <metadata name="timerInventory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>32, 9</value>
   </metadata>
-  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
-    <value>splitContainer1.Panel1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
-    <value>splitContainer1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="splitContainer1.Panel1MinSize" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
-    <value>splitContainer1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="splitContainer1.Panel2MinSize" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 216</value>
-  </data>
-  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>300</value>
-  </data>
-  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
-    <value>splitContainer1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
-    <value>splitContainer2.Panel1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="splitContainer2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1950,20 +2079,23 @@
   <data name="checkBoxShowDetail.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="checkBoxShowDetail.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="checkBoxShowDetail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="checkBoxShowDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 7</value>
+    <value>8, 3</value>
   </data>
   <data name="checkBoxShowDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 17</value>
+    <value>91, 19</value>
   </data>
   <data name="checkBoxShowDetail.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="checkBoxShowDetail.Text" xml:space="preserve">
-    <value>Show Detail</value>
+    <value>Show Table</value>
   </data>
   <data name="&gt;&gt;checkBoxShowDetail.Name" xml:space="preserve">
     <value>checkBoxShowDetail</value>
@@ -1981,10 +2113,10 @@
     <value>Bottom</value>
   </data>
   <data name="lrtxtLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 27</value>
+    <value>0, 31</value>
   </data>
   <data name="lrtxtLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 136</value>
+    <value>756, 136</value>
   </data>
   <data name="lrtxtLog.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2017,10 +2149,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 383</value>
+    <value>756, 390</value>
   </data>
   <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
-    <value>216</value>
+    <value>219</value>
   </data>
   <data name="splitContainer2.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2137,7 +2269,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>761, 383</value>
+    <value>756, 390</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2583,9 +2715,6 @@
         bkDQkgMg6AYELTkAgm5A0JIDIOgGBC05AIJuQNCSAyDoBgQtOQCCbkDQkgMg6AYELTkAgm5A0PKdB+D/
         Afvc1e9AMUCSAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>UHF RFID Reader</value>

@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
-    <ApplicationIcon>accessicons_rfid_300x300_97q_icon.ico</ApplicationIcon>
+    <ApplicationIcon>pngitem_278229_zQe_icon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -205,7 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomControl\CustomControl.csproj">
-      <Project>{3022476E-CEF0-48D4-B76D-5AA42F4DD121}</Project>
+      <Project>{3022476e-cef0-48d4-b76d-5aa42f4dd121}</Project>
       <Name>CustomControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Reader\Reader.csproj">
@@ -216,6 +216,7 @@
   <ItemGroup>
     <Content Include="accessicons_rfid_300x300_97q_icon.ico" />
     <Content Include="images_orU_icon.ico" />
+    <Content Include="pngitem_278229_zQe_icon.ico" />
     <None Include="reference\xml_rpc.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
