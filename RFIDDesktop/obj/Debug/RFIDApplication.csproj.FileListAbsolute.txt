@@ -82,3 +82,44 @@ C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\reference\xml_rpc.py
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.LoginForm.resources
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.RFIDTagIDForm.resources
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\RFIDApplication.exe.config
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.exe
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.LoginForm.resources
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.RFIDTagIDForm.resources
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.Properties.Resources.resources
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\reference\xml_rpc.py
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\RFIDApplication.exe.manifest
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\RFIDApplication.application
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\RFIDApplication.exe
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.Modules.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.SQLite.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.Wpf.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Scripting.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Reader.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Reader.pdb
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.Modules.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.SQLite.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\IronPython.Wpf.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Scripting.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.exe.manifest
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.application
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.csprojResolveAssemblyReference.cache
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\Markdown.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\Pygments.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\PythonLibs4CSharp.dll
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\Markdown.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\Pygments.xml
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\PythonLibs4CSharp.xml

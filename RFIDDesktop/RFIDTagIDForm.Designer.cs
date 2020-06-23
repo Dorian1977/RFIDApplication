@@ -49,7 +49,6 @@ namespace RFIDApplication
             this.tbDataUpdateStatus = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbDataVerify = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -106,6 +105,9 @@ namespace RFIDApplication
             this.lxLedControl16 = new LxControl.LxLedControl();
             this.lxLedControl17 = new LxControl.LxLedControl();
             this.lxLedControl18 = new LxControl.LxLedControl();
+            this.label8 = new System.Windows.Forms.Label();
+            this.richtbWorkOrderInfo = new System.Windows.Forms.RichTextBox();
+            this.tbOdooStatus = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -115,7 +117,6 @@ namespace RFIDApplication
             this.pageEpcID.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pageData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -275,11 +276,12 @@ namespace RFIDApplication
             // 
             // pageData
             // 
+            this.pageData.Controls.Add(this.richtbWorkOrderInfo);
+            this.pageData.Controls.Add(this.label8);
             this.pageData.Controls.Add(this.label5);
             this.pageData.Controls.Add(this.tbDataUpdateStatus);
             this.pageData.Controls.Add(this.textBox1);
             this.pageData.Controls.Add(this.label4);
-            this.pageData.Controls.Add(this.pictureBox1);
             resources.ApplyResources(this.pageData, "pageData");
             this.pageData.Name = "pageData";
             this.pageData.UseVisualStyleBackColor = true;
@@ -306,14 +308,9 @@ namespace RFIDApplication
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbOdooStatus);
             this.groupBox1.Controls.Add(this.tbDataVerify);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -818,6 +815,23 @@ namespace RFIDApplication
             this.lxLedControl18.ShowHighlight = true;
             this.lxLedControl18.TextAlignment = LxControl.LxLedControl.Alignment.Right;
             // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // richtbWorkOrderInfo
+            // 
+            resources.ApplyResources(this.richtbWorkOrderInfo, "richtbWorkOrderInfo");
+            this.richtbWorkOrderInfo.Name = "richtbWorkOrderInfo";
+            // 
+            // tbOdooStatus
+            // 
+            resources.ApplyResources(this.tbOdooStatus, "tbOdooStatus");
+            this.tbOdooStatus.ForeColor = System.Drawing.Color.Black;
+            this.tbOdooStatus.Name = "tbOdooStatus";
+            this.tbOdooStatus.ReadOnly = true;
+            // 
             // RFIDTagIDForm
             // 
             resources.ApplyResources(this, "$this");
@@ -841,7 +855,6 @@ namespace RFIDApplication
             this.groupBox2.ResumeLayout(false);
             this.pageData.ResumeLayout(false);
             this.pageData.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -939,7 +952,6 @@ namespace RFIDApplication
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
         private TabPage pageData;
-        private PictureBox pictureBox1;
         private TextBox textBox1;
         private Label label4;
         private CheckBox checkBoxShowDetail;
@@ -950,6 +962,9 @@ namespace RFIDApplication
         private Label label6;
         private Label label5;
         private TextBox tbDataUpdateStatus;
+        private Label label8;
+        private RichTextBox richtbWorkOrderInfo;
+        private TextBox tbOdooStatus;
     }
 }
 

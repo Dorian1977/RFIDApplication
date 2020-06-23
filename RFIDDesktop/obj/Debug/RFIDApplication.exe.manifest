@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FwgYYRIRZO6sjq2sFI982BwRMDLcHklP6Q2bbfDoF00=</dsig:DigestValue>
+        <dsig:DigestValue>POXDghz7fNMqf5Sf70EW+TSdTgUQ/u67GgX/NDSLY+o=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,6 +103,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Markdown.dll" size="1093120">
+      <assemblyIdentity name="Markdown" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>2A0cxifGfPcG6uUipaCD/zr/MAno4cCmfEVdIB7402A=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Dynamic.dll" size="898048">
       <assemblyIdentity name="Microsoft.Dynamic" version="1.2.3.0" publicKeyToken="7F709C5B713576E1" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -139,6 +151,30 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pygments.dll" size="10447360">
+      <assemblyIdentity name="Pygments" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>y3jB9MsM2xZkM2CIyii613WJvHLWoW5DWD43vsyXEvo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PythonLibs4CSharp.dll" size="29747200">
+      <assemblyIdentity name="PythonLibs4CSharp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>z8X8PLijUSdUV/uSgHnxAD/phMB5VI+RrB2LTqhUiJU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Reader.dll" size="16384">
       <assemblyIdentity name="Reader" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -146,19 +182,31 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JKuNFfAK8wflYgni3tDOUkcmzhAIPZR3slBi7CfizdA=</dsig:DigestValue>
+        <dsig:DigestValue>Y8ZUL4UvHQQVQvwvlQTx706qA92HLEdGNw+A7tJVuo4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RFIDApplication.exe" size="256400">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RFIDApplication.exe" size="259000">
       <assemblyIdentity name="RFIDApplication" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0wfHUPjass4zz+cyoj4puVuCLa4OVEQ22mvODrt3MX0=</dsig:DigestValue>
+        <dsig:DigestValue>gkiBj6tuQeflOfPkuHdUsB4kuAsS0IqCMDfrxqrAp5w=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="XmlRpc.dll" size="33792">
+      <assemblyIdentity name="XmlRpc" version="2.1.5352.29245" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>w+SYCvdpuWLe95uY3SEjMXeY2A58p2mF+U9PwHwg/PY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -189,13 +237,13 @@
       <dsig:DigestValue>eWPpfz1/oYGC5e40fndWebXiKOsfNK59poEC2ObPB8Y=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="RFIDApplication.exe.config" size="206">
+  <file name="RFIDApplication.exe.config" size="806">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>aKrSzVbnDwIJ4Wwm/F111pXhyICB3Yvgj38Rz58Tyro=</dsig:DigestValue>
+      <dsig:DigestValue>2vO5PXO+JvWVGPz62f6JdR42qrX74rxOzXI2YJy5o3E=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

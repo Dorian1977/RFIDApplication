@@ -6,3 +6,12 @@ C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\Authorizati
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\AuthorizationForms\bin\Debug\AuthorizationForms.pdb
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.exe
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.pdb
+C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csprojResolveAssemblyReference.cache
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\bin\Debug\AuthorizationForms.exe.config
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\bin\Debug\AuthorizationForms.exe
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\bin\Debug\AuthorizationForms.pdb
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.AuthorizationForm.resources
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.Properties.Resources.resources
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.exe
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.pdb

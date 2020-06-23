@@ -1,12 +1,12 @@
-﻿//using IronPython.Hosting;
+﻿using IronPython.Hosting;
 using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Data;
-//using System.Drawing;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RFIDApplication
@@ -14,12 +14,13 @@ namespace RFIDApplication
     public partial class LoginForm : Form
     {
         RFIDTagIDForm desktopApp = null;
-        
-        string url = "https://packsmart-rfid-1150777.dev.odoo.com";
-        string dbName = "packsmart-rfid-1150777";
+
+        string url = "https://packsmart-rfid-1204018.dev.odoo.com";
+        string dbName = "packsmart-rfid-1204018";
+
         //string userName = "smuroyan@packsmartinc.com";
         //string pwd = "Qwerty123";
-        
+
         public LoginForm()
         {
             desktopApp = new RFIDTagIDForm(this);
@@ -49,9 +50,8 @@ namespace RFIDApplication
             if(desktopApp.xmlLogin(url, dbName, tbUserName.Text, tbPassword.Text))
             {
                 this.Hide();                                
-                desktopApp.Show();
-                return;
-            }         
+                desktopApp.Show();                
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)

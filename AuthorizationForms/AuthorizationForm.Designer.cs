@@ -143,7 +143,7 @@
             this.tbInkVolume.Name = "tbInkVolume";
             this.tbInkVolume.Size = new System.Drawing.Size(82, 20);
             this.tbInkVolume.TabIndex = 11;
-            this.tbInkVolume.Text = "1500";
+            this.tbInkVolume.Text = "1000";
             // 
             // button1
             // 
