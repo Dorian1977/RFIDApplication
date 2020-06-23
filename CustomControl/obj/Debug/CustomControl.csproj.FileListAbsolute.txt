@@ -39,3 +39,10 @@ C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\Debug\CustomContro
 C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.Cache
 C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\Debug\CustomControl.dll
 C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\Debug\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\bin\Debug\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\bin\Debug\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.IpAddressTextBox.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.csprojResolveAssemblyReference.cache

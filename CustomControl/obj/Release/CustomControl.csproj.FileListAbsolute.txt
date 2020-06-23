@@ -11,3 +11,10 @@ C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomContr
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomControl\obj\Release\CustomControl.csproj.GenerateResource.Cache
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomControl\obj\Release\CustomControl.dll
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\CustomControl\obj\Release\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\bin\Release\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\bin\Release\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Release\CustomControl.IpAddressTextBox.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Release\CustomControl.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Release\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Release\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Release\CustomControl.csprojResolveAssemblyReference.cache

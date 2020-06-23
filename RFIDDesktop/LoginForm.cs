@@ -30,7 +30,7 @@ namespace RFIDApplication
 
         public void disableComPort()
         {
-            btLogin.Enabled = false;            
+            btLogin.Visible = false;
         }
 
         private void btLogin_Click(object sender, EventArgs e)
@@ -58,14 +58,53 @@ namespace RFIDApplication
         {
             if (desktopApp.iComPortStatus == 1)
             {
-                btLogin.Enabled = true;
-                labelNotes.Text = "Notes: RFID connected successful, Login now";
+                if (!btLogin.Visible)
+                {
+                    btLogin.Visible = true;
+                    textBoxNote.Visible = false;
+                    pictureBoxLogin.Visible = false;                  
+                }
             }
             else
             {
                 desktopApp.checkComPort();
-                btLogin.Enabled = false;
-                labelNotes.Text = "Note: Connect to RFID Reader first";
+                btLogin.Visible = false;              
+                textBoxNote.Show();
+                pictureBoxLogin.Visible = true;                
+            }
+        }
+
+        private void tbUserName_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (tbUserName.Text == "Username")
+                tbUserName.Text = tbUserName.Text.Replace("Username", "smuroyan@packsmartinc.com");            
+        }
+
+        private void tbPassword_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (tbPassword.Text == "Password")
+                tbPassword.Text = tbPassword.Text.Replace("Password", "Qwerty123");
+        }
+   
+        private void pictureBoxClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void pictureBoxHelp_Click(object sender, EventArgs e)
+        {
+            // Initializes the variables to pass to the MessageBox.Show method.
+            string message = "For support, please send email to dyeh@packsmartinc.com";
+            string caption = "Support";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            // Displays the MessageBox.
+            result = MessageBox.Show(message, caption, buttons);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                //Closes the parent form.
+                //this.Close();
             }
         }
     }

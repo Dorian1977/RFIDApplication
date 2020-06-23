@@ -62,6 +62,22 @@ class XmlRpc:
         return workorder_product_id
     
     def readProductionId(self):
+        try:
+            #prepare data to write
+            # Search for Work Order which the user is currently working on
+            workorder_rec = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read', [[['state','=','progress']]], {'fields': ['name', 'product_id', 'production_id', 'is_user_working', 'working_user_ids'], 'limit': 10})
+                
+            global workorder_production_id
+            global workorder_product_id
+            global workorder_id
+
+            for workorder in workorder_rec:
+                workorder_id = workorder.get('id')
+                workorder_product_id = workorder.get('product_id')
+                workorder_production_id = workorder.get('production_id')
+        except (Exception):
+                return ""
+
         return workorder_production_id
         
     #3. update RFID tag data, when RFIDEPCTagInfo is updated 
@@ -98,7 +114,15 @@ class XmlRpc:
     def getNextRFIDNumber(self, serial_number):
         next_serial_number = serial_number + 1
         id = models.execute_kw(db, uid, password, 'ir.sequence', 'write',[[serial_id], {'number_next_actual': next_serial_number}])
-        
+    
+    def getUserName(self):
+        try:
+            user_info = models.execute_kw(db, uid, password, 'res.users', 'search_read', [[['id','=',uid]]], {'fields': ['name']})
+            print('My name is', user_info[0].get('name'))
+            return user_info[0].get('name')
+        except (Exception):
+            return ""
+
     #login is simulate the overall process, need to simplify
     def login(self, url, _db, username, _password): #db, username, password):
         #Log in Odoo
@@ -119,7 +143,7 @@ class XmlRpc:
 
         #(Dorian)Check if RFID reader is connect, raise message if not connected
         if RFIDConnected == False:
-            return 0
+            return False
 
         #For Dorian:
         #Prompt User to put ink bottle on scanner
@@ -130,12 +154,11 @@ class XmlRpc:
             group_rec = models.execute_kw(db, uid, password, 'res.groups', 'search_read', [[['name','=','RFID Tag Creation']]], {'fields': ['users']})
             list_of_user = group_rec[0].get('users')
             if uid in list_of_user:
-                #print('Has privilege')
-                return 2            
+                return True  #print('Has privilege')                          
         except (Exception):
-            return 0
+            return False
         #print('Dont have privilege')
-        return 1
+        return False
 
         #(Jason)Update the number on screen
         #(Jason)Move to next one

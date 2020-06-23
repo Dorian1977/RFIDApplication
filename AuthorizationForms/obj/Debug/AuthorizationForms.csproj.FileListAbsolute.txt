@@ -15,3 +15,12 @@ C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\Authori
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csproj.GenerateResource.Cache
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.exe
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\bin\Debug\AuthorizationForms.exe.config
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\bin\Debug\AuthorizationForms.exe
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\bin\Debug\AuthorizationForms.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.AuthorizationForm.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.Properties.Resources.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.exe
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csprojResolveAssemblyReference.cache

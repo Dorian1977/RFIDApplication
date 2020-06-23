@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthorizationForm));
             this.tbDate = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbTagID = new System.Windows.Forms.TextBox();
@@ -173,6 +174,7 @@
             this.Controls.Add(this.tbTagID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbDate);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AuthorizationForm";
             this.Text = "AuthorizationForm";
             this.ResumeLayout(false);

@@ -32,31 +32,31 @@ namespace RFIDApplication
             this.listViewEPCTag = new System.Windows.Forms.ListView();
             this.RFIDTag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Counts = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBoxShowDetail = new System.Windows.Forms.CheckBox();
+            this.ckClearOperationRec = new System.Windows.Forms.CheckBox();
+            this.lrtxtLog = new CustomControl.LogRichTextBox();
             this.tabCtrMain = new System.Windows.Forms.TabControl();
             this.pageEpcID = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btEPCTag = new System.Windows.Forms.Button();
-            this.btAccessCode = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.checkBoxUpdateData = new System.Windows.Forms.CheckBox();
-            this.tbSelectTag = new System.Windows.Forms.TextBox();
-            this.tbUserData = new System.Windows.Forms.TextBox();
-            this.labelEPCTag = new System.Windows.Forms.Label();
-            this.textBoxEPCTagID = new System.Windows.Forms.TextBox();
-            this.pageData = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbDataUpdateStatus = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanelID = new System.Windows.Forms.TableLayoutPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbDataVerify = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbEPCTagVerify = new System.Windows.Forms.TextBox();
+            this.tbEPCTagDetected = new System.Windows.Forms.TextBox();
             this.tBAccessCodeVerify = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
+            this.btShowDebug1 = new System.Windows.Forms.Button();
+            this.pictureBoxID = new System.Windows.Forms.PictureBox();
+            this.pageData = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanelDataTop = new System.Windows.Forms.TableLayoutPanel();
+            this.labelPID = new System.Windows.Forms.Label();
+            this.richTextBoxProductID = new System.Windows.Forms.RichTextBox();
+            this.labelWOrder = new System.Windows.Forms.Label();
+            this.richtbWorkOrderInfo = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanelData = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbDataVerify = new System.Windows.Forms.TextBox();
+            this.tbOdooStatus = new System.Windows.Forms.TextBox();
+            this.btShowDebug = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pictureBoxData = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
@@ -95,29 +95,30 @@ namespace RFIDApplication
             this.label89 = new System.Windows.Forms.Label();
             this.label90 = new System.Windows.Forms.Label();
             this.label91 = new System.Windows.Forms.Label();
-            this.ckClearOperationRec = new System.Windows.Forms.CheckBox();
             this.timerInventory = new System.Windows.Forms.Timer(this.components);
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.checkBoxShowDetail = new System.Windows.Forms.CheckBox();
-            this.lrtxtLog = new CustomControl.LogRichTextBox();
+            this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
+            this.pictureBoxClose = new System.Windows.Forms.PictureBox();
+            this.tbLoginID = new System.Windows.Forms.TextBox();
             this.lxLedControl14 = new LxControl.LxLedControl();
             this.lxLedControl15 = new LxControl.LxLedControl();
             this.lxLedControl16 = new LxControl.LxLedControl();
             this.lxLedControl17 = new LxControl.LxLedControl();
             this.lxLedControl18 = new LxControl.LxLedControl();
-            this.label8 = new System.Windows.Forms.Label();
-            this.richtbWorkOrderInfo = new System.Windows.Forms.RichTextBox();
-            this.tbOdooStatus = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.tabCtrMain.SuspendLayout();
             this.pageEpcID.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.tableLayoutPanelID.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxID)).BeginInit();
             this.pageData.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanelDataTop.SuspendLayout();
+            this.tableLayoutPanelData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxData)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -131,6 +132,8 @@ namespace RFIDApplication
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl16)).BeginInit();
@@ -151,26 +154,26 @@ namespace RFIDApplication
             // splitContainer1.Panel2
             // 
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
-            this.splitContainer1.Panel2.Controls.Add(this.tabCtrMain);
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
             // 
             // groupBox4
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.listViewEPCTag);
             this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
             // listViewEPCTag
             // 
+            this.listViewEPCTag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.listViewEPCTag.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listViewEPCTag.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.RFIDTag,
             this.Counts});
             resources.ApplyResources(this.listViewEPCTag, "listViewEPCTag");
-            this.listViewEPCTag.FullRowSelect = true;
-            this.listViewEPCTag.GridLines = true;
+            this.listViewEPCTag.ForeColor = System.Drawing.Color.White;
             this.listViewEPCTag.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewEPCTag.HideSelection = false;
             this.listViewEPCTag.MultiSelect = false;
@@ -187,6 +190,41 @@ namespace RFIDApplication
             // 
             resources.ApplyResources(this.Counts, "Counts");
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.checkBoxShowDetail);
+            this.flowLayoutPanel1.Controls.Add(this.ckClearOperationRec);
+            this.flowLayoutPanel1.Controls.Add(this.lrtxtLog);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // checkBoxShowDetail
+            // 
+            resources.ApplyResources(this.checkBoxShowDetail, "checkBoxShowDetail");
+            this.checkBoxShowDetail.Checked = true;
+            this.checkBoxShowDetail.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxShowDetail.ForeColor = System.Drawing.Color.White;
+            this.checkBoxShowDetail.Name = "checkBoxShowDetail";
+            this.checkBoxShowDetail.UseVisualStyleBackColor = true;
+            this.checkBoxShowDetail.CheckedChanged += new System.EventHandler(this.checkBoxShowDetail_CheckedChanged);
+            // 
+            // ckClearOperationRec
+            // 
+            resources.ApplyResources(this.ckClearOperationRec, "ckClearOperationRec");
+            this.ckClearOperationRec.Checked = true;
+            this.ckClearOperationRec.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckClearOperationRec.ForeColor = System.Drawing.Color.White;
+            this.ckClearOperationRec.Name = "ckClearOperationRec";
+            this.ckClearOperationRec.UseVisualStyleBackColor = true;
+            // 
+            // lrtxtLog
+            // 
+            this.lrtxtLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.lrtxtLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.lrtxtLog, "lrtxtLog");
+            this.lrtxtLog.ForeColor = System.Drawing.Color.White;
+            this.lrtxtLog.Name = "lrtxtLog";
+            // 
             // tabCtrMain
             // 
             this.tabCtrMain.Controls.Add(this.pageEpcID);
@@ -198,176 +236,160 @@ namespace RFIDApplication
             // 
             // pageEpcID
             // 
-            this.pageEpcID.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pageEpcID.Controls.Add(this.groupBox2);
-            this.pageEpcID.Controls.Add(this.label7);
-            this.pageEpcID.Controls.Add(this.label6);
-            this.pageEpcID.Controls.Add(this.checkBoxUpdateData);
-            this.pageEpcID.Controls.Add(this.tbSelectTag);
-            this.pageEpcID.Controls.Add(this.tbUserData);
-            this.pageEpcID.Controls.Add(this.labelEPCTag);
-            this.pageEpcID.Controls.Add(this.textBoxEPCTagID);
+            this.pageEpcID.BackColor = System.Drawing.Color.White;
+            this.pageEpcID.Controls.Add(this.tableLayoutPanelID);
+            this.pageEpcID.Controls.Add(this.btShowDebug1);
+            this.pageEpcID.Controls.Add(this.pictureBoxID);
             resources.ApplyResources(this.pageEpcID, "pageEpcID");
-            this.pageEpcID.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.pageEpcID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.pageEpcID.Name = "pageEpcID";
             // 
-            // groupBox2
+            // tableLayoutPanelID
             // 
-            this.groupBox2.Controls.Add(this.btEPCTag);
-            this.groupBox2.Controls.Add(this.btAccessCode);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
-            // btEPCTag
-            // 
-            resources.ApplyResources(this.btEPCTag, "btEPCTag");
-            this.btEPCTag.Name = "btEPCTag";
-            this.btEPCTag.UseVisualStyleBackColor = true;
-            this.btEPCTag.Click += new System.EventHandler(this.btEPCTag_Click);
-            // 
-            // btAccessCode
-            // 
-            resources.ApplyResources(this.btAccessCode, "btAccessCode");
-            this.btAccessCode.Name = "btAccessCode";
-            this.btAccessCode.UseVisualStyleBackColor = true;
-            this.btAccessCode.Click += new System.EventHandler(this.btAccessCode_Click);
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // checkBoxUpdateData
-            // 
-            resources.ApplyResources(this.checkBoxUpdateData, "checkBoxUpdateData");
-            this.checkBoxUpdateData.Name = "checkBoxUpdateData";
-            this.checkBoxUpdateData.UseVisualStyleBackColor = true;
-            // 
-            // tbSelectTag
-            // 
-            resources.ApplyResources(this.tbSelectTag, "tbSelectTag");
-            this.tbSelectTag.ForeColor = System.Drawing.Color.Black;
-            this.tbSelectTag.Name = "tbSelectTag";
-            this.tbSelectTag.ReadOnly = true;
-            // 
-            // tbUserData
-            // 
-            resources.ApplyResources(this.tbUserData, "tbUserData");
-            this.tbUserData.ForeColor = System.Drawing.Color.Black;
-            this.tbUserData.Name = "tbUserData";
-            this.tbUserData.ReadOnly = true;
-            // 
-            // labelEPCTag
-            // 
-            resources.ApplyResources(this.labelEPCTag, "labelEPCTag");
-            this.labelEPCTag.Name = "labelEPCTag";
-            // 
-            // textBoxEPCTagID
-            // 
-            resources.ApplyResources(this.textBoxEPCTagID, "textBoxEPCTagID");
-            this.textBoxEPCTagID.ForeColor = System.Drawing.Color.Black;
-            this.textBoxEPCTagID.Name = "textBoxEPCTagID";
-            // 
-            // pageData
-            // 
-            this.pageData.Controls.Add(this.richtbWorkOrderInfo);
-            this.pageData.Controls.Add(this.label8);
-            this.pageData.Controls.Add(this.label5);
-            this.pageData.Controls.Add(this.tbDataUpdateStatus);
-            this.pageData.Controls.Add(this.textBox1);
-            this.pageData.Controls.Add(this.label4);
-            resources.ApplyResources(this.pageData, "pageData");
-            this.pageData.Name = "pageData";
-            this.pageData.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // tbDataUpdateStatus
-            // 
-            resources.ApplyResources(this.tbDataUpdateStatus, "tbDataUpdateStatus");
-            this.tbDataUpdateStatus.Name = "tbDataUpdateStatus";
-            this.tbDataUpdateStatus.ReadOnly = true;
+            resources.ApplyResources(this.tableLayoutPanelID, "tableLayoutPanelID");
+            this.tableLayoutPanelID.Controls.Add(this.textBox1, 0, 0);
+            this.tableLayoutPanelID.Controls.Add(this.tbEPCTagDetected, 0, 2);
+            this.tableLayoutPanelID.Controls.Add(this.tBAccessCodeVerify, 0, 4);
+            this.tableLayoutPanelID.Name = "tableLayoutPanelID";
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox1, "textBox1");
+            this.textBox1.ForeColor = System.Drawing.Color.Black;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
+            // 
+            // tbEPCTagDetected
+            // 
+            this.tbEPCTagDetected.BackColor = System.Drawing.Color.White;
+            this.tbEPCTagDetected.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.tbEPCTagDetected, "tbEPCTagDetected");
+            this.tbEPCTagDetected.ForeColor = System.Drawing.Color.Black;
+            this.tbEPCTagDetected.Name = "tbEPCTagDetected";
+            this.tbEPCTagDetected.ReadOnly = true;
+            // 
+            // tBAccessCodeVerify
+            // 
+            this.tBAccessCodeVerify.BackColor = System.Drawing.Color.White;
+            this.tBAccessCodeVerify.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.tBAccessCodeVerify, "tBAccessCodeVerify");
+            this.tBAccessCodeVerify.ForeColor = System.Drawing.Color.Green;
+            this.tBAccessCodeVerify.Name = "tBAccessCodeVerify";
+            this.tBAccessCodeVerify.ReadOnly = true;
+            // 
+            // btShowDebug1
+            // 
+            this.btShowDebug1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btShowDebug1.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btShowDebug1, "btShowDebug1");
+            this.btShowDebug1.Name = "btShowDebug1";
+            this.btShowDebug1.UseVisualStyleBackColor = true;
+            this.btShowDebug1.Click += new System.EventHandler(this.btShowDebug1_Click);
+            // 
+            // pictureBoxID
+            // 
+            resources.ApplyResources(this.pictureBoxID, "pictureBoxID");
+            this.pictureBoxID.Name = "pictureBoxID";
+            this.pictureBoxID.TabStop = false;
+            // 
+            // pageData
+            // 
+            this.pageData.BackColor = System.Drawing.Color.White;
+            this.pageData.Controls.Add(this.tableLayoutPanelDataTop);
+            this.pageData.Controls.Add(this.tableLayoutPanelData);
+            this.pageData.Controls.Add(this.btShowDebug);
+            this.pageData.Controls.Add(this.label4);
+            this.pageData.Controls.Add(this.pictureBoxData);
+            this.pageData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            resources.ApplyResources(this.pageData, "pageData");
+            this.pageData.Name = "pageData";
+            // 
+            // tableLayoutPanelDataTop
+            // 
+            resources.ApplyResources(this.tableLayoutPanelDataTop, "tableLayoutPanelDataTop");
+            this.tableLayoutPanelDataTop.Controls.Add(this.labelPID, 0, 1);
+            this.tableLayoutPanelDataTop.Controls.Add(this.richTextBoxProductID, 1, 1);
+            this.tableLayoutPanelDataTop.Controls.Add(this.labelWOrder, 0, 0);
+            this.tableLayoutPanelDataTop.Controls.Add(this.richtbWorkOrderInfo, 1, 0);
+            this.tableLayoutPanelDataTop.Name = "tableLayoutPanelDataTop";
+            // 
+            // labelPID
+            // 
+            resources.ApplyResources(this.labelPID, "labelPID");
+            this.labelPID.Name = "labelPID";
+            // 
+            // richTextBoxProductID
+            // 
+            this.richTextBoxProductID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.richTextBoxProductID, "richTextBoxProductID");
+            this.richTextBoxProductID.Name = "richTextBoxProductID";
+            // 
+            // labelWOrder
+            // 
+            resources.ApplyResources(this.labelWOrder, "labelWOrder");
+            this.labelWOrder.Name = "labelWOrder";
+            // 
+            // richtbWorkOrderInfo
+            // 
+            this.richtbWorkOrderInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.richtbWorkOrderInfo, "richtbWorkOrderInfo");
+            this.richtbWorkOrderInfo.Name = "richtbWorkOrderInfo";
+            // 
+            // tableLayoutPanelData
+            // 
+            resources.ApplyResources(this.tableLayoutPanelData, "tableLayoutPanelData");
+            this.tableLayoutPanelData.Controls.Add(this.textBox2, 0, 0);
+            this.tableLayoutPanelData.Controls.Add(this.tbDataVerify, 0, 2);
+            this.tableLayoutPanelData.Controls.Add(this.tbOdooStatus, 0, 4);
+            this.tableLayoutPanelData.Name = "tableLayoutPanelData";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.White;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox2, "textBox2");
+            this.textBox2.ForeColor = System.Drawing.Color.Black;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            // 
+            // tbDataVerify
+            // 
+            this.tbDataVerify.BackColor = System.Drawing.Color.White;
+            this.tbDataVerify.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.tbDataVerify, "tbDataVerify");
+            this.tbDataVerify.ForeColor = System.Drawing.Color.Black;
+            this.tbDataVerify.Name = "tbDataVerify";
+            this.tbDataVerify.ReadOnly = true;
+            // 
+            // tbOdooStatus
+            // 
+            this.tbOdooStatus.BackColor = System.Drawing.Color.White;
+            this.tbOdooStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.tbOdooStatus, "tbOdooStatus");
+            this.tbOdooStatus.ForeColor = System.Drawing.Color.Green;
+            this.tbOdooStatus.Name = "tbOdooStatus";
+            this.tbOdooStatus.ReadOnly = true;
+            // 
+            // btShowDebug
+            // 
+            this.btShowDebug.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btShowDebug, "btShowDebug");
+            this.btShowDebug.Name = "btShowDebug";
+            this.btShowDebug.UseVisualStyleBackColor = true;
+            this.btShowDebug.Click += new System.EventHandler(this.btShowDebug_Click);
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             // 
-            // groupBox1
+            // pictureBoxData
             // 
-            this.groupBox1.Controls.Add(this.tbOdooStatus);
-            this.groupBox1.Controls.Add(this.tbDataVerify);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tbEPCTagVerify);
-            this.groupBox1.Controls.Add(this.tBAccessCodeVerify);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
-            // tbDataVerify
-            // 
-            resources.ApplyResources(this.tbDataVerify, "tbDataVerify");
-            this.tbDataVerify.ForeColor = System.Drawing.Color.Black;
-            this.tbDataVerify.Name = "tbDataVerify";
-            this.tbDataVerify.ReadOnly = true;
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Name = "label3";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.ForeColor = System.Drawing.Color.Green;
-            this.label1.Name = "label1";
-            // 
-            // tbEPCTagVerify
-            // 
-            resources.ApplyResources(this.tbEPCTagVerify, "tbEPCTagVerify");
-            this.tbEPCTagVerify.ForeColor = System.Drawing.Color.Black;
-            this.tbEPCTagVerify.Name = "tbEPCTagVerify";
-            this.tbEPCTagVerify.ReadOnly = true;
-            // 
-            // tBAccessCodeVerify
-            // 
-            resources.ApplyResources(this.tBAccessCodeVerify, "tBAccessCodeVerify");
-            this.tBAccessCodeVerify.ForeColor = System.Drawing.Color.Black;
-            this.tBAccessCodeVerify.Name = "tBAccessCodeVerify";
-            this.tBAccessCodeVerify.ReadOnly = true;
-            // 
-            // label35
-            // 
-            resources.ApplyResources(this.label35, "label35");
-            this.label35.Name = "label35";
+            resources.ApplyResources(this.pictureBoxData, "pictureBoxData");
+            this.pictureBoxData.Name = "pictureBoxData";
+            this.pictureBoxData.TabStop = false;
             // 
             // tableLayoutPanel3
             // 
@@ -681,48 +703,49 @@ namespace RFIDApplication
             this.label91.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label91.Name = "label91";
             // 
-            // ckClearOperationRec
-            // 
-            resources.ApplyResources(this.ckClearOperationRec, "ckClearOperationRec");
-            this.ckClearOperationRec.Checked = true;
-            this.ckClearOperationRec.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckClearOperationRec.Name = "ckClearOperationRec";
-            this.ckClearOperationRec.UseVisualStyleBackColor = true;
-            // 
             // timerInventory
             // 
-            this.timerInventory.Interval = 300;
+            this.timerInventory.Interval = 200;
             this.timerInventory.Tick += new System.EventHandler(this.timerInventory_Tick);
             // 
             // splitContainer2
             // 
+            this.splitContainer2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             resources.ApplyResources(this.splitContainer2, "splitContainer2");
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
+            this.splitContainer2.Panel1.Controls.Add(this.pictureBoxHelp);
+            this.splitContainer2.Panel1.Controls.Add(this.pictureBoxClose);
+            this.splitContainer2.Panel1.Controls.Add(this.tbLoginID);
+            this.splitContainer2.Panel1.Controls.Add(this.tabCtrMain);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.checkBoxShowDetail);
-            this.splitContainer2.Panel2.Controls.Add(this.label35);
-            this.splitContainer2.Panel2.Controls.Add(this.lrtxtLog);
-            this.splitContainer2.Panel2.Controls.Add(this.ckClearOperationRec);
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer1);
             // 
-            // checkBoxShowDetail
+            // pictureBoxHelp
             // 
-            resources.ApplyResources(this.checkBoxShowDetail, "checkBoxShowDetail");
-            this.checkBoxShowDetail.Checked = true;
-            this.checkBoxShowDetail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowDetail.Name = "checkBoxShowDetail";
-            this.checkBoxShowDetail.UseVisualStyleBackColor = true;
-            this.checkBoxShowDetail.CheckedChanged += new System.EventHandler(this.checkBoxShowDetail_CheckedChanged);
+            resources.ApplyResources(this.pictureBoxHelp, "pictureBoxHelp");
+            this.pictureBoxHelp.Name = "pictureBoxHelp";
+            this.pictureBoxHelp.TabStop = false;
+            this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
             // 
-            // lrtxtLog
+            // pictureBoxClose
             // 
-            resources.ApplyResources(this.lrtxtLog, "lrtxtLog");
-            this.lrtxtLog.Name = "lrtxtLog";
+            resources.ApplyResources(this.pictureBoxClose, "pictureBoxClose");
+            this.pictureBoxClose.Name = "pictureBoxClose";
+            this.pictureBoxClose.TabStop = false;
+            this.pictureBoxClose.Click += new System.EventHandler(this.pictureBoxClose_Click);
+            // 
+            // tbLoginID
+            // 
+            this.tbLoginID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.tbLoginID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.tbLoginID, "tbLoginID");
+            this.tbLoginID.ForeColor = System.Drawing.Color.White;
+            this.tbLoginID.Name = "tbLoginID";
             // 
             // lxLedControl14
             // 
@@ -815,23 +838,6 @@ namespace RFIDApplication
             this.lxLedControl18.ShowHighlight = true;
             this.lxLedControl18.TextAlignment = LxControl.LxLedControl.Alignment.Right;
             // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // richtbWorkOrderInfo
-            // 
-            resources.ApplyResources(this.richtbWorkOrderInfo, "richtbWorkOrderInfo");
-            this.richtbWorkOrderInfo.Name = "richtbWorkOrderInfo";
-            // 
-            // tbOdooStatus
-            // 
-            resources.ApplyResources(this.tbOdooStatus, "tbOdooStatus");
-            this.tbOdooStatus.ForeColor = System.Drawing.Color.Black;
-            this.tbOdooStatus.Name = "tbOdooStatus";
-            this.tbOdooStatus.ReadOnly = true;
-            // 
             // RFIDTagIDForm
             // 
             resources.ApplyResources(this, "$this");
@@ -840,6 +846,7 @@ namespace RFIDApplication
             this.Controls.Add(this.splitContainer2);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Black;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RFIDTagIDForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RFIDTagIDForm_FormClosing);
             this.Load += new System.EventHandler(this.RFIDTagIDForm_Load);
@@ -849,14 +856,20 @@ namespace RFIDApplication
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.tabCtrMain.ResumeLayout(false);
             this.pageEpcID.ResumeLayout(false);
-            this.pageEpcID.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.tableLayoutPanelID.ResumeLayout(false);
+            this.tableLayoutPanelID.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxID)).EndInit();
             this.pageData.ResumeLayout(false);
             this.pageData.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.tableLayoutPanelDataTop.ResumeLayout(false);
+            this.tableLayoutPanelDataTop.PerformLayout();
+            this.tableLayoutPanelData.ResumeLayout(false);
+            this.tableLayoutPanelData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxData)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -869,10 +882,12 @@ namespace RFIDApplication
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl13)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl16)).EndInit();
@@ -886,7 +901,6 @@ namespace RFIDApplication
 
         private System.Windows.Forms.TabControl tabCtrMain;
         private CustomControl.LogRichTextBox lrtxtLog;
-        private System.Windows.Forms.Label label35;
         private System.Windows.Forms.TabPage pageEpcID;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panel6;
@@ -933,38 +947,36 @@ namespace RFIDApplication
         private LxControl.LxLedControl lxLedControl18;
         private System.Windows.Forms.CheckBox ckClearOperationRec;
         private System.Windows.Forms.Timer timerInventory;
-        private Button btAccessCode;
-        private Button btEPCTag;
-        private TextBox textBoxEPCTagID;
-        private Label labelEPCTag;
-        private TextBox tbUserData;
         private TextBox tBAccessCodeVerify;
         private GroupBox groupBox4;
-        private TextBox tbEPCTagVerify;
-        private GroupBox groupBox1;
-        private Label label1;
-        private Label label3;
-        private Label label2;
+        private TextBox tbEPCTagDetected;
         private ListView listViewEPCTag;
         private ColumnHeader RFIDTag;
         private ColumnHeader Counts;
-        private TextBox tbSelectTag;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
         private TabPage pageData;
-        private TextBox textBox1;
         private Label label4;
         private CheckBox checkBoxShowDetail;
-        private TextBox tbDataVerify;
-        private CheckBox checkBoxUpdateData;
-        private GroupBox groupBox2;
-        private Label label7;
-        private Label label6;
-        private Label label5;
-        private TextBox tbDataUpdateStatus;
-        private Label label8;
+        private Label labelWOrder;
         private RichTextBox richtbWorkOrderInfo;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private TextBox textBox1;
+        private PictureBox pictureBoxID;
         private TextBox tbOdooStatus;
+        private TextBox tbDataVerify;
+        private RichTextBox richTextBoxProductID;
+        private Label labelPID;
+        private TextBox textBox2;
+        private PictureBox pictureBoxData;
+        private TextBox tbLoginID;
+        private Button btShowDebug;
+        private Button btShowDebug1;
+        private TableLayoutPanel tableLayoutPanelData;
+        private TableLayoutPanel tableLayoutPanelID;
+        private PictureBox pictureBoxClose;
+        private TableLayoutPanel tableLayoutPanelDataTop;
+        private PictureBox pictureBoxHelp;
     }
 }
 

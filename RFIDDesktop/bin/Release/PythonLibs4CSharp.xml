@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PythonLibs4CSharp</name>
+    </assembly>
+    <members>
+        <member name="T:PythonLibs4CSharp.DynamicWrapper">
+            <summary>
+                Class to store a dynamic Python variable. Extension classes can define methods to expose attributes of the dynamic.
+            </summary>
+        </member>
+        <member name="M:PythonLibs4CSharp.DynamicWrapper.ToDynamic">
+            <summary>
+                Returns the dynamic representation of the instance.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

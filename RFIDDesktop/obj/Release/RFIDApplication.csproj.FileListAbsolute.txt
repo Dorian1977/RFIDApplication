@@ -37,3 +37,88 @@ C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.application
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe.config
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\reference\xml_rpc.py
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe.manifest
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.application
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.Modules.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.SQLite.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.Wpf.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Markdown.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Microsoft.Dynamic.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.Metadata.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Pygments.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\PythonLibs4CSharp.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Reader.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\XmlRpc.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Reader.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.Modules.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.SQLite.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\IronPython.Wpf.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Markdown.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Microsoft.Dynamic.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.Metadata.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\Pygments.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\PythonLibs4CSharp.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Release\XmlRpc.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.csprojResolveAssemblyReference.cache
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.LoginForm.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.RFIDTagIDForm.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.Properties.Resources.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe.manifest
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.application
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe.config
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe.config
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\reference\xml_rpc.py
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe.manifest
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.application
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.exe
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\RFIDApplication.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\CustomControl.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.Modules.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.SQLite.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.Wpf.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Markdown.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Microsoft.Dynamic.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.Metadata.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Pygments.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\PythonLibs4CSharp.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Reader.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\XmlRpc.dll
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\CustomControl.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Reader.pdb
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.Modules.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.SQLite.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\IronPython.Wpf.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Markdown.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Microsoft.Dynamic.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Microsoft.Scripting.Metadata.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\Pygments.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\PythonLibs4CSharp.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\bin\Release\XmlRpc.xml
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.csprojResolveAssemblyReference.cache
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.LoginForm.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.RFIDTagIDForm.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.Properties.Resources.resources
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.exe.manifest
+C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFID Application\RFIDDesktop\obj\Release\RFIDApplication.application

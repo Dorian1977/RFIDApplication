@@ -14,12 +14,13 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
-    <ApplicationIcon>pngitem_278229_zQe_icon.ico</ApplicationIcon>
+    <ApplicationIcon>pack_smart_logo___standard_white_outline_icon_xSH_icon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>C:\Users\test\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -35,7 +36,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,7 +85,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>35691C8C3B4251C2CA7896130E62ED9B25CDC6ED</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>973FB37BBC2005D9EE54B46AF306E69A21221528</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>RFIDApplication_TemporaryKey.pfx</ManifestKeyFile>
@@ -230,9 +230,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="accessicons_rfid_300x300_97q_icon.ico" />
     <Content Include="images_orU_icon.ico" />
-    <Content Include="pngitem_278229_zQe_icon.ico" />
+    <Content Include="pack_smart_logo___standard_white_outline_icon_xSH_icon.ico" />
     <None Include="reference\xml_rpc.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

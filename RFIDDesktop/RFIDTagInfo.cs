@@ -15,6 +15,9 @@ namespace RFIDApplication
         public string EPC_data;
         public int readCount;
         public int notUpdateCount;
+        public string reserverData;
+        public string label;
+        public string tagInfo;
         public int rssi;
         public TagStatus tagStatus;
 
@@ -35,6 +38,9 @@ namespace RFIDApplication
             EPC_data = "";
             readCount = 0;
             rssi = 0;
+            reserverData = "";
+            label = "";
+            tagInfo = "";
             tagStatus = TagStatus.IDNotUpdate;
         }
     }
@@ -43,10 +49,9 @@ namespace RFIDApplication
     {
         private static string labelFormat = "";
         public const char serialSep = '=';
-        public static string label;
-        public static string reserverData;
+
         public static byte[] accessCode = null;
-        public static string tagInfo;
+       
         public static List<string> labelList = new List<string>();
 
         public static bool bAccessCode(string verifyCode, string strData)
