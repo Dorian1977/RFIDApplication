@@ -19,6 +19,7 @@ namespace RFIDApplication
         public string label;
         public string tagInfo;
         public int rssi;
+        public bool tagIDNeedUpdate;
         public TagStatus tagStatus;
 
         public enum TagStatus
@@ -41,6 +42,7 @@ namespace RFIDApplication
             reserverData = "";
             label = "";
             tagInfo = "";
+            tagIDNeedUpdate = false;
             tagStatus = TagStatus.IDNotUpdate;
         }
     }
@@ -99,32 +101,50 @@ namespace RFIDApplication
             }
         }
 
-        public static bool verifyData(string inputData)
+        public static bool verifyData(string inputData, string sourceFilePath)
         {
             if (inputData == "")
                 return false;
-                       
+
+            int num = 0;
             string[] checkData = inputData.Split(RFIDTagInfo.serialSep);
-            if(!checkData[0].StartsWith("PS"))
+            if(!checkData[0].StartsWith("PS") && int.TryParse(checkData[0].Substring(2), out num))
             {
                 return false;
             }
-            
-            for (int i = 0; i < labelFormat.Length && i < checkData[0].Length; i++)
+                      
+            //check ink type, ink volume, and expire date supplier ID
+            using (StreamReader sr = new StreamReader(sourceFilePath + @"\reference\lookUpTable.csv"))
             {
-                if (checkData[0][i] != labelFormat[i])
+                string currentLine;
+                // currentLine will be null when the StreamReader reaches the end of file
+                while ((currentLine = sr.ReadLine()) != null)
                 {
-                    if (labelFormat[i] == '_')
+                    
+                    string[] dataRow = currentLine.Split(',');
+                    if (dataRow[0].Trim().Contains(checkData[1].Substring(0, 3)))
                     {
-                        continue;
+                        return true;
                     }
-                    else
+                    else if (dataRow[1].Trim().Contains(checkData[1].Substring(0, 4)) &&
+                             dataRow[2].Trim().Contains(checkData[1].Substring(4, 4)))
                     {
-                        return false;
-                    }
+                        int dateNowDigit = 0;
+                        int dateInDigit = 0;
+                        int supplierID = 0;
+                        if (int.TryParse(checkData[1].Substring(8, 4), out dateInDigit) &&
+                            int.TryParse(DateTime.Now.ToString("MMyy"), out dateNowDigit) &&
+                            int.TryParse(checkData[1].Substring(12, 2), out supplierID))
+                        {
+                            if(dateInDigit > dateNowDigit)
+                            {
+                                return true;
+                            }                            
+                        }
+                    }                    
                 }
-            }          
-            return true;
+            }
+            return false;
         }
 
         public static bool checkZeroAccessCode(byte[] input)
@@ -199,6 +219,6 @@ namespace RFIDApplication
                 list.Add(Convert.ToByte(binaryList[i], 2));
             }
             return list.ToArray();
-        }
+        } 
     }
 }

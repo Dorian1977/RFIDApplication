@@ -28,14 +28,14 @@ namespace RFIDApplication
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RFIDTagIDForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxShowDetail = new System.Windows.Forms.CheckBox();
+            this.ckClearOperationRec = new System.Windows.Forms.CheckBox();
+            this.lrtxtLog = new CustomControl.LogRichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.listViewEPCTag = new System.Windows.Forms.ListView();
             this.RFIDTag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Counts = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBoxShowDetail = new System.Windows.Forms.CheckBox();
-            this.ckClearOperationRec = new System.Windows.Forms.CheckBox();
-            this.lrtxtLog = new CustomControl.LogRichTextBox();
             this.tabCtrMain = new System.Windows.Forms.TabControl();
             this.pageEpcID = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelID = new System.Windows.Forms.TableLayoutPanel();
@@ -45,6 +45,7 @@ namespace RFIDApplication
             this.btShowDebug1 = new System.Windows.Forms.Button();
             this.pictureBoxID = new System.Windows.Forms.PictureBox();
             this.pageData = new System.Windows.Forms.TabPage();
+            this.btShowDebug = new System.Windows.Forms.Button();
             this.tableLayoutPanelDataTop = new System.Windows.Forms.TableLayoutPanel();
             this.labelPID = new System.Windows.Forms.Label();
             this.richTextBoxProductID = new System.Windows.Forms.RichTextBox();
@@ -54,7 +55,6 @@ namespace RFIDApplication
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tbDataVerify = new System.Windows.Forms.TextBox();
             this.tbOdooStatus = new System.Windows.Forms.TextBox();
-            this.btShowDebug = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBoxData = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -97,8 +97,8 @@ namespace RFIDApplication
             this.label91 = new System.Windows.Forms.Label();
             this.timerInventory = new System.Windows.Forms.Timer(this.components);
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
-            this.pictureBoxClose = new System.Windows.Forms.PictureBox();
+            this.btHelp = new System.Windows.Forms.Button();
+            this.btClose = new System.Windows.Forms.Button();
             this.tbLoginID = new System.Windows.Forms.TextBox();
             this.lxLedControl14 = new LxControl.LxLedControl();
             this.lxLedControl15 = new LxControl.LxLedControl();
@@ -109,8 +109,11 @@ namespace RFIDApplication
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.tabCtrMain.SuspendLayout();
             this.pageEpcID.SuspendLayout();
             this.tableLayoutPanelID.SuspendLayout();
@@ -132,8 +135,6 @@ namespace RFIDApplication
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl16)).BeginInit();
@@ -149,60 +150,30 @@ namespace RFIDApplication
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
             // 
             // splitContainer1.Panel2
             // 
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
-            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
             // 
-            // groupBox4
+            // splitContainer3
             // 
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Controls.Add(this.listViewEPCTag);
-            this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
+            resources.ApplyResources(this.splitContainer3, "splitContainer3");
+            this.splitContainer3.Name = "splitContainer3";
             // 
-            // listViewEPCTag
+            // splitContainer3.Panel1
             // 
-            this.listViewEPCTag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.listViewEPCTag.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listViewEPCTag.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.RFIDTag,
-            this.Counts});
-            resources.ApplyResources(this.listViewEPCTag, "listViewEPCTag");
-            this.listViewEPCTag.ForeColor = System.Drawing.Color.White;
-            this.listViewEPCTag.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewEPCTag.HideSelection = false;
-            this.listViewEPCTag.MultiSelect = false;
-            this.listViewEPCTag.Name = "listViewEPCTag";
-            this.listViewEPCTag.UseCompatibleStateImageBehavior = false;
-            this.listViewEPCTag.View = System.Windows.Forms.View.Details;
-            this.listViewEPCTag.SelectedIndexChanged += new System.EventHandler(this.listViewEPCTag_SelectedIndexChanged);
+            this.splitContainer3.Panel1.Controls.Add(this.checkBoxShowDetail);
+            this.splitContainer3.Panel1.Controls.Add(this.ckClearOperationRec);
             // 
-            // RFIDTag
+            // splitContainer3.Panel2
             // 
-            resources.ApplyResources(this.RFIDTag, "RFIDTag");
-            // 
-            // Counts
-            // 
-            resources.ApplyResources(this.Counts, "Counts");
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.checkBoxShowDetail);
-            this.flowLayoutPanel1.Controls.Add(this.ckClearOperationRec);
-            this.flowLayoutPanel1.Controls.Add(this.lrtxtLog);
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.splitContainer3.Panel2.Controls.Add(this.lrtxtLog);
             // 
             // checkBoxShowDetail
             // 
             resources.ApplyResources(this.checkBoxShowDetail, "checkBoxShowDetail");
-            this.checkBoxShowDetail.Checked = true;
-            this.checkBoxShowDetail.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxShowDetail.ForeColor = System.Drawing.Color.White;
             this.checkBoxShowDetail.Name = "checkBoxShowDetail";
             this.checkBoxShowDetail.UseVisualStyleBackColor = true;
@@ -224,6 +195,44 @@ namespace RFIDApplication
             resources.ApplyResources(this.lrtxtLog, "lrtxtLog");
             this.lrtxtLog.ForeColor = System.Drawing.Color.White;
             this.lrtxtLog.Name = "lrtxtLog";
+            // 
+            // groupBox4
+            // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.listViewEPCTag);
+            this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // listViewEPCTag
+            // 
+            this.listViewEPCTag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.listViewEPCTag.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewEPCTag.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.RFIDTag,
+            this.Counts});
+            resources.ApplyResources(this.listViewEPCTag, "listViewEPCTag");
+            this.listViewEPCTag.ForeColor = System.Drawing.Color.White;
+            this.listViewEPCTag.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewEPCTag.MultiSelect = false;
+            this.listViewEPCTag.Name = "listViewEPCTag";
+            this.listViewEPCTag.OwnerDraw = true;
+            this.listViewEPCTag.Scrollable = false;
+            this.listViewEPCTag.UseCompatibleStateImageBehavior = false;
+            this.listViewEPCTag.View = System.Windows.Forms.View.Details;
+            this.listViewEPCTag.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.listViewEPCTag_DrawColumnHeader);
+            this.listViewEPCTag.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.listViewEPCTag_DrawItem);
+            this.listViewEPCTag.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.listViewEPCTag_DrawSubItem);
+            this.listViewEPCTag.SelectedIndexChanged += new System.EventHandler(this.listViewEPCTag_SelectedIndexChanged);
+            // 
+            // RFIDTag
+            // 
+            resources.ApplyResources(this.RFIDTag, "RFIDTag");
+            // 
+            // Counts
+            // 
+            resources.ApplyResources(this.Counts, "Counts");
             // 
             // tabCtrMain
             // 
@@ -297,14 +306,22 @@ namespace RFIDApplication
             // pageData
             // 
             this.pageData.BackColor = System.Drawing.Color.White;
+            this.pageData.Controls.Add(this.btShowDebug);
             this.pageData.Controls.Add(this.tableLayoutPanelDataTop);
             this.pageData.Controls.Add(this.tableLayoutPanelData);
-            this.pageData.Controls.Add(this.btShowDebug);
             this.pageData.Controls.Add(this.label4);
             this.pageData.Controls.Add(this.pictureBoxData);
             this.pageData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             resources.ApplyResources(this.pageData, "pageData");
             this.pageData.Name = "pageData";
+            // 
+            // btShowDebug
+            // 
+            this.btShowDebug.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btShowDebug, "btShowDebug");
+            this.btShowDebug.Name = "btShowDebug";
+            this.btShowDebug.UseVisualStyleBackColor = true;
+            this.btShowDebug.Click += new System.EventHandler(this.btShowDebug_Click);
             // 
             // tableLayoutPanelDataTop
             // 
@@ -371,14 +388,6 @@ namespace RFIDApplication
             this.tbOdooStatus.ForeColor = System.Drawing.Color.Green;
             this.tbOdooStatus.Name = "tbOdooStatus";
             this.tbOdooStatus.ReadOnly = true;
-            // 
-            // btShowDebug
-            // 
-            this.btShowDebug.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btShowDebug, "btShowDebug");
-            this.btShowDebug.Name = "btShowDebug";
-            this.btShowDebug.UseVisualStyleBackColor = true;
-            this.btShowDebug.Click += new System.EventHandler(this.btShowDebug_Click);
             // 
             // label4
             // 
@@ -716,31 +725,40 @@ namespace RFIDApplication
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.pictureBoxHelp);
-            this.splitContainer2.Panel1.Controls.Add(this.pictureBoxClose);
+            this.splitContainer2.Panel1.Controls.Add(this.btHelp);
+            this.splitContainer2.Panel1.Controls.Add(this.btClose);
             this.splitContainer2.Panel1.Controls.Add(this.tbLoginID);
             this.splitContainer2.Panel1.Controls.Add(this.tabCtrMain);
+            this.splitContainer2.Panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitContainer2_Panel1_MouseDown);
+            this.splitContainer2.Panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitContainer2_Panel1_MouseMove);
+            this.splitContainer2.Panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitContainer2_Panel1_MouseUp);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer1);
             // 
-            // pictureBoxHelp
+            // btHelp
             // 
-            resources.ApplyResources(this.pictureBoxHelp, "pictureBoxHelp");
-            this.pictureBoxHelp.Name = "pictureBoxHelp";
-            this.pictureBoxHelp.TabStop = false;
-            this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
+            this.btHelp.BackColor = System.Drawing.Color.Transparent;
+            this.btHelp.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btHelp, "btHelp");
+            this.btHelp.ForeColor = System.Drawing.Color.Gold;
+            this.btHelp.Name = "btHelp";
+            this.btHelp.UseVisualStyleBackColor = false;
+            this.btHelp.Click += new System.EventHandler(this.btHelp_Click);
             // 
-            // pictureBoxClose
+            // btClose
             // 
-            resources.ApplyResources(this.pictureBoxClose, "pictureBoxClose");
-            this.pictureBoxClose.Name = "pictureBoxClose";
-            this.pictureBoxClose.TabStop = false;
-            this.pictureBoxClose.Click += new System.EventHandler(this.pictureBoxClose_Click);
+            this.btClose.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btClose, "btClose");
+            this.btClose.ForeColor = System.Drawing.Color.White;
+            this.btClose.Name = "btClose";
+            this.btClose.UseVisualStyleBackColor = true;
+            this.btClose.Click += new System.EventHandler(this.btClose_Click);
             // 
             // tbLoginID
             // 
+            this.tbLoginID.AllowDrop = true;
             this.tbLoginID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.tbLoginID.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.tbLoginID, "tbLoginID");
@@ -851,13 +869,16 @@ namespace RFIDApplication
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RFIDTagIDForm_FormClosing);
             this.Load += new System.EventHandler(this.RFIDTagIDForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.tabCtrMain.ResumeLayout(false);
             this.pageEpcID.ResumeLayout(false);
             this.tableLayoutPanelID.ResumeLayout(false);
@@ -886,8 +907,6 @@ namespace RFIDApplication
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl16)).EndInit();
@@ -960,7 +979,6 @@ namespace RFIDApplication
         private CheckBox checkBoxShowDetail;
         private Label labelWOrder;
         private RichTextBox richtbWorkOrderInfo;
-        private FlowLayoutPanel flowLayoutPanel1;
         private TextBox textBox1;
         private PictureBox pictureBoxID;
         private TextBox tbOdooStatus;
@@ -974,9 +992,10 @@ namespace RFIDApplication
         private Button btShowDebug1;
         private TableLayoutPanel tableLayoutPanelData;
         private TableLayoutPanel tableLayoutPanelID;
-        private PictureBox pictureBoxClose;
         private TableLayoutPanel tableLayoutPanelDataTop;
-        private PictureBox pictureBoxHelp;
+        private SplitContainer splitContainer3;
+        private Button btClose;
+        private Button btHelp;
     }
 }
 

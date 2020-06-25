@@ -164,3 +164,11 @@ C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Debug\Py
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.xml
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.exe.manifest
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.application
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Markdown.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Pygments.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\PythonLibs4CSharp.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.dll
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Markdown.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Pygments.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\PythonLibs4CSharp.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.xml

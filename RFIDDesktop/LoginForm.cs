@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,25 @@ namespace RFIDApplication
             desktopApp = new RFIDTagIDForm(this);
             desktopApp.checkComPort();
             InitializeComponent();
+
+            string sourceFilePath = Path.GetDirectoryName(new Uri(this.GetType().Assembly.GetName().CodeBase).LocalPath);
+            if (File.Exists(sourceFilePath + @"\reference\database.txt"))
+            {
+                using (StreamReader sr = new StreamReader(sourceFilePath + @"\reference\database.txt"))
+                {
+                    string currentLine;
+                    // currentLine will be null when the StreamReader reaches the end of file
+                    while ((currentLine = sr.ReadLine()) != null)
+                    {
+                        string[] dataRow = currentLine.Split(',');
+                        if(dataRow.Length == 2)
+                        {
+                            url = dataRow[0];
+                            dbName = dataRow[1];
+                        }                       
+                    }
+                }
+            }
         }
 
         public void disableComPort()
@@ -37,13 +57,13 @@ namespace RFIDApplication
         {
             if(tbUserName.Text == null || tbUserName.Text == "")
             {
-                MessageBox.Show("Username empty, try again!");
+                MessageBox.Show("Username empty, try again!", "Warning");
                 return;
             }
 
             if (tbPassword.Text == null || tbPassword.Text == "")
             {
-                MessageBox.Show("Password empty, try again!");
+                MessageBox.Show("Password empty, try again!", "Warning");
                 return;
             }
 
@@ -77,13 +97,13 @@ namespace RFIDApplication
         private void tbUserName_MouseClick(object sender, MouseEventArgs e)
         {
             if (tbUserName.Text == "Username")
-                tbUserName.Text = tbUserName.Text.Replace("Username", "smuroyan@packsmartinc.com");            
+                tbUserName.Text = tbUserName.Text.Replace("Username", "smuroyan@packsmartinc.com");  //smuroyan@packsmartinc.com          
         }
 
         private void tbPassword_MouseClick(object sender, MouseEventArgs e)
         {
             if (tbPassword.Text == "Password")
-                tbPassword.Text = tbPassword.Text.Replace("Password", "Qwerty123");
+                tbPassword.Text = tbPassword.Text.Replace("Password", "Qwerty123"); //Qwerty123
         }
    
         private void pictureBoxClose_Click(object sender, EventArgs e)
@@ -106,6 +126,41 @@ namespace RFIDApplication
                 //Closes the parent form.
                 //this.Close();
             }
+        }
+
+        private void tbPassword_KeyUp(object sender, KeyEventArgs e)
+        {          
+            if (e.KeyCode == Keys.Enter)
+            {
+                if((tbUserName.Text != "") && (tbPassword.Text != ""))
+                {
+                    if (desktopApp.xmlLogin(url, dbName, tbUserName.Text, tbPassword.Text))
+                    {
+                        this.Hide();
+                        desktopApp.Show();
+                    }
+                }
+            }
+        }
+
+        private void btClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBoxNote_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbUserName_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

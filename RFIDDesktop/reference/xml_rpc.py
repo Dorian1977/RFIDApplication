@@ -48,7 +48,7 @@ class XmlRpc:
                     workorder_working = workorder.get('is_user_working')
                     workorder_user = workorder.get('working_user_ids')
 
-                    if (uid in workorder_user and workorder_working == True) or (admin in workorder_user):
+                    if (uid in workorder_user and workorder_working == True):
                         # Search for Part Number of the Work Order Product
                         workorder_rec = models.execute_kw(db, uid, password, 'product.product', 'search_read', [[['id','=',workorder_product_id[0]]]], {'fields': ['engineering_code']})
                         workorder_product_code = workorder_rec[0].get('engineering_code')
@@ -62,22 +62,30 @@ class XmlRpc:
         return workorder_product_id
     
     def readProductionId(self):
+        global workorder_production_id
+        global workorder_product_id
+        global workorder_id
+
         try:
             #prepare data to write
             # Search for Work Order which the user is currently working on
-            workorder_rec = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read', [[['state','=','progress']]], {'fields': ['name', 'product_id', 'production_id', 'is_user_working', 'working_user_ids']})
-                
-            global workorder_production_id
-            global workorder_product_id
-            global workorder_id
+            workorder_rec = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read', [[['state','=','progress']]], {'fields': ['name', 'product_id', 'production_id', 'is_user_working', 'working_user_ids'], 'limit': 10})
+            workOrderCount = 0
 
-            for workorder in workorder_rec:
-                workorder_id = workorder.get('id')
-                workorder_product_id = workorder.get('product_id')
-                workorder_production_id = workorder.get('production_id')
+            for workorder in workorder_rec:                               
+                workorder_working = workorder.get('is_user_working')
+                workorder_user = workorder.get('working_user_ids')
+                if uid in workorder_user and workorder_working == True:
+                    workOrderCount += 1
+                    workorder_product_id = workorder.get('product_id')
+                    workorder_production_id = workorder.get('production_id')
+                    workorder_id = workorder.get('id')
 
         except (Exception):
-                return ""
+                return 0
+
+        if workOrderCount > 1:
+            return workOrderCount
 
         return workorder_production_id
         
@@ -96,7 +104,7 @@ class XmlRpc:
             models.execute_kw(db, uid, password, 'mrp.workorder', 'write',[[workorder_id],{'final_lot_id': serial_number_id, 'x_serial_number_id': serial_number_id}])
                 
             #Display the Serial Number on Screen. Need a onchange function???
-            models.execute_kw(db, uid, password, 'mrp.workorder', 'update_serial_number', [int(workorder_id)])
+            #models.execute_kw(db, uid, password, 'mrp.workorder', 'update_serial_number', [int(workorder_id)])
             #models.execute_kw(db, uid, password, 'update_serial_number', 'write', [{'id': workorder_id, 'number': serial_number_id}])
         except (Exception):
             return False
@@ -127,7 +135,6 @@ class XmlRpc:
     #login is simulate the overall process, need to simplify
     def login(self, url, _db, username, _password): #db, username, password):
         #Log in Odoo
-
         common = xmlrpclib.ServerProxy('{}/xmlrpc/common'.format(url))
 
         global uid
@@ -150,16 +157,14 @@ class XmlRpc:
         #Prompt User to put ink bottle on scanner
         global RFIDTagReady
         RFIDTagReady = True
-
-        try:
-            group_rec = models.execute_kw(db, uid, password, 'res.groups', 'search_read', [[['name','=','RFID Tag Creation']]], {'fields': ['users']})
-            list_of_user = group_rec[0].get('users')
-            if uid in list_of_user:
-                return True  #print('Has privilege')                          
-        except (Exception):
-            return False
+        
+        group_rec = models.execute_kw(db, uid, password, 'res.groups', 'search_read', [[['name','=','RFID Tag Creation']]], {'fields': ['users']})           
+        list_of_user = group_rec[0].get('users')
+        if uid in list_of_user:
+            #print('Has privilege')
+            return True
         #print('Dont have privilege')
-        return False
+        return False           
 
         #(Jason)Update the number on screen
         #(Jason)Move to next one

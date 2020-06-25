@@ -83,11 +83,8 @@ namespace AuthorizationForms
                     }
                 }
             }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Read Authorization data got exception: " + exp.Message);
-            }
-            MessageBox.Show("Read Authorization data failed! ");
+            catch (Exception exp){  }
+            MessageBox.Show("Read Authorization data failed! ", "Warning");
         }
         
         private void button1_Click(object sender, EventArgs e)

@@ -41,51 +41,51 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBoxLogin = new System.Windows.Forms.PictureBox();
-            this.pictureBoxClose = new System.Windows.Forms.PictureBox();
-            this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
+            this.btClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Roboto Medium", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(94, 266);
+            this.label1.Location = new System.Drawing.Point(113, 290);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 24);
+            this.label1.Size = new System.Drawing.Size(175, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "RFID Workstation";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tbUserName
             // 
             this.tbUserName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.tbUserName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbUserName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUserName.ForeColor = System.Drawing.SystemColors.Info;
-            this.tbUserName.Location = new System.Drawing.Point(434, 114);
+            this.tbUserName.Font = new System.Drawing.Font("Roboto Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUserName.ForeColor = System.Drawing.SystemColors.Control;
+            this.tbUserName.Location = new System.Drawing.Point(434, 117);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbUserName.Size = new System.Drawing.Size(215, 15);
+            this.tbUserName.Size = new System.Drawing.Size(215, 16);
             this.tbUserName.TabIndex = 3;
             this.tbUserName.Text = "Username";
             this.tbUserName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbUserName_MouseClick);
+            this.tbUserName.TextChanged += new System.EventHandler(this.tbUserName_TextChanged);
             // 
             // tbPassword
             // 
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPassword.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPassword.Font = new System.Drawing.Font("Roboto Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPassword.ForeColor = System.Drawing.Color.White;
-            this.tbPassword.Location = new System.Drawing.Point(434, 158);
+            this.tbPassword.Location = new System.Drawing.Point(434, 161);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(215, 15);
+            this.tbPassword.Size = new System.Drawing.Size(215, 16);
             this.tbPassword.TabIndex = 4;
             this.tbPassword.Text = "Password";
             this.tbPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbPassword_MouseClick);
+            this.tbPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPassword_KeyUp);
             // 
             // btLogin
             // 
@@ -96,9 +96,9 @@
             this.btLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btLogin.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btLogin.ForeColor = System.Drawing.Color.Transparent;
-            this.btLogin.Location = new System.Drawing.Point(479, 205);
+            this.btLogin.Location = new System.Drawing.Point(490, 221);
             this.btLogin.Name = "btLogin";
-            this.btLogin.Size = new System.Drawing.Size(124, 49);
+            this.btLogin.Size = new System.Drawing.Size(103, 40);
             this.btLogin.TabIndex = 5;
             this.btLogin.Text = "LOGIN";
             this.btLogin.UseVisualStyleBackColor = false;
@@ -109,7 +109,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(38, 27);
+            this.pictureBox1.Location = new System.Drawing.Point(45, 39);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(301, 248);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -126,21 +126,22 @@
             // 
             this.textBoxNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.textBoxNote.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxNote.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNote.Font = new System.Drawing.Font("Roboto Medium", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.textBoxNote.Location = new System.Drawing.Point(411, 335);
+            this.textBoxNote.Location = new System.Drawing.Point(401, 297);
             this.textBoxNote.Name = "textBoxNote";
-            this.textBoxNote.Size = new System.Drawing.Size(280, 14);
+            this.textBoxNote.Size = new System.Drawing.Size(280, 15);
             this.textBoxNote.TabIndex = 9;
-            this.textBoxNote.Text = "Please connect to RFID Reader to PC";
+            this.textBoxNote.Text = "Please connect to RFID Reader to PC.";
             this.textBoxNote.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxNote.Visible = false;
+            this.textBoxNote.TextChanged += new System.EventHandler(this.textBoxNote_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(430, 119);
+            this.label2.Location = new System.Drawing.Point(430, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(223, 13);
             this.label2.TabIndex = 10;
@@ -150,7 +151,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(430, 163);
+            this.label3.Location = new System.Drawing.Point(430, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(223, 13);
             this.label3.TabIndex = 11;
@@ -159,47 +160,39 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Roboto Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(484, 366);
+            this.label4.Location = new System.Drawing.Point(241, 369);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(234, 15);
+            this.label4.Size = new System.Drawing.Size(227, 14);
             this.label4.TabIndex = 13;
             this.label4.Text = "2020 Pack-Smart Inc. All Rights Reserved";
             // 
             // pictureBoxLogin
             // 
             this.pictureBoxLogin.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogin.Image")));
-            this.pictureBoxLogin.Location = new System.Drawing.Point(389, 194);
+            this.pictureBoxLogin.Location = new System.Drawing.Point(402, 167);
             this.pictureBoxLogin.Name = "pictureBoxLogin";
-            this.pictureBoxLogin.Size = new System.Drawing.Size(329, 169);
+            this.pictureBoxLogin.Size = new System.Drawing.Size(279, 144);
             this.pictureBoxLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLogin.TabIndex = 14;
             this.pictureBoxLogin.TabStop = false;
             this.pictureBoxLogin.Visible = false;
             // 
-            // pictureBoxClose
+            // btClose
             // 
-            this.pictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxClose.Image")));
-            this.pictureBoxClose.Location = new System.Drawing.Point(697, 2);
-            this.pictureBoxClose.Name = "pictureBoxClose";
-            this.pictureBoxClose.Size = new System.Drawing.Size(30, 24);
-            this.pictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxClose.TabIndex = 15;
-            this.pictureBoxClose.TabStop = false;
-            this.pictureBoxClose.Click += new System.EventHandler(this.pictureBoxClose_Click);
-            // 
-            // pictureBoxHelp
-            // 
-            this.pictureBoxHelp.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxHelp.Image")));
-            this.pictureBoxHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBoxHelp.Location = new System.Drawing.Point(667, 2);
-            this.pictureBoxHelp.Name = "pictureBoxHelp";
-            this.pictureBoxHelp.Size = new System.Drawing.Size(24, 24);
-            this.pictureBoxHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxHelp.TabIndex = 19;
-            this.pictureBoxHelp.TabStop = false;
-            this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
+            this.btClose.FlatAppearance.BorderSize = 0;
+            this.btClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btClose.Font = new System.Drawing.Font("Garamond", 16F);
+            this.btClose.ForeColor = System.Drawing.Color.White;
+            this.btClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btClose.Location = new System.Drawing.Point(690, 12);
+            this.btClose.Name = "btClose";
+            this.btClose.Size = new System.Drawing.Size(28, 27);
+            this.btClose.TabIndex = 20;
+            this.btClose.Text = "×";
+            this.btClose.UseVisualStyleBackColor = true;
+            this.btClose.Click += new System.EventHandler(this.btClose_Click);
             // 
             // LoginForm
             // 
@@ -207,8 +200,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.ClientSize = new System.Drawing.Size(730, 390);
-            this.Controls.Add(this.pictureBoxHelp);
-            this.Controls.Add(this.pictureBoxClose);
+            this.Controls.Add(this.btClose);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxNote);
             this.Controls.Add(this.btLogin);
@@ -226,8 +218,6 @@
             this.Text = "LoginForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,7 +236,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBoxLogin;
-        private System.Windows.Forms.PictureBox pictureBoxClose;
-        private System.Windows.Forms.PictureBox pictureBoxHelp;
+        private System.Windows.Forms.Button btClose;
     }
 }
