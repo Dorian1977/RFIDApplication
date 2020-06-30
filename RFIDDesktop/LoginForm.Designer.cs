@@ -56,10 +56,10 @@
             this.label1.Size = new System.Drawing.Size(175, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "RFID Workstation";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tbUserName
             // 
+            this.tbUserName.AcceptsTab = true;
             this.tbUserName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.tbUserName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbUserName.Font = new System.Drawing.Font("Roboto Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -71,10 +71,10 @@
             this.tbUserName.TabIndex = 3;
             this.tbUserName.Text = "Username";
             this.tbUserName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbUserName_MouseClick);
-            this.tbUserName.TextChanged += new System.EventHandler(this.tbUserName_TextChanged);
             // 
             // tbPassword
             // 
+            this.tbPassword.AcceptsTab = true;
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbPassword.Font = new System.Drawing.Font("Roboto Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -84,6 +84,7 @@
             this.tbPassword.Size = new System.Drawing.Size(215, 16);
             this.tbPassword.TabIndex = 4;
             this.tbPassword.Text = "Password";
+            this.tbPassword.UseSystemPasswordChar = true;
             this.tbPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbPassword_MouseClick);
             this.tbPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPassword_KeyUp);
             // 
@@ -135,7 +136,6 @@
             this.textBoxNote.Text = "Please connect to RFID Reader to PC.";
             this.textBoxNote.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxNote.Visible = false;
-            this.textBoxNote.TextChanged += new System.EventHandler(this.textBoxNote_TextChanged);
             // 
             // label2
             // 
@@ -199,7 +199,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.ClientSize = new System.Drawing.Size(730, 390);
+            this.ClientSize = new System.Drawing.Size(730, 396);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxNote);

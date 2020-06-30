@@ -2,6 +2,8 @@ import sys
 path = sys.argv[0]  #1 argument given is a string for the path
 sys.path.append(path)
 import xmlrpclib
+from datetime import datetime 
+from datetime import timedelta
 
 admin = 2
 RFIDConnected = False
@@ -53,10 +55,10 @@ class XmlRpc:
                         workorder_rec = models.execute_kw(db, uid, password, 'product.product', 'search_read', [[['id','=',workorder_product_id[0]]]], {'fields': ['engineering_code']})
                         workorder_product_code = workorder_rec[0].get('engineering_code')
                         RFIDEPCTagInfo = RFIDEPCTagID + '=' + workorder_product_code                    
-                        return True
+                        return RFIDEPCTagInfo
             except (Exception):
-                return False
-        return False
+                return ''
+        return ''
         
     def readProductId(self):
         return workorder_product_id
@@ -95,22 +97,32 @@ class XmlRpc:
         return RFIDEPCTagInfo
     
     #4. get RFID tag updated successful
-    def writeRFIDTagSuccessful(self, RFIDEPCTagInfo):       
+    def writeRFIDTag(self, RFIDEPCTagInfo, RFIDTIDInfo):       
         #if RFIDTagstatus == True:  
         try:
-            serial_number_id = models.execute_kw(db, uid, password, 'stock.production.lot', 'create',[{'name': RFIDEPCTagInfo, 'product_id': workorder_product_id[0]}])
-               
+            serial_number_id = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read',[[['id','=',workorder_id]]], {'fields': ['x_serial_number_id']})
+            #print( serial_number_id[0].get('x_serial_number_id'))
+            if serial_number_id[0].get('x_serial_number_id') != False:
+                return -2
+
+            serial_number_id = models.execute_kw(db, uid, password, 'stock.production.lot', 'create',[{'name': RFIDEPCTagInfo, 'product_id': workorder_product_id[0], 'life_date': datetime.now() + timedelta(days=365), 'ref': RFIDTIDInfo}])
+  
             #Write serial number to Work Order
-            models.execute_kw(db, uid, password, 'mrp.workorder', 'write',[[workorder_id],{'final_lot_id': serial_number_id, 'x_serial_number_id': serial_number_id}])
-                
-            #Display the Serial Number on Screen. Need a onchange function???
-            #models.execute_kw(db, uid, password, 'mrp.workorder', 'update_serial_number', [int(workorder_id)])
-            #models.execute_kw(db, uid, password, 'update_serial_number', 'write', [{'id': workorder_id, 'number': serial_number_id}])
+            models.execute_kw(db, uid, password, 'mrp.workorder', 'write',[[workorder_id],{'x_serial_number_id': serial_number_id}])
+    
         except (Exception):
-            return False
-        return True
-        #return False
-        
+            return -1
+        return 0
+    
+    #compare to check if final lot ID has been updated, if update, show odoo update successful
+    def readFinalLotID(self):
+        try:
+            final_lot_id = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read', [[['id','=', workorder_id]]], {'fields': ['final_lot_id']})
+            id = final_lot_id[0].get('final_lot_id')
+        except (Exception):
+            return ""
+        return id[1]
+
     #Get RFID tag number       
     def getRFIDNumber(self):
         serial_rec = models.execute_kw(db, uid, password, 'ir.sequence', 'search_read', [[['code','=','rfid']]], {'fields': ['number_next_actual']})

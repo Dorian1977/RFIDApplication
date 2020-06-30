@@ -18,9 +18,10 @@ C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\R
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\bin\Release\AuthorizationForms.exe.config
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\bin\Release\AuthorizationForms.exe
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\bin\Release\AuthorizationForms.pdb
-C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.csprojResolveAssemblyReference.cache
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.csprojAssemblyReference.cache
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.AuthorizationForm.resources
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.Properties.Resources.resources
-C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.csproj.GenerateResource.Cache
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.csproj.GenerateResource.cache
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.csproj.CoreCompileInputs.cache
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.exe
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Release\AuthorizationForms.pdb

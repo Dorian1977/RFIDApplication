@@ -153,7 +153,12 @@ namespace RFIDApplication
 
         //String -> String array -> Byte Array (hexadecimal array)
         public static byte[] String2ByteArray(string strValue, int nLength, out byte wordCnt)
-        {            
+        {
+            wordCnt = 0;
+
+            if (strValue == "")
+                return null;
+
             string[] result = String2StringArray(strValue, nLength);
             wordCnt = Convert.ToByte(result.Length / 2 + result.Length % 2);
             return StringArray2ByteArray(result, result.Length);

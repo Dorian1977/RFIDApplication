@@ -28,7 +28,7 @@ namespace RFIDApplication
         
         public int nTagCount;
         public int nDataCount; 
-        public int nCommandDuration;
+        //public int nCommandDuration;
         public int nReadRate;
         public int nCurrentAnt;
         public List<int> lTotalRead;

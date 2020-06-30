@@ -15,11 +15,13 @@ namespace RFIDApplication
         public string EPC_data;
         public int readCount;
         public int notUpdateCount;
-        public string reserverData;
         public string label;
         public string tagInfo;
+        public string OdooTagInfo;
+        public string tagTIDInfo;
         public int rssi;
-        public bool tagIDNeedUpdate;
+        public int writeTestCount;
+        public int writeReceiveCount;
         public TagStatus tagStatus;
 
         public enum TagStatus
@@ -28,7 +30,9 @@ namespace RFIDApplication
             IDUpdated,
             AccessCodeNotUpdate,
             AccessCodeUpdated,
+            TIDUpdated,
             DataNotUpdate,
+            DataErased,
             DataUpdated
         }
 
@@ -39,23 +43,45 @@ namespace RFIDApplication
             EPC_data = "";
             readCount = 0;
             rssi = 0;
-            reserverData = "";
             label = "";
             tagInfo = "";
-            tagIDNeedUpdate = false;
+            OdooTagInfo = "";
+            tagTIDInfo = "";
+            writeTestCount = 0;
+            writeReceiveCount = 0;
             tagStatus = TagStatus.IDNotUpdate;
+            RFIDTagInfo.reserverData = "";
+        }
+    }
+    public class TagQC
+    {
+        public struct TAGIDResult
+        {
+            public const string Serialize = "SERIALIZE";
+            public const string NewTag = "New TAG";
+        }
+        public struct TagAccessCodeResult
+        {
+            public const string PASS = "PASS";
+            public const string FAIL = "FAIL";
+        }
+
+        public struct TagDataResult
+        {
+            public const string PASS = "PASS";
+            public const string FAIL = "FAIL";
         }
     }
 
     class RFIDTagInfo
     {
+        public static int writeTestReceiveCount = 0;
+        public static int writeTestRssiTotal = 0;
         private static string labelFormat = "";
         public const char serialSep = '=';
-
-        public static byte[] accessCode = null;
-       
+        public static string reserverData;
+        public static byte[] accessCode = null;       
         public static List<string> labelList = new List<string>();
-
         public static bool bAccessCode(string verifyCode, string strData)
         {
             if (strData == null || strData == "")
@@ -149,11 +175,16 @@ namespace RFIDApplication
 
         public static bool checkZeroAccessCode(byte[] input)
         {//return true if read 0 access code
-            if ((input[0] == 0) &&
-               (input[1] == 0) &&
-               (input[2] == 0) &&
-               (input[3] == 0))
-                return true;
+            try
+            {
+                if(input == null)                
+                    return false;
+                
+                else if ((input[0] == 0) && (input[1] == 0) &&
+                         (input[2] == 0) &&  (input[3] == 0))
+                    return true;                
+            }
+            catch (Exception exp) { }
             return false;
         }
 

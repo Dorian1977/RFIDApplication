@@ -13,6 +13,9 @@ namespace AuthorizationForms
         public string EPC_ID;
         public ulong EPC_PS_Num;
         public string EPC_data;
+        public static string label;
+        public static string reserverData;
+        public static string tagInfo;
         public int readCount;
         public int notUpdateCount;
         public int rssi;
@@ -43,10 +46,7 @@ namespace AuthorizationForms
     {
         private static string labelFormat = "";
         public const char serialSep = '=';
-        public static string label;
-        public static string reserverData;
         public static byte[] accessCode = null;
-        public static string tagInfo;
         public static List<string> labelList = new List<string>();
 
         public static bool bAccessCode(string verifyCode, string strData)

@@ -1,4 +1,4 @@
-﻿using IronPython.Hosting;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IronPython.Hosting;
 
 namespace RFIDApplication
 {
@@ -146,21 +147,6 @@ namespace RFIDApplication
         private void btClose_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void textBoxNote_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbUserName_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

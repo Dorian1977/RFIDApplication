@@ -86,7 +86,6 @@ C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\RFIDApplicatio
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.exe
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.pdb
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.LoginForm.resources
-C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.RFIDTagIDForm.resources
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.Properties.Resources.resources
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.csproj.GenerateResource.Cache
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\reference\xml_rpc.py
@@ -114,7 +113,6 @@ C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Scri
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Microsoft.Scripting.Metadata.xml
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.exe.manifest
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.application
-C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.csprojResolveAssemblyReference.cache
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.dll
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.xml
 C:\Users\dyeh\Documents\Visual Studio 2015\Projects\RFID Application\RFIDDesktop\bin\Debug\Markdown.dll
@@ -172,3 +170,7 @@ C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Markdown.xml
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\Pygments.xml
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\PythonLibs4CSharp.xml
 C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\bin\Debug\XmlRpc.xml
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.csprojAssemblyReference.cache
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.csproj.CoreCompileInputs.cache
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.csproj.CopyComplete
+C:\Users\dyeh\source\repos\RFID Application\RFIDDesktop\obj\Debug\RFIDApplication.RFIDTagIDForm.resources

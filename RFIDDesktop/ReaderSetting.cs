@@ -25,19 +25,19 @@ namespace RFIDApplication
         public byte btGpio3Value;
         public byte btGpio4Value;
         public byte btAntDetector;
-        public byte btMonzaStatus;
-        public string btReaderIdentifier;
-        public byte btAntImpedance;
+       // public byte btMonzaStatus;
+        //public string btReaderIdentifier;
+       // public byte btAntImpedance;
         //public byte btImpedanceFrequency;
 
         public int nUserDefineStartFrequency;
         public byte btUserDefineFrequencyInterval;
         public byte btUserDefineChannelQuantity;
-        public byte btLinkProfile;
-        public byte[] btOutputPowers;
+        //public byte btLinkProfile;
+        //public byte[] btOutputPowers;
 
         // add for mask
-        public byte[] btsGetTagMask;
+        //public byte[] btsGetTagMask;
 
         public ReaderSetting()
         {
