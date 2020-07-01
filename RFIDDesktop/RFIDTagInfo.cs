@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ComponentAce.Compression.Libs.ZLib;
+using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -55,26 +58,35 @@ namespace RFIDApplication
     }
     public class TagQC
     {
-        public struct TAGIDResult
-        {
-            public const string Serialize = "SERIALIZE";
-            public const string NewTag = "New TAG";
-        }
-        public struct TagAccessCodeResult
+        public struct TagResult
         {
             public const string PASS = "PASS";
             public const string FAIL = "FAIL";
         }
 
-        public struct TagDataResult
+        public struct TagIDText
         {
-            public const string PASS = "PASS";
-            public const string FAIL = "FAIL";
+            public const string EMPTY = "Empty";
+        }
+
+        public struct TagAccessCodeText
+        {
+            public const string LOCKED = "Tag is locked";
+            public const string NONLOCK = "Tag is not locked";
+            public const string LOCKSIZE = "Size is 8 bytes";
+        }
+
+        public struct TagDataText
+        {
+            public const string EMPTY = "Tag is empty";
+            public const string USED = "Tag has been authenticated";
+            public const string DATASIZE = "Size is 64 bytes";
         }
     }
 
     class RFIDTagInfo
     {
+        public static string currentTagID = "";
         public static int writeTestReceiveCount = 0;
         public static int writeTestRssiTotal = 0;
         private static string labelFormat = "";

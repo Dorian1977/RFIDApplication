@@ -60,17 +60,19 @@ namespace RFIDApplication
             this.pageQC = new System.Windows.Forms.TabPage();
             this.btShowDebugQC = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.tbQCTestCnt = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.tbDataResult = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.tbWriteTestResult = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.tbAccessCodeResult = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
             this.tbIDResult = new System.Windows.Forms.TextBox();
+            this.tbAccessCodeResult = new System.Windows.Forms.TextBox();
+            this.tbDataResult = new System.Windows.Forms.TextBox();
+            this.tbWriteTestResult = new System.Windows.Forms.TextBox();
+            this.tbQCTestCnt = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.tbQCTagID = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.tbQCTagStatus = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.tbQCTagData = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -421,7 +423,7 @@ namespace RFIDApplication
             // 
             // pageQC
             // 
-            this.pageQC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.pageQC.BackColor = System.Drawing.Color.White;
             this.pageQC.Controls.Add(this.btShowDebugQC);
             this.pageQC.Controls.Add(this.tableLayoutPanel1);
             resources.ApplyResources(this.pageQC, "pageQC");
@@ -439,125 +441,145 @@ namespace RFIDApplication
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.textBox9, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tbQCTestCnt, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBox8, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tbDataResult, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox7, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbWriteTestResult, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBox4, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbAccessCodeResult, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbIDResult, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbQCTagID, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbQCTagStatus, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbQCTagData, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textBox10, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbIDResult, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbAccessCodeResult, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbDataResult, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbWriteTestResult, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tbQCTestCnt, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textBox3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbQCTagID, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox4, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbQCTagStatus, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textBox7, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textBox8, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.textBox9, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tbQCTagData, 3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // textBox9
+            // textBox10
             // 
-            resources.ApplyResources(this.textBox9, "textBox9");
-            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.ForeColor = System.Drawing.Color.White;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            // 
-            // tbQCTestCnt
-            // 
-            resources.ApplyResources(this.tbQCTestCnt, "tbQCTestCnt");
-            this.tbQCTestCnt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.tbQCTestCnt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbQCTestCnt.ForeColor = System.Drawing.Color.White;
-            this.tbQCTestCnt.Name = "tbQCTestCnt";
-            this.tbQCTestCnt.ReadOnly = true;
-            // 
-            // textBox8
-            // 
-            resources.ApplyResources(this.textBox8, "textBox8");
-            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox8.ForeColor = System.Drawing.Color.White;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            // 
-            // tbDataResult
-            // 
-            resources.ApplyResources(this.tbDataResult, "tbDataResult");
-            this.tbDataResult.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.tbDataResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbDataResult.ForeColor = System.Drawing.Color.White;
-            this.tbDataResult.Name = "tbDataResult";
-            this.tbDataResult.ReadOnly = true;
-            // 
-            // textBox7
-            // 
-            resources.ApplyResources(this.textBox7, "textBox7");
-            this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox7.ForeColor = System.Drawing.Color.White;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            // 
-            // tbWriteTestResult
-            // 
-            resources.ApplyResources(this.tbWriteTestResult, "tbWriteTestResult");
-            this.tbWriteTestResult.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.tbWriteTestResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbWriteTestResult.ForeColor = System.Drawing.Color.White;
-            this.tbWriteTestResult.Name = "tbWriteTestResult";
-            this.tbWriteTestResult.ReadOnly = true;
-            // 
-            // textBox4
-            // 
-            resources.ApplyResources(this.textBox4, "textBox4");
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.ForeColor = System.Drawing.Color.White;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            // 
-            // tbAccessCodeResult
-            // 
-            resources.ApplyResources(this.tbAccessCodeResult, "tbAccessCodeResult");
-            this.tbAccessCodeResult.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.tbAccessCodeResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbAccessCodeResult.ForeColor = System.Drawing.Color.White;
-            this.tbAccessCodeResult.Name = "tbAccessCodeResult";
-            this.tbAccessCodeResult.ReadOnly = true;
+            resources.ApplyResources(this.textBox10, "textBox10");
+            this.textBox10.BackColor = System.Drawing.Color.White;
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox10.ForeColor = System.Drawing.Color.Black;
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
             // 
             // tbIDResult
             // 
             resources.ApplyResources(this.tbIDResult, "tbIDResult");
-            this.tbIDResult.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.tbIDResult.BackColor = System.Drawing.Color.White;
             this.tbIDResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbIDResult.ForeColor = System.Drawing.Color.White;
+            this.tbIDResult.ForeColor = System.Drawing.Color.Black;
             this.tbIDResult.Name = "tbIDResult";
             this.tbIDResult.ReadOnly = true;
+            // 
+            // tbAccessCodeResult
+            // 
+            resources.ApplyResources(this.tbAccessCodeResult, "tbAccessCodeResult");
+            this.tbAccessCodeResult.BackColor = System.Drawing.Color.White;
+            this.tbAccessCodeResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbAccessCodeResult.ForeColor = System.Drawing.Color.Black;
+            this.tbAccessCodeResult.Name = "tbAccessCodeResult";
+            this.tbAccessCodeResult.ReadOnly = true;
+            // 
+            // tbDataResult
+            // 
+            resources.ApplyResources(this.tbDataResult, "tbDataResult");
+            this.tbDataResult.BackColor = System.Drawing.Color.White;
+            this.tbDataResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbDataResult.ForeColor = System.Drawing.Color.Black;
+            this.tbDataResult.Name = "tbDataResult";
+            this.tbDataResult.ReadOnly = true;
+            // 
+            // tbWriteTestResult
+            // 
+            resources.ApplyResources(this.tbWriteTestResult, "tbWriteTestResult");
+            this.tbWriteTestResult.BackColor = System.Drawing.Color.White;
+            this.tbWriteTestResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbWriteTestResult.ForeColor = System.Drawing.Color.Black;
+            this.tbWriteTestResult.Name = "tbWriteTestResult";
+            this.tbWriteTestResult.ReadOnly = true;
+            // 
+            // tbQCTestCnt
+            // 
+            resources.ApplyResources(this.tbQCTestCnt, "tbQCTestCnt");
+            this.tbQCTestCnt.BackColor = System.Drawing.Color.White;
+            this.tbQCTestCnt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbQCTestCnt.ForeColor = System.Drawing.Color.Black;
+            this.tbQCTestCnt.Name = "tbQCTestCnt";
+            this.tbQCTestCnt.ReadOnly = true;
+            // 
+            // textBox3
+            // 
+            resources.ApplyResources(this.textBox3, "textBox3");
+            this.textBox3.BackColor = System.Drawing.Color.White;
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.ForeColor = System.Drawing.Color.Black;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             // 
             // tbQCTagID
             // 
             resources.ApplyResources(this.tbQCTagID, "tbQCTagID");
-            this.tbQCTagID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.tbQCTagID.BackColor = System.Drawing.Color.White;
             this.tbQCTagID.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbQCTagID.ForeColor = System.Drawing.Color.White;
+            this.tbQCTagID.ForeColor = System.Drawing.Color.Black;
             this.tbQCTagID.Name = "tbQCTagID";
             this.tbQCTagID.ReadOnly = true;
+            // 
+            // textBox4
+            // 
+            resources.ApplyResources(this.textBox4, "textBox4");
+            this.textBox4.BackColor = System.Drawing.Color.White;
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.ForeColor = System.Drawing.Color.Black;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
             // 
             // tbQCTagStatus
             // 
             resources.ApplyResources(this.tbQCTagStatus, "tbQCTagStatus");
-            this.tbQCTagStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.tbQCTagStatus.BackColor = System.Drawing.Color.White;
             this.tbQCTagStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbQCTagStatus.ForeColor = System.Drawing.Color.White;
+            this.tbQCTagStatus.ForeColor = System.Drawing.Color.Black;
             this.tbQCTagStatus.Name = "tbQCTagStatus";
             this.tbQCTagStatus.ReadOnly = true;
+            // 
+            // textBox7
+            // 
+            resources.ApplyResources(this.textBox7, "textBox7");
+            this.textBox7.BackColor = System.Drawing.Color.White;
+            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox7.ForeColor = System.Drawing.Color.Black;
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            // 
+            // textBox8
+            // 
+            resources.ApplyResources(this.textBox8, "textBox8");
+            this.textBox8.BackColor = System.Drawing.Color.White;
+            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox8.ForeColor = System.Drawing.Color.Black;
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            // 
+            // textBox9
+            // 
+            resources.ApplyResources(this.textBox9, "textBox9");
+            this.textBox9.BackColor = System.Drawing.Color.White;
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox9.ForeColor = System.Drawing.Color.Black;
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
             // 
             // tbQCTagData
             // 
             resources.ApplyResources(this.tbQCTagData, "tbQCTagData");
-            this.tbQCTagData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.tbQCTagData.BackColor = System.Drawing.Color.White;
             this.tbQCTagData.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbQCTagData.ForeColor = System.Drawing.Color.White;
+            this.tbQCTagData.ForeColor = System.Drawing.Color.Black;
             this.tbQCTagData.Name = "tbQCTagData";
             this.tbQCTagData.ReadOnly = true;
             // 
@@ -1175,6 +1197,8 @@ namespace RFIDApplication
         private TextBox textBox7;
         private TextBox textBox4;
         public CustomControl.LogRichTextBox lrtxtLog;
+        private TextBox textBox10;
+        private TextBox textBox3;
     }
 }
 

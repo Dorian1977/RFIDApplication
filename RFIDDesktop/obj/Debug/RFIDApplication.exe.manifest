@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>9Srh3DL6nVbjojsL1PDmib6AasDRj5HlwKlNwLBnp/c=</dsig:DigestValue>
+        <dsig:DigestValue>YHpox4N6l0FhP/j/GE45xA4KGroW0KbHK5YhEX9+Y+s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -182,19 +182,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ge0ojMfyTKQMPjS5WQxn5RofxDtdNyjf8WDrSlauVnE=</dsig:DigestValue>
+        <dsig:DigestValue>KUd7F0eOCbpk+91XkmeJIew968fN9Ot/losVziV3hgE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RFIDApplication.exe" size="396216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RFIDApplication.exe" size="402360">
       <assemblyIdentity name="RFIDApplication" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>AE3ncmRE1Iu5zqIv9+N5f+9EX1wqRLz6WfLcfyilzh4=</dsig:DigestValue>
+        <dsig:DigestValue>Cit6xjmX7kc9R2ZAJut5NDswLmvoBBDXXK25Dh9nMSc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

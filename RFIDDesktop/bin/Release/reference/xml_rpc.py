@@ -116,8 +116,11 @@ class XmlRpc:
     
     #compare to check if final lot ID has been updated, if update, show odoo update successful
     def readFinalLotID(self):
-        final_lot_id = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read', [[['id','=', workorder_id]]], {'fields': ['final_lot_id']})
-        id = final_lot_id[0].get('final_lot_id')
+        try:
+            final_lot_id = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read', [[['id','=', workorder_id]]], {'fields': ['final_lot_id']})
+            id = final_lot_id[0].get('final_lot_id')
+        except (Exception):
+            return ""
         return id[1]
 
     #Get RFID tag number       

@@ -56,41 +56,37 @@ namespace RFIDApplication
                 var productionId = xmlRpc.readProductionId();
                 var productId = xmlRpc.readProductId();
 
-                try
+                Type pID = productId.GetType();
+                if (productionId.GetType() == typeof(string) && pID == typeof(string))
                 {
-                    object pID = productId.GetType();
-                    if (productionId.GetType() == typeof(string) && pID == typeof(string))
+                    MessageBox.Show("Can't find work order, or work order is pause ", "Warning");
+                    tabCtrMain.TabPages.Remove(pageData);
+                    return false;
+                }
+                else if (pID == typeof(int))
+                {
+                    MessageBox.Show("Read Error: " + productionId +
+                                    " work orders are currerntly in progress!. Please pause all but one workorder before proceeding.", "Warning");
+                    return false;
+                }
+                else if (pID == typeof(IronPython.Runtime.List))
+                {
+                    if (productId.Count > 0 && productionId.Count > 0)
                     {
-                        MessageBox.Show("Can't find work order, or work order is pause ", "Warning");
-                        tabCtrMain.TabPages.Remove(pageData);
-                        return true;
-                    }
-                    else if (pID == typeof(int))
-                    {
-                        MessageBox.Show("Read Error: " + productionId +
-                                        " work orders are currerntly in progress!. Please pause all but one workorder before proceeding.", "Warning");
-                        return false;
-                    }
-                    else if (pID == typeof(IronPython.Runtime.List))
-                    {
-                        if (productId.Count > 0 && productionId.Count > 0)
+                        richtbWorkOrderInfo.Text = productionId[1];
+                        richTextBoxProductID.Text = productId[1];
+                        if (!bLogin)
                         {
-                            richtbWorkOrderInfo.Text = productionId[1];
-                            richTextBoxProductID.Text = productId[1];
-                            if (!bLogin)
-                            {
-                                tabCtrMain.TabPages.Remove(pageEpcID);
-                            }
+                            tabCtrMain.TabPages.Remove(pageEpcID);
                         }
                     }
                 }
-                catch (Exception exp) { }
-
             }
             catch (Exception exp)
             {
                 MessageBox.Show("Can't find work order, or work order is pause " + exp.Message, "Warning");
                 tabCtrMain.TabPages.Remove(pageData);
+                return false;
             }
             return true;
         }
@@ -134,6 +130,7 @@ namespace RFIDApplication
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 timerInventory.Enabled = true;
+                initScanTag();
             }
         }
 
@@ -142,14 +139,14 @@ namespace RFIDApplication
         {
             if (tagLists.Count > 0)
             {
-                int maxCountIndex = 0;
-                /*if (checkBoxUpdateData.Checked)
-                    maxCountIndex = findTag(tagSelect.writeAll);
-                else*/
-                maxCountIndex = findTag(tagSelect.writeID);
-
+                int maxCountIndex = findTag(tagSelect.writeID);
                 if (maxCountIndex < 0) return;
 
+                if (RFIDTagInfo.currentTagID != tagLists[maxCountIndex].EPC_ID)
+                {
+                    resetStatusColor();
+                    RFIDTagInfo.currentTagID = tagLists[maxCountIndex].EPC_ID;
+                }
                 selectTag(tagLists[maxCountIndex].EPC_ID);
                 switch (tagLists[maxCountIndex].tagStatus)
                 {
@@ -336,6 +333,12 @@ namespace RFIDApplication
             {
                 tagIndex = findTag(tagSelect.writeData);
                 if (tagIndex < 0) return;
+
+                if (RFIDTagInfo.currentTagID != tagLists[tagIndex].EPC_ID)
+                {
+                    resetStatusColor();
+                    RFIDTagInfo.currentTagID = tagLists[tagIndex].EPC_ID;
+                }
             }
 
             ulong rCount = 0;

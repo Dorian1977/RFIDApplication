@@ -165,7 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCommondMethod.cs" />
-    <Compile Include="XmlRpc1.cs" />
+    <Compile Include="XmlRpc.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

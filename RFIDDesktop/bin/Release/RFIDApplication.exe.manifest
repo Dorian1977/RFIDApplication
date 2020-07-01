@@ -187,14 +187,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RFIDApplication.exe" size="389560">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RFIDApplication.exe" size="391096">
       <assemblyIdentity name="RFIDApplication" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Jq5VtEWETrbV/fhJGMzOjftb0r5v56InfRVu4fYD3eE=</dsig:DigestValue>
+        <dsig:DigestValue>ARbw/wPsA8U3M3Fy1i0c6Nh5KE+JM7uBuxwpjebmF8s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
