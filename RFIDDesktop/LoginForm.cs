@@ -28,6 +28,7 @@ namespace RFIDApplication
             desktopApp = new RFIDTagIDForm(this);
             desktopApp.checkComPort();
             InitializeComponent();
+            label5.Visible = false;
 
             string sourceFilePath = Path.GetDirectoryName(new Uri(this.GetType().Assembly.GetName().CodeBase).LocalPath);
             if (File.Exists(sourceFilePath + @"\reference\database.txt"))
@@ -56,6 +57,8 @@ namespace RFIDApplication
 
         private void btLogin_Click(object sender, EventArgs e)
         {
+            label5.Enabled = true;
+            label5.Visible = true;
             if(tbUserName.Text == null || tbUserName.Text == "")
             {
                 MessageBox.Show("Username empty, try again!", "Warning");
@@ -73,7 +76,10 @@ namespace RFIDApplication
                 this.Hide();                                
                 desktopApp.Show();                
             }
+            label5.Visible = false;
+
         }
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -147,6 +153,11 @@ namespace RFIDApplication
         private void btClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="RFIDApplication.exe.manifest" size="13124">
+    <dependentAssembly dependencyType="install" codebase="RFIDApplication.exe.manifest" size="13125">
       <assemblyIdentity name="RFIDApplication.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HEANxcQYt/xuaSuL5wk2Ouw6KzayC/UcIGjEs2ALshw=</dsig:DigestValue>
+        <dsig:DigestValue>kNwep8f3iUAGYvHSnZmR8ZTWosJ1VRGwJ9m/I4jODsg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

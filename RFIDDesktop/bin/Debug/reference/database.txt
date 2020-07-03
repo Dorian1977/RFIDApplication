@@ -1,1 +1,1 @@
-https://packsmart-rfid-1204018.dev.odoo.com,packsmart-rfid-1204018
+https://packsmart-test-1234534.dev.odoo.com,packsmart-test-1234534

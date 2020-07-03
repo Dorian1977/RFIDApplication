@@ -38,11 +38,11 @@ namespace RFIDApplication
             this.Counts = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabCtrMain = new System.Windows.Forms.TabControl();
             this.pageEpcID = new System.Windows.Forms.TabPage();
+            this.btShowDebug1 = new System.Windows.Forms.Button();
             this.tableLayoutPanelID = new System.Windows.Forms.TableLayoutPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tbEPCTagDetected = new System.Windows.Forms.TextBox();
             this.tBAccessCodeVerify = new System.Windows.Forms.TextBox();
-            this.btShowDebug1 = new System.Windows.Forms.Button();
             this.pictureBoxID = new System.Windows.Forms.PictureBox();
             this.pageData = new System.Windows.Forms.TabPage();
             this.btShowDebug = new System.Windows.Forms.Button();
@@ -267,12 +267,21 @@ namespace RFIDApplication
             // pageEpcID
             // 
             this.pageEpcID.BackColor = System.Drawing.Color.White;
-            this.pageEpcID.Controls.Add(this.tableLayoutPanelID);
             this.pageEpcID.Controls.Add(this.btShowDebug1);
+            this.pageEpcID.Controls.Add(this.tableLayoutPanelID);
             this.pageEpcID.Controls.Add(this.pictureBoxID);
             resources.ApplyResources(this.pageEpcID, "pageEpcID");
             this.pageEpcID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.pageEpcID.Name = "pageEpcID";
+            // 
+            // btShowDebug1
+            // 
+            this.btShowDebug1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btShowDebug1.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btShowDebug1, "btShowDebug1");
+            this.btShowDebug1.Name = "btShowDebug1";
+            this.btShowDebug1.UseVisualStyleBackColor = true;
+            this.btShowDebug1.Click += new System.EventHandler(this.btShowDebug1_Click);
             // 
             // tableLayoutPanelID
             // 
@@ -308,15 +317,6 @@ namespace RFIDApplication
             this.tBAccessCodeVerify.ForeColor = System.Drawing.Color.Green;
             this.tBAccessCodeVerify.Name = "tBAccessCodeVerify";
             this.tBAccessCodeVerify.ReadOnly = true;
-            // 
-            // btShowDebug1
-            // 
-            this.btShowDebug1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btShowDebug1.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btShowDebug1, "btShowDebug1");
-            this.btShowDebug1.Name = "btShowDebug1";
-            this.btShowDebug1.UseVisualStyleBackColor = true;
-            this.btShowDebug1.Click += new System.EventHandler(this.btShowDebug1_Click);
             // 
             // pictureBoxID
             // 
@@ -897,7 +897,6 @@ namespace RFIDApplication
             // 
             // timerInventory
             // 
-            this.timerInventory.Interval = 200;
             this.timerInventory.Tick += new System.EventHandler(this.timerInventory_Tick);
             // 
             // splitContainer2

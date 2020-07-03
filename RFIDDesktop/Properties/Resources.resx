@@ -121,8 +121,20 @@
   <data name="AccessCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\reference\AccessCode.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Bad" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bad.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Good" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Good.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="juntos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\juntos.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="LabelFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\reference\LabelFormat.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pristine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pristine.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SymmetricKey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\reference\SymmetricKey.dat;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

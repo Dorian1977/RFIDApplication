@@ -42,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBoxLogin = new System.Windows.Forms.PictureBox();
             this.btClose = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogin)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +96,7 @@
             this.btLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btLogin.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btLogin.Font = new System.Drawing.Font("Roboto Light", 15.75F);
             this.btLogin.ForeColor = System.Drawing.Color.Transparent;
             this.btLogin.Location = new System.Drawing.Point(490, 221);
             this.btLogin.Name = "btLogin";
@@ -194,12 +195,25 @@
             this.btClose.UseVisualStyleBackColor = true;
             this.btClose.Click += new System.EventHandler(this.btClose_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Roboto Light", 15.75F);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(475, 228);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(125, 25);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Logging in...";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
             this.ClientSize = new System.Drawing.Size(730, 396);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxNote);
@@ -237,5 +251,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBoxLogin;
         private System.Windows.Forms.Button btClose;
+        private System.Windows.Forms.Label label5;
     }
 }

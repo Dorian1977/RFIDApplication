@@ -235,6 +235,14 @@
   <ItemGroup>
     <Content Include="images_orU_icon.ico" />
     <Content Include="pack_smart_logo___standard_white_outline_icon_xSH_icon.ico" />
+    <None Include="Resources\pristine.wav" />
+    <None Include="Resources\juntos.wav" />
+    <None Include="Resources\Bad.wav" />
+    <None Include="Resources\Good.wav" />
+    <None Include="Resources\done.wav" />
+    <None Include="Resources\completed.wav" />
+    <None Include="Resources\done.mp3" />
+    <None Include="Resources\completed.mp3" />
     <None Include="reference\xml_rpc.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

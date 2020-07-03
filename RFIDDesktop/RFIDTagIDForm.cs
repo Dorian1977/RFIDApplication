@@ -1,4 +1,5 @@
-﻿#define enableWriteControl
+﻿#define DESKTOP
+#define enableWriteControl
 #define Connect2Odoo
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading;
 using System.IO;
 using System.IO.Ports;
 using IronPython.Hosting;
+using System.Media;
 
 namespace RFIDApplication
 {
@@ -18,12 +20,21 @@ namespace RFIDApplication
     {
         public class RFIDReader
         {
-            public static int nAdvStartFrequency = 13850000; //Start Freq: kHz
+#if DESKTOP
             public static int nNormalStartFrequency = 921000; //Start Freq: kHz
+            public static byte nFrequencyInterval = 10;//5;    //5, Freq Sapce: per 10KHz
+            public static byte btChannelQuantity = 50;//30;     //5, Quentity
+            public static byte[] OutputPower = { 10 }; //26-18, 10
+            public static int NormalRSSI_MIN = 80;
+            public static int RSSI_MIN = 80;
+#else
+            public static int nNormalStartFrequency = 13850000; //Start Freq: kHz
             public static byte nFrequencyInterval = 5;    //5, Freq Sapce: per 10KHz
             public static byte btChannelQuantity = 30;     //5, Quentity
             public static byte[] OutputPower = { 18 }; //26-18, 10
-            public static int RSSI_MIN = 60;
+             public static int NormalRSSI_MIN = 60;
+            public static int RSSI_MIN = 80;
+#endif
         }
 
         LoginForm loginForm = null;
@@ -42,7 +53,7 @@ namespace RFIDApplication
         const short rwTagDelay = 50; //read/write RFID tag delay, default is 300
         private int m_nTotal = 0;
         //Frequency of list updating.
-        private int m_nRealRate = 3;
+        private int m_nRealRate = 5;
         //Record quick poll antenna parameter.
         private byte[] m_btAryData = new byte[18];
         private byte[] m_btAryData_4 = new byte[10];
@@ -57,7 +68,6 @@ namespace RFIDApplication
         //private volatile bool m_nPhaseOpened = false;
         private volatile bool m_nSessionPhaseOpened = false;
         List<RFIDTagData> tagLists = new List<RFIDTagData>();
-        List<List<string>> tagUpdateList = new List<List<string>>(); //record tag id been updated
         bool bFormMoveflag = false;
 
         bool bVerify = false;        
@@ -70,7 +80,6 @@ namespace RFIDApplication
         {
             writeID,
             writeData,
-            writeAll,
             Test
         }
 
@@ -90,7 +99,7 @@ namespace RFIDApplication
         {
             byte[] labelFormat = Properties.Resources.LabelFormat;
             RFIDTagInfo.loadLabelFormat(labelFormat);
-            tbQCTestCnt.Text = RFIDTagInfo.writeTestReceiveCount + " out of " + QC_Write_Test;
+            tbQCTestCnt.Text = "Waiting...";//FIDTagInfo.writeTestReceiveCount + " out of " + QC_Write_Test;
             if (xmlRpc != null)
             {
                 tbLoginID.Text = "Welcome, " + xmlRpc.getUserName();
@@ -99,6 +108,9 @@ namespace RFIDApplication
             btShowDebug1.Text = "Hide log";
             splitContainer2.Panel2Collapsed = false;
             this.Height = 551;
+
+            checkBoxShowDetail.Checked = true;
+            splitContainer1.SplitterDistance = (int)Math.Ceiling(this.Width * 0.623);
 #else
             btShowDebug1.Text = "Show log";
             splitContainer2.Panel2Collapsed = true;            
@@ -117,29 +129,29 @@ namespace RFIDApplication
             if (iComPortStatus == 1)
             {
                 reader.GetFirmwareVersion(m_curSetting.btReadId);                        
-                initScanTag();
+                initScanTag(true);
             }
         }
 
         private void timerInventory_Tick(object sender, EventArgs e)
         {
-            m_nReceiveFlag_300ms++;
-            if (m_nReceiveFlag_300ms >= 3)
+            if (m_nReceiveFlag_300ms++ >= 1)
             {//900ms
                 RunLoopInventroy();
                 m_nReceiveFlag_300ms = 0;
 
                 try
                 {
-                    if (bReaderListUpdate && xmlRpc != null)
+                    if (/*bReaderListUpdate &&*/ xmlRpc != null)
                     {
                         bReaderListUpdate = false;
                         if (xmlRpc.readyToUpdateTag())
                         {
                             if (tabCtrMain.SelectedTab == pageData)
                             {
-                                if(XMLRPC.xmlRpcStatus == XMLRPC.XmlRPCTagStatus.OdooSuccessful)
+                                if (XMLRPC.xmlRpcStatus == XMLRPC.XmlRPCTagStatus.OdooSuccessful)
                                 {
+                                    //checkOdooStatus();
                                     return;
                                 }
                                 else if (XMLRPC.xmlRpcStatus == XMLRPC.XmlRPCTagStatus.Update2Odoo)
@@ -148,37 +160,32 @@ namespace RFIDApplication
                                 }
                                 else
                                 {
-                                    xmlRpcUpdateTagData(-1);                                   
+                                    xmlRpcUpdateTagData(-1);
                                 }
                                 return;
                             }
-                            else if(tabCtrMain.SelectedTab == pageEpcID)
+                            else if (tabCtrMain.SelectedTab == pageEpcID)
                             {
                                 xmlRpcUpdateTagID();
                                 return;
                             }
                         }
-                    }
-                                        
-                    //check tag status only
-                    //tbDataUpdateStatus.Text = "Cloud can't connect, check the connection!";
-                    int index = findTag(tagSelect.Test);
-                    if (index < 0) return;
 
-                    if (tabCtrMain.SelectedTab == pageQC)
-                    {
-                        if (tagLists[index].EPC_PS_Num > 0)
-                        {
-                            ulong rCount = 0;
-                            tagLists[index].label = RFIDTagInfo.readEPCLabel(tagLists[index].EPC_ID, out rCount);
-                            tbQCTagID.Text = tagLists[index].label.Substring(0, 2) + rCount.ToString();
-                            tbIDResult = SetStatusResult(tbIDResult, true);
+                        //check tag status only
+                        //tbDataUpdateStatus.Text = "Cloud can't connect, check the connection!";
+                        int index = findTag(tagSelect.Test);
+                        if (index < 0) return;
+
+                        selectTag(tagLists[index].EPC_ID);
+                        Thread.Sleep(rwTagDelay);
+                        if (tabCtrMain.SelectedTab == pageQC)
+                        {                            
+                            QCPage(index);
                         }
-                        QCPage(index);
-                    }
-                    else
-                    {
-                        checkTagStatus(tagLists[index].EPC_ID);
+                        else
+                        {
+                            checkTagStatus(tagLists[index].EPC_ID);
+                        }
                     }
                 }
                 catch (Exception exp) { }
@@ -270,13 +277,14 @@ namespace RFIDApplication
             m_curInventoryBuffer.bLoopInventory = true;
             m_curInventoryBuffer.bLoopInventoryReal = true;
             m_curInventoryBuffer.ClearInventoryResult();
-
+                        
+            listViewEPCTag.Items.Clear();
             tagLists.Clear();
             m_nTotal = 0;
             reader.SetWorkAntenna(m_curSetting.btReadId, 0x00);
             m_curSetting.btWorkAntenna = 0x00;
         }
-        private void initScanTag()
+        private void initScanTag(bool bUpdateSetting)
         {
             m_curInventoryBuffer.ClearInventoryPar();
             m_curInventoryBuffer.btRepeat = 1; //1
@@ -287,54 +295,72 @@ namespace RFIDApplication
             m_curInventoryBuffer.bLoopInventoryReal = true;
             m_curInventoryBuffer.ClearInventoryRealResult();
 
-            reader.SetOutputPower(m_curSetting.btReadId, RFIDReader.OutputPower);
-            Thread.Sleep(rwTagDelay);
-
-            if (tabCtrMain.TabPages.Count == 3 && tabCtrMain.SelectedTab == pageQC)
-            { 
-                reader.SetUserDefineFrequency(m_curSetting.btReadId,
-                                                RFIDReader.nAdvStartFrequency,
-                                                RFIDReader.nFrequencyInterval,
-                                                RFIDReader.btChannelQuantity);
-                m_curSetting.btRegion = 4;
-                m_curSetting.nUserDefineStartFrequency = RFIDReader.nAdvStartFrequency;
-                m_curSetting.btUserDefineFrequencyInterval = RFIDReader.nFrequencyInterval;
-                m_curSetting.btUserDefineChannelQuantity = RFIDReader.btChannelQuantity;
-            }
-            else
+            if (bUpdateSetting)
             {
-                reader.SetUserDefineFrequency(m_curSetting.btReadId,
-                                RFIDReader.nNormalStartFrequency,
-                                RFIDReader.nFrequencyInterval,
-                                RFIDReader.btChannelQuantity);
+                reader.SetOutputPower(m_curSetting.btReadId, RFIDReader.OutputPower);
+                Thread.Sleep(rwTagDelay*2);
+#if false
+                if (tabCtrMain.TabPages.Count == 3 && tabCtrMain.SelectedTab == pageQC)
+                {
+                    reader.SetUserDefineFrequency(m_curSetting.btReadId,
+                                                    RFIDReader.nAdvStartFrequency,
+                                                    RFIDReader.nFrequencyInterval,
+                                                    RFIDReader.btChannelQuantity);
+                    m_curSetting.btRegion = 4;
+                    m_curSetting.nUserDefineStartFrequency = RFIDReader.nAdvStartFrequency;
+                    m_curSetting.btUserDefineFrequencyInterval = RFIDReader.nFrequencyInterval;
+                    m_curSetting.btUserDefineChannelQuantity = RFIDReader.btChannelQuantity;
+                    RFIDReader.RSSI_MIN = RFIDReader.AdvRSSI_MIN;
+                }
+                else
+#endif
+                {
+                    reader.SetUserDefineFrequency(m_curSetting.btReadId,
+                                    RFIDReader.nNormalStartFrequency,
+                                    RFIDReader.nFrequencyInterval,
+                                    RFIDReader.btChannelQuantity);
 
-                m_curSetting.btRegion = 4;
-                m_curSetting.nUserDefineStartFrequency = RFIDReader.nNormalStartFrequency;
-                m_curSetting.btUserDefineFrequencyInterval = RFIDReader.nFrequencyInterval;
-                m_curSetting.btUserDefineChannelQuantity = RFIDReader.btChannelQuantity;
+                    m_curSetting.btRegion = 4;
+                    m_curSetting.nUserDefineStartFrequency = RFIDReader.nNormalStartFrequency;
+                    m_curSetting.btUserDefineFrequencyInterval = RFIDReader.nFrequencyInterval;
+                    m_curSetting.btUserDefineChannelQuantity = RFIDReader.btChannelQuantity;
+                    RFIDReader.RSSI_MIN = RFIDReader.NormalRSSI_MIN;
+                }
+                Thread.Sleep(rwTagDelay * 2);
+
+                m_nTotal = 0;
+                reader.SetWorkAntenna(m_curSetting.btReadId, 0x00);
+                Thread.Sleep(rwTagDelay * 2);
+                m_curSetting.btWorkAntenna = 0x00;
             }
-            Thread.Sleep(rwTagDelay*2);
-
-            m_nTotal = 0;
-            reader.SetWorkAntenna(m_curSetting.btReadId, 0x00);
-            Thread.Sleep(rwTagDelay * 2);
-            m_curSetting.btWorkAntenna = 0x00;
-            timerInventory.Enabled = true;         
+            timerInventory.Enabled = true;
         }
 
-        private TextBox SetStatusResult(TextBox tb, bool bPass)
+        private TextBox SetStatusResult(TextBox tb, TagQC.TagStatus tStatus)
         {
-            if(bPass)
+            switch (tStatus)
             {
-                tb.Text = TagQC.TagResult.PASS;
-                tb.ForeColor = Color.Green;
-                tb.BackColor = Color.White;             
-            }
-            else
-            {
-                tb.Text = TagQC.TagResult.FAIL;
-                tb.ForeColor = Color.Red;
-                tb.BackColor = Color.White;
+                case TagQC.TagStatus.Default:
+                    {
+                        tb.Text = TagQC.TagResult.DEFAULT;
+                        tb.ForeColor = Color.Green;
+                        tb.BackColor = Color.White;
+                    }
+                    break;
+                case TagQC.TagStatus.Pass:
+                    {
+                        tb.Text = TagQC.TagResult.PASS;
+                        tb.ForeColor = Color.Green;
+                        tb.BackColor = Color.White;
+                    }
+                    break;
+                case TagQC.TagStatus.Fail:
+                    {
+                        tb.Text = TagQC.TagResult.FAIL;
+                        tb.ForeColor = Color.Red;
+                        tb.BackColor = Color.White;
+                    }
+                    break;
             }
             tb.Refresh();
             return tb;
@@ -343,91 +369,98 @@ namespace RFIDApplication
         private void QCPage(int iTagIndex)
         {//for existing tag, check tag access code, data
          //for new tag, check the size of ID, size of access code, size of data
-            switch (XMLRPC.xmlRpcStatus)
+
+            byte btWordCnt = 0;
+            byte[] btAryPwd = CCommondMethod.String2ByteArray(symmetric.readAccessCode(), 2, out btWordCnt);
+            byte[] byteZeroData = new byte[4] { 0, 0, 0, 0 };
+            if (tbQCTagStatus.Text == TagQC.TagAccessCodeText.DEFAULT)
             {
-                case XMLRPC.XmlRPCTagStatus.Ready:
-                case XMLRPC.XmlRPCTagStatus.Test:
+                if (tbQCTagID.Text == TagQC.TagIDText.EMPTY)
+                {
+                    reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, byteZeroData);
+                    RFIDTagInfo.accessCode = byteZeroData;
+                    Thread.Sleep(rwTagDelay*2);
+                }
+                else
+                {
+                    checkTagStatus(tagLists[iTagIndex].EPC_ID);
+                }
+            }
+            else if (tbQCTagData.Text == TagQC.TagDataText.DEFAULT)
+            {
+                reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, byteZeroData);
+                Thread.Sleep(rwTagDelay * 2);
+            }
+            else if (tbQCTagData.Text == TagQC.TagDataText.EMPTY ||
+                    tbQCTagData.Text == TagQC.TagDataText.USED ||
+                    tbQCTagData.Text == TagQC.TagDataText.DATASIZE)
+            {//test read write  
+                if (tagLists[iTagIndex].writeTestCount == 0) //reset
+                {
+                    RFIDTagInfo.writeTestReceiveCount = 0;
+                    RFIDTagInfo.writeTestRssiTotal = 0;
+                    timerInventory.Interval = 30;
+                }
+                if (tagLists[iTagIndex].writeTestCount <= QC_Write_Test)
+                {
+                    XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Test;
+                    m_bInventory = false;
+                    m_curInventoryBuffer.bLoopInventory = false;
+                    m_curInventoryBuffer.bLoopInventoryReal = false;
+
+                    if (RFIDTagInfo.reserverData == "")
                     {
-                        byte btWordCnt = 0;
-                        byte[] btAryPwd = CCommondMethod.String2ByteArray(symmetric.readAccessCode(), 2, out btWordCnt);
-                        byte[] byteZeroData = new byte[4] { 0, 0, 0, 0 };
-                        if (tbQCTagStatus.Text == "")
-                        {
-                            if(tbQCTagID.Text == TagQC.TagIDText.EMPTY)
-                            {                               
-                                selectTag(tagLists[iTagIndex].EPC_ID);
-                                reader.ReadTag(m_curSetting.btReadId, 0, 0, 4, byteZeroData);
-                                RFIDTagInfo.accessCode = byteZeroData;
-                                Thread.Sleep(rwTagDelay * 2);
-                            }
-                            else
-                            {
-                                checkTagStatus(tagLists[iTagIndex].EPC_ID);
-                            }
-                        }
-                        else if (tbQCTagData.Text == "")
-                        {
-                            if(tbQCTagStatus.Text == TagQC.TagAccessCodeText.LOCKED && tbAccessCodeResult.Text == TagQC.TagResult.PASS)
-                                reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, btAryPwd);                            
-                            else                          
-                                reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, byteZeroData);
-
-                            Thread.Sleep(rwTagDelay * 2);
-                        }
+                        if (tbQCTagStatus.Text == TagQC.TagAccessCodeText.LOCKED && tbAccessCodeResult.Text == TagQC.TagResult.PASS)
+                            reader.WriteTag(m_curSetting.btReadId, btAryPwd, 0, 0, 4, byteZeroData, 0x94);
                         else
-                        {//test read write  
-                            if (tagLists[iTagIndex].writeTestCount == 0) //reset
-                            {
-                                RFIDTagInfo.writeTestReceiveCount = 0;
-                                RFIDTagInfo.writeTestRssiTotal = 0;
-                            }
-                            if (tagLists[iTagIndex].writeTestCount <= QC_Write_Test)
-                            {
-                                XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Test;
-                                m_bInventory = false;
-                                m_curInventoryBuffer.bLoopInventory = false;
-                                m_curInventoryBuffer.bLoopInventoryReal = false;
-
-                                if (RFIDTagInfo.reserverData == "")
-                                {
-                                    if (tbQCTagStatus.Text == TagQC.TagAccessCodeText.LOCKED && tbAccessCodeResult.Text == TagQC.TagResult.PASS)
-                                        reader.WriteTag(m_curSetting.btReadId, btAryPwd, 0, 0, 4, byteZeroData, 0x94);
-                                    else
-                                        reader.WriteTag(m_curSetting.btReadId, byteZeroData, 0, 0, 4, byteZeroData, 0x94);
-                                }
-                                else
-                                {
-                                    byte[] byteData = CCommondMethod.String2ByteArray(RFIDTagInfo.reserverData.ToUpper(), 2, out btWordCnt);
-                                    reader.WriteTag(m_curSetting.btReadId, btAryPwd, 0, 0, btWordCnt, byteData, 0x94);
-                                }
-                                //WriteLog(lrtxtLog, "Write test, count " + tagLists[iTagIndex].writeTestCount.ToString(), 0);
-                                Thread.Sleep(rwTagDelay * 4);
-                                tagLists[iTagIndex].writeReceiveCount = RFIDTagInfo.writeTestReceiveCount;
-                                RFIDTagInfo.writeTestRssiTotal += tagLists[iTagIndex].rssi;
-                                tbQCTestCnt.Text = tagLists[iTagIndex].writeReceiveCount + " out of " + tagLists[iTagIndex].writeTestCount++;
-                            }
-                            else if (tagLists[iTagIndex].writeReceiveCount >= (tagLists[iTagIndex].writeTestCount / 4 * 3) &&
-                                     tbWriteTestResult.Text == TagQC.TagResult.PASS)
-                            {
-                                break;
-                            }
-                            else if(tbWriteTestResult.Text != TagQC.TagResult.PASS ||
-                                    tbWriteTestResult.Text != TagQC.TagResult.FAIL)
-                            { 
-                                if (tagLists[iTagIndex].writeReceiveCount >= (tagLists[iTagIndex].writeTestCount/4*3))
-                                {
-                                    tbWriteTestResult = SetStatusResult(tbWriteTestResult, true);
-                                }
-                                else
-                                {
-                                    tbWriteTestResult = SetStatusResult(tbWriteTestResult, false);
-                                }
-                                initScanTag();
-                                XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
-                            }
-                        }
+                            reader.WriteTag(m_curSetting.btReadId, byteZeroData, 0, 0, 4, byteZeroData, 0x94);
                     }
-                    break;
+                    else
+                    {
+                        byte[] byteData = CCommondMethod.String2ByteArray(RFIDTagInfo.reserverData.ToUpper(), 2, out btWordCnt);
+                        reader.WriteTag(m_curSetting.btReadId, btAryPwd, 0, 0, btWordCnt, byteData, 0x94);
+                    }
+                    //WriteLog(lrtxtLog, "Write test, count " + tagLists[iTagIndex].writeTestCount.ToString(), 0);
+                    Thread.Sleep(rwTagDelay * 3);
+                    tagLists[iTagIndex].writeReceiveCount = RFIDTagInfo.writeTestReceiveCount;
+                    RFIDTagInfo.writeTestRssiTotal += tagLists[iTagIndex].rssi;
+                    tbQCTestCnt.Text = tagLists[iTagIndex].writeReceiveCount + " out of " + tagLists[iTagIndex].writeTestCount++;
+                }
+                else if (tagLists[iTagIndex].writeReceiveCount >= (tagLists[iTagIndex].writeTestCount / 4 * 3) &&
+                         tbWriteTestResult.Text == TagQC.TagResult.PASS ||
+                         tbWriteTestResult.Text == TagQC.TagResult.FAIL)
+                {
+                    if(!m_curInventoryBuffer.bLoopInventory)
+                    {
+                        timerInventory.Interval = 200;
+                        initScanTag(false);
+                    }
+                    return;
+                }
+                else if (tbWriteTestResult.Text != TagQC.TagResult.PASS ||
+                        tbWriteTestResult.Text != TagQC.TagResult.FAIL)
+                {
+                    if (tagLists[iTagIndex].writeReceiveCount >= (tagLists[iTagIndex].writeTestCount / 4 * 3))
+                    {
+                        tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Pass);
+                        RFIDTagInfo.playSound(true);
+                    }
+                    else
+                    {
+                        tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Fail);
+                        RFIDTagInfo.playSound(false);
+                    }
+                    timerInventory.Interval = 200;
+                    initScanTag(false);
+                    XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
+                }
+            }
+            else if (tbQCTagData.Text.Contains(tbQCTagID.Text))
+            {
+                if (tbQCTestCnt.Text == TagQC.TagDataText.DEFAULT)
+                {
+                    tbQCTestCnt.Text = "Skip write test";
+                }
             }
         }
         private void ProcessSetOutputPower(Reader.MessageTran msgTran)
@@ -498,9 +531,8 @@ namespace RFIDApplication
             {
                 strErrorCode = "Unknown Error";
             }
-
-            string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
-            WriteLog(lrtxtLog, strLog, 1);
+            //string strLog = strCmd + "Failure, failure cause: " + strErrorCode;
+            //WriteLog(lrtxtLog, strLog, 1);
         }
 
         private void AnalyData(Reader.MessageTran msgTran)
@@ -593,18 +625,23 @@ namespace RFIDApplication
         {
             tbEPCTagDetected.Visible = false;
             tBAccessCodeVerify.Visible = false;
+            tBAccessCodeVerify.ForeColor = Color.Green;            
             tbDataVerify.Visible = false;
             tbOdooStatus.Visible = false;
+            tbOdooStatus.ForeColor = Color.Green;
 
             XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.Ready;
-            tbQCTagID.Text = "Waiting...";
-            tbIDResult.Text = "PASS/FAIL";
-            tbQCTagStatus.Text = "Waiting...";
-            tbAccessCodeResult.Text = "PASS/FAIL";
-            tbQCTagData.Text = "Waiting...";
-            tbDataResult.Text = "PASS/FAIL";
-            tbWriteTestResult.Text = "PASS/FAIL";
-            tbQCTestCnt.Text = RFIDTagInfo.writeTestReceiveCount +  " out of " + QC_Write_Test;
+            tbQCTagID.Text = TagQC.TagIDText.DEFAULT;
+            tbIDResult = SetStatusResult(tbIDResult, TagQC.TagStatus.Default);
+
+            tbQCTagStatus.Text = TagQC.TagAccessCodeText.DEFAULT;
+            tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, TagQC.TagStatus.Default);
+
+            tbQCTagData.Text = TagQC.TagDataText.DEFAULT;
+            tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Default);
+
+            tbQCTestCnt.Text = "Waiting..."; // RFIDTagInfo.writeTestReceiveCount + " out of " + QC_Write_Test;
+            tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Default);
         }
 
         private delegate void RefreshInventoryRealUnsafe(byte btCmd);
@@ -624,8 +661,8 @@ namespace RFIDApplication
                         {
                             //int nTagCount = m_curInventoryBuffer.dtTagTable.Rows.Count;
                             int nTotalRead = m_nTotal;// m_curInventoryBuffer.dtTagDetailTable.Rows.Count;
-                            TimeSpan ts = m_curInventoryBuffer.dtEndInventory - m_curInventoryBuffer.dtStartInventory;
-                            int nTotalTime = ts.Minutes * 60 * 1000 + ts.Seconds * 1000 + ts.Milliseconds;
+                            //TimeSpan ts = m_curInventoryBuffer.dtEndInventory - m_curInventoryBuffer.dtStartInventory;
+                            //int nTotalTime = ts.Minutes * 60 * 1000 + ts.Seconds * 1000 + ts.Milliseconds;
 
                             if (m_nTotal % m_nRealRate == 1)
                             {//update item info here
@@ -644,11 +681,11 @@ namespace RFIDApplication
                                     }
                                     if (index != -1)
                                     {
-                                        if(tagLists[index].readCount == Convert.ToInt32(row[7]))
+                                        if (tagLists[index].readCount == Convert.ToInt32(row[7]))
                                             tagLists[index].notUpdateCount++;
-                                        else
-                                            tagLists[index].notUpdateCount = 0;
-
+                                        else if (tagLists[index].notUpdateCount > 0)                                        
+                                            tagLists[index].notUpdateCount--;
+                                        
                                         tagLists[index].readCount = Convert.ToInt32(row[7]);
                                         tagLists[index].rssi = Convert.ToInt32(row[4]);
 
@@ -672,35 +709,38 @@ namespace RFIDApplication
                                         tagData.readCount = Convert.ToInt32(row[7]);
                                         tagData.rssi = Convert.ToInt32(row[4]);
 
-                                        bool bTagExisted = false;
-                                        for (int i = 0; i < tagUpdateList.Count; i++)
-                                        {
-                                            if (tagUpdateList[i][1].Trim().Contains(tagData.EPC_ID.Trim()))
-                                            {
-                                                bTagExisted = true;
-                                                break;
-                                            }
-                                        }
-                                        if (!bTagExisted)
-                                        {
-                                            tagUpdateList.Clear();
-                                        }
-
                                         if (tagData.EPC_PS_Num > 0)
                                         {                                           
                                             tagData.tagStatus = RFIDTagData.TagStatus.IDUpdated;
                                             resetStatusColor();
 
-                                            if(tabCtrMain.SelectedTab == pageEpcID)
+                                            if (tabCtrMain.SelectedTab == pageEpcID)
                                             {
                                                 tbEPCTagDetected.Visible = true;
+
+                                                if (rfidID > 0 && tagData.EPC_PS_Num == (ulong)rfidID)
+                                                {
+                                                    xmlRpc.getNextRFIDNumber(rfidID);
+
+                                                    tBAccessCodeVerify.Text = "Write success";
+                                                    tBAccessCodeVerify.Visible = true;
+                                                    tBAccessCodeVerify.ForeColor = Color.Green;
+                                                    tBAccessCodeVerify.BackColor = Color.White;
+                                                    RFIDTagInfo.playSound(true);
+                                                }
+                                                else
+                                                {
+                                                    tBAccessCodeVerify.Visible = true;
+                                                    tBAccessCodeVerify.Text = "Tag ID has already updated";
+                                                    tBAccessCodeVerify.ForeColor = Color.Red;
+                                                    tBAccessCodeVerify.BackColor = Color.White;
+                                                    RFIDTagInfo.playSound(false);
+                                                }
                                             }
                                             else if (tabCtrMain.SelectedTab == pageQC)
-                                            {                                                
-                                                ulong rCount = 0;
-                                                tagData.label = RFIDTagInfo.readEPCLabel(tagData.EPC_ID, out rCount);
-                                                tbQCTagID.Text = tagData.label.Substring(0, 2) + rCount.ToString();
-                                                tbIDResult = SetStatusResult(tbIDResult, true);
+                                            {
+                                                tbQCTagID.Text = "PS"+ tagData.EPC_PS_Num.ToString();                                               
+                                                tbIDResult = SetStatusResult(tbIDResult, TagQC.TagStatus.Pass);
                                             }
                                         }
                                         else
@@ -715,7 +755,7 @@ namespace RFIDApplication
                                             else if (tabCtrMain.SelectedTab == pageQC)
                                             {
                                                 tbQCTagID.Text = TagQC.TagIDText.EMPTY;//"Tag ID format not corrected";
-                                                tbIDResult = SetStatusResult(tbIDResult, true);
+                                                tbIDResult = SetStatusResult(tbIDResult, TagQC.TagStatus.Pass);
                                             }
 
                                             if (tabCtrMain.SelectedTab != pageEpcID)
@@ -772,22 +812,21 @@ namespace RFIDApplication
                                         }
                                     }
                                 }
-                                //check all tag is update or not, if not, count not update time
-                                for (int i = 0; i < tagLists.Count; i++)
+                                for(int i=0; i<tagLists.Count; i++)
                                 {
-                                   if (tagLists[i].notUpdateCount++ > TAGRESET)
-                                    {//remove from database, listview, and taglist
+                                    if(tagLists[i].notUpdateCount > TAGRESET)
+                                    {
                                         m_curInventoryBuffer.removeInventoryItem(2, tagLists[i].EPC_ID);
                                         foreach (ListViewItem item in listViewEPCTag.Items)
                                         {
-                                            if (item.SubItems[0].Text == tagLists[i].EPC_ID)
-                                            {//existed 
+                                            if (item.SubItems[0].Text.Trim().Contains(tagLists[i].EPC_ID.Trim()))
+                                            {
                                                 item.Remove();
                                                 break;
                                             }
                                         }
                                         tagLists.RemoveAt(i);
-                                    }                                   
+                                    }
                                 }
                                 bReaderListUpdate = true;
                                 Thread.Sleep(50);
@@ -1124,6 +1163,9 @@ namespace RFIDApplication
                     //WriteLog(lrtxtLog,"Read Tag, AryData.Length " + msgTran.AryData.Length, 0);
                     if (msgTran.AryData.Length == 1)
                     {
+                        if (tagLists.Count == 0)
+                            return; 
+
                         strErrorCode = CCommondMethod.FormatErrorCode(msgTran.AryData[0]);
                         string strLog = strCmd + " Failure, read tag failure cause1: " + strErrorCode;
                         if (readTagRetry++ < rwTagRetryMAX)
@@ -1137,28 +1179,59 @@ namespace RFIDApplication
 
                             switch(XMLRPC.xmlRpcStatus)
                             {
-                                case XMLRPC.XmlRPCTagStatus.WriteIDOk:
+                                case XMLRPC.XmlRPCTagStatus.WriteIDOk: //read ID
                                     reader.ReadTag(m_curSetting.btReadId, 1, 2, 6, btAryPwd);
                                     break;
                                 case XMLRPC.XmlRPCTagStatus.Ready:
                                 case XMLRPC.XmlRPCTagStatus.WriteAccessOk:
-                                    reader.ReadTag(m_curSetting.btReadId, 0, 0, 4, btAryPwd);
+                                    reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, btAryPwd);
                                     break;
                                 case XMLRPC.XmlRPCTagStatus.writeUserData:
-                                    reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, btAryPwd);
+                                    reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, btAryPwd);
                                     break;
-                            }
-                           
-                            Thread.Sleep(rwTagDelay * (readTagRetry % 3 + 2));
-                            //setVerifiedLEDStatus(false, true); //red on
+                            }                           
+                            Thread.Sleep((readTagRetry % rwTagRetryMAX) * 2);
 #if DEBUG
-                            WriteLog(lrtxtLog, "Read Tag retry " + readTagRetry, 1);
+                            //WriteLog(lrtxtLog, "Read Tag retry " + readTagRetry, 1);
 #endif
+                            if (RFIDTagInfo.currentTagID != "")
+                            {
+                                for (int i = 0; i < tagLists.Count; i++)
+                                {
+                                    if (RFIDTagInfo.currentTagID == tagLists[i].EPC_ID)
+                                    {
+                                        tagLists[i].notUpdateCount++;
+                                    }
+                                }
+                            }
                         }
-                        else
+                        else 
                         {// read tag failed
-                            WriteLog(lrtxtLog, "Read Tag retry more than " + rwTagRetryMAX + " times " + readTagRetry, 1);
+                            WriteLog(lrtxtLog, "Read Tag retry" + readTagRetry + " (" + rwTagRetryMAX + ") " + readTagRetry, 1);
                             readTagRetry = 0;
+                            Thread.Sleep(rwTagDelay*2);
+                            if (RFIDTagInfo.currentTagID != "")
+                            {
+                                for (int i = 0; i < tagLists.Count; i++)
+                                {
+                                    if (RFIDTagInfo.currentTagID == tagLists[i].EPC_ID)
+                                    {
+                                        m_curInventoryBuffer.removeInventoryItem(2, tagLists[i].EPC_ID);
+                                        foreach (ListViewItem item in listViewEPCTag.Items)
+                                        {
+                                            if (item.SubItems[0].Text.Trim().Contains(tagLists[i].EPC_ID.Trim()))
+                                            {
+                                                item.Remove();
+                                                break;
+                                            }
+                                        }
+                                        tagLists.RemoveAt(i);
+                                    }
+                                }
+                            }
+                            timerInventory.Enabled = false;
+                            timerInventory.Interval = 200;
+                            initScanTag(false);
                         }
                     }
                     else
@@ -1185,14 +1258,39 @@ namespace RFIDApplication
                         tagLists[index].label = RFIDTagInfo.readEPCLabel(strEPC, out uWordCnt);
                         if (RFIDTagInfo.currentTagID != tagLists[index].EPC_ID)
                         {
-                            resetStatusColor();                         
+                            if (tabCtrMain.SelectedTab != pageEpcID)
+                                resetStatusColor();
+
                             RFIDTagInfo.currentTagID = tagLists[index].EPC_ID;
                         }
+                        byte[] byteZeroData = new byte[4] { 0, 0, 0, 0 };
+                        if (tabCtrMain.SelectedTab == pageQC)
+                        {
+                            if (tbQCTagID.Text == TagQC.TagIDText.DEFAULT)
+                            {
+                                if (tagLists[index].label != "" && uWordCnt > 0)                                    
+                                    tbQCTagID.Text = tagLists[index].label.Substring(0, 2) + uWordCnt.ToString();                                    
+                                else                                    
+                                    tbQCTagID.Text = TagQC.TagIDText.EMPTY;
+                                    
+                                tbIDResult.Text = TagQC.TagResult.PASS;
+                            }
+                            if(tbQCTagStatus.Text == TagQC.TagAccessCodeText.DEFAULT)
+                            {
+                                byte[] btAryPwd = CCommondMethod.String2ByteArray(symmetric.readAccessCode(), 2, out btWordCnt);                                    
+                                    
+                                if (tbQCTagID.Text == TagQC.TagIDText.EMPTY)                                    
+                                    RFIDTagInfo.accessCode = byteZeroData;                           
+                                else                                    
+                                    RFIDTagInfo.accessCode = btAryPwd;
+                                    
+                                reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, RFIDTagInfo.accessCode);
+                                Thread.Sleep(rwTagDelay);
+                            }
+                        }                                            
+                        
                         if (!tbEPCTagDetected.Visible)
-                            tbEPCTagDetected.Visible = true;
-
-                        if(tbQCTagID.Text == "Waiting...")
-                            tbQCTagID.Text = tagLists[index].label.Substring(0, 2) + uWordCnt.ToString();
+                            tbEPCTagDetected.Visible = true;                       
 
                         if (strData.Length / 3 == 4 || strData.Length / 3 == 8)
                         {
@@ -1206,29 +1304,7 @@ namespace RFIDApplication
 
                             if (RFIDTagInfo.bAccessCode(symmetric.readAccessCode(), strData))
                             {//verify access code                               
-                                RFIDTagInfo.reserverData = strData;
-                                if(!tBAccessCodeVerify.Visible && tabCtrMain.SelectedTab == pageEpcID )
-                                {
-                                    if (tagUpdateList.Count > 0)
-                                    {
-                                        if (tagUpdateList[0][0] != "" ||
-                                          (tagUpdateList[0][0] == "" && tagUpdateList[0][1].Trim().Contains(tagLists[index].EPC_ID.Trim())))
-                                        {
-                                            tBAccessCodeVerify.Text = "Write success";
-                                            tBAccessCodeVerify.Visible = true;
-                                            tBAccessCodeVerify.ForeColor = Color.Green;
-                                            tBAccessCodeVerify.BackColor = Color.White;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        tBAccessCodeVerify.Visible = true;
-                                        tBAccessCodeVerify.Text = "Tag ID has already updated";
-                                        tBAccessCodeVerify.ForeColor = Color.Red;
-                                        tBAccessCodeVerify.BackColor = Color.White;
-
-                                    }
-                                }
+                                RFIDTagInfo.reserverData = strData;                               
 
                                 //update tag status for ready or locked                                
                                 if ((tagLists[index].tagStatus != RFIDTagData.TagStatus.DataNotUpdate) &&
@@ -1237,7 +1313,7 @@ namespace RFIDApplication
                                 {
                                     if (tagLists[index].tagStatus != RFIDTagData.TagStatus.AccessCodeUpdated)
                                     {
-                                        WriteLog(lrtxtLog, "*** Verified Access Code Successful ***" + tagLists[index].EPC_ID, 0);
+                                        WriteLog(lrtxtLog, "Verified Access Code Successful", 0);
                                     }
 
                                     if (!tbDataVerify.Visible)
@@ -1248,28 +1324,28 @@ namespace RFIDApplication
                                     tagLists[index].tagStatus = RFIDTagData.TagStatus.AccessCodeUpdated;
                                     if (tabCtrMain.SelectedTab == pageEpcID)
                                     {
-                                        reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, null);
-                                        Thread.Sleep(rwTagDelay * 2);
+                                        reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, null);
+                                        Thread.Sleep(rwTagDelay*2);
                                     }
                                     else if (tabCtrMain.SelectedTab == pageData)
                                     {//in data page, read TID
                                         reader.ReadTag(m_curSetting.btReadId, 2, 0, 12, null);
-                                        Thread.Sleep(rwTagDelay * 2);
+                                        Thread.Sleep(rwTagDelay);
                                     }
                                     else if (tabCtrMain.SelectedTab == pageQC)
                                     {
                                         tbQCTagStatus.Text = TagQC.TagAccessCodeText.LOCKED; // "TAG Locked";
-                                        tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, true);
+                                        tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, TagQC.TagStatus.Pass);
 
-                                        reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, null);
-                                        Thread.Sleep(rwTagDelay * 2);
+                                        reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, null);
+                                        Thread.Sleep(rwTagDelay*2);
                                     }
                                 }
                                 else if((RFIDTagInfo.reserverData.Substring(0, 12).Trim() != "00 00 00 00") &&
                                         (tagLists[index].tagStatus != RFIDTagData.TagStatus.DataErased))
                                 {
-                                    reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, RFIDTagInfo.accessCode);
-                                    Thread.Sleep(rwTagDelay * 2);
+                                    reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, RFIDTagInfo.accessCode);
+                                    Thread.Sleep(rwTagDelay*2);
                                 }
                             }
                             else
@@ -1277,31 +1353,23 @@ namespace RFIDApplication
                                 RFIDTagInfo.reserverData = "";
                                 // ID update, but access code not update
                                 tagLists[index].tagStatus = RFIDTagData.TagStatus.AccessCodeNotUpdate;
-                                                                
-                                List<string> tagIDList = new List<string>();
-                                tagIDList.Add("");
-                                tagIDList.Add(tagLists[index].EPC_ID);
-                                tagUpdateList.Add(tagIDList);
-
-                                WriteLog(lrtxtLog, "*** Verified Access Code Failed ***" + tagLists[index].EPC_ID, 1);
-
+                                                               
                                 if (tabCtrMain.SelectedTab == pageQC)
                                 {                                   
-                                    if(tbQCTagID.Text != TagQC.TagIDText.EMPTY && 
-                                       tbIDResult.Text == TagQC.TagResult.PASS)
+                                    if(tbQCTagID.Text != TagQC.TagIDText.EMPTY)
                                     {// ID is serialize, not lock
                                         tbQCTagStatus.Text = TagQC.TagAccessCodeText.NONLOCK; // "TAG is not lock";
-                                        tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, false);
+                                        tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, TagQC.TagStatus.Fail);
                                         if (strData == null || strData.Trim().StartsWith("00 00 00 00"))
                                         {
                                             tbQCTagData.Text = TagQC.TagDataText.EMPTY; // "Data verification failed";
-                                            tbDataResult = SetStatusResult(tbDataResult, false);
+                                            tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Pass);
                                         }
                                         else
                                         {
                                             XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.writeUserData;
-                                            reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, RFIDTagInfo.accessCode);
-                                            Thread.Sleep(rwTagDelay * 2);
+                                            reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, RFIDTagInfo.accessCode);
+                                            Thread.Sleep(rwTagDelay*2);
                                         }
                                     }
                                     else
@@ -1309,15 +1377,19 @@ namespace RFIDApplication
                                         //reserve section is require 4 words / 8 bytes
                                         tbQCTagStatus.Text = TagQC.TagAccessCodeText.LOCKSIZE; // "Reserve section requires 8 bytes";
                                         if (strData != null && strData.Length / 3 == 8)
-                                            tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, true);                                         
+                                            tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, TagQC.TagStatus.Pass);                                         
                                         else
-                                            tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, false);
+                                            tbAccessCodeResult = SetStatusResult(tbAccessCodeResult, TagQC.TagStatus.Fail);
                                         
                                         tbDataResult.Refresh();
                                         XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.writeUserData;
-                                        reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, RFIDTagInfo.accessCode);
-                                        Thread.Sleep(rwTagDelay * 2);
+                                        reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, RFIDTagInfo.accessCode);
+                                        Thread.Sleep(rwTagDelay*2);
                                     }                                   
+                                }
+                                else
+                                {
+                                    WriteLog(lrtxtLog, "*** Verified Access Code Failed ***", 1);
                                 }
                             }
                         }
@@ -1325,7 +1397,7 @@ namespace RFIDApplication
                         {//read TID
                             tagLists[index].tagStatus = RFIDTagData.TagStatus.TIDUpdated;
                             tagLists[index].tagTIDInfo = strData.Trim();
-                            reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, RFIDTagInfo.accessCode);
+                            reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, RFIDTagInfo.accessCode);
                             Thread.Sleep(rwTagDelay*2);
                         }
                         else if (strData.Length / 3 >= 40)
@@ -1344,23 +1416,32 @@ namespace RFIDApplication
                             }
                             else
                             {
-                                if(tabCtrMain.SelectedTab == pageQC && 
-                                   tbQCTagID.Text == TagQC.TagIDText.EMPTY)
-                                {// reserve data existed
-                                    tbQCTagData.Text = TagQC.TagDataText.DATASIZE; // "Data section requires 60 bytes";
-                                    if (strData.Length / 3 == 60)
-                                        tbDataResult = SetStatusResult(tbDataResult, true);
-                                    else
-                                        tbDataResult = SetStatusResult(tbDataResult, false);
+                                if (tabCtrMain.SelectedTab == pageQC)
+                                {
+                                    if (tbQCTagID.Text == TagQC.TagIDText.EMPTY)
+                                    {// reserve data existed
+                                        tbQCTagData.Text = TagQC.TagDataText.DATASIZE; // "Data section requires 60 bytes";
+                                        if (strData.Length / 3 == 64)
+                                            tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Pass);
+                                        else
+                                            tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Fail);
 
-                                    tbDataResult.Refresh();
-                                    XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.Test;
-                                    return;
-                                }
-                                WriteLog(lrtxtLog, "Add reserve data first!! ", 1);
-                                reader.ReadTag(m_curSetting.btReadId, 0, 0, 4, RFIDTagInfo.accessCode);
-                                Thread.Sleep(rwTagDelay);
-                                return;
+                                        tbDataResult.Refresh();
+                                        XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Test;
+                                        return;
+                                    }
+                                    if (tbQCTagStatus.Text == TagQC.TagAccessCodeText.DEFAULT)
+                                    {
+                                        reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, RFIDTagInfo.accessCode);
+                                        Thread.Sleep(rwTagDelay);
+                                        return;
+                                    }
+                                    if(tbQCTagData.Text == TagQC.TagDataText.DEFAULT)
+                                    {
+                                        tbQCTagData.Text = "Read data failed!";
+                                        tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Fail);
+                                    }
+                                }                                                              
                             }
 
                             if (reserveData == "00 00 00 00")
@@ -1376,9 +1457,10 @@ namespace RFIDApplication
                                             tbOdooStatus.Text = "Error, tag has already authenticated";
                                             tbOdooStatus.ForeColor = Color.Red;
                                             tbOdooStatus.BackColor = Color.White;
+                                            RFIDTagInfo.playSound(false);
                                         }
                                         tbQCTagData.Text = TagQC.TagDataText.USED; // "Tag has already authenticated";
-                                        tbDataResult = SetStatusResult(tbDataResult, false);
+                                        tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Fail);
                                     }
                                 }
                                 bVerify = false;
@@ -1388,7 +1470,7 @@ namespace RFIDApplication
                                 bVerify = verifyTag(reserveData.ToUpper() + strData, index);
                             }
                             if (bVerify)
-                            {
+                            {/*
                                 foreach (ListViewItem item in listViewEPCTag.Items)
                                 {
                                     if (item.SubItems[0].Text.Trim().Contains(strEPC.Trim()))
@@ -1397,7 +1479,7 @@ namespace RFIDApplication
                                         item.ForeColor = Color.WhiteSmoke;
                                         break;
                                     }
-                                }   
+                                }*/   
                                 tagLists[index].tagStatus = RFIDTagData.TagStatus.DataUpdated;
 
                                 if(tabCtrMain.SelectedTab == pageEpcID)
@@ -1409,10 +1491,13 @@ namespace RFIDApplication
                                     tbQCTagData.Text = tagLists[index].tagInfo;
                                     string [] tagIDData = tbQCTagData.Text.Split(RFIDTagInfo.serialSep);
                                     if(tagIDData[0].Substring(2) == tagLists[index].EPC_PS_Num.ToString())
-                                        tbDataResult = SetStatusResult(tbDataResult, true);
+                                        tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Pass);
                                     else
-                                        tbDataResult = SetStatusResult(tbDataResult, false);
+                                        tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Fail);
                                     tbDataResult.Refresh();
+
+                                    tbQCTestCnt.Text = "Skip write test";
+                                    tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Pass);
                                     return;
                                 }
 
@@ -1421,16 +1506,30 @@ namespace RFIDApplication
                                     (tagLists[index].OdooTagInfo != ""))
                                 {
 #if Connect2Odoo
-                                   XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.Update2Odoo;
+                                    XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.Update2Odoo;
                                     int result = xmlRpc.writeRFIDTag(tagLists[index].OdooTagInfo, tagLists[index].tagTIDInfo);
                                     if (result == 0)
-                                    {                                        
-
-                                        WriteLog(lrtxtLog, "*** Verified Data Successful ***" + tagLists[index].EPC_ID, 0);
+                                    {                                 
+                                        WriteLog(lrtxtLog,"Verified Data Successful " + tagLists[index].EPC_ID, 0);
                                         //WriteLog(lrtxtLog, "*** Data Read ***" + RFIDTagInfo.tagInfo, 0);
 
                                         WriteLog(lrtxtLog, "*** Click \"Update\" on WebPage Now ***", 0);
                                         ////tbDataUpdateStatus.Text = "Click RECORD PRODUCTION on WebPage Now";
+                                        /// XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.OdooSuccessful;
+                                        //udpate tag status for done or content updated 
+#if true
+                                        if (tbOdooStatus.ForeColor != Color.Green || tbOdooStatus.Visible == false)
+                                        {
+                                            tbOdooStatus.Visible = true;
+                                            tbOdooStatus.Text = "Tag " + tagLists[index].OdooTagInfo +
+                                                                " Activated. Press \"UPDATE\" ->  \"RECORD PRODCUTION\" on Odoo";
+                                            tbOdooStatus.ForeColor = Color.Green;
+                                            tbOdooStatus.BackColor = Color.White;
+                                            RFIDTagInfo.playSound(true);
+                                        }
+#endif
+                                        //RFIDTagInfo.playSound(true);
+
                                     }
                                     else if (result == -1)
                                     {//duplicate tag
@@ -1445,10 +1544,10 @@ namespace RFIDApplication
                                             tbOdooStatus.Text = "Error, duplicate tag";
                                             tbOdooStatus.ForeColor = Color.Red;
                                             tbOdooStatus.BackColor = Color.White;
+                                            RFIDTagInfo.playSound(false);
                                         }
                                     }
-                                    else {//press record production
-                            
+                                    else {//press record production                            
                                         if (!tbOdooStatus.Visible)
                                         {
                                             //xmlRpcStatus = XMLRPC.XmlRPCTagStatus.OdooFail;
@@ -1459,7 +1558,8 @@ namespace RFIDApplication
                                             tbOdooStatus.Visible = true;
                                             tbOdooStatus.Text = "Error, Click \"RECORD PRODUCTION\" on WebPage Now";
                                             tbOdooStatus.ForeColor = Color.Red;
-                                            tbOdooStatus.BackColor = Color.White;                                            
+                                            tbOdooStatus.BackColor = Color.White;
+                                            RFIDTagInfo.playSound(false);
                                         }
                                     }
 #else
@@ -1476,12 +1576,19 @@ namespace RFIDApplication
                                      (tagLists[index].tagStatus != RFIDTagData.TagStatus.DataErased))
                             {
                                 tagLists[index].tagStatus = RFIDTagData.TagStatus.DataNotUpdate;
-                                WriteLog(lrtxtLog, "verified data failed, retry now " + tagLists[index].EPC_ID, 1);
 
                                 if (tabCtrMain.SelectedTab == pageQC)
                                 {
                                     tbQCTagData.Text = TagQC.TagDataText.EMPTY; // "Data verification failed";
-                                    tbDataResult = SetStatusResult(tbDataResult, false);
+                                    tbDataResult = SetStatusResult(tbDataResult, TagQC.TagStatus.Fail);
+                                }
+                                else if (tabCtrMain.SelectedTab == pageEpcID)
+                                {
+                                    WriteLog(lrtxtLog, "Data is empty ", 0);
+                                }
+                                else if(tabCtrMain.SelectedTab == pageData)
+                                { 
+                                    WriteLog(lrtxtLog, "verified data failed, retry now " + tagLists[index].EPC_ID, 1);
                                 }
                             }
                         }
@@ -1492,6 +1599,12 @@ namespace RFIDApplication
                     //setVerifiedLEDStatus(0, 1); //red on      
                     WriteLog(lrtxtLog, strCmd + " got error " + exp.Message, 1);
                     //need to move to scan next tag here
+                    tbOdooStatus.Visible = true;
+                    tbOdooStatus.Text = "Error, write tag failed";
+                    tbOdooStatus.ForeColor = Color.Red;
+                    tbOdooStatus.BackColor = Color.White;
+                    RFIDTagInfo.playSound(false);
+
                 }
             }
         }
@@ -1536,6 +1649,9 @@ namespace RFIDApplication
                 {//write tag failed
                     //setVerifiedLEDStatus(0, 1); //red on 
                     writeTagRetry = 0;
+                    timerInventory.Enabled = false;
+                    timerInventory.Interval = 200;
+                    initScanTag(false);
                 }
             }
             else
@@ -1599,14 +1715,14 @@ namespace RFIDApplication
                     case XMLRPC.XmlRPCTagStatus.WriteID:
                         {
                            XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.WriteIDOk;
-                            reader.ReadTag(m_curSetting.btReadId, 0, 0, 4, btAryPwd);
+                            reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, btAryPwd);
                             Thread.Sleep(rwTagDelay);
                         }
                         break;
                     case XMLRPC.XmlRPCTagStatus.WriteAccessCode:
                         {
                            XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.WriteAccessOk;
-                            reader.ReadTag(m_curSetting.btReadId, 0, 0, 4, btAryPwd);
+                            reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, btAryPwd);
                             Thread.Sleep(rwTagDelay);
                         }
                         break;
@@ -1621,11 +1737,11 @@ namespace RFIDApplication
                         if (RFIDTagInfo.reserverData.Trim().StartsWith("00 00 00 00"))
                         {
                            XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.WriteDataDone;
-                            reader.ReadTag(m_curSetting.btReadId, 0, 0, 4, btAryPwd);
+                            reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, btAryPwd);
                         }
                         else
                         {
-                            reader.ReadTag(m_curSetting.btReadId, 3, 0, 30, btAryPwd);
+                            reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, btAryPwd);
                             //WriteLog(lrtxtLog, " Write -> Read Tag data section", 0);
                         }
                         Thread.Sleep(rwTagDelay*2);
@@ -1788,14 +1904,14 @@ namespace RFIDApplication
 
             for (int i = 0; i < tagLists.Count; i++)
             {
-                if ((readCount < tagLists[i].readCount) &&                   
-                    (readRSSI < tagLists[i].rssi) && (tagLists[i].rssi >= RFIDReader.RSSI_MIN))
+                if ((readCount < (tagLists[i].readCount - tagLists[i].notUpdateCount*2)) &&
+                    /*(readRSSI < tagLists[i].rssi) &&*/ (tagLists[i].rssi >= RFIDReader.RSSI_MIN))
                 {
 #if DEBUG
                     //WriteLog(lrtxtLog, "Get tag " + tagLists[i].EPC_ID + ", rssi " + tagLists[i].rssi, 0);
 #endif
                     if (tagLists[i].tagStatus == RFIDTagData.TagStatus.IDUpdated ||
-                       tagLists[i].tagStatus == RFIDTagData.TagStatus.IDNotUpdate)
+                        tagLists[i].tagStatus == RFIDTagData.TagStatus.IDNotUpdate)
                        XMLRPC.xmlRpcStatus= XMLRPC.XmlRPCTagStatus.Ready;
 
                     switch(tagLists[i].tagStatus)
@@ -1805,7 +1921,7 @@ namespace RFIDApplication
                         case RFIDTagData.TagStatus.AccessCodeNotUpdate:
                             {
                                 if (selectTag == tagSelect.writeID ||
-                                   selectTag == tagSelect.writeAll)
+                                    selectTag == tagSelect.Test)
                                 {
                                     readCount = tagLists[i].readCount;
                                     readRSSI = tagLists[i].rssi;
@@ -1814,7 +1930,7 @@ namespace RFIDApplication
                                     if (tagLists[i].tagStatus == RFIDTagData.TagStatus.AccessCodeNotUpdate &&
                                         !tbDataVerify.Visible)
                                     {
-                                        tbOdooStatus.Visible = true;
+                                        tbDataVerify.Visible = true;
                                     }
                                 }
                             }break;                        
@@ -1823,7 +1939,7 @@ namespace RFIDApplication
                         case RFIDTagData.TagStatus.DataNotUpdate:
                             {
                                 if (selectTag == tagSelect.writeData ||
-                                    selectTag == tagSelect.writeAll)
+                                    selectTag == tagSelect.Test)
                                 {
                                     readCount = tagLists[i].readCount;
                                     readRSSI = tagLists[i].rssi;
@@ -1831,7 +1947,7 @@ namespace RFIDApplication
 
                                     if (!tbDataVerify.Visible)
                                     {
-                                        tbOdooStatus.Visible = true;
+                                        tbDataVerify.Visible = true;
                                     }
                                 }
                             }break;
@@ -1841,7 +1957,7 @@ namespace RFIDApplication
                                 {
                                     if (!tbDataVerify.Visible)
                                     {
-                                        tbOdooStatus.Visible = true;
+                                        tbDataVerify.Visible = true;
                                     }
                                 }
                                 else if(XMLRPC.xmlRpcStatus== XMLRPC.XmlRPCTagStatus.Ready ||
@@ -1855,12 +1971,6 @@ namespace RFIDApplication
                                 }
                                 break;
                             }
-                    }
-                    if (tabCtrMain.SelectedTab == pageQC)
-                    {
-                        readCount = tagLists[i].readCount;
-                        readRSSI = tagLists[i].rssi;
-                        maxCountIndex = i;
                     }
                 }
             }                     
@@ -1903,7 +2013,8 @@ namespace RFIDApplication
                 btWordCnt = 4;
                 reader.ReadTag(m_curSetting.btReadId, btMemBank, btWordAddr, btWordCnt, byteAryWriteData);
                 Thread.Sleep(rwTagDelay);
-            }*/
+            }
+            */
         }
 
         private void listViewEPCTag_SelectedIndexChanged(object sender, EventArgs e)
@@ -1957,7 +2068,7 @@ namespace RFIDApplication
                     }
                 }
                 selectTag(tagID);
-                reader.ReadTag(m_curSetting.btReadId, 0, 0, 4, RFIDTagInfo.accessCode);
+                reader.ReadTag(m_curSetting.btReadId, 0, 0, RFIDTagInfo.RESERVESIZE, RFIDTagInfo.accessCode);
 #if DEBUG
                 //WriteLog(lrtxtLog, "Read Tag access code: " + tagID, 0);
 #endif
@@ -2021,7 +2132,7 @@ namespace RFIDApplication
 
             tagLists.Clear();
             resetStatusColor();
-            initScanTag();
+            initScanTag(true);
         }
         
         private void checkBoxShowDetail_CheckedChanged(object sender, EventArgs e)

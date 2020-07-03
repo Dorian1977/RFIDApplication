@@ -6,6 +6,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -58,26 +59,38 @@ namespace RFIDApplication
     }
     public class TagQC
     {
+        public enum TagStatus
+        {
+            Default,
+            Pass,
+            Fail
+        }
+
         public struct TagResult
         {
+            public const string DEFAULT = "";//"PASS/FAIL";
             public const string PASS = "PASS";
             public const string FAIL = "FAIL";
         }
 
         public struct TagIDText
         {
+            public const string DEFAULT = "Waiting...";
             public const string EMPTY = "Empty";
         }
 
         public struct TagAccessCodeText
         {
+            public const string DEFAULT = "Waiting...";
             public const string LOCKED = "Tag is locked";
             public const string NONLOCK = "Tag is not locked";
+            public const string LOCKFAIL = "Tag is lock failed";
             public const string LOCKSIZE = "Size is 8 bytes";
         }
 
         public struct TagDataText
         {
+            public const string DEFAULT = "Waiting...";
             public const string EMPTY = "Tag is empty";
             public const string USED = "Tag has been authenticated";
             public const string DATASIZE = "Size is 64 bytes";
@@ -86,6 +99,8 @@ namespace RFIDApplication
 
     class RFIDTagInfo
     {
+        public const byte DATASIZE = 32; //64 bytes
+        public const byte RESERVESIZE = 4; //8 bytes
         public static string currentTagID = "";
         public static int writeTestReceiveCount = 0;
         public static int writeTestRssiTotal = 0;
@@ -93,7 +108,7 @@ namespace RFIDApplication
         public const char serialSep = '=';
         public static string reserverData;
         public static byte[] accessCode = null;       
-        public static List<string> labelList = new List<string>();
+        //public static List<string> labelList = new List<string>();
         public static bool bAccessCode(string verifyCode, string strData)
         {
             if (strData == null || strData == "")
@@ -263,5 +278,67 @@ namespace RFIDApplication
             }
             return list.ToArray();
         } 
+
+        public static void playSound(bool bPASS)
+        {
+            if(bPASS)
+            {
+                //SystemSounds.Exclamation.Play();
+                //SystemSounds.Question.Play();
+#if true
+                PlayWav(Properties.Resources.juntos, false);
+#else
+                using (var soundPlayer = new SoundPlayer(@"c:\Windows\Media\Windows Notify System Generic.wav"))
+                {
+                    soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+                }
+#endif
+                /*
+                 * System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.Sound);
+                 * player.Play();
+                */
+            }
+            else
+            {
+#if true
+                PlayWav(Properties.Resources.Bad, false);
+#else
+                using (var soundPlayer = new SoundPlayer(@"c:\Windows\Media\Windows Error.wav"))
+                //using (var soundPlayer = new SoundPlayer(@"c:\Windows\Media\ringout.wav"))
+                {
+                    soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+                }
+#endif
+            }
+        }
+
+        // The player making the current sound.
+        private static SoundPlayer Player = null;
+
+        // Dispose of the current player and
+        // play the indicated WAV file.
+        private static void PlayWav(Stream stream, bool play_looping)
+        {
+            // Stop the player if it is running.
+            if (Player != null)
+            {
+                Player.Stop();
+                Player.Dispose();
+                Player = null;
+            }
+
+            // If we have no stream, we're done.
+            if (stream == null) return;
+
+            // Make the new player for the WAV stream.
+            Player = new SoundPlayer(stream);
+
+            // Play.
+            if (play_looping)
+                Player.PlayLooping();
+            else
+                Player.Play();
+        }
+
     }
 }
