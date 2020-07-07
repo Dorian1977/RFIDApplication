@@ -24,5 +24,5 @@ C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\D
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.exe
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.pdb
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csprojResolveAssemblyReference.cache
-C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csprojAssemblyReference.cache
 C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csproj.CoreCompileInputs.cache
+C:\Users\dyeh\source\repos\RFID Application\AuthorizationForms\obj\Debug\AuthorizationForms.csprojAssemblyReference.cache

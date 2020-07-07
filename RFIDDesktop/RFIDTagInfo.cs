@@ -19,6 +19,7 @@ namespace RFIDApplication
         public string EPC_data;
         public int readCount;
         public int notUpdateCount;
+        public bool bUpdate;
         public string label;
         public string tagInfo;
         public string OdooTagInfo;
@@ -42,10 +43,12 @@ namespace RFIDApplication
 
         public RFIDTagData()
         {
+            bUpdate = true;
             EPC_ID = "";
             EPC_PS_Num = 0;
             EPC_data = "";
             readCount = 0;
+            notUpdateCount = 0;
             rssi = 0;
             label = "";
             tagInfo = "";
@@ -99,13 +102,21 @@ namespace RFIDApplication
 
     class RFIDTagInfo
     {
+        public struct WriteData
+        {
+            public static byte[] ID = new byte[12];
+            public static byte[] reserve = new byte[8]; 
+            public static byte[] data = new byte[44];
+        }
+
+        public const char serialSep = '=';
         public const byte DATASIZE = 32; //64 bytes
         public const byte RESERVESIZE = 4; //8 bytes
+        public static int scanTags = 0;
         public static string currentTagID = "";
         public static int writeTestReceiveCount = 0;
         public static int writeTestRssiTotal = 0;
-        private static string labelFormat = "";
-        public const char serialSep = '=';
+        private static string labelFormat = "";        
         public static string reserverData;
         public static byte[] accessCode = null;       
         //public static List<string> labelList = new List<string>();

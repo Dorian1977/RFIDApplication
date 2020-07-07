@@ -16,9 +16,10 @@ namespace RFIDApplication
     public partial class LoginForm : Form
     {
         RFIDTagIDForm desktopApp = null;
+        public List<string> productList = new List<string>();
 
-        string url = "https://packsmart-rfid-1204018.dev.odoo.com";
-        string dbName = "packsmart-rfid-1204018";
+        string url = "https://packsmart-test-1234534.dev.odoo.com";
+        string dbName = "packsmart-test-1234534";
 
         //string userName = "smuroyan@packsmartinc.com";
         //string pwd = "Qwerty123";
@@ -71,7 +72,7 @@ namespace RFIDApplication
                 return;
             }
 
-            if(desktopApp.xmlLogin(url, dbName, tbUserName.Text, tbPassword.Text))
+            if(desktopApp.xmlLogin(url, dbName, tbUserName.Text, tbPassword.Text, out productList) != -1)
             {
                 this.Hide();                                
                 desktopApp.Show();                
@@ -79,7 +80,6 @@ namespace RFIDApplication
             label5.Visible = false;
 
         }
-
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -104,13 +104,21 @@ namespace RFIDApplication
         private void tbUserName_MouseClick(object sender, MouseEventArgs e)
         {
             if (tbUserName.Text == "Username")
-                tbUserName.Text = tbUserName.Text.Replace("Username", "smuroyan@packsmartinc.com");  //smuroyan@packsmartinc.com          
+#if DEBUG
+                tbUserName.Text = tbUserName.Text.Replace("Username", "smuroyan@packsmartinc.com");
+#else
+                tbUserName.Text = tbUserName.Text.Replace("Username", "");  //smuroyan@packsmartinc.com
+#endif
         }
 
         private void tbPassword_MouseClick(object sender, MouseEventArgs e)
         {
             if (tbPassword.Text == "Password")
-                tbPassword.Text = tbPassword.Text.Replace("Password", "Qwerty123"); //Qwerty123
+#if DEBUG
+                tbPassword.Text = tbPassword.Text.Replace("Password", "Qwerty123");
+#else
+                tbPassword.Text = tbPassword.Text.Replace("Password", ""); //Qwerty123
+#endif
         }
    
         private void pictureBoxClose_Click(object sender, EventArgs e)
@@ -141,11 +149,19 @@ namespace RFIDApplication
             {
                 if((tbUserName.Text != "") && (tbPassword.Text != ""))
                 {
-                    if (desktopApp.xmlLogin(url, dbName, tbUserName.Text, tbPassword.Text))
+                    if(!btLogin.Visible)
                     {
-                        this.Hide();
-                        desktopApp.Show();
+                        return;
                     }
+                    try
+                    {
+                        if (desktopApp.xmlLogin(url, dbName, tbUserName.Text, tbPassword.Text, out productList) != -1)
+                        {
+                            this.Hide();
+                            desktopApp.Show();
+                        }
+                    }
+                    catch (Exception exp) { }
                 }
             }
         }

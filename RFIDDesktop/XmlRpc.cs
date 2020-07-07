@@ -15,7 +15,7 @@ namespace RFIDApplication
 {
     public class XMLRPC
     {
-        public static XmlRPCTagStatus xmlRpcStatus;
+        public static XmlRPCTagStatus xmlRpcStatus = XmlRPCTagStatus.Ready;
         public enum XmlRPCTagStatus
         {
             Ready,
@@ -27,8 +27,6 @@ namespace RFIDApplication
             WriteReserveData,
             writeUserData,
             WriteDataDone,
-            ReadFromOdoo,
-            Update2Odoo,
             OdooSuccessful,
             OdooFail,
             Test
@@ -37,8 +35,10 @@ namespace RFIDApplication
     public partial class RFIDTagIDForm
     {
 
-        public bool xmlLogin(string url, string dbName, string usr, string pwd)
+        public int xmlLogin(string url, string dbName, string usr, string pwd, out List<string> productList)
         {
+            List<string> products = new List<string>();
+            int iLogin = 0;
             try
             {
                 var engine = Python.CreateEngine();
@@ -50,10 +50,30 @@ namespace RFIDApplication
 
                 xmlRpc = py.XmlRpc();
                 xmlRpc.isRFIDConnected(true);
-                bool bLogin = xmlRpc.login(url, dbName, usr, pwd);
+                iLogin = xmlRpc.login(url, dbName, usr, pwd);
+                               
                 XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
-
-                var productionId = xmlRpc.readProductionId();
+#if true
+                var readProductList = xmlRpc.readWorkOrderList();
+                if(readProductList.Count == 0)
+                {
+                    MessageBox.Show("No work order planned!");
+                    productList = products;
+                    iLogin = -1;
+                }
+                else
+                {                    
+                    for(int i=0;i< readProductList.Count; i++)
+                    {
+                        products.Add(readProductList[i][1]);
+                    }
+                }
+                if(iLogin == 0)
+                {
+                    tabCtrMain.TabPages.Remove(pageEpcID);
+                }
+#else
+                var productionId = xmlRpc.readProductId();
                 var productId = xmlRpc.readProductId();
 
                 Type pID = productionId.GetType();
@@ -81,16 +101,30 @@ namespace RFIDApplication
                         }
                     }
                 }
+#endif
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Can't find work order, or work order is pause " + exp.Message, "Warning");
+                MessageBox.Show("No work order planned, got error " + exp.Message, "Warning");
                 //tabCtrMain.TabPages.Remove(pageData);
-                return false;
+                productList = products;
+                iLogin = -1;
             }
-            return true;
+            productList = products;
+            return iLogin;
         }
 
+        void getWorkOrder(out List<string> productList)
+        {
+            List<string> products = new List<string>();
+            var readProductList = xmlRpc.readWorkOrderList();            
+            for (int i = 0; i < readProductList.Count; i++)
+            {
+                products.Add(readProductList[i][1]);
+            }
+            productList = products;
+        }
+#if false
         void checkOdooStatus()
         {
             int tagIndex = findTag(tagSelect.writeData);
@@ -134,22 +168,28 @@ namespace RFIDApplication
                 initScanTag(false);
             }*/
         }
-
+#endif
         int rfidID = 0;
         private void xmlRpcUpdateTagID()
         {
             if (tagLists.Count > 0)
             {
-                int maxCountIndex = findTag(tagSelect.writeID);
-                if (maxCountIndex < 0) return;
+                int tagIndex = findTag(tagSelect.writeID);
+                if (tagIndex < 0) return;
 
-                if (RFIDTagInfo.currentTagID != tagLists[maxCountIndex].EPC_ID)
+                if (RFIDTagInfo.scanTags > 1 || getDuplicateTags())
                 {
-                    resetStatusColor();
-                    RFIDTagInfo.currentTagID = tagLists[maxCountIndex].EPC_ID;
+                    if (!labelDetectedTagsID.Visible)
+                        labelDetectedTagsID.Visible = true;
                 }
-                selectTag(tagLists[maxCountIndex].EPC_ID);
-                switch (tagLists[maxCountIndex].tagStatus)
+                else
+                {
+                    if (labelDetectedTagsID.Visible)
+                        labelDetectedTagsID.Visible = false;
+                }
+               
+                selectTag(tagLists[tagIndex].EPC_ID);
+                switch (tagLists[tagIndex].tagStatus)
                 {
                     case RFIDTagData.TagStatus.IDNotUpdate:
                         {
@@ -173,54 +213,40 @@ namespace RFIDApplication
                             //resetStatusColor();
                             if (RFIDTagInfo.reserverData == "")
                             {
-                                selectTag(tagLists[maxCountIndex].EPC_ID);
-                                setAccessCode(maxCountIndex);
+                                selectTag(tagLists[tagIndex].EPC_ID);
+                                setAccessCode(tagIndex);
                             }
 
-                            writeTagID(rfidID.ToString(), maxCountIndex, out tagID);
-                            XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.WriteID;
-                            /*
-                            List<string> tagIDList = new List<string>();
-                            tagIDList.Add(tagLists[maxCountIndex].EPC_ID.ToString());
-                            tagIDList.Add(tagID);
-                            tagUpdateList.Add(tagIDList);
-                              */                          
-                            m_curInventoryBuffer.removeInventoryItem(2, tagLists[maxCountIndex].EPC_ID);
+                            writeTagID(rfidID.ToString(), tagIndex, out tagID);
+                            XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
+                            m_curInventoryBuffer.removeInventoryItem(2, tagLists[tagIndex].EPC_ID);
                             foreach (ListViewItem item in listViewEPCTag.Items)
                             {
-                                if (item.SubItems[0].Text == tagLists[maxCountIndex].EPC_ID)
+                                if (item.SubItems[0].Text == tagLists[tagIndex].EPC_ID)
                                 {
                                     item.Remove();
                                     break;
                                 }
                             }
-                            tagLists.RemoveAt(maxCountIndex);
+                            tagLists.RemoveAt(tagIndex);
                             //initScanTag();
                         }
                         break;
                     case RFIDTagData.TagStatus.IDUpdated:
                         {
                             XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
-                            checkTagStatus(tagLists[maxCountIndex].EPC_ID);
+                            checkTagStatus(tagLists[tagIndex].EPC_ID);
                         }
                         break;
                     case RFIDTagData.TagStatus.AccessCodeNotUpdate:
                         {
                             RFIDTagInfo.reserverData = "";
                             //selectTag(tagLists[maxCountIndex].EPC_ID);
-                            setAccessCode(maxCountIndex);
-                            checkTagStatus(tagLists[maxCountIndex].EPC_ID);
+                            setAccessCode(tagIndex);
+                            checkTagStatus(tagLists[tagIndex].EPC_ID);
                             XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.WriteAccessCode;
                         }
                         break;
-                        /* case RFIDTagData.TagStatus.AccessCodeUpdated:
-                         case RFIDTagData.TagStatus.DataNotUpdate:
-                             {
-                                 if (checkBoxUpdateData.Checked == true)
-                                 {
-                                     xmlRpcUpdateTagData(maxCountIndex);
-                                 }
-                             }break;*/
                 }
             }
         }
@@ -233,7 +259,6 @@ namespace RFIDApplication
 
             string[] result = { "00", "00", "00", "00" };
             byte[] btAryPwd = { 0, 0, 0, 0 };
-            byte[] btAryWriteData = null;
 
             if (RFIDTagInfo.bAccessCode(symmetric.readAccessCode(), RFIDTagInfo.reserverData))
             {
@@ -256,24 +281,15 @@ namespace RFIDApplication
                 return;
             }
             //mix with 2 ASCII and 10 digits
-            strHEXdata = tagID = RFIDTagInfo.ASCIIToHex(EPClabel) + RFIDTagInfo.AddHexSpace(EPSnumber);
-            btAryWriteData = CCommondMethod.String2ByteArray(tagID, 2, out btWordCnt);
+            tagID = RFIDTagInfo.ASCIIToHex(EPClabel) + RFIDTagInfo.AddHexSpace(EPSnumber);
+            RFIDTagInfo.WriteData.ID = CCommondMethod.String2ByteArray(tagID, 2, out btWordCnt);
 
             //1, access, 1, 2, 6, data, 148
-            reader.WriteTag(m_curSetting.btReadId, btAryPwd, 1, 2, btWordCnt, btAryWriteData, 0x94);
+            reader.WriteTag(m_curSetting.btReadId, btAryPwd, 1, 2, btWordCnt, RFIDTagInfo.WriteData.ID, 0x94);
 #if DEBUG
             WriteLog(lrtxtLog, "Write Tag ID: " + tagID, 0);
 #endif
             Thread.Sleep(rwTagDelay * 3);
-
-            //select new tag
-            /*selectTag(tagID);
-                        
-            //read access code
-            btMemBank = 0;
-            btWordAddr = 0;
-            btWordCnt = 4;
-            reader.ReadTag(m_curSetting.btReadId, btMemBank, 0, 4, RFIDTagInfo.accessCode);*/
         }
 #if false
         private void btEPCTag_Click(object sender, EventArgs e)
@@ -315,31 +331,28 @@ namespace RFIDApplication
             //initScanTag();
         }
 #endif
-
-        private void xmlRpcUpdateTagData(int _maxCountIndex)
+        bool bShowWorkOrderError = false;
+        private void xmlRpcUpdateTagData()
         {//1. get RFID tag with top hit count
             int tagIndex = 0;
-            byte btWordCnt = 0;
             if (tagLists.Count == 0)
                 return;
 
-            //if (xmlRpcStatus != XMLRPC.XmlRPCTagStatus.Ready)
-            //     return;
-
-            if (_maxCountIndex != -1)
+            tagIndex = findTag(tagSelect.writeData);
+            if (tagIndex < 0)
             {
-                tagIndex = _maxCountIndex;
+                return;
+            }
+
+            if (RFIDTagInfo.scanTags > 1 || getDuplicateTags())
+            {
+                if (!labelDetectedTagsData.Visible)
+                    labelDetectedTagsData.Visible = true;
             }
             else
             {
-                tagIndex = findTag(tagSelect.writeData);
-                if (tagIndex < 0) return;
-
-                if (RFIDTagInfo.currentTagID != tagLists[tagIndex].EPC_ID)
-                {
-                    resetStatusColor();
-                    RFIDTagInfo.currentTagID = tagLists[tagIndex].EPC_ID;
-                }
+                if (labelDetectedTagsData.Visible)
+                    labelDetectedTagsData.Visible = false;
             }
 
             ulong rCount = 0;
@@ -347,32 +360,36 @@ namespace RFIDApplication
             tagLists[tagIndex].label = RFIDTagInfo.readEPCLabel(tagLists[tagIndex].EPC_ID, out rCount);
             string rfidTag = tagLists[tagIndex].label.Substring(0, 2) + rCount.ToString();
 #if Connect2Odoo
-            tagLists[tagIndex].OdooTagInfo = xmlRpc.readRFIDTagID(rfidTag);
+            if (productInfo != "")
+                tagLists[tagIndex].OdooTagInfo = rfidTag + RFIDTagInfo.serialSep + productInfo; //xmlRpc.readRFIDTagID(rfidTag);     
+            else return;
 #endif
-            if (tagLists[tagIndex].tagStatus == RFIDTagData.TagStatus.DataNotUpdate &&
-               XMLRPC.xmlRpcStatus == XMLRPC.XmlRPCTagStatus.WriteDataDone)
-            {
-                XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.ReadID;
-            }
-            if (XMLRPC.xmlRpcStatus == XMLRPC.XmlRPCTagStatus.WriteDataDone)
-            {//wait for verify data
-                byte[] btAryPwd = CCommondMethod.String2ByteArray(symmetric.readAccessCode(), 2, out btWordCnt);
-                reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, btAryPwd);
-                Thread.Sleep(rwTagDelay * 2);
-                return;
-            }
 
-            XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.ReadID;
+            switch (XMLRPC.xmlRpcStatus)
+            {
+                //case XMLRPC.XmlRPCTagStatus.writeUserData:
+                //    return;
+                case XMLRPC.XmlRPCTagStatus.WriteDataDone:
+                    {
+                        reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, RFIDTagInfo.accessCode);
+                        Thread.Sleep(rwTagDelay * 2);
+                    }
+                    break;
+            }
+#if DEBUG
+            WriteLog(lrtxtLog, "Write data state " + XMLRPC.xmlRpcStatus, 0);
+#endif
 #if DEBUG
             //WriteLog(lrtxtLog, "Send Tag: " + tagLists[tagIndex].label, 0);
 #endif
 #if Connect2Odoo
-            string tagOdooData = xmlRpc.updateTag();
+            string tagOdooData = tagLists[tagIndex].OdooTagInfo;//xmlRpc.updateTag();
 #else
             tagOdooData = rfidTag + "=S2-0067";
 #endif
-            if (tagOdooData == "")
+            if (tagOdooData == "" && !bShowWorkOrderError)
             {
+                bShowWorkOrderError = true;
                 string message = "*** Cannot find Work Order in Odoo! ***" +
                                  "Please make sure the Work Order is being processed and not paused.";
                 string caption = "Warning";
@@ -411,9 +428,8 @@ namespace RFIDApplication
                             }
                         }
                     }
-                    if (strRFIDTag != "" && (XMLRPC.xmlRpcStatus != XMLRPC.XmlRPCTagStatus.WriteDataDone))
+                    if (strRFIDTag != "")
                     {
-                        XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.writeUserData;
                         writeTagData(strRFIDTag, tagIndex);
                     }
                 }
@@ -430,43 +446,54 @@ namespace RFIDApplication
             }
 
             symmetric.encryptedtext = symmetric.Encrypt(data);
-            string strEncrypted = Convert.ToBase64String(symmetric.encryptedtext);
-            //WriteLog(lrtxtLog, "Encrypt data " + strEncrypted +
-            //                   ", size " + symmetric.encryptedtext.Length, 0);
-
-            string EPClabel = RFIDTagInfo.ASCIIToHex(data.Substring(0, 2).ToUpper());
-            string EPSnumber = tagLists[tagIndex].EPC_PS_Num.ToString("D20");
-            string RFIDTagID = EPClabel + RFIDTagInfo.AddHexSpace(EPSnumber);
-           
+            string strEncrypted = Convert.ToBase64String(symmetric.encryptedtext);            
             string reserveData = RFIDTagInfo.ASCIIToHex(strEncrypted.Substring(0, 4));
             string userData = RFIDTagInfo.ASCIIToHex(strEncrypted.Substring(4));
-            byte[] btAryPwd = CCommondMethod.String2ByteArray(symmetric.readAccessCode(), 2, out btWordCnt);
+
+            RFIDTagInfo.WriteData.data = CCommondMethod.String2ByteArray(userData.ToUpper() + "00 00 00 00 ", 2, out btWordCnt);
+            RFIDTagInfo.WriteData.reserve = CCommondMethod.String2ByteArray(reserveData.ToUpper(), 2, out btWordCnt);
 
             if (!RFIDTagInfo.reserverData.Trim().StartsWith(reserveData.ToUpper().Trim()))
-            {//1. check reserve section                
-                strHEXdata = reserveData;
-                byte[] byteData = CCommondMethod.String2ByteArray(strHEXdata.ToUpper(), 2, out btWordCnt);
+            {//1. check reserve section
                 XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.WriteReserveData;
+                reader.WriteTag(m_curSetting.btReadId, RFIDTagInfo.accessCode, 0, 0, btWordCnt, RFIDTagInfo.WriteData.reserve, 0x94);
+                Thread.Sleep(rwTagDelay * 3);
 #if DEBUG
-                //WriteLog(lrtxtLog, " Write Tag " + "0 0" + btWordCnt, 0);
+                WriteLog(lrtxtLog, "Write reserve ", 0);
 #endif
-                reader.WriteTag(m_curSetting.btReadId, btAryPwd, 0, 0, 2, byteData, 0x94);
-                Thread.Sleep(rwTagDelay * 3);
-                strHEXdata = userData;
             }
-            else if (tagLists[tagIndex].tagInfo != data || XMLRPC.xmlRpcStatus != XMLRPC.XmlRPCTagStatus.writeUserData)
+            else if(tagLists[tagIndex].tagTIDInfo == "")
+            {
+                reader.ReadTag(m_curSetting.btReadId, 2, 0, 12, null);
+                Thread.Sleep(rwTagDelay);
+#if DEBUG
+                WriteLog(lrtxtLog, "Read TID ", 0);
+#endif
+            }
+            else if (tagLists[tagIndex].tagInfo != data && XMLRPC.xmlRpcStatus != XMLRPC.XmlRPCTagStatus.WriteDataDone)
             {//check tag data section
-                strHEXdata = userData;
                 XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.writeUserData;
-                byte[] byteData = CCommondMethod.String2ByteArray(strHEXdata.ToUpper(), 2, out btWordCnt);
-                reader.WriteTag(m_curSetting.btReadId, btAryPwd, 3, 0, btWordCnt, byteData, 0x94);
-                Thread.Sleep(rwTagDelay * 3);
+                byte size = (byte)(RFIDTagInfo.WriteData.data.Length / 2);
+                reader.WriteTag(m_curSetting.btReadId, RFIDTagInfo.accessCode, 3, 0, size, RFIDTagInfo.WriteData.data, 0x94);
+                Thread.Sleep(rwTagDelay * 5);
+#if DEBUG
+                WriteLog(lrtxtLog, "Write data ", 0);
+#endif
             }
-            else
+            /*else if ((RFIDTagInfo.bAccessCode(symmetric.readAccessCode(), RFIDTagInfo.reserverData)) &&
+                     (tagLists[tagIndex].tagInfo != tagLists[tagIndex].OdooTagInfo) &&
+                     XML
+            {
+
+            }*/
+            else if(tagLists[tagIndex].tagInfo == data)
             {
                 XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.WriteDataDone;
-                reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, btAryPwd);
-                Thread.Sleep(rwTagDelay*2);
+                reader.ReadTag(m_curSetting.btReadId, 3, 0, RFIDTagInfo.DATASIZE, RFIDTagInfo.accessCode);
+                Thread.Sleep(rwTagDelay * 2);
+#if DEBUG
+                WriteLog(lrtxtLog, "read data ", 0);
+#endif
             }
         }
     }
