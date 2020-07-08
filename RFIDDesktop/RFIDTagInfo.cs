@@ -85,9 +85,9 @@ namespace RFIDApplication
         public struct TagAccessCodeText
         {
             public const string DEFAULT = "Waiting...";
-            public const string LOCKED = "Tag is locked";
-            public const string NONLOCK = "Tag is not locked";
-            public const string LOCKFAIL = "Tag is lock failed";
+            public const string LOCKED = "Encrypted";//"Tag is locked";
+            public const string NONLOCK = "Not Encrypted";//"Tag is not locked";
+            public const string LOCKFAIL = "Encryption failed";//"Tag is lock failed";
             public const string LOCKSIZE = "Size is 8 bytes";
         }
 
@@ -96,7 +96,9 @@ namespace RFIDApplication
             public const string DEFAULT = "Waiting...";
             public const string EMPTY = "Tag is empty";
             public const string USED = "Tag has been authenticated";
+            public const string ACTIVATED = "Tag has been activated";
             public const string DATASIZE = "Size is 64 bytes";
+            public const string READFAILED = "Read data failed!";
         }
     }
 
@@ -109,10 +111,12 @@ namespace RFIDApplication
             public static byte[] data = new byte[44];
         }
 
+        public const string multipleTagsFound =
+                "Multiple Tags detected. Please ensure only one tag is within reader’s detection range.";
+
         public const char serialSep = '=';
         public const byte DATASIZE = 32; //64 bytes
         public const byte RESERVESIZE = 4; //8 bytes
-        public static int scanTags = 0;
         public static string currentTagID = "";
         public static int writeTestReceiveCount = 0;
         public static int writeTestRssiTotal = 0;

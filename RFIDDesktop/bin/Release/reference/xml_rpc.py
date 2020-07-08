@@ -144,30 +144,34 @@ class XmlRpc:
                 productionID = workorder_status[0].get('production_id')
                 models.execute_kw(db, uid, password, 'mrp.production', 'button_mark_done',[productionID[0]])
         except (Exception):
-            print('Exception error')
-
+            return -1
         return workorder_status[0].get('qty_produced') + workorder_status[0].get('qty_remaining')
 
-    def writeRFIDTag(self, RFIDEPCTagInfo, RFIDTIDInfo):    
-        #if RFIDTagstatus == True:  
+
+    def writeRFIDTag(self, RFIDEPCTagInfo, RFIDTIDInfo):       
         try:
             workorder_status = models.execute_kw(db, uid, password, 'mrp.workorder', 'read',[workorder_id],{'fields': ['qty_remaining', 'qty_produced']})        
-            if workorder_status[0].get('qty_remaining') == 0:   
-                return -3
-
+            if workorder_status[0].get('qty_remaining') == 0:
+                return 2
+        except (Exception):
+            return -1
+        try:
             serial_number_id = models.execute_kw(db, uid, password, 'mrp.workorder', 'search_read',[[['id','=',workorder_id]]], {'fields': ['x_serial_number_id']})
-            #print( serial_number_id[0].get('x_serial_number_id'))
-            #if serial_number_id[0].get('x_serial_number_id') != False:
-            #    return -1
-
-            serial_number_id = models.execute_kw(db, uid, password, 'stock.production.lot', 'create',[{'name': RFIDEPCTagInfo, 'product_id': workorder_product_id[0], 'life_date': datetime.now() + timedelta(days=365), 'ref': RFIDTIDInfo}])
-  
-            #Write serial number to Work Order
-            models.execute_kw(db, uid, password, 'mrp.workorder', 'write',[[workorder_id],{'x_serial_number_id': serial_number_id}])
-            models.execute_kw(db, uid, password, 'mrp.workorder', 'update_serial_number',[[workorder_id]])           
-
         except (Exception):
             return -2
+        try:
+            serial_number_id = models.execute_kw(db, uid, password, 'stock.production.lot', 'create',[{'name': RFIDEPCTagInfo, 'product_id': workorder_product_id[0], 'life_date': datetime.now() + timedelta(days=365), 'ref': RFIDTIDInfo}])
+        except (Exception):
+            return -3
+        try:
+            #Write serial number to Work Order
+            models.execute_kw(db, uid, password, 'mrp.workorder', 'write',[[workorder_id],{'x_serial_number_id': serial_number_id}])
+        except (Exception):
+            return -4
+        try:
+            models.execute_kw(db, uid, password, 'mrp.workorder', 'update_serial_number',[[workorder_id]])
+        except (Exception):
+            return -5 
         return 1
     
     #compare to check if final lot ID has been updated, if update, show odoo update successful

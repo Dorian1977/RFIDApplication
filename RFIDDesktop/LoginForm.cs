@@ -105,7 +105,7 @@ namespace RFIDApplication
         {
             if (tbUserName.Text == "Username")
 #if DEBUG
-                tbUserName.Text = tbUserName.Text.Replace("Username", "smuroyan@packsmartinc.com");
+                tbUserName.Text = tbUserName.Text.Replace("Username", "");// "smuroyan@packsmartinc.com");
 #else
                 tbUserName.Text = tbUserName.Text.Replace("Username", "");  //smuroyan@packsmartinc.com
 #endif
@@ -115,7 +115,7 @@ namespace RFIDApplication
         {
             if (tbPassword.Text == "Password")
 #if DEBUG
-                tbPassword.Text = tbPassword.Text.Replace("Password", "Qwerty123");
+                tbPassword.Text = tbPassword.Text.Replace("Password", "");// "Qwerty123");
 #else
                 tbPassword.Text = tbPassword.Text.Replace("Password", ""); //Qwerty123
 #endif

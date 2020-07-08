@@ -45,5 +45,5 @@ C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.dll
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.pdb
 C:\Users\dyeh\source\repos\RFID for PC\RFID Application\CustomControl\obj\Debug\CustomControl.csprojResolveAssemblyReference.cache
-C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\Debug\CustomControl.csprojAssemblyReference.cache
 C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\Debug\CustomControl.csproj.CoreCompileInputs.cache
+C:\Users\dyeh\source\repos\RFID Application\CustomControl\obj\Debug\CustomControl.csprojAssemblyReference.cache

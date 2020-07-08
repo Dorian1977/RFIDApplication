@@ -176,18 +176,7 @@ namespace RFIDApplication
             {
                 int tagIndex = findTag(tagSelect.writeID);
                 if (tagIndex < 0) return;
-
-                if (RFIDTagInfo.scanTags > 1 || getDuplicateTags())
-                {
-                    if (!labelDetectedTagsID.Visible)
-                        labelDetectedTagsID.Visible = true;
-                }
-                else
-                {
-                    if (labelDetectedTagsID.Visible)
-                        labelDetectedTagsID.Visible = false;
-                }
-               
+                               
                 selectTag(tagLists[tagIndex].EPC_ID);
                 switch (tagLists[tagIndex].tagStatus)
                 {
@@ -342,17 +331,6 @@ namespace RFIDApplication
             if (tagIndex < 0)
             {
                 return;
-            }
-
-            if (RFIDTagInfo.scanTags > 1 || getDuplicateTags())
-            {
-                if (!labelDetectedTagsData.Visible)
-                    labelDetectedTagsData.Visible = true;
-            }
-            else
-            {
-                if (labelDetectedTagsData.Visible)
-                    labelDetectedTagsData.Visible = false;
             }
 
             ulong rCount = 0;
