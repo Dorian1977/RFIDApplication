@@ -31,7 +31,6 @@ namespace RFIDApplication
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.checkBoxShowDetail = new System.Windows.Forms.CheckBox();
             this.ckClearOperationRec = new System.Windows.Forms.CheckBox();
-            this.lrtxtLog = new CustomControl.LogRichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.listViewEPCTag = new System.Windows.Forms.ListView();
             this.RFIDTag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -95,16 +94,11 @@ namespace RFIDApplication
             this.label78 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.lxLedControl9 = new LxControl.LxLedControl();
-            this.lxLedControl10 = new LxControl.LxLedControl();
-            this.lxLedControl11 = new LxControl.LxLedControl();
-            this.lxLedControl12 = new LxControl.LxLedControl();
             this.label79 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
-            this.lxLedControl13 = new LxControl.LxLedControl();
             this.columnHeader43 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader44 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader45 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -122,7 +116,12 @@ namespace RFIDApplication
             this.btHelp = new System.Windows.Forms.Button();
             this.btClose = new System.Windows.Forms.Button();
             this.tbLoginID = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lrtxtLog = new CustomControl.LogRichTextBox();
+            this.lxLedControl9 = new LxControl.LxLedControl();
+            this.lxLedControl10 = new LxControl.LxLedControl();
+            this.lxLedControl11 = new LxControl.LxLedControl();
+            this.lxLedControl12 = new LxControl.LxLedControl();
+            this.lxLedControl13 = new LxControl.LxLedControl();
             this.lxLedControl14 = new LxControl.LxLedControl();
             this.lxLedControl15 = new LxControl.LxLedControl();
             this.lxLedControl16 = new LxControl.LxLedControl();
@@ -151,15 +150,15 @@ namespace RFIDApplication
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl16)).BeginInit();
@@ -212,15 +211,6 @@ namespace RFIDApplication
             this.ckClearOperationRec.ForeColor = System.Drawing.Color.White;
             this.ckClearOperationRec.Name = "ckClearOperationRec";
             this.ckClearOperationRec.UseVisualStyleBackColor = true;
-            // 
-            // lrtxtLog
-            // 
-            this.lrtxtLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
-            this.lrtxtLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lrtxtLog.CausesValidation = false;
-            resources.ApplyResources(this.lrtxtLog, "lrtxtLog");
-            this.lrtxtLog.ForeColor = System.Drawing.Color.White;
-            this.lrtxtLog.Name = "lrtxtLog";
             // 
             // groupBox4
             // 
@@ -748,79 +738,6 @@ namespace RFIDApplication
             resources.ApplyResources(this.comboBox9, "comboBox9");
             this.comboBox9.Name = "comboBox9";
             // 
-            // lxLedControl9
-            // 
-            this.lxLedControl9.BackColor = System.Drawing.Color.Transparent;
-            this.lxLedControl9.BackColor_1 = System.Drawing.Color.Transparent;
-            this.lxLedControl9.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.lxLedControl9.BevelRate = 0.1F;
-            this.lxLedControl9.BorderColor = System.Drawing.Color.Lavender;
-            this.lxLedControl9.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.lxLedControl9.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.lxLedControl9.ForeColor = System.Drawing.Color.Black;
-            this.lxLedControl9.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.lxLedControl9, "lxLedControl9");
-            this.lxLedControl9.Name = "lxLedControl9";
-            this.lxLedControl9.RoundCorner = true;
-            this.lxLedControl9.SegmentIntervalRatio = 50;
-            this.lxLedControl9.ShowHighlight = true;
-            this.lxLedControl9.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            this.lxLedControl9.TotalCharCount = 10;
-            // 
-            // lxLedControl10
-            // 
-            this.lxLedControl10.BackColor = System.Drawing.Color.Transparent;
-            this.lxLedControl10.BackColor_1 = System.Drawing.Color.Transparent;
-            this.lxLedControl10.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.lxLedControl10.BevelRate = 0.1F;
-            this.lxLedControl10.BorderColor = System.Drawing.Color.Lavender;
-            this.lxLedControl10.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.lxLedControl10.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.lxLedControl10.ForeColor = System.Drawing.Color.Black;
-            this.lxLedControl10.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.lxLedControl10, "lxLedControl10");
-            this.lxLedControl10.Name = "lxLedControl10";
-            this.lxLedControl10.RoundCorner = true;
-            this.lxLedControl10.SegmentIntervalRatio = 50;
-            this.lxLedControl10.ShowHighlight = true;
-            this.lxLedControl10.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            // 
-            // lxLedControl11
-            // 
-            this.lxLedControl11.BackColor = System.Drawing.Color.Transparent;
-            this.lxLedControl11.BackColor_1 = System.Drawing.Color.Transparent;
-            this.lxLedControl11.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.lxLedControl11.BevelRate = 0.1F;
-            this.lxLedControl11.BorderColor = System.Drawing.Color.Lavender;
-            this.lxLedControl11.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.lxLedControl11.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.lxLedControl11.ForeColor = System.Drawing.Color.Black;
-            this.lxLedControl11.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.lxLedControl11, "lxLedControl11");
-            this.lxLedControl11.Name = "lxLedControl11";
-            this.lxLedControl11.RoundCorner = true;
-            this.lxLedControl11.SegmentIntervalRatio = 50;
-            this.lxLedControl11.ShowHighlight = true;
-            this.lxLedControl11.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            // 
-            // lxLedControl12
-            // 
-            this.lxLedControl12.BackColor = System.Drawing.Color.Transparent;
-            this.lxLedControl12.BackColor_1 = System.Drawing.Color.Transparent;
-            this.lxLedControl12.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.lxLedControl12.BevelRate = 0.1F;
-            this.lxLedControl12.BorderColor = System.Drawing.Color.Lavender;
-            this.lxLedControl12.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.lxLedControl12.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.lxLedControl12.ForeColor = System.Drawing.Color.Black;
-            this.lxLedControl12.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.lxLedControl12, "lxLedControl12");
-            this.lxLedControl12.Name = "lxLedControl12";
-            this.lxLedControl12.RoundCorner = true;
-            this.lxLedControl12.SegmentIntervalRatio = 50;
-            this.lxLedControl12.ShowHighlight = true;
-            this.lxLedControl12.TextAlignment = LxControl.LxLedControl.Alignment.Right;
-            // 
             // label79
             // 
             resources.ApplyResources(this.label79, "label79");
@@ -850,24 +767,6 @@ namespace RFIDApplication
             resources.ApplyResources(this.label83, "label83");
             this.label83.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label83.Name = "label83";
-            // 
-            // lxLedControl13
-            // 
-            this.lxLedControl13.BackColor = System.Drawing.Color.Transparent;
-            this.lxLedControl13.BackColor_1 = System.Drawing.Color.Transparent;
-            this.lxLedControl13.BackColor_2 = System.Drawing.Color.DarkRed;
-            this.lxLedControl13.BevelRate = 0.1F;
-            this.lxLedControl13.BorderColor = System.Drawing.Color.Lavender;
-            this.lxLedControl13.FadedColor = System.Drawing.SystemColors.ControlLight;
-            this.lxLedControl13.FocusedBorderColor = System.Drawing.Color.LightCoral;
-            this.lxLedControl13.ForeColor = System.Drawing.Color.Purple;
-            this.lxLedControl13.HighlightOpaque = ((byte)(20));
-            resources.ApplyResources(this.lxLedControl13, "lxLedControl13");
-            this.lxLedControl13.Name = "lxLedControl13";
-            this.lxLedControl13.RoundCorner = true;
-            this.lxLedControl13.SegmentIntervalRatio = 50;
-            this.lxLedControl13.ShowHighlight = true;
-            this.lxLedControl13.TextAlignment = LxControl.LxLedControl.Alignment.Right;
             // 
             // columnHeader43
             // 
@@ -989,6 +888,106 @@ namespace RFIDApplication
             resources.ApplyResources(this.tbLoginID, "tbLoginID");
             this.tbLoginID.ForeColor = System.Drawing.Color.White;
             this.tbLoginID.Name = "tbLoginID";
+            // 
+            // lrtxtLog
+            // 
+            this.lrtxtLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(88)))), ((int)(((byte)(136)))));
+            this.lrtxtLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lrtxtLog.CausesValidation = false;
+            resources.ApplyResources(this.lrtxtLog, "lrtxtLog");
+            this.lrtxtLog.ForeColor = System.Drawing.Color.White;
+            this.lrtxtLog.Name = "lrtxtLog";
+            // 
+            // lxLedControl9
+            // 
+            this.lxLedControl9.BackColor = System.Drawing.Color.Transparent;
+            this.lxLedControl9.BackColor_1 = System.Drawing.Color.Transparent;
+            this.lxLedControl9.BackColor_2 = System.Drawing.Color.DarkRed;
+            this.lxLedControl9.BevelRate = 0.1F;
+            this.lxLedControl9.BorderColor = System.Drawing.Color.Lavender;
+            this.lxLedControl9.FadedColor = System.Drawing.SystemColors.ControlLight;
+            this.lxLedControl9.FocusedBorderColor = System.Drawing.Color.LightCoral;
+            this.lxLedControl9.ForeColor = System.Drawing.Color.Black;
+            this.lxLedControl9.HighlightOpaque = ((byte)(20));
+            resources.ApplyResources(this.lxLedControl9, "lxLedControl9");
+            this.lxLedControl9.Name = "lxLedControl9";
+            this.lxLedControl9.RoundCorner = true;
+            this.lxLedControl9.SegmentIntervalRatio = 50;
+            this.lxLedControl9.ShowHighlight = true;
+            this.lxLedControl9.TextAlignment = LxControl.LxLedControl.Alignment.Right;
+            this.lxLedControl9.TotalCharCount = 10;
+            // 
+            // lxLedControl10
+            // 
+            this.lxLedControl10.BackColor = System.Drawing.Color.Transparent;
+            this.lxLedControl10.BackColor_1 = System.Drawing.Color.Transparent;
+            this.lxLedControl10.BackColor_2 = System.Drawing.Color.DarkRed;
+            this.lxLedControl10.BevelRate = 0.1F;
+            this.lxLedControl10.BorderColor = System.Drawing.Color.Lavender;
+            this.lxLedControl10.FadedColor = System.Drawing.SystemColors.ControlLight;
+            this.lxLedControl10.FocusedBorderColor = System.Drawing.Color.LightCoral;
+            this.lxLedControl10.ForeColor = System.Drawing.Color.Black;
+            this.lxLedControl10.HighlightOpaque = ((byte)(20));
+            resources.ApplyResources(this.lxLedControl10, "lxLedControl10");
+            this.lxLedControl10.Name = "lxLedControl10";
+            this.lxLedControl10.RoundCorner = true;
+            this.lxLedControl10.SegmentIntervalRatio = 50;
+            this.lxLedControl10.ShowHighlight = true;
+            this.lxLedControl10.TextAlignment = LxControl.LxLedControl.Alignment.Right;
+            // 
+            // lxLedControl11
+            // 
+            this.lxLedControl11.BackColor = System.Drawing.Color.Transparent;
+            this.lxLedControl11.BackColor_1 = System.Drawing.Color.Transparent;
+            this.lxLedControl11.BackColor_2 = System.Drawing.Color.DarkRed;
+            this.lxLedControl11.BevelRate = 0.1F;
+            this.lxLedControl11.BorderColor = System.Drawing.Color.Lavender;
+            this.lxLedControl11.FadedColor = System.Drawing.SystemColors.ControlLight;
+            this.lxLedControl11.FocusedBorderColor = System.Drawing.Color.LightCoral;
+            this.lxLedControl11.ForeColor = System.Drawing.Color.Black;
+            this.lxLedControl11.HighlightOpaque = ((byte)(20));
+            resources.ApplyResources(this.lxLedControl11, "lxLedControl11");
+            this.lxLedControl11.Name = "lxLedControl11";
+            this.lxLedControl11.RoundCorner = true;
+            this.lxLedControl11.SegmentIntervalRatio = 50;
+            this.lxLedControl11.ShowHighlight = true;
+            this.lxLedControl11.TextAlignment = LxControl.LxLedControl.Alignment.Right;
+            // 
+            // lxLedControl12
+            // 
+            this.lxLedControl12.BackColor = System.Drawing.Color.Transparent;
+            this.lxLedControl12.BackColor_1 = System.Drawing.Color.Transparent;
+            this.lxLedControl12.BackColor_2 = System.Drawing.Color.DarkRed;
+            this.lxLedControl12.BevelRate = 0.1F;
+            this.lxLedControl12.BorderColor = System.Drawing.Color.Lavender;
+            this.lxLedControl12.FadedColor = System.Drawing.SystemColors.ControlLight;
+            this.lxLedControl12.FocusedBorderColor = System.Drawing.Color.LightCoral;
+            this.lxLedControl12.ForeColor = System.Drawing.Color.Black;
+            this.lxLedControl12.HighlightOpaque = ((byte)(20));
+            resources.ApplyResources(this.lxLedControl12, "lxLedControl12");
+            this.lxLedControl12.Name = "lxLedControl12";
+            this.lxLedControl12.RoundCorner = true;
+            this.lxLedControl12.SegmentIntervalRatio = 50;
+            this.lxLedControl12.ShowHighlight = true;
+            this.lxLedControl12.TextAlignment = LxControl.LxLedControl.Alignment.Right;
+            // 
+            // lxLedControl13
+            // 
+            this.lxLedControl13.BackColor = System.Drawing.Color.Transparent;
+            this.lxLedControl13.BackColor_1 = System.Drawing.Color.Transparent;
+            this.lxLedControl13.BackColor_2 = System.Drawing.Color.DarkRed;
+            this.lxLedControl13.BevelRate = 0.1F;
+            this.lxLedControl13.BorderColor = System.Drawing.Color.Lavender;
+            this.lxLedControl13.FadedColor = System.Drawing.SystemColors.ControlLight;
+            this.lxLedControl13.FocusedBorderColor = System.Drawing.Color.LightCoral;
+            this.lxLedControl13.ForeColor = System.Drawing.Color.Purple;
+            this.lxLedControl13.HighlightOpaque = ((byte)(20));
+            resources.ApplyResources(this.lxLedControl13, "lxLedControl13");
+            this.lxLedControl13.Name = "lxLedControl13";
+            this.lxLedControl13.RoundCorner = true;
+            this.lxLedControl13.SegmentIntervalRatio = 50;
+            this.lxLedControl13.ShowHighlight = true;
+            this.lxLedControl13.TextAlignment = LxControl.LxLedControl.Alignment.Right;
             // 
             // lxLedControl14
             // 
@@ -1126,16 +1125,16 @@ namespace RFIDApplication
             this.panel7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl13)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lxLedControl13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lxLedControl16)).EndInit();
@@ -1246,7 +1245,6 @@ namespace RFIDApplication
         private Label labelTotal;
         private Label labelProduce;
         private ComboBox comBoxWorkOrder;
-        private Timer timer1;
         private TextBox tbMultiTag;
     }
 }

@@ -82,15 +82,6 @@ namespace RFIDApplication.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Good {
-            get {
-                return ResourceManager.GetStream("Good", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
         internal static System.IO.UnmanagedMemoryStream juntos {
             get {
                 return ResourceManager.GetStream("juntos", resourceCulture);
@@ -104,15 +95,6 @@ namespace RFIDApplication.Properties {
             get {
                 object obj = ResourceManager.GetObject("LabelFormat", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream pristine {
-            get {
-                return ResourceManager.GetStream("pristine", resourceCulture);
             }
         }
         

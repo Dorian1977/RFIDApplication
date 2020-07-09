@@ -9,8 +9,7 @@ from datetime import timedelta
 admin = 2
 RFIDConnected = False
 RFIDTagReady = False 
-#workorder_product_code = '' #SU-0067
-RFIDEPCTagInfo = ''#'PS999999999999999999=SU-00670521' #max 18 digits, ink type, expire date
+RFIDEPCTagInfo = ''
 uid = 0
 password = ""
 db = ""
@@ -236,10 +235,10 @@ class XmlRpc:
             RFIDTagReady = True
         
             group_rec = models.execute_kw(db, uid, password, 'res.groups', 'search_read', [[['name','=','RFID Tag Creation']]], {'fields': ['users']})           
+            #group_rec = models.execute_kw(db, uid, password, 'res.groups', 'search_read', [[['name','=','Serialize RFID Tags']]], {'fields': ['users']})
             list_of_user = group_rec[0].get('users')
-            if uid in list_of_user:            
-                return 1  #print('Has privilege')        
-       
+            if uid in list_of_user:
+                return 1  #print('Has privilege')
         except (Exception):
             return -1
        

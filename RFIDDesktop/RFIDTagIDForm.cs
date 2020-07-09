@@ -273,7 +273,8 @@ namespace RFIDApplication
                             return;
                         }
                         if(tbQCTagID.Text.Substring(2) != tagLists[index].EPC_PS_Num.ToString() &&
-                           tagLists[index].tagStatus != RFIDTagData.TagStatus.IDNotUpdate)
+                           tagLists[index].tagStatus != RFIDTagData.TagStatus.IDNotUpdate &&
+                           tagLists[index].writeTestCount < QC_Write_Test) 
                         {
                             tagLists[index].tagStatus = RFIDTagData.TagStatus.IDUpdated;
                             tagLists[index].writeTestCount = 0;
@@ -509,9 +510,12 @@ namespace RFIDApplication
                 {
                     XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Test;
 #if DEBUG_ADV
-                    m_bInventory = false;
-                    m_curInventoryBuffer.bLoopInventory = false;
-                    m_curInventoryBuffer.bLoopInventoryReal = false;
+                    if (m_bInventory)
+                    {
+                        m_bInventory = false;
+                        m_curInventoryBuffer.bLoopInventory = false;
+                        m_curInventoryBuffer.bLoopInventoryReal = false;
+                    }
 #endif
                     RFIDTagInfo.WriteData.reserve = byteZeroData;
                     reader.WriteTag(m_curSetting.btReadId, RFIDTagInfo.accessCode, 0, 0, 2, byteZeroData, 0x94);
@@ -525,31 +529,33 @@ namespace RFIDApplication
 
                     tbQCTestCnt.Text = tagLists[iTagIndex].writeReceiveCount + " out of " + tagLists[iTagIndex].writeTestCount++;
                 }
-                else if (tagLists[iTagIndex].writeReceiveCount >= (tagLists[iTagIndex].writeTestCount / 4 * 3))
-                {
-                    switch (tbWriteTestResult.Text)
-                    {
-                        case TagQC.TagResult.DEFAULT:
-                        case TagQC.TagResult.FAIL:
-                            tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Pass);
-                            Thread.Sleep(rwTagDelay);
-                            RFIDTagInfo.playSound(true);
-                            break;
-
-                    }
-                    XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
-                    return;
-                }
                 else
                 {
-                    tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Fail);
-                    RFIDTagInfo.playSound(false);
-                }
+                    if (tagLists[iTagIndex].writeReceiveCount >= (tagLists[iTagIndex].writeTestCount / 4 * 3))
+                    {
+                        switch (tbWriteTestResult.Text)
+                        {
+                            case TagQC.TagResult.DEFAULT:
+                            case TagQC.TagResult.FAIL:
+                                tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Pass);
+                                Thread.Sleep(rwTagDelay);
+                                RFIDTagInfo.playSound(true);
+                                break;
+
+                        }
+                        XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
+                    }
+                    else
+                    {
+                        tbWriteTestResult = SetStatusResult(tbWriteTestResult, TagQC.TagStatus.Fail);
+                        RFIDTagInfo.playSound(false);
+                    }
 #if DEBUG_ADV
-                if (!m_curInventoryBuffer.bLoopInventory)
-                {
-                    timerInventory.Interval = 120;
-                    initScanTag(false);
+                    if (!m_curInventoryBuffer.bLoopInventory)
+                    {
+                        timerInventory.Interval = 120;
+                        initScanTag(false);
+                    }
                 }
 #endif
             }
@@ -914,8 +920,9 @@ namespace RFIDApplication
                                 
                                 for(int i=0; i<tagLists.Count; i++)
                                 {
-                                    if(!tagLists[i].bUpdate || tagLists[i].notUpdateCount > TAGRESET)
-                                    {//remove tags
+                                    if (!tagLists[i].bUpdate ||
+                                         tagLists[i].notUpdateCount > TAGRESET)
+                                    {//remove tags                                        
                                         m_curInventoryBuffer.removeInventoryItem(2, tagLists[i].EPC_ID);
                                         foreach (ListViewItem item in listViewEPCTag.Items)
                                         {
@@ -1251,7 +1258,7 @@ namespace RFIDApplication
             int index = -1;
             for (int i = 0; i < tagLists.Count; i++)
             {
-                if (tagLists[i].EPC_ID.Trim().Contains(RFIDTagID))
+                if (tagLists[i].EPC_ID.Trim().Contains(RFIDTagID.Trim()))
                 {
                     index = i;
                     break;
@@ -1404,7 +1411,7 @@ namespace RFIDApplication
                                 else
                                 {
                                     tBAccessCodeVerify.Visible = true;
-                                    tBAccessCodeVerify.Text = "Tag ID has already updated";
+                                    tBAccessCodeVerify.Text = "Error - Tag was already serialized!"; //"Tag ID has already updated";
                                     tBAccessCodeVerify.ForeColor = Color.Red;
                                     tBAccessCodeVerify.BackColor = Color.White;
                                     RFIDTagInfo.playSound(false);
@@ -1552,7 +1559,7 @@ namespace RFIDApplication
                                     XMLRPC.xmlRpcStatus = XMLRPC.XmlRPCTagStatus.Ready;
                                     if (!tbOdooStatus.Visible)
                                     {
-                                        tbOdooStatus.Text = "Error, tag not serialized";
+                                        tbOdooStatus.Text = "Error - Tag is not serialized";
                                         tbOdooStatus.ForeColor = Color.Red;
                                         tbOdooStatus.BackColor = Color.White;
                                         RFIDTagInfo.playSound(false);
@@ -1622,7 +1629,7 @@ namespace RFIDApplication
                                     {
                                         if (!tbOdooStatus.Visible)
                                         {
-                                            tbOdooStatus.Text = "Error, tag has already authenticated";
+                                            tbOdooStatus.Text = "Error - Tag was already authenticated";
                                             tbOdooStatus.ForeColor = Color.Red;
                                             tbOdooStatus.BackColor = Color.White;
                                             RFIDTagInfo.playSound(false);
@@ -1719,9 +1726,9 @@ namespace RFIDApplication
                                             tbOdooStatus.Visible = true;
 
                                             if(labelProduce.Text == labelTotal.Text)
-                                                tbOdooStatus.Text = "Error, Serial number not accecpted";
+                                                tbOdooStatus.Text = "Error - Serial number is not accepted";
                                             else
-                                                tbOdooStatus.Text = "Error, duplicate tag";
+                                                tbOdooStatus.Text = "Error - Duplicate tag";
 
                                             tbOdooStatus.ForeColor = Color.Red;
                                             tbOdooStatus.BackColor = Color.White;
@@ -1735,7 +1742,7 @@ namespace RFIDApplication
                                             //xmlRpcStatus = XMLRPC.XmlRPCTagStatus.OdooFail;
                                             WriteLog(lrtxtLog, "*** Get Exception from Odoo ***" + tagLists[index].EPC_ID, 1);
                                             //WriteLog(lrtxtLog, "*** Press RECORD PRODUCTION ***", 1);                                                                                   
-                                            tbOdooStatus.Text = "Get Exception from Odoo";
+                                            tbOdooStatus.Text = "Error - Odoo Exception";
                                             tbOdooStatus.ForeColor = Color.Red;
                                             tbOdooStatus.BackColor = Color.White;
                                             RFIDTagInfo.playSound(false);
@@ -1753,7 +1760,7 @@ namespace RFIDApplication
                                         string[] tagID = tagLists[index].tagInfo.Split(RFIDTagInfo.serialSep);
                                         if (!tbOdooStatus.Visible)
                                         {
-                                            tbOdooStatus.Text = "Tag " + tagID[0] + " has already activated";
+                                            tbOdooStatus.Text = "Error - Tag " + tagID[0] + " was activated in the pass";
                                             tbOdooStatus.ForeColor = Color.Red;
                                             tbOdooStatus.BackColor = Color.White;
                                             RFIDTagInfo.playSound(false);
@@ -2617,6 +2624,7 @@ namespace RFIDApplication
             }
             catch (Exception exp) { }
         }
+
     }
 
 }

@@ -60,6 +60,13 @@ namespace RFIDApplication
         {
             label5.Enabled = true;
             label5.Visible = true;
+#if DEBUG
+            if(tbUserName.Text == "DY1811")
+            {
+                tbUserName.Text = "smuroyan@packsmartinc.com";
+                tbPassword.Text = "Qwerty123";
+            }
+#endif
             if(tbUserName.Text == null || tbUserName.Text == "")
             {
                 MessageBox.Show("Username empty, try again!", "Warning");
@@ -74,8 +81,8 @@ namespace RFIDApplication
 
             if(desktopApp.xmlLogin(url, dbName, tbUserName.Text, tbPassword.Text, out productList) != -1)
             {
-                this.Hide();                                
-                desktopApp.Show();                
+                this.Hide();
+                desktopApp.Show();
             }
             label5.Visible = false;
 
@@ -171,9 +178,5 @@ namespace RFIDApplication
             this.Close();
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

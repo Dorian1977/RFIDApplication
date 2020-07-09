@@ -134,7 +134,7 @@
             this.textBoxNote.Name = "textBoxNote";
             this.textBoxNote.Size = new System.Drawing.Size(280, 15);
             this.textBoxNote.TabIndex = 9;
-            this.textBoxNote.Text = "Please connect to RFID Reader to PC.";
+            this.textBoxNote.Text = "Please connect RFID Reader to PC.";
             this.textBoxNote.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxNote.Visible = false;
             // 
@@ -205,7 +205,6 @@
             this.label5.Size = new System.Drawing.Size(125, 25);
             this.label5.TabIndex = 21;
             this.label5.Text = "Logging in...";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // LoginForm
             // 
